@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public float m_moveSpeed = 7.0f;
     public float m_accel = 70.0f;
     public Weapon m_laserWeapon;
+    public SimpleButton m_fireButton;
 
     Joystick m_joystick;
     SpriteRenderer m_sprite;
@@ -27,11 +28,28 @@ public class Player : MonoBehaviour
     {
         float dt = Time.deltaTime;
 
+        // Input
         Vector3 move = new Vector3(m_joystick.Horizontal, m_joystick.Vertical, 0.0f);
+        if (Input.GetKey(KeyCode.UpArrow))
+            move.y += 1.0f;
+        if (Input.GetKey(KeyCode.DownArrow))
+            move.y -= 1.0f;
+        if (Input.GetKey(KeyCode.RightArrow))
+            move.x += 1.0f;
+        if (Input.GetKey(KeyCode.LeftArrow))
+            move.x -= 1.0f;
+
+        m_fireLaser = m_fireButton.IsButtonHold();
+        m_fireLaser |= Input.GetKey(KeyCode.Space);
+        bool fireLaser = m_fireLaser && (!m_fireLaserOld);
+
+        // face the right direction
         if (move.x < 0.0f)
             m_sprite.flipX = true;
         else if (move.x > 0.0f)
             m_sprite.flipX = false;
+
+        // update velocity
         Vector3 vel = move * m_moveSpeed;
         Vector3 dV = vel - m_vel;
         float accel = dV.magnitude;
@@ -44,8 +62,6 @@ public class Player : MonoBehaviour
         pos += m_vel * dt;
         transform.position = pos;
 
-        bool fireLaser = m_fireLaser && (!m_fireLaserOld);
-
         // fire the laser
         if (fireLaser)
             m_laserWeapon.HitTrigger();
@@ -53,10 +69,5 @@ public class Player : MonoBehaviour
             m_laserWeapon.HoldTrigger();
         m_fireLaserOld = m_fireLaser;
         m_fireLaser = false;
-    }
-
-    public void OnFireButton()
-    {
-        m_fireLaser = true;
     }
 }

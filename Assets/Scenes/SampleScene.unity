@@ -545,6 +545,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dynamic Joystick
       objectReference: {fileID: 0}
+    - target: {fileID: 8135886327475159576, guid: 56fae09712773584fb63896d473a98ee, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8135886327475159578, guid: 56fae09712773584fb63896d473a98ee, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -563,6 +567,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8135886327475159579, guid: 56fae09712773584fb63896d473a98ee, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8135886327784587630, guid: 56fae09712773584fb63896d473a98ee, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8135886327784587633, guid: 56fae09712773584fb63896d473a98ee, type: 3}
@@ -853,6 +861,7 @@ MonoBehaviour:
   m_moveSpeed: 7
   m_accel: 70
   m_laserWeapon: {fileID: 1002365090}
+  m_fireButton: {fileID: 742093022}
 --- !u!1 &742093017
 GameObject:
   m_ObjectHideFlags: 0
@@ -865,6 +874,7 @@ GameObject:
   - component: {fileID: 742093021}
   - component: {fileID: 742093020}
   - component: {fileID: 742093019}
+  - component: {fileID: 742093022}
   m_Layer: 5
   m_Name: Fire
   m_TagString: Untagged
@@ -986,6 +996,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 742093017}
   m_CullTransparentMesh: 1
+--- !u!114 &742093022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742093017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29fa5d27ffb44af47b3ed471127f521b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &778742623
 GameObject:
   m_ObjectHideFlags: 0

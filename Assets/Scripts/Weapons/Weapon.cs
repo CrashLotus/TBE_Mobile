@@ -5,9 +5,9 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public GameObject m_bulletPrefab;
-    public float m_fireDelay;    //time between bullets (in seconds)
+    public float m_fireDelay = 0.25f;   //time between bullets (in seconds)
 
-    protected float m_fireTimer;    //countdown timer for next bullet
+    protected float m_fireTimer;        //countdown timer for next bullet
     protected bool m_triggerHold;
     protected GameObject m_owner;
     protected SpriteRenderer m_ownerSprite;
@@ -17,7 +17,6 @@ public class Weapon : MonoBehaviour
     void Start()
     {
         m_fireTimer = 0.0f;
-        m_fireDelay = 1.0f;
         m_triggerHold = false;
         m_owner = transform.parent.gameObject;
         m_ownerSprite = m_owner.GetComponent<SpriteRenderer>();
@@ -72,15 +71,19 @@ public class Weapon : MonoBehaviour
     protected virtual bool Fire()
     {
         GameObject bulletObj = Instantiate(m_bulletPrefab);
+        if (null != bulletObj)
+        {
 
-        Vector3 pos = GetFirePos();
-        Vector3 dir = Vector3.right;
-        if (m_ownerSprite.flipX)
-            dir = -dir;
+            Vector3 pos = GetFirePos();
+            Vector3 dir = Vector3.right;
+            if (m_ownerSprite.flipX)
+                dir = -dir;
 
-        Bullet bullet = bulletObj.GetComponent<Bullet>();
-        bullet.Fire(pos, dir);
+            Bullet bullet = bulletObj.GetComponent<Bullet>();
+            bullet.Fire(pos, dir);
 
+            return true;
+        }
         return false;
     }
 
