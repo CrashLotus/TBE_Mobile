@@ -73,29 +73,35 @@ public class RepeatBackground : Parallax
         // go through deleting any tiles that have scrolled off
         float xMax = float.MinValue;
         float xMin = float.MaxValue;
+        Transform firstChild = null;
+        Transform lastChild = null;
         for (int childIndex = 0; childIndex < transform.childCount; ++childIndex)
         {
             // find the boundaries of the object in view-space (0.0 to 1.0)
             Transform child = transform.GetChild(childIndex);
-            Vector3 leftPos = child.position + m_bounds.min;
-            Vector3 rightPos = child.position + m_bounds.max;
-            Vector3 topLeft = Camera.main.WorldToViewportPoint(leftPos);
-            Vector3 botRight = Camera.main.WorldToViewportPoint(rightPos);
-            if (botRight.x < 0.0f)
-            {   // off the left
-                Free(child.gameObject);
+            if (child.gameObject.activeInHierarchy)
+            {
+                if (null == firstChild)
+                    firstChild = child;
+                lastChild = child;
+                Vector3 leftPos = child.position + m_bounds.min;
+                Vector3 rightPos = child.position + m_bounds.max;
+                Vector3 topLeft = Camera.main.WorldToViewportPoint(leftPos);
+                Vector3 botRight = Camera.main.WorldToViewportPoint(rightPos);
+                if (botRight.x < 0.0f)
+                {   // off the left
+                    Free(child.gameObject);
+                }
+                else if (topLeft.x > 1.0f)
+                {   // off the right
+                    Free(child.gameObject);
+                }
+                xMax = Mathf.Max(botRight.x, xMax);
+                xMin = Mathf.Min(topLeft.x, xMin);
             }
-            else if (topLeft.x > 1.0f)
-            {   // off the right
-                Free(child.gameObject);
-            }
-            xMax = Mathf.Max(botRight.x, xMax);
-            xMin = Mathf.Min(topLeft.x, xMin);
         }
 
         // add new tiles to fill to the right
-        Transform firstChild = transform.GetChild(0);
-        Transform lastChild = transform.GetChild(transform.childCount - 1);
         while (xMax < 1.0f)
         {
             GameObject newObj = Allocate();
