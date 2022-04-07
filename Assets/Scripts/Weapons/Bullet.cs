@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : PooledObject
 {
     public float m_speed = 14.0f;
     protected Vector3 m_vel;
@@ -35,7 +35,7 @@ public class Bullet : MonoBehaviour
             Bounds screenBounds = GameManager.Get().GetScreenBounds();
             if (false == bounds.Intersects(screenBounds))
             {
-                Destroy(gameObject);
+                Free();
             }
         }
     }

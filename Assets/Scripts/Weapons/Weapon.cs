@@ -70,7 +70,9 @@ public class Weapon : MonoBehaviour
 
     protected virtual bool Fire()
     {
-        GameObject bulletObj = Instantiate(m_bulletPrefab);
+        //mrwTODO can probably remove pos from Fire function
+        ObjectPool pool = ObjectPool.GetPool(m_bulletPrefab, 64);
+        GameObject bulletObj = pool.Allocate(GetFirePos());
         if (null != bulletObj)
         {
 
