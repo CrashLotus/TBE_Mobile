@@ -6,6 +6,12 @@ public class Bullet : MonoBehaviour
 {
     public float m_speed = 14.0f;
     protected Vector3 m_vel;
+    Renderer m_renderer;
+
+    protected virtual void Start()
+    {
+        m_renderer = GetComponent<Renderer>();
+    }
 
     public virtual void Fire(Vector3 pos, Vector3 dir)
     {
@@ -22,5 +28,15 @@ public class Bullet : MonoBehaviour
         Vector3 pos = transform.position;
         pos += m_vel * Time.deltaTime;
         transform.position = pos;
+
+        if (null != m_renderer)
+        {
+            Bounds bounds = m_renderer.bounds;
+            Bounds screenBounds = GameManager.Get().GetScreenBounds();
+            if (false == bounds.Intersects(screenBounds))
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 }
