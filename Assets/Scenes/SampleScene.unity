@@ -862,6 +862,8 @@ MonoBehaviour:
   m_accel: 70
   m_laserWeapon: {fileID: 1002365090}
   m_fireButton: {fileID: 742093022}
+  m_topBoundary: 0.94
+  m_bottomBoundary: 0.16
 --- !u!1 &742093017
 GameObject:
   m_ObjectHideFlags: 0

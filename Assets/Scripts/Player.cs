@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     public float m_accel = 70.0f;
     public Weapon m_laserWeapon;
     public SimpleButton m_fireButton;
+    public float m_topBoundary = 0.94f;
+    public float m_bottomBoundary = 0.16f;
 
     Joystick m_joystick;
     SpriteRenderer m_sprite;
@@ -60,6 +62,14 @@ public class Player : MonoBehaviour
 
         Vector3 pos = transform.position;
         pos += m_vel * dt;
+
+        // constrain the player to the top and bottom of the screen
+        Vector3 topLeft = new Vector3(0.0f, m_topBoundary, 0.0f);   // top-left corner in view coords
+        topLeft = Camera.main.ViewportToWorldPoint(topLeft);    // converted to world coords
+        Vector3 botRight = new Vector3(1.0f, m_bottomBoundary, 0.0f);   // bottom-right corner in view coords
+        botRight = Camera.main.ViewportToWorldPoint(botRight);    // converted to world coords
+        pos.y = Mathf.Clamp(pos.y, botRight.y, topLeft.y);
+
         transform.position = pos;
 
         // fire the laser
