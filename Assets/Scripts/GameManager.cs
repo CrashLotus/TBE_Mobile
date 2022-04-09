@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     static GameManager s_theManager;
     Bounds m_screenBounds;  // screen boundaries in world space
 
+    public float m_worldWidth = 22.0f;
+
     public static GameManager Get()
     {
         if (null == s_theManager)
