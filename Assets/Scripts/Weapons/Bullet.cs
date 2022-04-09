@@ -5,6 +5,8 @@ using UnityEngine;
 public class Bullet : PooledObject
 {
     public float m_speed = 14.0f;
+    public float m_damage = 1.0f;
+    public HitPoints.HitType m_hitType = HitPoints.HitType.BULLET;
     protected Vector3 m_vel;
     Renderer m_renderer;
 
@@ -38,5 +40,35 @@ public class Bullet : PooledObject
                 Free();
             }
         }
+    }
+
+    public virtual void Hit(GameObject other)
+    {
+        HitPoints hp = other.GetComponent<HitPoints>();
+        if (null != hp)
+        {
+            HitPoints.DamageReturn damageReturn = hp.Damage(m_damage, m_hitType);
+            if (HitPoints.DamageReturn.PASS_THROUGH != damageReturn)
+            {
+                Impact(other, damageReturn);
+                Explode();
+            }
+        }
+    }
+
+    public virtual void Explode()
+    {
+        Free();
+    }
+
+    protected virtual void Impact(GameObject other, HitPoints.DamageReturn damageReturn)
+    {
+        //mrwTODO
+//        other.Push(m_vel * m_force);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Hit(collision.gameObject);
     }
 }
