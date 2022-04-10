@@ -6,6 +6,7 @@ public class Bullet : PooledObject
 {
     public float m_speed = 14.0f;
     public float m_damage = 1.0f;
+    public float m_force = 0.75f;
     public HitPoints.HitType m_hitType = HitPoints.HitType.BULLET;
     protected Vector3 m_vel;
     Renderer m_renderer;
@@ -15,9 +16,8 @@ public class Bullet : PooledObject
         m_renderer = GetComponent<Renderer>();
     }
 
-    public virtual void Fire(Vector3 pos, Vector3 dir)
+    public virtual void Fire(Vector3 dir)
     {
-        transform.position = pos;
         transform.eulerAngles = new Vector3(0.0f, 0.0f, Mathf.Atan2(dir.y, dir.x));
         m_vel = dir * m_speed;
         SpriteRenderer sprite = GetComponent<SpriteRenderer>();
@@ -63,8 +63,9 @@ public class Bullet : PooledObject
 
     protected virtual void Impact(GameObject other, HitPoints.DamageReturn damageReturn)
     {
-        //mrwTODO
-//        other.Push(m_vel * m_force);
+        Bird bird = other.GetComponent<Bird>();
+        if (null != bird)
+            bird.Push(m_vel * m_force);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

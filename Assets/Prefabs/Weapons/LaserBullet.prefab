@@ -98,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_speed: 14
   m_damage: 1
+  m_force: 6
   m_hitType: 1
 --- !u!58 &8188786416755197214
 CircleCollider2D:

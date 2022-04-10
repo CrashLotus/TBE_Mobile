@@ -16,6 +16,7 @@ public class Bird : MonoBehaviour
     protected virtual void Start()
     {
         m_sprite = GetComponent<SpriteRenderer>();
+        m_pushFactor = Mathf.Sqrt(m_horizSpeed / 100.0f);
     }
 
     protected virtual void Update()
@@ -35,7 +36,9 @@ public class Bird : MonoBehaviour
         // update push
         m_pushTimer -= dt;
         if (m_pushTimer <= 0.0f)
+        {
             m_pushTimer = 0.0f;
+        }
         else
         {
             float lerp = m_pushTimer / s_pushTime;

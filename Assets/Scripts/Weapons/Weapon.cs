@@ -6,6 +6,7 @@ public class Weapon : MonoBehaviour
 {
     public GameObject m_bulletPrefab;
     public float m_fireDelay = 0.25f;   //time between bullets (in seconds)
+    public float m_recoil = 8.0f;
 
     protected float m_fireTimer;        //countdown timer for next bullet
     protected bool m_triggerHold;
@@ -70,19 +71,20 @@ public class Weapon : MonoBehaviour
 
     protected virtual bool Fire()
     {
-        //mrwTODO can probably remove pos from Fire function
         ObjectPool pool = ObjectPool.GetPool(m_bulletPrefab, 64);
         GameObject bulletObj = pool.Allocate(GetFirePos());
         if (null != bulletObj)
         {
-
-            Vector3 pos = GetFirePos();
             Vector3 dir = Vector3.right;
             if (m_ownerSprite.flipX)
                 dir = -dir;
 
             Bullet bullet = bulletObj.GetComponent<Bullet>();
-            bullet.Fire(pos, dir);
+            bullet.Fire(dir);
+
+            Bird bird = m_owner.GetComponent<Bird>();
+            if (null != bird)
+                bird.Push(-dir * m_recoil);
 
             return true;
         }

@@ -99,6 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a07a5cc562251e46868d092fe6d6f13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_vertSpeed: 2
+  m_horizSpeed: 2
   m_moveSpeed: 7
   m_accel: 70
   m_laserWeapon: {fileID: 25891694241100729}
@@ -200,3 +202,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_bulletPrefab: {fileID: 4334953183423426640, guid: 115ef3a5d5308c044abcf67797142397, type: 3}
   m_fireDelay: 0.25
+  m_recoil: 8
