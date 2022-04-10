@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Bird
 {
     public float m_moveSpeed = 7.0f;
     public float m_accel = 70.0f;
@@ -12,33 +12,39 @@ public class Player : MonoBehaviour
     public float m_bottomBoundary = 0.16f;
 
     Joystick m_joystick;
-    SpriteRenderer m_sprite;
     Vector3 m_vel = Vector3.zero;
     bool m_fireLaser = false;
     bool m_fireLaserOld = false;
 
+    static Player s_thePlayer;
+
+    public static Player Get()
+    {
+        return s_thePlayer;
+    }
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         m_joystick = FindObjectOfType<Joystick>();
-        m_sprite = GetComponent<SpriteRenderer>();
+        s_thePlayer = this;
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         float dt = Time.deltaTime;
 
         // Input
         Vector3 move = new Vector3(m_joystick.Horizontal, m_joystick.Vertical, 0.0f);
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
             move.y += 1.0f;
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
             move.y -= 1.0f;
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
             move.x += 1.0f;
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
             move.x -= 1.0f;
 
         m_fireLaser = m_fireButton.IsButtonHold();
@@ -79,5 +85,7 @@ public class Player : MonoBehaviour
             m_laserWeapon.HoldTrigger();
         m_fireLaserOld = m_fireLaser;
         m_fireLaser = false;
+
+        base.Update();
     }
 }
