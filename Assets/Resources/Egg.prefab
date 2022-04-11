@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 619954381184054313}
   - component: {fileID: 4273889505698268044}
   - component: {fileID: 513541575644140831}
-  m_Layer: 0
+  - component: {fileID: -2699930961212935171}
+  - component: {fileID: -8923324675955095820}
+  m_Layer: 10
   m_Name: Egg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,3 +114,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e139d085245cd6243ba16bb0ac8fe265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-2699930961212935171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4419007208999314902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8c42a7b124aa5d4fbcc4e2c6e5a8067, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_hitPoints: 1
+--- !u!50 &-8923324675955095820
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4419007208999314902}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

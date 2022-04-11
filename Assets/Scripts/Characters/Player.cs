@@ -88,4 +88,9 @@ public class Player : Bird
 
         base.Update();
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Player hit a " + collision.gameObject.name);
+    }
 }

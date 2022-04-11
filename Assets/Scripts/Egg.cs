@@ -163,7 +163,7 @@ public class Egg : PooledObject
                         break;
                     case State.WOBBLE:
                         transform.localEulerAngles = 
-                            new Vector3(0.0f, 0.0f, m_stateTimer * Mathf.Sin(Mathf.Deg2Rad * 360.0f * m_stateTimer));
+                            new Vector3(0.0f, 0.0f, Mathf.Rad2Deg * m_stateTimer * Mathf.Sin(Mathf.Deg2Rad * 360.0f * m_stateTimer));
                         m_stateTimer -= dt;
                         if (m_stateTimer <= 0.0f)
                             SetState(State.IDLE);
@@ -180,6 +180,10 @@ public class Egg : PooledObject
     void UpdateFlyToHud(float dt)
     {
         m_stateTimer -= dt;
+        float lerp = m_stateTimer / s_hudFlyTime;
+        transform.position = Vector3.Lerp(m_hudPos, m_startPos, lerp);
+        transform.localEulerAngles = new Vector3(0.0f, 0.0f, Mathf.Lerp(0.0f, m_startRot, lerp));
+        //        m_scale = MathHelper.Lerp(EggIcon.GetScale(), 1.0f, lerp);    //mrwTODO
         if (m_stateTimer <= 0.0f)
         {
             Free();
@@ -213,9 +217,11 @@ public class Egg : PooledObject
                 m_stateTimer = s_wobbleTime;
                 break;
             case State.FLY_TO_HUD:
-                m_stateTimer = s_hudFlyTime;
-                m_startPos = transform.position;
-                m_startRot = transform.localEulerAngles.z;
+                {
+                    m_stateTimer = s_hudFlyTime;
+                    m_startPos = transform.position;
+                    m_startRot = transform.localEulerAngles.z;
+                }
                 break;
         }
 
@@ -238,6 +244,19 @@ public class Egg : PooledObject
         //}
     }
 
+    public HitPoints.DamageReturn Damage(float damage, HitPoints.HitType hitType)
+    {
+        if (State.SPIN != m_state)
+        {
+            ++m_numJuggle;
+            ++s_numJuggle;
+            PopUp(s_spawnSpeed);
+            SetState(State.SPIN);
+            return HitPoints.DamageReturn.DAMAGED;
+        }
+        return HitPoints.DamageReturn.PASS_THROUGH;
+    }
+
     private void OnEnable()
     {
         s_theList.Add(this);
@@ -246,5 +265,35 @@ public class Egg : PooledObject
     private void OnDisable()
     {
         s_theList.Remove(this);
+    }
+
+    override public void Init(ObjectPool pool)
+    {
+        base.Init(pool);
+        m_vel = Vector3.zero;
+        m_state = State.IDLE;
+        m_stateTimer = 0.0f;
+        m_numJuggle = 0;
+        m_magnetPower = 0.0f;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (State.FLY_TO_HUD != m_state)
+        {
+            if (m_pickUpTimer <= 0.0f)
+            {
+                Player player = collision.gameObject.GetComponent<Player>();
+                if (null != player)
+                {
+                    // mrwTODO
+                    //            Player.AddScore(s_score);
+                    //            player.AddEgg();
+                    //            m_hudPos = EggIcon.GetPos();
+                    m_hudPos = Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 1.0f, 0.0f));
+                    SetState(State.FLY_TO_HUD);
+                }
+            }
+        }
     }
 }
