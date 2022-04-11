@@ -39,6 +39,7 @@ public class HitPoints : MonoBehaviour
         m_lastHit = hitType;
         if (m_hitPoints > 0.0f)
         {
+            Egg.Spawn(transform.position, 1);
             m_hitPoints -= damage;
             if (m_hitPoints <= 0.0f)
             {

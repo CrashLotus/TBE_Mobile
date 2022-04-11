@@ -42,6 +42,14 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        if (null == s_theManager)
+        {
+            s_theManager = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         UpdateScreenBounds();
     }
 

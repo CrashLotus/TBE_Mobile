@@ -7,8 +7,8 @@ public class EnemyBird : Bird
     public Weapon m_weapon;
     public float m_fireDelay = 5.0f;
     public float m_jukeFreq = 1.0f;
-    public float s_chaseDist = 100.0f;
 
+    const float s_chaseDist = 100.0f;
     const float s_minPlayerDist = 2.0f;
     const float s_repulseForce = 0.75f;
     const float s_repulseForceEgg = 3.0f;
