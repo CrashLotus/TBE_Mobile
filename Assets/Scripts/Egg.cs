@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Egg : PooledObject
 {
+    public Sprite[] m_sprites;
+
     static ObjectPool s_eggPool;
     static List<Egg> s_theList = new List<Egg>();
     static int s_numHitLava = 0;
     static int s_numJuggle = 0;
-    public const float s_animSpeedMin = 20.0f;
-    public const float s_animSpeedMax = 60.0f;
+    const float s_animSpeedMin = 20.0f;
+    const float s_animSpeedMax = 60.0f;
     static float s_spawnSpeed = 1.8f;
     const float s_spawnAng = 45.0f;
     static float s_gravity = 1.7f;
@@ -57,8 +59,11 @@ public class Egg : PooledObject
             MakeEggPool();
         }
         GameObject eggObj = s_eggPool.Allocate(pos);
-        return eggObj.GetComponent<Egg>();
-        //mrwTODO set the power
+        Egg egg = eggObj.GetComponent<Egg>();
+        egg.m_power = power;
+        SpriteRenderer sprite = egg.GetComponent<SpriteRenderer>();
+        sprite.sprite = egg.m_sprites[power-1]; 
+        return egg;
     }
 
     public static void Spawn(Vector3 pos, int power, float upSpeed)
