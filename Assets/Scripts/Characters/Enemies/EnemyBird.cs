@@ -7,6 +7,7 @@ public class EnemyBird : Bird
     public Weapon m_weapon;
     public float m_fireDelay = 5.0f;
     public float m_jukeFreq = 1.0f;
+    public int m_eggPower = 1;
 
     const float s_chaseDist = 100.0f;
     const float s_minPlayerDist = 2.0f;
@@ -230,6 +231,25 @@ public class EnemyBird : Bird
                 bird1.m_repulse += delta * push;
             }
 #endif
+        }
+    }
+
+    public void OnExplode()
+    {
+        Egg.Spawn(transform.position, m_eggPower);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (m_invTimer <= 0.0f)
+        {
+            HitPoints hit = collision.gameObject.GetComponent<HitPoints>();
+            if (null != hit)
+            {
+                HitPoints myHit = gameObject.GetComponent<HitPoints>();
+                hit.Damage(myHit.m_hitPoints, HitPoints.HitType.NONE);
+                myHit.Damage(myHit.m_hitPoints, HitPoints.HitType.NONE);
+            }
         }
     }
 }

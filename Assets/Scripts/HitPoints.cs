@@ -39,7 +39,6 @@ public class HitPoints : MonoBehaviour
         m_lastHit = hitType;
         if (m_hitPoints > 0.0f)
         {
-            Egg.Spawn(transform.position, 1);
             m_hitPoints -= damage;
             if (m_hitPoints <= 0.0f)
             {
@@ -54,6 +53,11 @@ public class HitPoints : MonoBehaviour
 
     public virtual void Explode()
     {
-        Destroy(gameObject);
+        SendMessage("OnExplode", SendMessageOptions.DontRequireReceiver);
+        PooledObject pooled = GetComponent<PooledObject>();
+        if (null != pooled)
+            pooled.Free();
+        else
+            Destroy(gameObject);
     }
 }

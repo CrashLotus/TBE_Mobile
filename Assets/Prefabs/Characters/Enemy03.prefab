@@ -100,9 +100,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.050930142, y: -0.054623604}
+  m_Offset: {x: 0.050929785, y: 0.29092735}
   serializedVersion: 2
-  m_Radius: 0.43285644
+  m_Radius: 0.5083216
 --- !u!50 &2498166132894955083
 Rigidbody2D:
   serializedVersion: 4
@@ -166,3 +166,4 @@ MonoBehaviour:
   m_weapon: {fileID: 0}
   m_fireDelay: 3
   m_jukeFreq: 3
+  m_eggPower: 6
