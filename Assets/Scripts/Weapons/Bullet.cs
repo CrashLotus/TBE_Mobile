@@ -7,7 +7,7 @@ public class Bullet : PooledObject
     public float m_speed = 14.0f;
     public float m_damage = 1.0f;
     public float m_force = 0.75f;
-    public HitPoints.HitType m_hitType = HitPoints.HitType.BULLET;
+    public IHitPoints.HitType m_hitType = IHitPoints.HitType.BULLET;
     protected Vector3 m_vel;
     Renderer m_renderer;
 
@@ -44,11 +44,11 @@ public class Bullet : PooledObject
 
     public virtual void Hit(GameObject other)
     {
-        HitPoints hp = other.GetComponent<HitPoints>();
+        IHitPoints hp = other.GetComponent<IHitPoints>();
         if (null != hp)
         {
-            HitPoints.DamageReturn damageReturn = hp.Damage(m_damage, m_hitType);
-            if (HitPoints.DamageReturn.PASS_THROUGH != damageReturn)
+            IHitPoints.DamageReturn damageReturn = hp.Damage(m_damage, m_hitType);
+            if (IHitPoints.DamageReturn.PASS_THROUGH != damageReturn)
             {
                 Impact(other, damageReturn);
                 Explode();
@@ -61,7 +61,7 @@ public class Bullet : PooledObject
         Free();
     }
 
-    protected virtual void Impact(GameObject other, HitPoints.DamageReturn damageReturn)
+    protected virtual void Impact(GameObject other, IHitPoints.DamageReturn damageReturn)
     {
         Bird bird = other.GetComponent<Bird>();
         if (null != bird)

@@ -6,17 +6,22 @@ public class Bird : MonoBehaviour
 {
     public float m_vertSpeed = 2.0f;
     public float m_horizSpeed = 2.0f;
+    public float m_hitPoints = 1.0f;
 
     protected const float s_pushTime = 0.15f;
     protected Vector3 m_push = Vector3.zero;
     protected float m_pushTimer = 0.0f;
     protected float m_pushFactor;
+    protected int[] m_hitByType;
+    protected IHitPoints.HitType m_lastHit;
     protected SpriteRenderer m_sprite;
 
     protected virtual void Start()
     {
         m_sprite = GetComponent<SpriteRenderer>();
         m_pushFactor = Mathf.Sqrt(m_horizSpeed / 100.0f);
+        m_hitByType = new int[(int)IHitPoints.HitType.TOTAL];
+        m_lastHit = IHitPoints.HitType.NONE;
     }
 
     protected virtual void Update()

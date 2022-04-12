@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBird : Bird
+public class EnemyBird : Bird, IHitPoints
 {
     public Weapon m_weapon;
     public float m_fireDelay = 5.0f;
@@ -234,22 +234,42 @@ public class EnemyBird : Bird
         }
     }
 
-    public void OnExplode()
-    {
-        Egg.Spawn(transform.position, m_eggPower);
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (m_invTimer <= 0.0f)
         {
-            HitPoints hit = collision.gameObject.GetComponent<HitPoints>();
+            IHitPoints hit = collision.gameObject.GetComponent<IHitPoints>();
             if (null != hit)
             {
-                HitPoints myHit = gameObject.GetComponent<HitPoints>();
-                hit.Damage(myHit.m_hitPoints, HitPoints.HitType.NONE);
-                myHit.Damage(myHit.m_hitPoints, HitPoints.HitType.NONE);
+                hit.Damage(m_hitPoints, IHitPoints.HitType.NONE);
+                Damage(m_hitPoints, IHitPoints.HitType.NONE);
             }
         }
+    }
+
+    public IHitPoints.DamageReturn Damage(float damage, IHitPoints.HitType hitType)
+    {
+        if (m_invTimer > 0.0f)
+            return IHitPoints.DamageReturn.NO_DAMAGE;
+        ++m_hitByType[(int)hitType];
+        m_lastHit = hitType;
+        if (m_hitPoints > 0.0f)
+        {
+            m_hitPoints -= damage;
+            if (m_hitPoints <= 0.0f)
+            {
+                Explode();
+                return IHitPoints.DamageReturn.KILLED;    // I've been killed
+            }
+            return IHitPoints.DamageReturn.DAMAGED;
+        }
+
+        return IHitPoints.DamageReturn.PASS_THROUGH;       // I'm already dead    }
+    }
+
+    void Explode()
+    {
+        Egg.Spawn(transform.position, m_eggPower);
+        Destroy(gameObject);    //mrwTODO put these in a pool
     }
 }

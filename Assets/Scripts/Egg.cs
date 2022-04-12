@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Egg : PooledObject
+public class Egg : PooledObject, IHitPoints
 {
     public Sprite[] m_sprites;
 
@@ -249,7 +249,7 @@ public class Egg : PooledObject
         //}
     }
 
-    public HitPoints.DamageReturn Damage(float damage, HitPoints.HitType hitType)
+    public IHitPoints.DamageReturn Damage(float damage, IHitPoints.HitType hitType)
     {
         if (State.SPIN != m_state)
         {
@@ -257,9 +257,9 @@ public class Egg : PooledObject
             ++s_numJuggle;
             PopUp(s_spawnSpeed);
             SetState(State.SPIN);
-            return HitPoints.DamageReturn.DAMAGED;
+            return IHitPoints.DamageReturn.DAMAGED;
         }
-        return HitPoints.DamageReturn.PASS_THROUGH;
+        return IHitPoints.DamageReturn.PASS_THROUGH;
     }
 
     private void OnEnable()
