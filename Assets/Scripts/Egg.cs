@@ -186,7 +186,8 @@ public class Egg : PooledObject, IHitPoints
     {
         m_stateTimer -= dt;
         float lerp = m_stateTimer / s_hudFlyTime;
-        transform.position = Vector3.Lerp(m_hudPos, m_startPos, lerp);
+        Vector3 targetPos = Camera.main.ScreenToWorldPoint(m_hudPos);
+        transform.position = Vector3.Lerp(targetPos, m_startPos, lerp);
         transform.localEulerAngles = new Vector3(0.0f, 0.0f, Mathf.Lerp(0.0f, m_startRot, lerp));
         //        m_scale = MathHelper.Lerp(EggIcon.GetScale(), 1.0f, lerp);    //mrwTODO
         if (m_stateTimer <= 0.0f)
@@ -275,6 +276,7 @@ public class Egg : PooledObject, IHitPoints
     override public void Init(ObjectPool pool)
     {
         base.Init(pool);
+        m_pickUpTimer = s_minPickUpDelay;
         m_vel = Vector3.zero;
         m_state = State.IDLE;
         m_stateTimer = 0.0f;
@@ -292,10 +294,9 @@ public class Egg : PooledObject, IHitPoints
                 if (null != player)
                 {
                     // mrwTODO
-                    //            Player.AddScore(s_score);
-                    //            player.AddEgg();
-                    //            m_hudPos = EggIcon.GetPos();
-                    m_hudPos = Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 1.0f, 0.0f));
+                    Player.AddScore(s_score);
+                    m_hudPos = HitPoint_UI.Get().GetEggPos();
+                    player.AddEgg();
                     SetState(State.FLY_TO_HUD);
                 }
             }

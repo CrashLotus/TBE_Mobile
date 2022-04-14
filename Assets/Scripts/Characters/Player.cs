@@ -18,8 +18,18 @@ public class Player : Bird, IHitPoints
 
     const int s_maxEggStart = 10;
     const int s_maxEggFinish = 20;
+    const float s_startingHP = 3.0f;
 
     static Player s_thePlayer;
+    static int s_score = 0;
+    static float s_saveHitPoints = s_startingHP;
+    //mrwTODO these were for achievements
+    static int s_bossesKilled = 0;
+    static int s_bossesMissiled = 0;
+    static int s_enemiesKilled = 0;
+    static int s_enemiesMissiled = 0;
+    static int s_enemiesLasered = 0;
+    static int s_eggsCaught = 0;
 
     public static Player Get()
     {
@@ -31,6 +41,7 @@ public class Player : Bird, IHitPoints
     {
         base.Start();
         m_joystick = FindObjectOfType<Joystick>();
+        m_hitPoints = s_saveHitPoints;
         s_thePlayer = this;
     }
 
@@ -170,6 +181,99 @@ public class Player : Bird, IHitPoints
         }
 #endif
         return ret;
+    }
+
+    public static void AddScore(int score)
+    {
+        int oldScore = s_score;
+        //mrwTODO
+        //if (score > 0 && Player.IsAbilityUnlocked(Upgrade.Type.EXTRAPOINTS))
+        //    score += 3 * score / 10;
+        s_score += score;
+        //if (s_score < 0)
+        //    s_score = oldScore;
+    }
+    public static int GetScore()
+    {
+        return s_score;
+    }
+
+    public static void KilledEnemy(IHitPoints.HitType hitType)
+    {
+        ++s_enemiesKilled;
+        if (IHitPoints.HitType.MISSILE == hitType)
+        {
+            ++s_enemiesMissiled;
+        }
+        if (IHitPoints.HitType.LASER == hitType)
+        {
+            ++s_enemiesLasered;
+        }
+    }
+
+    public static void KilledBoss(IHitPoints.HitType hitType)
+    {
+        ++s_bossesKilled;
+        if (IHitPoints.HitType.MISSILE == hitType)
+            ++s_bossesMissiled;
+    }
+
+    public void AddEgg()
+    {   //mrwTODO egg bonuses
+//        EggBonus startBonus = GetBonusMode();
+
+        int maxEgg = MaxEgg();
+//        if (IsAbilityUnlocked(Upgrade.Type.MEGALASER))
+//            maxEgg *= 3;
+//        else if (IsAbilityUnlocked(Upgrade.Type.MULTISHOT))
+//            maxEgg *= 2;
+        m_hitPoints += 1.0f;
+        if (m_hitPoints > maxEgg)
+            m_hitPoints = maxEgg;
+
+        //EggBonus endBonus = GetBonusMode();
+        //if (endBonus != startBonus)
+        //{
+        //    switch (endBonus)
+        //    {
+        //        case EggBonus.POWER_LASER:
+        //            if (IsAbilityUnlocked(Upgrade.Type.EGGSHIELD))
+        //            {
+        //                m_eggShieldOn = true;
+        //                AudioComponent.Get().PlaySound("BubbleShieldBirth");
+        //            }
+        //            AudioComponent.Get().PlaySound("PowerUp1");
+        //            EggIcon.StartWave();
+        //            break;
+        //        case EggBonus.MULTISHOT:
+        //            if (IsAbilityUnlocked(Upgrade.Type.EGGSHIELD))
+        //            {
+        //                m_eggShieldOn = true;
+        //                AudioComponent.Get().PlaySound("BubbleShieldBirth");
+        //            }
+        //            AudioComponent.Get().PlaySound("PowerUp2");
+        //            EggIcon.StartWave();
+        //            break;
+        //        case EggBonus.MEGA_LASER:
+        //            if (IsAbilityUnlocked(Upgrade.Type.EGGSHIELD))
+        //            {
+        //                m_eggShieldOn = true;
+        //                AudioComponent.Get().PlaySound("BubbleShieldBirth");
+        //            }
+        //            AudioComponent.Get().PlaySound("PowerUp3");
+        //            EggIcon.StartWave();
+        //            break;
+        //    }
+        //}
+        ++s_eggsCaught;
+    }
+
+    public int NumEgg()
+    {
+        int numEgg = (int)m_hitPoints;
+        if (numEgg < 0)
+            numEgg = 0;
+        return numEgg;
     }
 
     public static int MaxEgg()

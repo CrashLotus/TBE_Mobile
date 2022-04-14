@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2930590875182620166}
   - component: {fileID: 2930590875182620161}
   - component: {fileID: 2930590875182620160}
-  - component: {fileID: 937780049060657015}
   - component: {fileID: 257406634375021150}
   - component: {fileID: 7067236232418262243}
   m_Layer: 8
@@ -124,19 +123,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &937780049060657015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2930590875182620165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7bc88e7d7680e244a37da643dfbef69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_hitPoints: 4
 --- !u!114 &257406634375021150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,7 +149,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_vertSpeed: 2
   m_horizSpeed: 2
+  m_hitPoints: 4
   m_weapon: {fileID: 0}
   m_fireDelay: 4
   m_jukeFreq: 2
   m_eggPower: 3
+  m_score: 200

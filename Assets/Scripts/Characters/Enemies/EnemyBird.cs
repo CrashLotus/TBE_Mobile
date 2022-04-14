@@ -8,6 +8,7 @@ public class EnemyBird : Bird, IHitPoints
     public float m_fireDelay = 5.0f;
     public float m_jukeFreq = 1.0f;
     public int m_eggPower = 1;
+    public int m_score;
 
     const float s_chaseDist = 100.0f;
     const float s_minPlayerDist = 2.0f;
@@ -269,7 +270,13 @@ public class EnemyBird : Bird, IHitPoints
 
     void Explode()
     {
+        //mrwTODO
+//        new Explosion(GetPos());
+        Player.AddScore(m_score);
         Egg.Spawn(transform.position, m_eggPower);
+//        AudioComponent.Get().PlaySound(m_explodeSound);
+        Player.KilledEnemy(m_lastHit);
+
         Destroy(gameObject);    //mrwTODO put these in a pool
     }
 }
