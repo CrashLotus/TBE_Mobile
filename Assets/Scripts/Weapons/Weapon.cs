@@ -75,9 +75,7 @@ public class Weapon : MonoBehaviour
         GameObject bulletObj = pool.Allocate(GetFirePos());
         if (null != bulletObj)
         {
-            Vector3 dir = Vector3.right;
-            if (m_ownerSprite.flipX)
-                dir = -dir;
+            Vector3 dir = Aim();
 
             Bullet bullet = bulletObj.GetComponent<Bullet>();
             bullet.Fire(dir);
@@ -100,5 +98,33 @@ public class Weapon : MonoBehaviour
             pos.x += m_offset.x;
         pos.y += m_offset.y;
         return pos;
+    }
+
+    protected Vector3 Dir2Player(Vector3 pos)
+    {
+        Vector3 dir = new Vector3(1.0f, 0.0f, 0.0f);
+        Player player = Player.Get();
+        if (null != player)
+        {
+            dir = player.transform.position - pos;
+            dir.Normalize();
+        }
+        else
+        {
+            float ang = Random.Range(-0.3f, 0.3f);
+            dir = new Vector3(Mathf.Cos(ang), Mathf.Sin(ang), 0.0f);
+            if (m_ownerSprite.flipX)
+                dir.x = -dir.x;
+        }
+
+        return dir;
+    }
+
+    protected virtual Vector3 Aim()
+    {
+        Vector3 dir = Vector3.right;
+        if (m_ownerSprite.flipX)
+            dir = -dir;
+        return dir;
     }
 }

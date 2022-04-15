@@ -9,6 +9,7 @@ public class Bullet : PooledObject
     public float m_force = 0.75f;
     public IHitPoints.HitType m_hitType = IHitPoints.HitType.BULLET;
     protected Vector3 m_vel;
+    protected Vector3 m_dir;
     Renderer m_renderer;
 
     protected virtual void Start()
@@ -18,14 +19,13 @@ public class Bullet : PooledObject
 
     public virtual void Fire(Vector3 dir)
     {
-        transform.eulerAngles = new Vector3(0.0f, 0.0f, Mathf.Atan2(dir.y, dir.x));
-        m_vel = dir * m_speed;
-        SpriteRenderer sprite = GetComponent<SpriteRenderer>();
-        sprite.flipX = dir.x < 0.0f;
+        m_dir = dir;
+        transform.eulerAngles = new Vector3(0.0f, 0.0f, Mathf.Rad2Deg * Mathf.Atan2(dir.y, dir.x));
+        m_vel = m_dir * m_speed;
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         Vector3 pos = transform.position;
         pos += m_vel * Time.deltaTime;
@@ -69,6 +69,11 @@ public class Bullet : PooledObject
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Hit(collision.gameObject);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         Hit(collision.gameObject);
     }
