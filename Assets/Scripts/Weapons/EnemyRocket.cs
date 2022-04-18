@@ -2,11 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyRocket : Bullet
+public class EnemyRocket : Bullet, IHitPoints
 {
     public float m_timeOut = 2.0f;
     public float m_turnSpd = 0.5f;
+    public float m_maxHitPoints = 2.0f;
+
     float m_timer;
+    float m_hitPoints;
+
+    public override void Init(ObjectPool pool)
+    {
+        base.Init(pool);
+        m_hitPoints = m_maxHitPoints;
+    }
+
+    public IHitPoints.DamageReturn Damage(float damage, IHitPoints.HitType hitType)
+    {
+        if (m_hitPoints > 0.0f)
+        {
+            m_hitPoints -= damage;
+            if (m_hitPoints <= 0.0f)
+            {
+                Explode();
+                return IHitPoints.DamageReturn.KILLED;    // I've been killed
+            }
+            return IHitPoints.DamageReturn.DAMAGED;
+        }
+
+        return IHitPoints.DamageReturn.PASS_THROUGH;       // I'm already dead    }
+    }
 
     public override void Fire(Vector3 dir)
     {
