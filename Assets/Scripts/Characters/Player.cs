@@ -36,10 +36,9 @@ public class Player : Bird, IHitPoints
         return s_thePlayer;
     }
 
-    // Start is called before the first frame update
-    protected override void Start()
+    public override void Init(ObjectPool pool)
     {
-        base.Start();
+        base.Init(pool);
         m_joystick = FindObjectOfType<Joystick>();
         m_hitPoints = s_saveHitPoints;
         s_thePlayer = this;

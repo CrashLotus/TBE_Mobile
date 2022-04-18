@@ -58,12 +58,19 @@ public class Egg : PooledObject, IHitPoints
         {
             MakeEggPool();
         }
-        GameObject eggObj = s_eggPool.Allocate(pos);
-        Egg egg = eggObj.GetComponent<Egg>();
-        egg.m_power = power;
-        SpriteRenderer sprite = egg.GetComponent<SpriteRenderer>();
-        sprite.sprite = egg.m_sprites[power-1]; 
-        return egg;
+        if (null != s_eggPool)
+        {
+            GameObject eggObj = s_eggPool.Allocate(pos);
+            if (null != eggObj)
+            {
+                Egg egg = eggObj.GetComponent<Egg>();
+                egg.m_power = power;
+                SpriteRenderer sprite = egg.GetComponent<SpriteRenderer>();
+                sprite.sprite = egg.m_sprites[power - 1];
+                return egg;
+            }
+        }
+        return null;
     }
 
     public static void Spawn(Vector3 pos, int power, float upSpeed)
@@ -150,7 +157,7 @@ public class Egg : PooledObject, IHitPoints
             m_vel.y -= s_gravity * dt;
             pos += m_vel * dt;
 
-            if (pos.y > GameManager.Get().GetLavaHeight())
+            if (pos.y < GameManager.Get().GetLavaHeight())
             {
                 HitLava();
                 Free();
@@ -236,18 +243,12 @@ public class Egg : PooledObject, IHitPoints
 
     protected virtual void HitLava()
     {
-        //mrwTODO
-        //if (EnemyBird.GetCount() < EnemyBird.s_maxEnemy)
-        //{
-        //    ++s_numHitLava;
-        //    new Flame(m_pos);
-        //    if (m_power >= 3)
-        //        new Enemy_03(m_pos);
-        //    else if (m_power >= 2)
-        //        new Enemy_02(m_pos);
-        //    else
-        //        new Enemy_01(m_pos);
-        //}
+        EnemyBird enemy = EnemyBird.Spawn(transform.position, m_power);
+        if (null != enemy)
+        { 
+            ++s_numHitLava;
+        //    new Flame(m_pos);     //mrwTODO
+        }
     }
 
     public IHitPoints.DamageReturn Damage(float damage, IHitPoints.HitType hitType)

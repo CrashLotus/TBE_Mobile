@@ -72,6 +72,8 @@ public class Weapon : MonoBehaviour
     protected virtual bool Fire()
     {
         ObjectPool pool = ObjectPool.GetPool(m_bulletPrefab, 64);
+        if (null == pool)
+            return false;
         GameObject bulletObj = pool.Allocate(GetFirePos());
         if (null != bulletObj)
         {

@@ -150,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_vertSpeed: 1
   m_horizSpeed: 1
-  m_hitPoints: 2
+  m_maxHitPoints: 2
   m_weapon: {fileID: 8561782924357723153}
   m_fireDelay: 5
   m_jukeFreq: 1

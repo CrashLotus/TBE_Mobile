@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     Bounds m_screenBounds;  // screen boundaries in world space
 
     public float m_worldWidth = 22.0f;
-    public float m_lavaHeight = 5.0f;
+    public float m_lavaHeight = -3.0f;
 
     public static GameManager Get()
     {

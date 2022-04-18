@@ -8,7 +8,8 @@ public class PooledObject : MonoBehaviour
 
     virtual public void Init(ObjectPool pool)
     {
-        m_pool = pool;
+        if (null == m_pool)
+            m_pool = pool;
     }
 
     virtual public void Stop()

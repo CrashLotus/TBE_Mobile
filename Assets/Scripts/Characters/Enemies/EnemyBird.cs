@@ -21,11 +21,12 @@ public class EnemyBird : Bird, IHitPoints
     const float s_fireDelayMin = 2.0f;
     const float s_fireDelayMax = 5.0f;
     protected const float s_wanderJuke = 1.0f;
-    const float s_riseHeight = 2.2f;
-    const float s_fallHeight = 0.6f;
+    const float s_riseHeight = 0.2f;
+    const float s_fallHeight = -3.0f;
     const float s_invTime = 1.0f;
     protected const float s_jukeAmp = 1.0f;
     static List<EnemyBird> s_theList = new List<EnemyBird>();
+    static ObjectPool[] s_enemyPool = new ObjectPool[3];
 
     protected enum State
     {
@@ -39,9 +40,51 @@ public class EnemyBird : Bird, IHitPoints
     protected float m_invTimer;
     protected State m_state;
 
-    protected override void Start()
+    static readonly string[] s_enemyName =
     {
-        base.Start();
+        "Enemy01",
+        "Enemy02",
+        "Enemy03"
+    };
+
+    public static void MakeEnemyPool(int power)
+    {
+        int index = power - 1;
+        if (null == s_enemyPool[index])
+        {
+            GameObject enemyPrefab = Resources.Load<GameObject>(s_enemyName[index]);
+            if (null == enemyPrefab)
+            {
+                Debug.LogError("Unable to load enemy prefab " + s_enemyName[index]);
+                return;
+            }
+            s_enemyPool[index] = ObjectPool.GetPool(enemyPrefab, 50);
+            DontDestroyOnLoad(s_enemyPool[index]);
+        }
+    }
+
+    public static EnemyBird Spawn(Vector3 pos, int power)
+    {
+        int index = power - 1;
+        if (null == s_enemyPool[index])
+        {
+            MakeEnemyPool(power);
+        }
+        if (null != s_enemyPool[index])
+        {
+            GameObject enemyObj = s_enemyPool[index].Allocate(pos);
+            if (null != enemyObj)
+            {
+                EnemyBird enemy = enemyObj.GetComponent<EnemyBird>();
+                return enemy;
+            }
+        }
+        return null;
+    }
+
+    public override void Init(ObjectPool pool)
+    {
+        base.Init(pool);
         m_jukeFreq = Random.Range(0.6f, 1.4f) * m_jukeFreq;
         m_fireDelay = Random.Range(s_fireDelayMin, s_fireDelayMax);
         m_invTimer = s_invTime;
@@ -120,14 +163,14 @@ public class EnemyBird : Bird, IHitPoints
 
             if (State.RISING == m_state)
             {
-                move.y = -m_vertSpeed * dt;
-                if (pos.y < GameManager.Get().GetLavaHeight() - s_riseHeight)
+                move.y = m_vertSpeed * dt;
+                if (pos.y > GameManager.Get().GetLavaHeight() + s_riseHeight)
                     m_state = State.FLYING;
             }
             else if (State.FALLING == m_state)
             {
-                move.y = m_vertSpeed * dt;
-                if (pos.y > s_fallHeight)
+                move.y = -m_vertSpeed * dt;
+                if (pos.y < s_fallHeight)
                     m_state = State.FLYING;
             }
 
@@ -277,6 +320,6 @@ public class EnemyBird : Bird, IHitPoints
 //        AudioComponent.Get().PlaySound(m_explodeSound);
         Player.KilledEnemy(m_lastHit);
 
-        Destroy(gameObject);    //mrwTODO put these in a pool
+        Free();
     }
 }
