@@ -37,8 +37,6 @@ public class EggWave : Wave
         {   // wait for the enemies to be done
             EnemyWave enemy = ScriptableObject.CreateInstance<EnemyWave>();
             Level.Get().AddWave(enemy, insertWave);
-            WaitOnWave wait = ScriptableObject.CreateInstance<WaitOnWave>();
-            Level.Get().AddWave(wait, enemy);
         }
 
         m_numEgg = m_numEgg1 + m_numEgg2 + m_numEgg3;

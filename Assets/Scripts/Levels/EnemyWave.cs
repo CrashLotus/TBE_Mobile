@@ -8,6 +8,7 @@ public class EnemyWave : Wave
     public int m_numEnemy1;
     public int m_numEnemy2;
     public int m_numEnemy3;
+    public bool m_waitOnEnemies = true;
 
     class Spawn
     {
@@ -35,6 +36,12 @@ public class EnemyWave : Wave
 
     public override void Start()
     {
+        if (m_waitOnEnemies)
+        {   // wait for the enemies to be done
+            WaitOnWave wait = ScriptableObject.CreateInstance<WaitOnWave>();
+            Level.Get().AddWave(wait, this);
+        }
+
         m_spawnList = new List<Spawn>();
         m_spawnIndex = 0;
         m_timer = 0.0f;
