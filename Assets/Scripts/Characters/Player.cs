@@ -104,7 +104,7 @@ public class Player : Bird, IHitPoints
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Player hit a " + collision.gameObject.name);
+//        Debug.Log("Player hit a " + collision.gameObject.name);
     }
 
     public IHitPoints.DamageReturn Damage(float damage, IHitPoints.HitType hitType)
