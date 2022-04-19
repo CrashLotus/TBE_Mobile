@@ -6,11 +6,11 @@ using UnityEngine;
 public class TextWave : Wave
 {
     public float m_delay;
-    float m_timer;
+    float m_textTimer;
 
     public override void Start()
     {
-        m_timer = m_delay;
+        m_textTimer = m_delay;
         Debug.Log("TextWave: " + m_text);
         base.Start();
     }
@@ -18,7 +18,7 @@ public class TextWave : Wave
     public override void Update()
     {
         float dt = Time.deltaTime;
-        m_timer -= dt;
+        m_textTimer -= dt;
         base.Update();
     }
 
@@ -27,7 +27,7 @@ public class TextWave : Wave
         if (m_isDone)
             return true;
 
-        if (m_timer <= 0.0f)
+        if (m_textTimer <= 0.0f)
             return true;
 
         return false;

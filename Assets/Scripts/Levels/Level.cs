@@ -149,6 +149,14 @@ public class Level : ScriptableObject
         }
     }
 
+    public void AddWave(Wave newWave, Wave afterWave)
+    {
+        int insertAt = m_waves.Count;
+        if (null != afterWave)
+            insertAt = m_waves.IndexOf(afterWave) + 1;
+        m_waves.Insert(insertAt, newWave);
+    }
+
 #if false   //mrwTODO
     protected Wave DoEnemyWave(int numEnemy1, int numEnemy2, int numEnemy3)
     {

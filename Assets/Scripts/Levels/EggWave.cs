@@ -8,7 +8,9 @@ public class EggWave : Wave
     public int m_numEgg1 = 0;
     public int m_numEgg2 = 0;
     public int m_numEgg3 = 0;
-    public float m_totalTime = 0.0f;   //zero time means use the default calculation
+    public float m_duration = 0.0f;   //zero time means use the default calculation
+    public bool m_waitOnEggs = true;
+    public bool m_waitOnEnemies = true;
 
     protected const float s_eggSpacing = 9.0f;  // +/- this dist from player's pos
     protected const float s_eggPosY = 5.0f;
@@ -17,15 +19,33 @@ public class EggWave : Wave
     protected int m_numEgg;
     protected List<int> m_eggList;
     protected int m_eggsLeft;
+    protected float m_totalTime;
     protected float m_timePerEgg;
     protected float m_eggTimer;
     protected float m_spawnCenterX;     // the player's posision at the beginning of the wave marks the center of the spawn
 
     public override void Start()
     {
+        Wave insertWave = this;
+        if (m_waitOnEggs)
+        {   // wait for the eggs to be done
+            WaitOnWave wait = ScriptableObject.CreateInstance<WaitOnWave>();
+            Level.Get().AddWave(wait, this);
+            insertWave = wait;
+        }
+        if (m_waitOnEnemies)
+        {   // wait for the enemies to be done
+            EnemyWave enemy = ScriptableObject.CreateInstance<EnemyWave>();
+            Level.Get().AddWave(enemy, insertWave);
+            WaitOnWave wait = ScriptableObject.CreateInstance<WaitOnWave>();
+            Level.Get().AddWave(wait, enemy);
+        }
+
         m_numEgg = m_numEgg1 + m_numEgg2 + m_numEgg3;
-        if (m_totalTime <= 0.0f)
+        if (m_duration <= 0.0f)
             m_totalTime = 3.0f + 0.25f * m_numEgg;
+        else
+            m_totalTime = m_duration;
         if (m_text.Length == 0)
         {   // default text
             if (m_numEgg > 60)

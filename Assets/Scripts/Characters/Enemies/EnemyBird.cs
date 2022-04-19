@@ -81,6 +81,10 @@ public class EnemyBird : Bird, IHitPoints
         }
         return null;
     }
+    public static int GetCount()
+    {
+        return s_theList.Count;
+    }
 
     public override void Init(ObjectPool pool)
     {
