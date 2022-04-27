@@ -16,6 +16,14 @@ public class Bird : PooledObject
     protected int[] m_hitByType;
     protected IHitPoints.HitType m_lastHit;
     protected SpriteRenderer m_sprite;
+    protected Animator m_anim;
+    protected Vector3 m_oldPos;
+
+    const float s_animSpeedMod = 5.4f;
+    const float s_animSpeedMax = 120.0f;
+    const float s_animSpeedMin = 0.0f;
+    const float s_animSpeedBase = 15.0f;
+
 
     private void Start()
     {
@@ -26,16 +34,38 @@ public class Bird : PooledObject
     {
         base.Init(pool);
         m_sprite = GetComponent<SpriteRenderer>();
+        m_anim = GetComponent<Animator>();
         m_pushFactor = Mathf.Sqrt(m_horizSpeed / 100.0f);
         m_hitPoints = m_maxHitPoints;
         m_hitByType = new int[(int)IHitPoints.HitType.TOTAL];
         m_lastHit = IHitPoints.HitType.NONE;
+        m_oldPos = transform.position;
     }
 
     protected virtual void Update()
     {
         float dt = Time.deltaTime;
         UpdatePush(dt);
+
+        if (null != m_anim)
+        {
+            if (m_anim.GetCurrentAnimatorStateInfo(0).IsName("Fly"))
+            {
+                if (dt > 0.0f)
+                {
+                    Vector3 move = transform.position - m_oldPos;
+                    float animSpeed = s_animSpeedBase + s_animSpeedMod * move.y / dt;
+                    animSpeed = Mathf.Clamp(animSpeed, s_animSpeedMin, s_animSpeedMax);
+                    m_anim.speed = animSpeed / 15.0f;
+                }
+            }
+            else
+            {
+                m_anim.speed = 1.0f;
+            }
+        }
+
+        m_oldPos = transform.position;
     }
 
     public virtual void Push(Vector3 force)
@@ -58,6 +88,15 @@ public class Bird : PooledObject
             Vector3 pos = transform.position;
             pos += m_push * lerp * dt;
             transform.position = pos;
+        }
+    }
+
+    void OnFireWeapon()
+    {
+        if (null != m_anim)
+        {
+            m_anim.Play("Fire", 0, 0.0f);
+            m_anim.speed = 1.0f;
         }
     }
 }

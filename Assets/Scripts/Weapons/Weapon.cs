@@ -53,6 +53,7 @@ public class Weapon : MonoBehaviour
         {
             if (m_triggerHold && Fire())
             {
+                m_owner.SendMessage("OnFireWeapon", SendMessageOptions.DontRequireReceiver);
                 m_fireTimer += m_fireDelay;
             }
             else

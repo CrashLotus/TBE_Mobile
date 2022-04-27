@@ -26,7 +26,7 @@ public class EnemyWave : Wave
 
     List<Spawn> m_spawnList;
     int m_spawnIndex;
-    float m_timer;
+    float m_enemyTimer;
     float m_spawnCenterX;     // the player's posision at the beginning of the wave marks the center of the spawn
 
     public void AddSpawn(string spawnType, Vector2 pos, float delay)
@@ -44,7 +44,7 @@ public class EnemyWave : Wave
 
         m_spawnList = new List<Spawn>();
         m_spawnIndex = 0;
-        m_timer = 0.0f;
+        m_enemyTimer = 0.0f;
         m_spawnCenterX = 0.0f;
 
         Player player = Player.Get();
@@ -77,7 +77,7 @@ public class EnemyWave : Wave
         }
 
         if (m_spawnList.Count > 0)
-            m_timer = m_spawnList[0].m_delay;
+            m_enemyTimer = m_spawnList[0].m_delay;
 
         base.Start();
     }
@@ -85,8 +85,8 @@ public class EnemyWave : Wave
     public override void Update()
     {
         float dt = Time.deltaTime;
-        m_timer -= dt;
-        while (m_spawnIndex < m_spawnList.Count && m_timer <= 0.0f)
+        m_enemyTimer -= dt;
+        while (m_spawnIndex < m_spawnList.Count && m_enemyTimer <= 0.0f)
         {
             Vector2 spawnPos = m_spawnList[m_spawnIndex].m_spawnPos;
             spawnPos.x += m_spawnCenterX;
@@ -105,7 +105,7 @@ public class EnemyWave : Wave
 #endif
             ++m_spawnIndex;
             if (m_spawnIndex < m_spawnList.Count)
-                m_timer += m_spawnList[m_spawnIndex].m_delay;
+                m_enemyTimer += m_spawnList[m_spawnIndex].m_delay;
         }
         base.Update();
     }

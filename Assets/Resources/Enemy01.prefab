@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2176816224531254975}
   - component: {fileID: 3822548884580487905}
   - component: {fileID: 6092750058333383772}
+  - component: {fileID: 7636005242807028577}
   m_Layer: 8
   m_Name: Enemy01
   m_TagString: Untagged
@@ -156,6 +157,25 @@ MonoBehaviour:
   m_jukeFreq: 1
   m_eggPower: 2
   m_score: 100
+--- !u!95 &7636005242807028577
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2176816224531254970}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6de9d4d2ad9ccf9409e2e14c6fe2b4cc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4154377840126578286
 GameObject:
   m_ObjectHideFlags: 0

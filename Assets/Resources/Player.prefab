@@ -13,8 +13,7 @@ GameObject:
   - component: {fileID: 25891693911960411}
   - component: {fileID: 25891693911960409}
   - component: {fileID: 25891693911960410}
-  - component: {fileID: 4995534746324094898}
-  - component: {fileID: 8917160508789595049}
+  - component: {fileID: 918969530846492428}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -102,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_vertSpeed: 2
   m_horizSpeed: 2
+  m_maxHitPoints: 1
   m_moveSpeed: 7
   m_accel: 70
   m_laserWeapon: {fileID: 25891694241100729}
@@ -145,32 +145,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &4995534746324094898
-MonoBehaviour:
+--- !u!95 &918969530846492428
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 25891693911960358}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7bc88e7d7680e244a37da643dfbef69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_hitPoints: 1
---- !u!114 &8917160508789595049
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 25891693911960358}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ce7d8f717e2b1a43ace2675dcea83d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_hitPoints: 3
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bd6ea4ae69f05a741b0d902ba6a4879a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &25891694241100731
 GameObject:
   m_ObjectHideFlags: 0

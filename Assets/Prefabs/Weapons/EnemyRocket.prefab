@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7710132959507348157}
   - component: {fileID: 1664276234456929009}
   - component: {fileID: 7393012539898060894}
+  - component: {fileID: 2561806139928673485}
   m_Layer: 9
   m_Name: EnemyRocket
   m_TagString: Untagged
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3863693d561b7f046b0d0a3a8c886e6e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 551304e288ca9c142ae8e611ef3f9280, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -123,6 +124,8 @@ MonoBehaviour:
   m_force: 2
   m_hitType: 2
   m_timeOut: 2
+  m_turnSpd: 0.5
+  m_maxHitPoints: 2
 --- !u!61 &7393012539898060894
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -140,7 +143,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.58, y: 0.14}
+    oldSize: {x: 0.55, y: 0.13}
     newSize: {x: 0.84, y: 0.22}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -149,3 +152,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.33091807, y: 0.12185496}
   m_EdgeRadius: 0
+--- !u!95 &2561806139928673485
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3638967504368526713}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 154cbe78583beb746b40f929c282d3c3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
