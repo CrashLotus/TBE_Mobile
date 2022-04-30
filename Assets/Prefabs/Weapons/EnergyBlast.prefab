@@ -138,5 +138,6 @@ MonoBehaviour:
   m_damage: 3
   m_force: 2
   m_hitType: 1
+  m_impactPow: {fileID: 3800861333027323790, guid: 2c771f0e623acd54bba2d2de852575ae, type: 3}
   m_accel: 1.1
   m_spinRate: -572.9578

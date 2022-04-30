@@ -9,6 +9,7 @@ public class EnemyBird : Bird, IHitPoints
     public float m_jukeFreq = 1.0f;
     public int m_eggPower = 1;
     public int m_score;
+    public GameObject m_spawnEffect;
 
     const float s_chaseDist = 100.0f;
     const float s_minPlayerDist = 2.0f;
@@ -59,7 +60,6 @@ public class EnemyBird : Bird, IHitPoints
                 return;
             }
             s_enemyPool[index] = ObjectPool.GetPool(enemyPrefab, 50);
-            DontDestroyOnLoad(s_enemyPool[index]);
         }
     }
 
@@ -76,6 +76,13 @@ public class EnemyBird : Bird, IHitPoints
             if (null != enemyObj)
             {
                 EnemyBird enemy = enemyObj.GetComponent<EnemyBird>();
+                if (null != enemy.m_spawnEffect)
+                {
+                    pos.z -= 1.0f;  // sort the flames to the front
+                    ObjectPool pool = ObjectPool.GetPool(enemy.m_spawnEffect, 16);
+                    if (null != pool)
+                        pool.Allocate(pos);
+                }
                 return enemy;
             }
         }
@@ -317,10 +324,15 @@ public class EnemyBird : Bird, IHitPoints
 
     void Explode()
     {
-        //mrwTODO
-//        new Explosion(GetPos());
+        if (null != m_deathEffect)
+        {
+            ObjectPool pool = ObjectPool.GetPool(m_deathEffect, 64);
+            if (null != pool)
+                pool.Allocate(transform.position);
+        }
         Player.AddScore(m_score);
         Egg.Spawn(transform.position, m_eggPower);
+        //mrwTODO
 //        AudioComponent.Get().PlaySound(m_explodeSound);
         Player.KilledEnemy(m_lastHit);
 

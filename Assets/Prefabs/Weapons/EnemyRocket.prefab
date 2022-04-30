@@ -123,6 +123,7 @@ MonoBehaviour:
   m_damage: 2
   m_force: 2
   m_hitType: 2
+  m_impactPow: {fileID: 4416542217565844506, guid: 81a38b6935e23dc4da1149a07aca81c8, type: 3}
   m_timeOut: 2
   m_turnSpd: 0.5
   m_maxHitPoints: 2

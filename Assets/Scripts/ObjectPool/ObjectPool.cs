@@ -15,6 +15,7 @@ public class ObjectPool : MonoBehaviour
         if (false == s_allPools.ContainsKey(prefab))
         {
             GameObject obj = new GameObject("Pool_" + prefab.name);
+            DontDestroyOnLoad(obj);
             s_allPools[prefab] = obj.AddComponent<ObjectPool>();
             s_allPools[prefab].m_prefab = prefab;
             s_allPools[prefab].m_numObj = num;

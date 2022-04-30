@@ -152,11 +152,13 @@ MonoBehaviour:
   m_vertSpeed: 2
   m_horizSpeed: 2
   m_maxHitPoints: 4
+  m_deathEffect: {fileID: 4234046206340094728, guid: 7edfa5faa808ada4ebb4dbf2928029bd, type: 3}
   m_weapon: {fileID: 7269066255821751309}
   m_fireDelay: 4
   m_jukeFreq: 2
   m_eggPower: 3
   m_score: 200
+  m_spawnEffect: {fileID: 7310939739548605333, guid: f385b209e7275a149813edcd33d60dcb, type: 3}
 --- !u!95 &6851482052842624396
 Animator:
   serializedVersion: 3

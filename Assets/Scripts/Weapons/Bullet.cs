@@ -8,6 +8,8 @@ public class Bullet : PooledObject
     public float m_damage = 1.0f;
     public float m_force = 0.75f;
     public IHitPoints.HitType m_hitType = IHitPoints.HitType.BULLET;
+    public GameObject m_impactPow;
+
     protected Vector3 m_vel;
     protected Vector3 m_dir;
     Renderer m_renderer;
@@ -58,6 +60,14 @@ public class Bullet : PooledObject
 
     public virtual void Explode()
     {
+        if (null != m_impactPow)
+        {
+            Vector3 pos = transform.position;
+            pos.z -= 1.0f;  // sort the pows to the front
+            ObjectPool pool = ObjectPool.GetPool(m_impactPow, 32);
+            if (null != pool)
+                pool.Allocate(pos);
+        }
         Free();
     }
 

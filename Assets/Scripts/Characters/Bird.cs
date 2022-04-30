@@ -7,6 +7,7 @@ public class Bird : PooledObject
     public float m_vertSpeed = 2.0f;
     public float m_horizSpeed = 2.0f;
     public float m_maxHitPoints = 1.0f;
+    public GameObject m_deathEffect;
     
     protected const float s_pushTime = 0.15f;
     protected Vector3 m_push = Vector3.zero;

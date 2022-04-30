@@ -48,7 +48,6 @@ public class Egg : PooledObject, IHitPoints
         {
             GameObject eggPrefab = Resources.Load<GameObject>("Egg");
             s_eggPool = ObjectPool.GetPool(eggPrefab, 100);
-            DontDestroyOnLoad(s_eggPool);
         }
     }
 
@@ -245,9 +244,8 @@ public class Egg : PooledObject, IHitPoints
     {
         EnemyBird enemy = EnemyBird.Spawn(transform.position, m_power);
         if (null != enemy)
-        { 
+        {
             ++s_numHitLava;
-        //    new Flame(m_pos);     //mrwTODO
         }
     }
 

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 619954381184054313}
   - component: {fileID: 4273889505698268044}
   - component: {fileID: 513541575644140831}
-  - component: {fileID: -2699930961212935171}
   - component: {fileID: -8923324675955095820}
   m_Layer: 10
   m_Name: Egg
@@ -118,19 +117,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: bd1dea81f0f7c32419ad82d690b6279f, type: 3}
   - {fileID: 21300000, guid: 51c9e3794d26c7f439cefe03f2d70a81, type: 3}
   - {fileID: 21300000, guid: 982a89ace3322d04c91807b6816d02f3, type: 3}
---- !u!114 &-2699930961212935171
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4419007208999314902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8c42a7b124aa5d4fbcc4e2c6e5a8067, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_hitPoints: 1
+  m_flame: {fileID: 7310939739548605333, guid: f385b209e7275a149813edcd33d60dcb, type: 3}
 --- !u!50 &-8923324675955095820
 Rigidbody2D:
   serializedVersion: 4

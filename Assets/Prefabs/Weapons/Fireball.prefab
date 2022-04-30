@@ -102,6 +102,7 @@ MonoBehaviour:
   m_damage: 1
   m_force: 2
   m_hitType: 1
+  m_impactPow: {fileID: 3122422795111728831, guid: 66d5739712e73544d831f1d72ce573f0, type: 3}
 --- !u!58 &7423548665585032755
 CircleCollider2D:
   m_ObjectHideFlags: 0
