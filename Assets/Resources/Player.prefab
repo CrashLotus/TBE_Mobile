@@ -102,6 +102,7 @@ MonoBehaviour:
   m_vertSpeed: 2
   m_horizSpeed: 2
   m_maxHitPoints: 1
+  m_deathEffect: {fileID: 0}
   m_moveSpeed: 7
   m_accel: 70
   m_laserWeapon: {fileID: 25891694241100729}
@@ -210,3 +211,4 @@ MonoBehaviour:
   m_bulletPrefab: {fileID: 4334953183423426640, guid: 115ef3a5d5308c044abcf67797142397, type: 3}
   m_fireDelay: 0.25
   m_recoil: 8
+  m_fireSound: {fileID: 11400000, guid: 04f2bdef1e0215b4a93b58c45dd326e1, type: 2}

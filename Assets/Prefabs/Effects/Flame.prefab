@@ -120,7 +120,4 @@ MonoBehaviour:
   m_maxSpeed: 1.5
   m_minScale: 1
   m_maxScale: 1.6
-  m_minVolume: 0.8
-  m_maxVolume: 1.2
-  m_minPitch: 0.8
-  m_maxPitch: 1.2
+  m_sound: {fileID: 11400000, guid: a3fbdad3117c7204a92cf53a1af83e16, type: 2}

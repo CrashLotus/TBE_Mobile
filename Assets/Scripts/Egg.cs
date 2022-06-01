@@ -5,6 +5,7 @@ using UnityEngine;
 public class Egg : PooledObject, IHitPoints
 {
     public Sprite[] m_sprites;
+    public Sound m_collectSound;
 
     static ObjectPool s_eggPool;
     static List<Egg> s_theList = new List<Egg>();
@@ -292,7 +293,8 @@ public class Egg : PooledObject, IHitPoints
                 Player player = collision.gameObject.GetComponent<Player>();
                 if (null != player)
                 {
-                    // mrwTODO
+                    if (null != m_collectSound)
+                        m_collectSound.Play();
                     Player.AddScore(s_score);
                     m_hudPos = HitPoint_UI.Get().GetEggPos();
                     player.AddEgg();

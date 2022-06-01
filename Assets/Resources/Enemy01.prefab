@@ -153,6 +153,7 @@ MonoBehaviour:
   m_horizSpeed: 1
   m_maxHitPoints: 2
   m_deathEffect: {fileID: 4234046206340094728, guid: 7edfa5faa808ada4ebb4dbf2928029bd, type: 3}
+  m_deathSound: {fileID: 11400000, guid: 63f8240c27825f74595de4e378e55b7e, type: 2}
   m_weapon: {fileID: 8561782924357723153}
   m_fireDelay: 5
   m_jukeFreq: 1
@@ -224,3 +225,4 @@ MonoBehaviour:
   m_bulletPrefab: {fileID: 3064997521842465661, guid: dd1760b5111003c45aec3f1ea441186e, type: 3}
   m_fireDelay: 5
   m_recoil: 8
+  m_fireSound: {fileID: 11400000, guid: 262b90bf0d518364fbf05fc67a4f4c0f, type: 2}

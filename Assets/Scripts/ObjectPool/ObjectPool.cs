@@ -24,7 +24,7 @@ public class ObjectPool : MonoBehaviour
         return s_allPools[prefab];
     }
 
-    protected virtual void Start()
+    public virtual void Start()
     {
         s_allPools[m_prefab] = this;
         if (null == m_pool)

@@ -7,6 +7,7 @@ public class EnemyRocket : Bullet, IHitPoints
     public float m_timeOut = 2.0f;
     public float m_turnSpd = 0.5f;
     public float m_maxHitPoints = 2.0f;
+    public Sound m_destroyedSound;
 
     float m_timer;
     float m_hitPoints;
@@ -24,6 +25,8 @@ public class EnemyRocket : Bullet, IHitPoints
             m_hitPoints -= damage;
             if (m_hitPoints <= 0.0f)
             {
+                if (null != m_destroyedSound)
+                    m_destroyedSound.Play();
                 Explode();
                 return IHitPoints.DamageReturn.KILLED;    // I've been killed
             }
@@ -45,6 +48,8 @@ public class EnemyRocket : Bullet, IHitPoints
         m_timer -= dt;
         if (m_timer <= 0.0f)
         {
+            if (null != m_destroyedSound)
+                m_destroyedSound.Play();
             Explode();
             return;
         }

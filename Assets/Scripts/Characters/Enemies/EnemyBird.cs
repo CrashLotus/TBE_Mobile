@@ -330,10 +330,10 @@ public class EnemyBird : Bird, IHitPoints
             if (null != pool)
                 pool.Allocate(transform.position);
         }
+        if (null != m_deathSound)
+            m_deathSound.Play();
         Player.AddScore(m_score);
         Egg.Spawn(transform.position, m_eggPower);
-        //mrwTODO
-//        AudioComponent.Get().PlaySound(m_explodeSound);
         Player.KilledEnemy(m_lastHit);
 
         Free();

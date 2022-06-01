@@ -7,6 +7,7 @@ public class Weapon : MonoBehaviour
     public GameObject m_bulletPrefab;
     public float m_fireDelay = 0.25f;   //time between bullets (in seconds)
     public float m_recoil = 8.0f;
+    public Sound m_fireSound;
 
     protected float m_fireTimer;        //countdown timer for next bullet
     protected bool m_triggerHold;
@@ -78,6 +79,9 @@ public class Weapon : MonoBehaviour
         GameObject bulletObj = pool.Allocate(GetFirePos());
         if (null != bulletObj)
         {
+            if (null != m_fireSound)
+                m_fireSound.Play();
+
             Vector3 dir = Aim();
 
             Bullet bullet = bulletObj.GetComponent<Bullet>();

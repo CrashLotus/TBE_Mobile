@@ -117,7 +117,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: bd1dea81f0f7c32419ad82d690b6279f, type: 3}
   - {fileID: 21300000, guid: 51c9e3794d26c7f439cefe03f2d70a81, type: 3}
   - {fileID: 21300000, guid: 982a89ace3322d04c91807b6816d02f3, type: 3}
-  m_flame: {fileID: 7310939739548605333, guid: f385b209e7275a149813edcd33d60dcb, type: 3}
+  m_collectSound: {fileID: 11400000, guid: 2649a684c1fe273458fef6bc4c13ea8f, type: 2}
 --- !u!50 &-8923324675955095820
 Rigidbody2D:
   serializedVersion: 4

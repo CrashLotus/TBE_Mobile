@@ -9,6 +9,7 @@ public class Bullet : PooledObject
     public float m_force = 0.75f;
     public IHitPoints.HitType m_hitType = IHitPoints.HitType.BULLET;
     public GameObject m_impactPow;
+    public Sound m_impactSound;
 
     protected Vector3 m_vel;
     protected Vector3 m_dir;
@@ -68,6 +69,8 @@ public class Bullet : PooledObject
             if (null != pool)
                 pool.Allocate(pos);
         }
+        if (null != m_impactSound)
+            m_impactSound.Play();
         Free();
     }
 
