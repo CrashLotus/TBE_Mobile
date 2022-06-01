@@ -118,6 +118,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 51c9e3794d26c7f439cefe03f2d70a81, type: 3}
   - {fileID: 21300000, guid: 982a89ace3322d04c91807b6816d02f3, type: 3}
   m_collectSound: {fileID: 11400000, guid: 2649a684c1fe273458fef6bc4c13ea8f, type: 2}
+  m_spawnSound: {fileID: 11400000, guid: ea8f839fe867df44a975054553adf662, type: 2}
 --- !u!50 &-8923324675955095820
 Rigidbody2D:
   serializedVersion: 4

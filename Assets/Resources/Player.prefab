@@ -103,12 +103,14 @@ MonoBehaviour:
   m_horizSpeed: 2
   m_maxHitPoints: 1
   m_deathEffect: {fileID: 0}
+  m_deathSound: {fileID: 0}
   m_moveSpeed: 7
   m_accel: 70
   m_laserWeapon: {fileID: 25891694241100729}
   m_fireButton: {fileID: 0}
   m_topBoundary: 0.94
   m_bottomBoundary: 0.16
+  m_hitSound: {fileID: 11400000, guid: 4c91af20ab1400440b5133efe22d86a9, type: 2}
 --- !u!58 &25891693911960409
 CircleCollider2D:
   m_ObjectHideFlags: 0

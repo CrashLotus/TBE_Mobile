@@ -6,6 +6,7 @@ public class Egg : PooledObject, IHitPoints
 {
     public Sprite[] m_sprites;
     public Sound m_collectSound;
+    public Sound m_spawnSound;
 
     static ObjectPool s_eggPool;
     static List<Egg> s_theList = new List<Egg>();
@@ -67,6 +68,8 @@ public class Egg : PooledObject, IHitPoints
                 egg.m_power = power;
                 SpriteRenderer sprite = egg.GetComponent<SpriteRenderer>();
                 sprite.sprite = egg.m_sprites[power - 1];
+                if (null != egg.m_spawnSound)
+                    egg.m_spawnSound.Play();
                 return egg;
             }
         }

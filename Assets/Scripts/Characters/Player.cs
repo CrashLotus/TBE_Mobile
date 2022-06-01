@@ -10,6 +10,7 @@ public class Player : Bird, IHitPoints
     public SimpleButton m_fireButton;
     public float m_topBoundary = 0.94f;
     public float m_bottomBoundary = 0.16f;
+    public Sound m_hitSound;
 
     Joystick m_joystick;
     Vector3 m_vel = Vector3.zero;
@@ -151,7 +152,8 @@ public class Player : Bird, IHitPoints
             numEgg -= 1;
         }
 
-        //        AudioComponent.Get().PlaySound("Punch");  //mrwTODO
+        if (null != m_hitSound)
+            m_hitSound.Play();
         IHitPoints.DamageReturn ret = IHitPoints.DamageReturn.PASS_THROUGH;
         ++m_hitByType[(int)hitType];
         m_lastHit = hitType;
