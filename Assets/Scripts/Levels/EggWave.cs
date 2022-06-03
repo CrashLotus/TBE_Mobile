@@ -14,7 +14,7 @@ public class EggWave : Wave
 
     protected const float s_eggSpacing = 9.0f;  // +/- this dist from player's pos
     protected const float s_eggPosY = 5.0f;
-    protected const float s_eggSpeedY = 2.2f;
+    protected const float s_eggSpeedY = -2.2f;
 
     protected int m_numEgg;
     protected List<int> m_eggList;

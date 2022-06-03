@@ -34,7 +34,9 @@ public class Player : Bird, IHitPoints
 
     public static Player Get()
     {
-        return s_thePlayer;
+        if (null != s_thePlayer && s_thePlayer.m_hitPoints > 0.0f)
+            return s_thePlayer;
+        return null;
     }
 
     public override void Init(ObjectPool pool)
@@ -159,23 +161,24 @@ public class Player : Bird, IHitPoints
         m_lastHit = hitType;
         if (m_hitPoints > 0.0f)
         {
+            ret = IHitPoints.DamageReturn.DAMAGED;
             m_hitPoints -= damage;
             if (m_hitPoints <= 0.0f)
             {
                 Explode();
                 ret = IHitPoints.DamageReturn.KILLED;    // I've been killed
             }
-            ret = IHitPoints.DamageReturn.DAMAGED;
         }
 
-#if false   //mrwTODO
-        if (DamageReturn.KILLED == ret)
+        if (IHitPoints.DamageReturn.KILLED == ret)
         {
-            // shut off the laser - if it is firing
-            m_megaLaser.ReleaseTrigger();
-            m_megaLaser.Update(0.0f);
-            Game1.SetState(Game1.State.GAME_OVER);
+            //mrwTODO shut off the laser - if it is firing
+            //            m_megaLaser.ReleaseTrigger();
+            //            m_megaLaser.Update(0.0f);
+            GameManager.Get().GameOver();
+            gameObject.SetActive(false);
         }
+#if false   //mrwTODO
         else if (GetBonusMode() != startBonus)
         {
             AudioComponent.Get().PlaySound("PowerDown");

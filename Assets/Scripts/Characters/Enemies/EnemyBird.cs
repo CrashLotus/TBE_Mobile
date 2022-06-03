@@ -93,6 +93,14 @@ public class EnemyBird : Bird, IHitPoints
         return s_theList.Count;
     }
 
+    public static void DeleteAll()
+    {
+        for (int i = s_theList.Count - 1; i >= 0; --i)
+        {
+            s_theList[i].Free();
+        }
+    }
+
     public override void Init(ObjectPool pool)
     {
         base.Init(pool);

@@ -162,8 +162,8 @@ public class Egg : PooledObject, IHitPoints
 
             if (pos.y < GameManager.Get().GetLavaHeight())
             {
-                HitLava();
                 Free();
+                HitLava();
             }
             else
             {
@@ -294,7 +294,7 @@ public class Egg : PooledObject, IHitPoints
             if (m_pickUpTimer <= 0.0f)
             {
                 Player player = collision.gameObject.GetComponent<Player>();
-                if (null != player)
+                if (null != player && player == Player.Get())
                 {
                     if (null != m_collectSound)
                         m_collectSound.Play();

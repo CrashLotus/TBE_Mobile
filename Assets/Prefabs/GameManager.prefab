@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_worldWidth: 22
-  m_lavaHeight: 5
+  m_lavaHeight: -3

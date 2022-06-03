@@ -33,8 +33,12 @@ public class HitPoint_UI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        int numEgg = 0;
         Player player = Player.Get();
-        int numEgg = player.NumEgg();
+        if (null != player)
+        {
+            numEgg = player.NumEgg();
+        }
         for (int i = 0; i < numEgg; ++i)
         {
             m_eggSlots[i].color = Color.white;
@@ -55,7 +59,9 @@ public class HitPoint_UI : MonoBehaviour
     public Vector3 GetEggPos()
     {
         Vector3 pos = m_eggSlots[0].transform.position;
-        pos.x += m_eggSpacing * Player.Get().NumEgg();
+        Player player = Player.Get();
+        if (null != player)
+            pos.x += m_eggSpacing * player.NumEgg();
         return pos;
     }
 }

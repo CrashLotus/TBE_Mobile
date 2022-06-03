@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Title
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 879749f7078b06a438ae331b3815ee09, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: e69a45200de63314097a0691d5da06af, type: 3}
+  - {fileID: 21300000, guid: 99151a11cc923eb4883ba398966d8504, type: 3}
+  - {fileID: 21300000, guid: 047248f1d465fcb488bf17a2fa137222, type: 3}
+  - {fileID: 21300000, guid: 2647ad12d72101049ac8923cfe9e472d, type: 3}
+  - {fileID: 21300000, guid: dc1904a28e35dbd479a24c5cb292c80c, type: 3}
+  - {fileID: 21300000, guid: 326ad334e18abe045a9884688e370379, type: 3}
+  - {fileID: 21300000, guid: b00a3295d37328a489273300289b8657, type: 3}
+  - {fileID: 21300000, guid: baf95fb509ac0b149ab4899dbbb109a8, type: 3}
+  - {fileID: 21300000, guid: cb51df363f4d4cc43b371009e19a4f8b, type: 3}
+  - {fileID: 21300000, guid: 328240672404fe9499870c19ef6ba5fa, type: 3}
+  - {fileID: 21300000, guid: 9bcd6367e2ab88f4d8f53f503b22661b, type: 3}
+  - {fileID: 21300000, guid: 51dc2728d2dd4e54792a7856b61d5d42, type: 3}
+  - {fileID: 21300000, guid: 9493cda89a27fb548a2c3160f5f2e2f9, type: 3}
+  - {fileID: 21300000, guid: 60c0d689695f9de48ae791e517ef24c1, type: 3}
+  - {fileID: 21300000, guid: 4778b19952c6a2a4096f3587bf649b36, type: 3}
+  - {fileID: 21300000, guid: 8537ba3a2a11d9a42b673be2e54c0f31, type: 3}
+  - {fileID: 21300000, guid: cdd59c5a89bcf894e95163b35e48af9a, type: 3}
+  - {fileID: 21300000, guid: 1a80d7ca1468ad84589eab8d7fad2bf7, type: 3}
+  - {fileID: 21300000, guid: 0f1e52ab171ed844cb4c3f1e6e47eabe, type: 3}
+  - {fileID: 21300000, guid: 3c6785ac71ee6c541b022a3cd3c19547, type: 3}
+  - {fileID: 21300000, guid: 8f2bbecc6edcd744393f14536fdb713e, type: 3}
+  - {fileID: 21300000, guid: 3e40d13d3014d904e8a5339455632df3, type: 3}
+  - {fileID: 21300000, guid: 99bdcc4dbe75e204c8fbc770ffc7cc4e, type: 3}
+  - {fileID: 21300000, guid: 523acc5ed65daa44da76a70b799efe3d, type: 3}
+  - {fileID: 21300000, guid: 39f8f84fa25ea584dbbd2e72c2ee15fa, type: 3}
+  - {fileID: 21300000, guid: c41d46afb58fcaa4ca5be87c5e548e53, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Sparkle_Static0014
+  - TVM_Text_1
+  - Sparkle_Static0002
+  - Sparkle_Static0006
+  - Sparkle_Static0009
+  - TVM_Text_3
+  - TVM_Burst_1
+  - Title_Star
+  - Sparkle_Static0012
+  - Sparkle_Static0016
+  - TVE_Dagger_1
+  - PurpleWipe
+  - Sparkle_Static0013
+  - Start
+  - Sparkle_Static0001
+  - Sparkle_Static0005
+  - Title_Clock
+  - Sparkle_Static0010
+  - Sparkle_Static0007
+  - TVM_Text_2
+  - Sparkle_Static0004
+  - Sparkle_Static0011
+  - Sparkle_Static0008
+  - Sparkle_Static0015
+  - TVM_Sword_1
+  - Sparkle_Static0003
+  m_RenderDataMap: {}
+  m_Tag: Title
+  m_IsVariant: 0
