@@ -20,12 +20,14 @@ public class HitPoint_UI : MonoBehaviour
         s_theUI = this;
         m_eggSlots = new List<Image>();
         m_eggSlots.Add(m_eggSlot);
-        Vector3 pos = m_eggSlot.transform.position;
+        RectTransform rect = m_eggSlot.transform as RectTransform;
+        Vector3 pos = rect.anchoredPosition3D;
         for (int i = 1; i < Player.MaxEgg(); ++i)
         {
             GameObject copy = Instantiate(m_eggSlot.gameObject, transform);
             pos.x += m_eggSpacing;
-            copy.transform.position = pos;
+            RectTransform copyRect = copy.transform as RectTransform;
+            copyRect.anchoredPosition3D = pos;
             m_eggSlots.Add(copy.GetComponent<Image>());
         }
     }
