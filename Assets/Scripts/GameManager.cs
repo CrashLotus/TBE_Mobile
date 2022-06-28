@@ -58,6 +58,8 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GameOverCountDown()
     {
+        GameUI.Get().GameOver();
+
         // wait for all the eggs to hit the lava
         while (Egg.GetCount() > 0)
             yield return null;

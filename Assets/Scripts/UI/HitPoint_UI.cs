@@ -58,6 +58,7 @@ public class HitPoint_UI : MonoBehaviour
     {
         return s_theUI;
     }
+
     public Vector3 GetEggPos()
     {
         Vector3 pos = m_eggSlots[0].transform.position;

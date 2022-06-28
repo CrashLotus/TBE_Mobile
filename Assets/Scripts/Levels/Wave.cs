@@ -35,19 +35,16 @@ public class Wave : ScriptableObject
         m_timer = s_centerTime;
     }
 
-    public void SetText(string text)
-    {
-        m_text = text;
-        m_state = State.CENTER;
-        m_timer = s_centerTime;
-    }
-
     public virtual void Start()
     {
         m_isActive = true;
         m_isDone = false;
         m_state = State.CENTER;
         m_timer = s_centerTime;
+        if (null != m_text && m_text.Length > 0)
+        {
+            GameUI.Get().SetLabel(m_text);
+        }
     }
 
     public virtual void Stop()
