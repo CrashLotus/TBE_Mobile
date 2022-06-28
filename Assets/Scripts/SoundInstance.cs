@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SoundInstance : PooledObject
 {
     static ObjectPool s_soundPool;
+    static AudioMixerGroup s_sfxGroup;
     AudioSource m_source;
 
     const int s_numSounds = 128;
@@ -26,6 +28,7 @@ public class SoundInstance : PooledObject
             m_source = gameObject.AddComponent<AudioSource>();
             m_source.playOnAwake = false;
         }
+        m_source.outputAudioMixerGroup = s_sfxGroup;
     }
 
     public void Play(Sound sound)
@@ -43,6 +46,19 @@ public class SoundInstance : PooledObject
 
     static ObjectPool GetPool()
     {
+        if (null == s_sfxGroup)
+        {
+            AudioMixer mixer = Resources.Load<AudioMixer>("Mixer");
+            if (null == mixer)
+            {
+                Debug.LogError("Unable to load Mixer");
+            }
+            else
+            {
+                AudioMixerGroup[] groups = mixer.FindMatchingGroups("SFX");
+                s_sfxGroup = groups[0];
+            }
+        }
         if (null == s_soundPool)
         {
             GameObject prefab = new GameObject("Sound");

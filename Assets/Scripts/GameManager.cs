@@ -46,14 +46,12 @@ public class GameManager : MonoBehaviour
 
     public void OnNewGame()
     {
-        m_state = State.GAME_ON;
-        SceneManager.LoadScene("Game");
+        ChangeState(State.GAME_ON);
     }
 
     public void GameOver()
     {
-        m_state = State.GAME_OVER;
-        StartCoroutine(GameOverCountDown());
+        ChangeState(State.GAME_OVER);
     }
 
     IEnumerator GameOverCountDown()
@@ -68,8 +66,7 @@ public class GameManager : MonoBehaviour
 
         // return to main menu
         EnemyBird.DeleteAll();
-        m_state = State.MAIN_MENU;
-        SceneManager.LoadScene("MainMenu");
+        ChangeState(State.MAIN_MENU);
     }
 
     void UpdateScreenBounds()
@@ -95,9 +92,54 @@ public class GameManager : MonoBehaviour
         UpdateScreenBounds();
     }
 
+    void Start()
+    {
+        if (SceneManager.GetActiveScene().name == "Game")
+        {
+            SetState(State.GAME_ON);
+        }
+        else
+        {
+            SetState(State.MAIN_MENU);
+        }
+    }
+
     void Update()
     {
         UpdateScreenBounds();
         EnemyBird.DoRepulse(Time.deltaTime);
+    }
+
+    void ChangeState(State newState)
+    {
+        switch (newState)
+        {
+            case State.MAIN_MENU:
+                SceneManager.LoadScene("MainMenu");
+                break;
+            case State.GAME_ON:
+                SceneManager.LoadScene("Game");
+                break;
+            default:
+                break;
+        }
+        SetState(newState);
+    }
+
+    void SetState(State newState)
+    {
+        switch (newState)
+        {
+            case State.MAIN_MENU:
+                MusicManager.Get().Play(MusicManager.SongType.TITLE);
+                break;
+            case State.GAME_ON:
+                MusicManager.Get().Play(MusicManager.SongType.GAME);
+                break;
+            case State.GAME_OVER:
+                StartCoroutine(GameOverCountDown());
+                break;
+        }
+        m_state = newState;
     }
 }
