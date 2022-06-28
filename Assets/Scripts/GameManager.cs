@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
     IEnumerator GameOverCountDown()
     {
         GameUI.Get().GameOver();
+        GameUI.Get().SetHint("Catch the eggs before they hit the lava!");
 
         // wait for all the eggs to hit the lava
         while (Egg.GetCount() > 0)

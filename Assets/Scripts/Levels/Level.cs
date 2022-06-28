@@ -19,31 +19,6 @@ public class Level : ScriptableObject
         return s_currentLevel;
     }
 
-#if false   //mrwTODO
-    public virtual void DoLoad()
-    {
-        if (null != m_background)
-        {
-            m_background.Load();
-        }
-        base.DoLoad();
-    }
-
-    public override void Create()
-    {
-        if (null != m_background)
-            m_background.Create();
-        base.Create();
-    }
-
-    public override void UnLoad()
-    {
-        if (null != m_background)
-            m_background.UnLoad();
-        base.UnLoad();
-    }
-#endif
-
     public Wave FindWave(string label)
     {
         foreach (Wave wave in m_waves)
@@ -123,15 +98,6 @@ public class Level : ScriptableObject
 
         if (m_currentWave >= m_waves.Count)
             m_isDone = !m_isActive;
-    }
-
-    public void Draw()
-    {
-        for (int i = 0; i <= m_currentWave; ++i)
-        {
-            if (i < m_waves.Count && m_waves[i].IsActive())
-                m_waves[i].Draw();
-        }
     }
 
     void StartNextWave()
