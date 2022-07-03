@@ -15,6 +15,17 @@ public class Weapon : MonoBehaviour
     protected SpriteRenderer m_ownerSprite;
     protected Vector3 m_offset;
 
+    public void WarmUp()
+    {
+        if (null != m_bulletPrefab)
+        {
+            ObjectPool.GetPool(m_bulletPrefab, 64);
+            Bullet bullet = m_bulletPrefab.GetComponent<Bullet>();
+            if (null != bullet)
+                bullet.WarmUp();
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {

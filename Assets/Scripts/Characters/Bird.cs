@@ -26,6 +26,11 @@ public class Bird : PooledObject
     const float s_animSpeedMin = 0.0f;
     const float s_animSpeedBase = 15.0f;
 
+    protected virtual void _WarmUp()
+    {
+        if (null != m_deathEffect)
+            ObjectPool.GetPool(m_deathEffect, 64);
+    }
 
     private void Start()
     {

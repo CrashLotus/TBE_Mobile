@@ -15,6 +15,12 @@ public class Bullet : PooledObject
     protected Vector3 m_dir;
     Renderer m_renderer;
 
+    public void WarmUp()
+    {
+        if (null != m_impactPow)
+            ObjectPool.GetPool(m_impactPow, 32);
+    }
+
     protected virtual void Start()
     {
         m_renderer = GetComponent<Renderer>();

@@ -11,6 +11,11 @@ public class SoundInstance : PooledObject
 
     const int s_numSounds = 128;
 
+    public static void WarmUp()
+    {
+        GetPool();
+    }
+
     public static SoundInstance PlaySound(Sound sound)
     {
         ObjectPool pool = GetPool();
@@ -57,6 +62,7 @@ public class SoundInstance : PooledObject
             {
                 AudioMixerGroup[] groups = mixer.FindMatchingGroups("SFX");
                 s_sfxGroup = groups[0];
+                SetVolume(Options.GetSFXVolume());
             }
         }
         if (null == s_soundPool)
@@ -71,5 +77,12 @@ public class SoundInstance : PooledObject
             s_soundPool.Start();
         }
         return s_soundPool;
+    }
+
+    public static void SetVolume(float volume)
+    {
+        float sfxVolume = Mathf.Clamp(volume, 0.0001f, 1.0f);
+        sfxVolume = Mathf.Log10(sfxVolume) * 20.0f;
+        s_sfxGroup.audioMixer.SetFloat("SFXVolume", sfxVolume);
     }
 }

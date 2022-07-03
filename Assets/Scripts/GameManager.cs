@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     static GameManager s_theManager;
     Bounds m_screenBounds;  // screen boundaries in world space
     State m_state = State.MAIN_MENU;
+    bool m_isPaused = false;
 
     public static GameManager Get()
     {
@@ -89,8 +90,18 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
+        // Boot Strap
         UpdateScreenBounds();
+        SoundInstance.WarmUp();
+        Egg.MakeEggPool();
+        EnemyBird.WarmUp();
+        {   // warm up the player
+            GameObject playerObject = Resources.Load<GameObject>("Player");
+            Player player = playerObject.GetComponent<Player>();
+            player.WarmUp();
+        }
     }
 
     void Start()
@@ -142,5 +153,24 @@ public class GameManager : MonoBehaviour
                 break;
         }
         m_state = newState;
+    }
+
+    public void SetPause(bool set)
+    {
+        if (set)
+        {
+            Time.timeScale = 0.0f;
+            m_isPaused = true;
+        }
+        else
+        {
+            Time.timeScale = 1.0f;
+            m_isPaused = false;
+        }
+    }
+
+    public void ReturnToMainMenu()
+    {
+        ChangeState(State.MAIN_MENU);
     }
 }

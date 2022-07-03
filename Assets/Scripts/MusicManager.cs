@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class MusicManager : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class MusicManager : MonoBehaviour
 
     static MusicManager s_theManager;
     AudioSource m_source;
+    AudioMixerGroup m_mixerGroup;
 
     public static MusicManager Get()
     {
@@ -44,9 +46,25 @@ public class MusicManager : MonoBehaviour
         if (null == m_source)
         {
             m_source = gameObject.AddComponent<AudioSource>();
+            AudioMixer mixer = Resources.Load<AudioMixer>("Mixer");
+            if (null == mixer)
+            {
+                Debug.LogError("Unable to load Mixer");
+            }
+            else
+            {
+                AudioMixerGroup[] groups = mixer.FindMatchingGroups("Music");
+                m_mixerGroup = groups[0];
+                m_source.outputAudioMixerGroup = m_mixerGroup;
+            }
+        }
+        else
+        {
+            m_mixerGroup = m_source.outputAudioMixerGroup;
         }
         m_source.playOnAwake = false;
         m_source.loop = true;
+        SetVolume(Options.GetMusicVolume());
     }
 
     public void Play(SongType song)
@@ -66,6 +84,13 @@ public class MusicManager : MonoBehaviour
                 _Play(m_songCredits);
                 break;
         }
+    }
+
+    public void SetVolume(float volume)
+    {
+        float musicVol = Mathf.Clamp(volume, 0.0001f, 1.0f);
+        musicVol = Mathf.Log10(musicVol) * 20.0f;
+        m_mixerGroup.audioMixer.SetFloat("MusicVolume", musicVol);
     }
 
     void _Play(AudioClip song)

@@ -48,6 +48,24 @@ public class EnemyBird : Bird, IHitPoints
         "Enemy03"
     };
 
+    public static void WarmUp()
+    {
+        for (int i = 0; i < 3; ++i)
+        {
+            MakeEnemyPool(i + 1);
+            EnemyBird bird = s_enemyPool[i].m_prefab.GetComponent<EnemyBird>();
+            bird._WarmUp();
+        }
+    }
+
+    protected override void _WarmUp()
+    {
+        base._WarmUp();
+        ObjectPool.GetPool(m_spawnEffect, 16);
+        if (null != m_weapon)
+            m_weapon.WarmUp();
+    }
+
     public static void MakeEnemyPool(int power)
     {
         int index = power - 1;

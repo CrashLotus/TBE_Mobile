@@ -39,6 +39,11 @@ public class Player : Bird, IHitPoints
         return null;
     }
 
+    public void WarmUp()
+    {
+        m_laserWeapon.WarmUp();
+    }
+
     public override void Init(ObjectPool pool)
     {
         base.Init(pool);
