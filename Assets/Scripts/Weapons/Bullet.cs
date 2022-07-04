@@ -11,6 +11,7 @@ public class Bullet : PooledObject
     public GameObject m_impactPow;
     public Sound m_impactSound;
 
+    static List<Bullet> s_theList = new List<Bullet>();
     protected Vector3 m_vel;
     protected Vector3 m_dir;
     Renderer m_renderer;
@@ -95,5 +96,23 @@ public class Bullet : PooledObject
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Hit(collision.gameObject);
+    }
+
+    private void OnEnable()
+    {
+        s_theList.Add(this);
+    }
+
+    private void OnDisable()
+    {
+        s_theList.Remove(this);
+    }
+
+    public static void DeleteAll()
+    {
+        for (int i = s_theList.Count - 1; i >= 0; --i)
+        {
+            s_theList[i].Free();
+        }
     }
 }

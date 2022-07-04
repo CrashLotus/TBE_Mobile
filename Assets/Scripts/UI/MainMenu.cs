@@ -6,10 +6,17 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject m_optionsMenu;
     public Sound m_menuSelect;
+    public Sound m_startGameSound;
 
     public void OnNewGame()
     {
         GameManager.Get().OnNewGame();
+        m_startGameSound.Play();
+    }
+
+    public void OnStoreMenu()
+    {
+        GameManager.Get().GoToStore();
         m_menuSelect.Play();
     }
 

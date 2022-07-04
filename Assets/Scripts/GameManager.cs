@@ -12,7 +12,8 @@ public class GameManager : MonoBehaviour
     {
         MAIN_MENU,
         GAME_ON,
-        GAME_OVER
+        GAME_OVER,
+        STORE
     }
     static GameManager s_theManager;
     Bounds m_screenBounds;  // screen boundaries in world space
@@ -48,6 +49,11 @@ public class GameManager : MonoBehaviour
     public void OnNewGame()
     {
         ChangeState(State.GAME_ON);
+    }
+
+    public void GoToStore()
+    {
+        ChangeState(State.STORE);
     }
 
     public void GameOver()
@@ -127,10 +133,16 @@ public class GameManager : MonoBehaviour
         switch (newState)
         {
             case State.MAIN_MENU:
+                Egg.DeleteAll();
+                EnemyBird.DeleteAll();
+                Bullet.DeleteAll();
                 SceneManager.LoadScene("MainMenu");
                 break;
             case State.GAME_ON:
                 SceneManager.LoadScene("Game");
+                break;
+            case State.STORE:
+                SceneManager.LoadScene("Store");
                 break;
             default:
                 break;
@@ -150,6 +162,9 @@ public class GameManager : MonoBehaviour
                 break;
             case State.GAME_OVER:
                 StartCoroutine(GameOverCountDown());
+                break;
+            case State.STORE:
+                MusicManager.Get().Play(MusicManager.SongType.SHOP);
                 break;
         }
         m_state = newState;
@@ -171,6 +186,7 @@ public class GameManager : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
+        SetPause(false);
         ChangeState(State.MAIN_MENU);
     }
 }

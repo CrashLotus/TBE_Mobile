@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0843e1c7cf98ea14eb464cc7471dbcac, type: 3}
+  m_Name: EggShield
+  m_EditorClassIdentifier: 
+  m_key: EGGSHIELD
+  m_name: Egg-geis
+  m_cost: 10
+  m_desc: Activates when your egg meter fills up, blocking a single hit.
+  m_icon: {fileID: 21300000, guid: 7446569c430514b41b923dea2323d14a, type: 3}
+  m_display: {fileID: 21300000, guid: f9a7fc2389f2f7a41809ac9cb5716f59, type: 3}

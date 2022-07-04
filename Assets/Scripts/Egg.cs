@@ -276,6 +276,14 @@ public class Egg : PooledObject, IHitPoints
         s_theList.Remove(this);
     }
 
+    public static void DeleteAll()
+    {
+        for (int i = s_theList.Count - 1; i >= 0; --i)
+        {
+            s_theList[i].Free();
+        }
+    }
+
     override public void Init(ObjectPool pool)
     {
         base.Init(pool);
