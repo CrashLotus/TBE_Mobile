@@ -31,4 +31,9 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
         m_menuSelect.Play();
     }
+
+    public void OnResetSave()
+    {
+        SaveData.Get().Reset();
+    }
 }

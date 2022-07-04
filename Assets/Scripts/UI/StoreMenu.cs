@@ -14,6 +14,7 @@ public class StoreMenu : MonoBehaviour
     public GameObject m_selection;
     public Vector3 m_selectionOffset;
     public GameObject m_buyButton;
+    public GameObject m_offerPanel;
 
     public Image m_display;
     public TextMeshProUGUI m_cost;
@@ -22,7 +23,8 @@ public class StoreMenu : MonoBehaviour
     public Sound m_menuSelect;
     public Sound m_buySound;
 
-    static List<Upgrade> s_allUpgrades;
+    List<Upgrade> m_allUpgrades;
+    List<UpgradeButton> m_allButtons;
     int m_selectedIndex = -1;
 
     // Start is called before the first frame update
@@ -32,35 +34,28 @@ public class StoreMenu : MonoBehaviour
         if (null != m_crystals)
             m_crystals.text = data.GetTimeCrystals().ToString();
 
-        if (null == s_allUpgrades)
+        if (null == m_allUpgrades)
         {
-            s_allUpgrades = new List<Upgrade>();
+            m_allUpgrades = new List<Upgrade>();
+            m_allButtons = new List<UpgradeButton>();
             TextAsset list = Resources.Load<TextAsset>("Upgrades/UpgradeList");
             string[] lines = list.text.Split("\n"[0]);
             int itemCount = 0;
             foreach (string line in lines)
             {
-                s_allUpgrades.Add(Resources.Load<Upgrade>("Upgrades/" + line.TrimEnd()));
+                m_allUpgrades.Add(Resources.Load<Upgrade>("Upgrades/" + line.TrimEnd()));
                 GameObject newItem = Instantiate(m_itemPrefab);
+                UpgradeButton upgradeButton = newItem.GetComponent<UpgradeButton>();
+                if (null != upgradeButton)
+                {
+                    upgradeButton.SetUp(m_allUpgrades[itemCount]);
+                }
+                m_allButtons.Add(upgradeButton);
                 Button button = newItem.GetComponent<Button>();
                 if (null != button)
                 {
                     int index = itemCount;
                     button.onClick.AddListener(() => OnSelectItem(index) );
-                }
-                Transform child = newItem.transform.GetChild(0);
-                if (null != child)
-                {
-                    Image image = child.GetComponent<Image>();
-                    if (null != image)
-                        image.sprite = s_allUpgrades[itemCount].m_icon;
-                    child = child.GetChild(0);
-                    if (null != child)
-                    {
-                        TextMeshProUGUI text = child.GetComponent<TextMeshProUGUI>();
-                        if (null != text)
-                            text.text = s_allUpgrades[itemCount].m_name;
-                    }
                 }
                 newItem.transform.SetParent(m_itemArea.transform, false);
                 Vector3 itemPos = m_itemPos;
@@ -75,12 +70,20 @@ public class StoreMenu : MonoBehaviour
         OnSelectItem(-1);
     }
 
+    void Update()
+    {
+        SaveData data = SaveData.Get();
+        if (null != m_crystals)
+            m_crystals.text = data.GetTimeCrystals().ToString();
+    }
+
     public void OnSelectItem(int item)
     {
-        if (item >= 0 && item < s_allUpgrades.Count)
+        if (item >= 0 && item < m_allUpgrades.Count)
         {
             m_menuSelect.Play();
-            bool isOwned = SaveData.Get().HasUpgrade(s_allUpgrades[item].m_key);
+            bool isOwned = m_allUpgrades[item].IsOwned();
+            bool isLocked = m_allUpgrades[item].IsLocked();
             if (null != m_selection)
             {
                 m_selection.SetActive(true);
@@ -90,23 +93,25 @@ public class StoreMenu : MonoBehaviour
             if (null != m_display)
             {
                 m_display.enabled = true;
-                m_display.sprite = s_allUpgrades[item].m_display;
+                m_display.sprite = m_allUpgrades[item].m_display;
             }
             if (null != m_cost)
             {
-                if (isOwned)
+                if (isLocked)
+                    m_cost.text = "Locked";
+                else if (isOwned)
                     m_cost.text = "0";
                 else
-                    m_cost.text = s_allUpgrades[item].m_cost.ToString();
+                    m_cost.text = m_allUpgrades[item].m_cost.ToString();
             }
             if (null != m_desc)
             {
                 m_desc.enabled = true;
-                m_desc.text = s_allUpgrades[item].m_desc;
+                m_desc.text = m_allUpgrades[item].m_desc;
             }
             if (null != m_buyButton)
             {
-                if (isOwned)
+                if (isOwned || isLocked)
                     m_buyButton.SetActive(false);
                 else
                     m_buyButton.SetActive(true);
@@ -131,8 +136,31 @@ public class StoreMenu : MonoBehaviour
 
     public void OnBuyItem()
     {
-        Debug.Log("Buy Item");
-        m_buySound.Play();
+        if (m_selectedIndex < 0 || m_selectedIndex >= m_allUpgrades.Count)
+            return;
+        
+        SaveData data = SaveData.Get();
+        if (data.HasUpgrade(m_allUpgrades[m_selectedIndex].m_key))
+            return;
+
+        int cost = m_allUpgrades[m_selectedIndex].m_cost;
+        if (data.GetTimeCrystals() >= cost)
+        {   // buy it
+            data.AddTimeCrystals(-cost);
+            data.AddUpgrade(m_allUpgrades[m_selectedIndex].m_key);
+            Debug.Log("Buy Item");
+            m_buySound.Play();
+            for (int i = 0; i < m_allButtons.Count; ++i)
+            {
+                m_allButtons[i].SetUp(m_allUpgrades[i]);
+            }
+            OnSelectItem(m_selectedIndex);
+        }
+        else
+        {
+            m_offerPanel.SetActive(true);
+            m_menuSelect.Play();
+        }
     }
 
     public void OnExitMenu()

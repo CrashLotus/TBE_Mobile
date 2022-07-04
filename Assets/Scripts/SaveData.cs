@@ -81,4 +81,10 @@ public class SaveData
         m_data.m_timeCrystals += num;
         Save();
     }
+
+    public void Reset()
+    {
+        m_data = new Data();
+        Save();
+    }
 }

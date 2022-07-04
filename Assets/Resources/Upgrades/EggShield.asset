@@ -18,3 +18,4 @@ MonoBehaviour:
   m_desc: Activates when your egg meter fills up, blocking a single hit.
   m_icon: {fileID: 21300000, guid: 7446569c430514b41b923dea2323d14a, type: 3}
   m_display: {fileID: 21300000, guid: f9a7fc2389f2f7a41809ac9cb5716f59, type: 3}
+  m_preReq: POWERLASER
