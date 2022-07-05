@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Upgrades
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 2697bc42ac6190b4f869e5c46e8994ea, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: e10c5d51a8d58414fbbf01dca7f6e0aa, type: 3}
+  - {fileID: 21300000, guid: f9a7fc2389f2f7a41809ac9cb5716f59, type: 3}
+  - {fileID: 21300000, guid: d39ca9a3a76489a409ea11d32a54f684, type: 3}
+  - {fileID: 21300000, guid: bec143d5750c2554e8abf2d6ef219bc7, type: 3}
+  - {fileID: 21300000, guid: 8a3bae675af17a848a572b252197adab, type: 3}
+  - {fileID: 21300000, guid: d11f538906ad2a04a9c2cd929a00ed56, type: 3}
+  - {fileID: 21300000, guid: 8ac7706be85fe544b900702b45aa5ae6, type: 3}
+  - {fileID: -947610302, guid: b577aebb093e3614e82a30b51eb2e19f, type: 3}
+  - {fileID: 21300000, guid: 9865ac1c149c6014680a40709e42a551, type: 3}
+  - {fileID: 21300000, guid: 7446569c430514b41b923dea2323d14a, type: 3}
+  - {fileID: 21300000, guid: c34ae9dcb30861c49942174a15cf63a0, type: 3}
+  - {fileID: -736876375, guid: 3218180f0c46c1d449595e77ac52cf3c, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Missile1
+  - EggShield
+  - Icon_Check
+  - Icon_PowerLaser
+  - Selected
+  - Button_Buy
+  - PowerLaser
+  - Frame_ScreenShot_0
+  - Icon_Missile1
+  - Icon_Shield
+  - Icon_Lock
+  - Frame_Full_0
+  m_RenderDataMap: {}
+  m_Tag: Upgrades
+  m_IsVariant: 0

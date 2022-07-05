@@ -219,13 +219,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 25891694241100731}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e25d73ff9caacb4daaf08567eb4c1ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b1fb5331042d67438398ff2a49ea856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_bulletPrefab: {fileID: 4334953183423426640, guid: 115ef3a5d5308c044abcf67797142397, type: 3}
   m_fireDelay: 0.25
   m_recoil: 8
   m_fireSound: {fileID: 11400000, guid: 04f2bdef1e0215b4a93b58c45dd326e1, type: 2}
+  m_powerBullet: {fileID: 5540659085790315851, guid: 9c4a44bb80730d744b3fc71d65332097, type: 3}
+  m_powerSound: {fileID: 11400000, guid: 6331f47c5cf9818468f43c61dc016357, type: 2}
 --- !u!1001 &2403427821568228908
 PrefabInstance:
   m_ObjectHideFlags: 0
