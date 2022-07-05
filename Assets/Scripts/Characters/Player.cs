@@ -4,18 +4,35 @@ using UnityEngine;
 
 public class Player : Bird, IHitPoints
 {
+    public enum EggBonus
+    {
+        NONE,
+        POWER_LASER,
+        MULTISHOT,
+        MEGA_LASER
+    }
+
     public float m_moveSpeed = 7.0f;
     public float m_accel = 70.0f;
     public Weapon m_laserWeapon;
     public SimpleButton m_fireButton;
+    public GameObject m_eggShield;
     public float m_topBoundary = 0.94f;
     public float m_bottomBoundary = 0.16f;
     public Sound m_hitSound;
+    public Sound m_powerUp1;
+    public Sound m_powerUp2;
+    public Sound m_powerUp3;
+    public Sound m_powerDown;
+    public Sound m_eggShieldOn;
+    public Sound m_eggShieldOff;
 
     Joystick m_joystick;
     Vector3 m_vel = Vector3.zero;
     bool m_fireLaser = false;
     bool m_fireLaserOld = false;
+    bool m_isEggShieldOn = false;
+    Animator m_eggShieldAnim;
 
     const int s_maxEggStart = 10;
     const int s_maxEggFinish = 20;
@@ -49,6 +66,8 @@ public class Player : Bird, IHitPoints
         base.Init(pool);
         m_joystick = FindObjectOfType<Joystick>();
         m_hitPoints = s_saveHitPoints;
+        m_eggShieldAnim = m_eggShield.GetComponent<Animator>();
+        m_eggShield.SetActive(false);
         s_thePlayer = this;
     }
 
@@ -117,14 +136,15 @@ public class Player : Bird, IHitPoints
 
     public IHitPoints.DamageReturn Damage(float damage, IHitPoints.HitType hitType)
     {
-#if false   //mrwTODO
-        if (m_eggShieldOn)
+        if (m_isEggShieldOn)
         {
-            m_eggShieldOn = false;
-            AudioComponent.Get().PlaySound("BubbleBurst");
-            return DamageReturn.NO_DAMAGE;
+            m_isEggShieldOn = false;
+            m_eggShieldAnim.SetBool("ShieldOn", false);
+            m_eggShieldOff.Play();
+            return IHitPoints.DamageReturn.NO_DAMAGE;
         }
 
+#if false
         m_comboTimer = 0.0f;
         m_comboPoints = 0;
 
@@ -135,7 +155,7 @@ public class Player : Bird, IHitPoints
         return DamageReturn.NO_DAMAGE;
 #endif
 #endif
-        //        EggBonus startBonus = GetBonusMode(); //mrwTODO
+        EggBonus startBonus = GetBonusMode();
 
         int maxEgg = MaxEgg();
         if (m_hitPoints > maxEgg)   // you can have more than max eggs, but you can't have more than max hit points
@@ -183,13 +203,24 @@ public class Player : Bird, IHitPoints
             GameManager.Get().GameOver();
             gameObject.SetActive(false);
         }
-#if false   //mrwTODO
         else if (GetBonusMode() != startBonus)
         {
-            AudioComponent.Get().PlaySound("PowerDown");
+            m_powerDown.Play();
         }
-#endif
         return ret;
+    }
+
+    public EggBonus GetBonusMode()
+    {
+        int maxEgg = MaxEgg();
+        SaveData data = SaveData.Get();
+        if (data.HasUpgrade("MEGALASER") && m_hitPoints >= 3 * maxEgg)
+            return EggBonus.MEGA_LASER;
+        if (data.HasUpgrade("MULTISHOT") && m_hitPoints >= 2 * maxEgg)
+            return EggBonus.MULTISHOT;
+        if (data.HasUpgrade("POWERLASER") && m_hitPoints >= maxEgg)
+            return EggBonus.POWER_LASER;
+        return EggBonus.NONE;
     }
 
     public static void AddScore(int score)
@@ -227,53 +258,62 @@ public class Player : Bird, IHitPoints
             ++s_bossesMissiled;
     }
 
+    void EggShieldOn()
+    {
+        if (false == m_isEggShieldOn)
+        {
+            m_isEggShieldOn = true;
+            m_eggShield.SetActive(true);
+            m_eggShieldAnim.SetBool("ShieldOn", true);
+            m_eggShieldOn.Play();
+        }
+    }
+
     public void AddEgg()
-    {   //mrwTODO egg bonuses
-//        EggBonus startBonus = GetBonusMode();
+    {
+        SaveData data = SaveData.Get();
+        EggBonus startBonus = GetBonusMode();
 
         int maxEgg = MaxEgg();
-//        if (IsAbilityUnlocked(Upgrade.Type.MEGALASER))
-//            maxEgg *= 3;
-//        else if (IsAbilityUnlocked(Upgrade.Type.MULTISHOT))
-//            maxEgg *= 2;
+        if (data.HasUpgrade("MEGALASER"))
+            maxEgg *= 3;
+        if (data.HasUpgrade("MULTISHOT"))
+            maxEgg *= 2;
         m_hitPoints += 1.0f;
         if (m_hitPoints > maxEgg)
             m_hitPoints = maxEgg;
 
-        //EggBonus endBonus = GetBonusMode();
-        //if (endBonus != startBonus)
-        //{
-        //    switch (endBonus)
-        //    {
-        //        case EggBonus.POWER_LASER:
-        //            if (IsAbilityUnlocked(Upgrade.Type.EGGSHIELD))
-        //            {
-        //                m_eggShieldOn = true;
-        //                AudioComponent.Get().PlaySound("BubbleShieldBirth");
-        //            }
-        //            AudioComponent.Get().PlaySound("PowerUp1");
-        //            EggIcon.StartWave();
-        //            break;
-        //        case EggBonus.MULTISHOT:
-        //            if (IsAbilityUnlocked(Upgrade.Type.EGGSHIELD))
-        //            {
-        //                m_eggShieldOn = true;
-        //                AudioComponent.Get().PlaySound("BubbleShieldBirth");
-        //            }
-        //            AudioComponent.Get().PlaySound("PowerUp2");
-        //            EggIcon.StartWave();
-        //            break;
-        //        case EggBonus.MEGA_LASER:
-        //            if (IsAbilityUnlocked(Upgrade.Type.EGGSHIELD))
-        //            {
-        //                m_eggShieldOn = true;
-        //                AudioComponent.Get().PlaySound("BubbleShieldBirth");
-        //            }
-        //            AudioComponent.Get().PlaySound("PowerUp3");
-        //            EggIcon.StartWave();
-        //            break;
-        //    }
-        //}
+        EggBonus endBonus = GetBonusMode();
+        if (endBonus != startBonus)
+        {
+            switch (endBonus)
+            {
+                case EggBonus.POWER_LASER:
+                    if (data.HasUpgrade("EGGSHIELD"))
+                    {
+                        EggShieldOn();
+                    }
+                    m_powerUp1.Play();
+                    //mrwTODO do egg wave
+                    break;
+                case EggBonus.MULTISHOT:
+                    if (data.HasUpgrade("EGGSHIELD"))
+                    {
+                        EggShieldOn();
+                    }
+                    m_powerUp2.Play();
+                    //mrwTODO do egg wave
+                    break;
+                case EggBonus.MEGA_LASER:
+                    if (data.HasUpgrade("EGGSHIELD"))
+                    {
+                        EggShieldOn();
+                    }
+                    m_powerUp3.Play();
+                    //mrwTODO do egg wave
+                    break;
+            }
+        }
         ++s_eggsCaught;
     }
 

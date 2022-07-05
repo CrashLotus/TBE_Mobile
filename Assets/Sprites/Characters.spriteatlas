@@ -114,6 +114,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: b78aec3742a9cc24c9669ec99fe7dbd4, type: 3}
   - {fileID: 21300000, guid: 9fcd4c67baae7694d87debf5e08f9724, type: 3}
   - {fileID: 21300000, guid: 22c01b77f9c924049bf9a18a6351d90e, type: 3}
+  - {fileID: 21300000, guid: eb48679752eb37b41ad064fe7624b856, type: 3}
   - {fileID: 21300000, guid: c50ba4a7bf224ba4688896d1109594f8, type: 3}
   - {fileID: 21300000, guid: e8bf25c78cf7bde4fa2c772a9c3d726a, type: 3}
   - {fileID: 21300000, guid: 44910dc7a25bdbb4f966d83a981afe3e, type: 3}
@@ -275,6 +276,7 @@ SpriteAtlas:
   - EnergyBlast_030001
   - Explotion0003
   - Enemy_Bullet_02_10005
+  - Shield_Ring
   - Missile20002
   - Fireball_010008
   - Joust_Enemy_02A0007

@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f92e051b6ada1d4595224226f1ef9e0, type: 3}
-  m_Name: Level01
+  m_Script: {fileID: 11500000, guid: 540e3762f93f0344cabd440e7c4f30b3, type: 3}
+  m_Name: EggShieldOn
   m_EditorClassIdentifier: 
-  m_waves:
-  - {fileID: 11400000, guid: d1fc489f0c4bc6e44abcf46d28b7d4e1, type: 2}
-  - {fileID: 11400000, guid: d1fc489f0c4bc6e44abcf46d28b7d4e1, type: 2}
+  m_clip: {fileID: 0}
+  m_minPitch: 0.8
+  m_maxPitch: 1.4
+  m_minVol: 0.8
+  m_maxVol: 1

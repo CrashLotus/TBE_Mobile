@@ -38,8 +38,11 @@ public class Level : ScriptableObject
         m_isActive = false;
         m_doTransition = false;
 
-        foreach (Wave wave in m_waves)
-            wave.Reset();
+        for (int i = 0; i < m_waves.Count; ++i)
+        {
+            m_waves[i] = Instantiate(m_waves[i]);
+            m_waves[i].Reset();
+        }
         if (m_waves.Count > 0)
         {
             m_currentWave = -1;
