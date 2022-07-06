@@ -364,4 +364,10 @@ public class EnemyBird : Bird, IHitPoints
 
         Free();
     }
+
+    public static void ProcessAll(GameManager.ProcessObject process)
+    {
+        foreach (EnemyBird bird in s_theList)
+            process(bird.gameObject);
+    }
 }

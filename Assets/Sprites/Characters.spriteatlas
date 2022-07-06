@@ -115,7 +115,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 9fcd4c67baae7694d87debf5e08f9724, type: 3}
   - {fileID: 21300000, guid: 22c01b77f9c924049bf9a18a6351d90e, type: 3}
   - {fileID: 21300000, guid: eb48679752eb37b41ad064fe7624b856, type: 3}
-  - {fileID: 21300000, guid: c50ba4a7bf224ba4688896d1109594f8, type: 3}
   - {fileID: 21300000, guid: e8bf25c78cf7bde4fa2c772a9c3d726a, type: 3}
   - {fileID: 21300000, guid: 44910dc7a25bdbb4f966d83a981afe3e, type: 3}
   - {fileID: 21300000, guid: 46a710e7945bc654b9fbf96be0ad74bc, type: 3}
@@ -132,7 +131,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: c396b6a8c503fbd48b426ca439cdd3ac, type: 3}
   - {fileID: 21300000, guid: 54b6baa8efd450d45ade7cddf65552f2, type: 3}
   - {fileID: 21300000, guid: 5a4c81e8c6877264591213daf6fe53d5, type: 3}
-  - {fileID: 21300000, guid: 701606e83165bea4ebdd560954e10c12, type: 3}
   - {fileID: 21300000, guid: 3d658a09b1dba4848936438700b7035f, type: 3}
   - {fileID: 21300000, guid: 35335b097cd9b984991aaa01d1b8339d, type: 3}
   - {fileID: 21300000, guid: e8997b49d7167b84b8196e377f0e3373, type: 3}
@@ -277,7 +275,6 @@ SpriteAtlas:
   - Explotion0003
   - Enemy_Bullet_02_10005
   - Shield_Ring
-  - Missile20002
   - Fireball_010008
   - Joust_Enemy_02A0007
   - Missile_Indian0005
@@ -294,7 +291,6 @@ SpriteAtlas:
   - Joust_Char_Missile_010002
   - Joust_Enemy_02A0004
   - Joust_Enemy_02A0007
-  - Missile0002
   - Explotion0002
   - Joust_Char_Fire_010002
   - Explotion0005

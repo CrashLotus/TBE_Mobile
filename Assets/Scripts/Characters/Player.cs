@@ -16,6 +16,8 @@ public class Player : Bird, IHitPoints
     public float m_accel = 70.0f;
     public Weapon m_laserWeapon;
     public SimpleButton m_fireButton;
+    public Weapon m_missileWeapon;
+    public SimpleButton m_missileButton;
     public GameObject m_eggShield;
     public float m_topBoundary = 0.94f;
     public float m_bottomBoundary = 0.16f;
@@ -31,6 +33,8 @@ public class Player : Bird, IHitPoints
     Vector3 m_vel = Vector3.zero;
     bool m_fireLaser = false;
     bool m_fireLaserOld = false;
+    bool m_fireMissile = false;
+    bool m_fireMissileOld = false;
     bool m_isEggShieldOn = false;
     Animator m_eggShieldAnim;
 
@@ -91,6 +95,9 @@ public class Player : Bird, IHitPoints
         m_fireLaser |= Input.GetKey(KeyCode.Space);
         bool fireLaser = m_fireLaser && (!m_fireLaserOld);
 
+        bool fireMissile = m_missileButton.IsButtonPress();
+        fireMissile |= Input.GetKeyDown(KeyCode.Tab);
+
         // face the right direction
         if (move.x < 0.0f)
             m_sprite.flipX = true;
@@ -125,6 +132,10 @@ public class Player : Bird, IHitPoints
             m_laserWeapon.HoldTrigger();
         m_fireLaserOld = m_fireLaser;
         m_fireLaser = false;
+
+        // fire the missile
+        if (fireMissile)
+            m_missileWeapon.HitTrigger();
 
         base.Update();
     }

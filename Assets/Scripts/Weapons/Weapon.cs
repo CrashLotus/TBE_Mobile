@@ -36,13 +36,13 @@ public class Weapon : MonoBehaviour
         m_offset = transform.localPosition;
     }
 
-    public void HitTrigger()
+    public virtual void HitTrigger()
     {
         m_fireTimer = 0.0f;
         m_triggerHold = true;
     }
 
-    public void HoldTrigger()
+    public virtual void HoldTrigger()
     {
         m_triggerHold = true;
     }
@@ -56,7 +56,7 @@ public class Weapon : MonoBehaviour
         m_triggerHold = false;
     }
 
-    public void Update()
+    public virtual void Update()
     {
         float dt = Time.deltaTime;
 

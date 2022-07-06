@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public float m_worldWidth = 22.0f;
     public float m_lavaHeight = -3.0f;
 
+    public delegate void ProcessObject(GameObject obj);
+
     public enum State
     {
         MAIN_MENU,
