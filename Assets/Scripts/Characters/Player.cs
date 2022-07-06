@@ -309,7 +309,7 @@ public class Player : Bird, IHitPoints
                         EggShieldOn();
                     }
                     m_powerUp1.Play();
-                    //mrwTODO do egg wave
+                    HitPoint_UI.Get().StartWave();
                     break;
                 case EggBonus.MULTISHOT:
                     if (data.HasUpgrade("EGGSHIELD"))
@@ -317,7 +317,7 @@ public class Player : Bird, IHitPoints
                         EggShieldOn();
                     }
                     m_powerUp2.Play();
-                    //mrwTODO do egg wave
+                    HitPoint_UI.Get().StartWave();
                     break;
                 case EggBonus.MEGA_LASER:
                     if (data.HasUpgrade("EGGSHIELD"))
@@ -325,7 +325,7 @@ public class Player : Bird, IHitPoints
                         EggShieldOn();
                     }
                     m_powerUp3.Play();
-                    //mrwTODO do egg wave
+                    HitPoint_UI.Get().StartWave();
                     break;
             }
         }

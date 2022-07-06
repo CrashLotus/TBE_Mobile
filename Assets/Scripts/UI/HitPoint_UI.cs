@@ -10,8 +10,13 @@ public class HitPoint_UI : MonoBehaviour
     public Image m_eggSlot;
     public float m_eggSpacing = 56.0f;
     public Color m_noEggColor;
+    public float m_scale = 1.0f;
+    public float m_waveScale = 1.25f;
+    public float m_waveFreq = 16.0f;
+    public float m_waveOffset = 0.75f;
 
     List<Image> m_eggSlots;
+    float m_waveTimer = 0.0f;
     static HitPoint_UI s_theUI;
 
     // Start is called before the first frame update
@@ -50,6 +55,7 @@ public class HitPoint_UI : MonoBehaviour
         {
             m_eggSlots[i].color = m_noEggColor;
         }
+        UpdateWave(numEgg);
 
         m_points.text = Player.GetScore().ToString();
     }
@@ -61,10 +67,36 @@ public class HitPoint_UI : MonoBehaviour
 
     public Vector3 GetEggPos()
     {
-        Vector3 pos = m_eggSlots[0].transform.position;
+        int numEgg = 0;
         Player player = Player.Get();
         if (null != player)
-            pos.x += m_eggSpacing * player.NumEgg();
+            numEgg = player.NumEgg();
+        Vector3 pos = m_eggSlots[numEgg].transform.position;
         return pos;
+    }
+
+    public void StartWave()
+    {
+        m_waveTimer = 0.0f;
+    }
+
+    void UpdateWave(int numEgg)
+    {
+        float dt = Time.deltaTime;
+        m_waveTimer += m_waveFreq * dt;
+        float eggWaveTime = m_waveTimer;
+        for (int i = 0; i < numEgg; ++i)
+        {
+            if (eggWaveTime > 0.0f && eggWaveTime < Mathf.PI)
+            {
+                float lerp = Mathf.Sin(eggWaveTime);
+                m_eggSlots[i].transform.localScale = Mathf.Lerp(m_scale, m_waveScale, lerp) * Vector3.one;
+            }
+            else
+            {
+                m_eggSlots[i].transform.localScale = m_scale * Vector3.one;
+            }
+            eggWaveTime -= m_waveOffset;
+        }
     }
 }
