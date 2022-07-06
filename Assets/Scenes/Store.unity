@@ -532,7 +532,7 @@ MonoBehaviour:
   m_itemPos: {x: 64, y: -56, z: 0}
   m_itemSpacing: -288
   m_selection: {fileID: 1454398917}
-  m_selectionOffset: {x: -28, y: 26, z: 0}
+  m_selectionOffset: {x: -32, y: 32, z: 0}
   m_buyButton: {fileID: 1308529890}
   m_offerPanel: {fileID: 1744357620}
   m_display: {fileID: 1459584340}
@@ -1619,7 +1619,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1899488069}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.74999994
+  m_Size: 0.75000006
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

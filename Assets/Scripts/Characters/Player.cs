@@ -69,6 +69,13 @@ public class Player : Bird, IHitPoints
         m_hitPoints = s_saveHitPoints;
         m_eggShieldAnim = m_eggShield.GetComponent<Animator>();
         m_eggShield.SetActive(false);
+        if (null != m_missileButton)
+        {
+            if (SaveData.Get().HasUpgrade("MISSILE1"))
+                m_missileButton.gameObject.SetActive(true);
+            else
+                m_missileButton.gameObject.SetActive(false);
+        }
         s_thePlayer = this;
     }
 
