@@ -71,6 +71,8 @@ MonoBehaviour:
   m_recoil: 8
   m_fireSound: {fileID: 11400000, guid: 8ff917ca6568802468ec9484409d9bd8, type: 2}
   m_failSound: {fileID: 11400000, guid: 72d1b41c76f6f7943a8c2d8a96470ebc, type: 2}
+  m_missileAppearSound: {fileID: 11400000, guid: e303f32d431b61842a3922d11878a747, type: 2}
+  m_crosshairPrefab: {fileID: 2367684081858445827, guid: d2ec56bfb31f0ff45896e4b88cb5e272, type: 3}
 --- !u!1 &3886965415406907885
 GameObject:
   m_ObjectHideFlags: 0

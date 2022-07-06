@@ -33,13 +33,10 @@ public class Player : Bird, IHitPoints
     Vector3 m_vel = Vector3.zero;
     bool m_fireLaser = false;
     bool m_fireLaserOld = false;
-    bool m_fireMissile = false;
-    bool m_fireMissileOld = false;
     bool m_isEggShieldOn = false;
     Animator m_eggShieldAnim;
 
     const int s_maxEggStart = 10;
-    const int s_maxEggFinish = 20;
     const float s_startingHP = 3.0f;
 
     static Player s_thePlayer;

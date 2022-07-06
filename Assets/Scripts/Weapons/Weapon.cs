@@ -15,7 +15,7 @@ public class Weapon : MonoBehaviour
     protected SpriteRenderer m_ownerSprite;
     protected Vector3 m_offset;
 
-    public void WarmUp()
+    public virtual void WarmUp()
     {
         if (null != m_bulletPrefab)
         {

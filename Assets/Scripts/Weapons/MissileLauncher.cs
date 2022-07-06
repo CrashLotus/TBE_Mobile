@@ -5,6 +5,8 @@ using UnityEngine;
 public class MissileLauncher : Weapon
 {
     public Sound m_failSound;
+    public Sound m_missileAppearSound;
+    public GameObject m_crosshairPrefab;
 
     static int[] s_numMissile = { 6, 10 };
     static float[] s_maxRange = { 5.6f, 7.8f };
@@ -14,6 +16,13 @@ public class MissileLauncher : Weapon
     Animator m_anim;
     List<GameObject> m_targets;
     List<float> m_targetDist;
+    List<Crosshair> m_crosshairs;
+
+    public override void WarmUp()
+    {
+        base.WarmUp();
+        ObjectPool.GetPool(m_crosshairPrefab, 10);
+    }
 
     protected override void Start()
     {
@@ -22,6 +31,7 @@ public class MissileLauncher : Weapon
         m_anim = GetComponent<Animator>();
         m_targets = new List<GameObject>();
         m_targetDist = new List<float>();
+        m_crosshairs = new List<Crosshair>();
         HideMissile();
     }
 
@@ -37,14 +47,43 @@ public class MissileLauncher : Weapon
 
         base.Update();
 
+        m_targets.Clear();
         if (ready)
         {
-            if (false == m_isReady && m_fireTimer <= 0.0f)
-                ShowMissile();
+            if (m_fireTimer <= 0.0f)
+            { 
+                if (false == m_isReady)
+                    ShowMissile();
+                // update targets
+                GetTargets();
+            }
         }
 
         if (null != m_ownerSprite)
             m_missile.flipX = m_ownerSprite.flipX;
+
+        // make sure the number of crosshairs matches the number of targets
+        for (int i = m_crosshairs.Count - 1; i >= m_targets.Count; --i)
+        {
+            m_crosshairs[i].Free();
+            m_crosshairs.RemoveAt(i);
+        }
+        ObjectPool pool = ObjectPool.GetPool(m_crosshairPrefab, 64);
+        if (null != pool)
+        {
+            for (int i = m_crosshairs.Count; i < m_targets.Count; ++i)
+            {
+                GameObject crossObj = pool.Allocate(m_targets[i].transform.position);
+                m_crosshairs.Add(crossObj.GetComponent<Crosshair>());
+            }
+        }
+        // update the position of the crosshairs
+        for (int i = 0; i < m_crosshairs.Count; ++i)
+        {
+            Vector3 pos = m_targets[i].transform.position;
+            pos.z -= 1.0f;
+            m_crosshairs[i].transform.position = pos;
+        }
     }
 
     public override void HitTrigger()
@@ -101,6 +140,7 @@ public class MissileLauncher : Weapon
         m_missile.enabled = true;
         m_anim.Play("Appear", -1, 0.0f);
         m_isReady = true;
+        m_missileAppearSound.Play();
     }
 
     List<GameObject> GetTargets()
