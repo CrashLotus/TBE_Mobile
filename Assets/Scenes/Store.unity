@@ -1619,7 +1619,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1899488069}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.75000006
+  m_Size: 0.75
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2610,9 +2610,33 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 511100993}
     m_Modifications:
+    - target: {fileID: 7662056413998076956, guid: 6ad9bbc60324ab242978f79265fa452b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662056413998076956, guid: 6ad9bbc60324ab242978f79265fa452b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662056414162677149, guid: 6ad9bbc60324ab242978f79265fa452b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662056414162677149, guid: 6ad9bbc60324ab242978f79265fa452b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662056414162677149, guid: 6ad9bbc60324ab242978f79265fa452b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7662056414738472866, guid: 6ad9bbc60324ab242978f79265fa452b, type: 3}
       propertyPath: m_Name
       value: BuyCrystals
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662056414738472866, guid: 6ad9bbc60324ab242978f79265fa452b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7662056414738472867, guid: 6ad9bbc60324ab242978f79265fa452b, type: 3}
       propertyPath: m_Pivot.x
