@@ -188,4 +188,13 @@ public class MissileLauncher : Weapon
             }
         }
     }
+
+    void OnDisable()
+    {
+        for (int i = m_crosshairs.Count - 1; i >= 0; --i)
+        {
+            m_crosshairs[i].Free();
+            m_crosshairs.RemoveAt(i);
+        }
+    }
 }
