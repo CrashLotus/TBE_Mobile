@@ -46,3 +46,4 @@ UserSettings/
 .vsconfig
 *.csproj
 /Temp
+/Builds

@@ -88,7 +88,7 @@ public class StoreMenu : MonoBehaviour
             {
                 m_selection.SetActive(true);
                 Transform xform = m_itemArea.transform.GetChild(item + 1);
-                m_selection.transform.position = xform.position + m_selectionOffset;
+                m_selection.transform.localPosition = xform.localPosition + m_selectionOffset;
             }
             if (null != m_display)
             {
