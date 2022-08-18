@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 4783850258251089607}
   - component: {fileID: 4783850258251089604}
   - component: {fileID: 4783850258251089605}
-  - component: {fileID: 4783850258251089606}
+  - component: {fileID: 3633168925991641937}
   m_Layer: 5
   m_Name: CrystalOffer
   m_TagString: Untagged
@@ -350,7 +350,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4783850258251089606
+--- !u!114 &3633168925991641937
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

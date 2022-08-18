@@ -8,12 +8,21 @@ public class BuyCrystals : MonoBehaviour
 {
     public Sound m_buySound;
 
-    public void OnBuyOffer(int numCrystal)
+    public void OnBuyOffer(string id)
     {
         //mrwTODO cost
-        SaveData data = SaveData.Get();
-        data.AddTimeCrystals(numCrystal);
-        m_buySound.Play();
+        if (PurchaseManager.Get().BuyProductID(id))
+        {
+//            SaveData data = SaveData.Get();
+//            data.AddTimeCrystals(5);
+            m_buySound.Play();
+        }
+        gameObject.SetActive(false);
+    }
+
+    public void OnPurchaseFailed()
+    {
+        Debug.LogError("OnPurchaseFailed");
         gameObject.SetActive(false);
     }
 }

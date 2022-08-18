@@ -30,6 +30,7 @@ public class StoreMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameManager.Get();  // bootstrap the game
         SaveData data = SaveData.Get();
         if (null != m_crystals)
             m_crystals.text = data.GetTimeCrystals().ToString();

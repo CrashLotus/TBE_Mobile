@@ -101,6 +101,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         // Boot Strap
+        PurchaseManager.Get();
         UpdateScreenBounds();
         SoundInstance.WarmUp();
         Egg.MakeEggPool();
