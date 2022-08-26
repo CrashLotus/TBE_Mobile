@@ -64,7 +64,7 @@ public class GameUI : MonoBehaviour
                 text.text = label;
                 Animator anim = m_labelText.GetComponent<Animator>();
                 if (null != anim)
-                    anim.Play("Label");
+                    anim.Play("Label", -1, 0.0f);
             }
         }
     }

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 02a75defeae755c43845b581e8279a6b, type: 3}
-  m_Name: EggWave1a
+  m_Name: EggWave1b
   m_EditorClassIdentifier: 
   m_label: 
-  m_text: Old New York 500 yrs After Ape
+  m_text: 
   m_numEgg1: 4
   m_numEgg2: 0
   m_numEgg3: 0

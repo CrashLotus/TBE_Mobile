@@ -32,4 +32,9 @@ public class TextWave : Wave
 
         return false;
     }
+
+    public override bool IsWait()
+    {
+        return m_textTimer > 0.0f;
+    }
 }
