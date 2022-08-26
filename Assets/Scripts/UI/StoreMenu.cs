@@ -169,4 +169,10 @@ public class StoreMenu : MonoBehaviour
         GameManager.Get().ReturnToMainMenu();
         m_menuSelect.Play();
     }
+
+    public void OnContinueGame()
+    {
+        GameManager.Get().OnContinueGame();
+        m_menuSelect.Play();
+    }
 }

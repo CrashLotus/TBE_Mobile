@@ -14,6 +14,12 @@ public class MainMenu : MonoBehaviour
         m_startGameSound.Play();
     }
 
+    public void OnContinueGame()
+    {
+        GameManager.Get().OnContinueGame();
+        m_startGameSound.Play();
+    }
+
     public void OnStoreMenu()
     {
         GameManager.Get().GoToStore();

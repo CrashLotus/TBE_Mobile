@@ -93,7 +93,8 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(2.0f);
 
         // return to main menu
-        ChangeState(State.MAIN_MENU);
+        OnContinueGame();
+        ChangeState(State.STORE);
     }
 
     void UpdateScreenBounds()
@@ -211,5 +212,10 @@ public class GameManager : MonoBehaviour
     {
         SetPause(false);
         ChangeState(State.MAIN_MENU);
+    }
+
+    public void OnContinueGame()
+    {
+        ChangeState(State.GAME_ON);
     }
 }
