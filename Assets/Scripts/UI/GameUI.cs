@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameUI : MonoBehaviour
 {
     public GameObject m_gameOver;
+    public GameObject m_stageClear;
     public GameObject m_labelText;
     public GameObject m_hintText;
 
@@ -17,6 +18,8 @@ public class GameUI : MonoBehaviour
         s_theUI = this;
         if (null != m_gameOver)
             m_gameOver.SetActive(false);
+        if (null != m_stageClear)
+            m_stageClear.SetActive(false);
         if (null != m_labelText)
             m_labelText.SetActive(false);
         if (null != m_hintText)
@@ -36,6 +39,17 @@ public class GameUI : MonoBehaviour
             Animator anim = m_gameOver.GetComponent<Animator>();
             if (null != anim)
                 anim.Play("GameOver");
+        }
+    }
+
+    public void StageClear()
+    {
+        if (null != m_stageClear)
+        {
+            m_stageClear.SetActive(true);
+            Animator anim = m_gameOver.GetComponent<Animator>();
+            if (null != anim)
+                anim.Play("GameOver");  // we're re-using the same animation here
         }
     }
 

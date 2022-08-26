@@ -15,7 +15,8 @@ public class GameManager : MonoBehaviour
         MAIN_MENU,
         GAME_ON,
         GAME_OVER,
-        STORE
+        STORE,
+        STAGE_CLEAR,
     }
     static GameManager s_theManager;
     Bounds m_screenBounds;  // screen boundaries in world space
@@ -63,6 +64,11 @@ public class GameManager : MonoBehaviour
         ChangeState(State.GAME_OVER);
     }
 
+    public void StageClear()
+    {
+        ChangeState(State.STAGE_CLEAR);
+    }
+
     IEnumerator GameOverCountDown()
     {
         GameUI.Get().GameOver();
@@ -75,7 +81,18 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(2.0f);
 
         // return to main menu
-        EnemyBird.DeleteAll();
+        ChangeState(State.MAIN_MENU);
+    }
+
+    IEnumerator StageClearCountDown()
+    {
+        GameUI.Get().StageClear();
+        GameUI.Get().SetHint("Catch the eggs before they hit the lava!");
+
+        // wait 2 more seconds
+        yield return new WaitForSecondsRealtime(2.0f);
+
+        // return to main menu
         ChangeState(State.MAIN_MENU);
     }
 
@@ -168,6 +185,9 @@ public class GameManager : MonoBehaviour
                 break;
             case State.STORE:
                 MusicManager.Get().Play(MusicManager.SongType.SHOP);
+                break;
+            case State.STAGE_CLEAR:
+                StartCoroutine(StageClearCountDown());
                 break;
         }
         m_state = newState;

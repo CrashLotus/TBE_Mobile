@@ -157,7 +157,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db11f9f6f3b8d7c429726dd35166750e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_levelName: Levels/Level01
+  m_levelName:
+  - Levels\Level01
+  - Levels\Level02
 --- !u!4 &476247852
 Transform:
   m_ObjectHideFlags: 0
@@ -584,6 +586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -697,14 +700,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1667665205}
-    - target: {fileID: 4899773588630436461, guid: e21f56918989b3047b40ae7fbf94ce60, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnPauseGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 4899773588630436461, guid: e21f56918989b3047b40ae7fbf94ce60, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PauseMenu, Assembly-CSharp
-      objectReference: {fileID: 0}
     - target: {fileID: 7389636558133790601, guid: e21f56918989b3047b40ae7fbf94ce60, type: 3}
       propertyPath: m_Name
       value: GameHUD
@@ -792,14 +787,6 @@ PrefabInstance:
     - target: {fileID: 7389636558133790606, guid: e21f56918989b3047b40ae7fbf94ce60, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7389636558136306448, guid: e21f56918989b3047b40ae7fbf94ce60, type: 3}
-      propertyPath: m_waveFreq
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 7389636558136306448, guid: e21f56918989b3047b40ae7fbf94ce60, type: 3}
-      propertyPath: m_waveScale
-      value: 1.6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e21f56918989b3047b40ae7fbf94ce60, type: 3}
