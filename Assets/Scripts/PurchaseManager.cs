@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Advertisements;
 using UnityEngine.Purchasing;
 using Unity.Services.Core;
 
-public class PurchaseManager : MonoBehaviour, IStoreListener
+public class PurchaseManager : MonoBehaviour, IStoreListener, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
 {
     static PurchaseManager s_theManager;
     static IStoreController m_StoreController;          // The Unity Purchasing system.
@@ -15,6 +16,14 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
     IGooglePlayStoreExtensions m_GoogleExtensions;
 
     ConfigurationBuilder builder;
+
+    // Ad Stuff
+    const string s_android_id = "4888923";
+    const string s_iOS_id = "4888922";
+    const string s_androidAdUnitId = "Rewarded_Android";
+    const string s_iOSAdUnitId = "Rewarded_iOS";
+    string m_adUnitId = null; // This will remain null for unsupported platforms
+    bool m_isAdLoaded = false;
 
     public static PurchaseManager Get()
     {
@@ -58,6 +67,7 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
             await UnityServices.InitializeAsync();
             Debug.Log("InitializePurchasing()");
             InitializePurchasing();
+            InitializeAds();
         }
         catch (Exception e)
         {
@@ -161,4 +171,98 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
     {
         Debug.LogError(string.Format("OnPurchaseFailed: FAIL. Product: '{0}', PurchaseFailureReason: {1}", product.definition.storeSpecificId, failureReason));
     }
+
+    // Ads
+
+    public bool IsAdReady()
+    {
+        return m_isAdLoaded;
+    }
+
+    void InitializeAds()
+    {
+        string gameId = (Application.platform == RuntimePlatform.IPhonePlayer)
+            ? s_iOS_id
+            : s_android_id;
+        Advertisement.Initialize(gameId, true, this);
+    }
+
+    public void OnInitializationComplete()
+    {
+        Debug.Log("Unity Ads initialization complete.");
+
+#if UNITY_IOS
+        m_adUnitId = s_iOSAdUnitId;
+#elif UNITY_ANDROID
+        m_adUnitId = s_androidAdUnitId;
+#endif
+        LoadAd();
+    }
+
+    public void OnInitializationFailed(UnityAdsInitializationError error, string message)
+    {
+        Debug.LogError($"Unity Ads Initialization Failed: {error.ToString()} - {message}");
+    }
+
+    // Load content to the Ad Unit:
+    void LoadAd()
+    {
+        // IMPORTANT! Only load content AFTER initialization (in this example, initialization is handled in a different script).
+        Debug.Log("Loading Ad: " + m_adUnitId);
+        Advertisement.Load(m_adUnitId, this);
+    }
+
+    // If the ad successfully loads, add a listener to the button and enable it:
+    public void OnUnityAdsAdLoaded(string adUnitId)
+    {
+        Debug.Log("Ad Loaded: " + adUnitId);
+
+        if (adUnitId.Equals(m_adUnitId))
+        {
+            m_isAdLoaded = true;
+        }
+    }
+
+    public bool ShowAd()
+    {
+        if (m_isAdLoaded)
+        {
+            // show the ad:
+            Advertisement.Show(m_adUnitId, this);
+            return true;
+        }
+        return false;
+    }
+
+    // Implement the Show Listener's OnUnityAdsShowComplete callback method to determine if the user gets a reward:
+    public void OnUnityAdsShowComplete(string adUnitId, UnityAdsShowCompletionState showCompletionState)
+    {
+        if (adUnitId.Equals(m_adUnitId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
+        {
+            Debug.Log("Unity Ads Rewarded Ad Completed");
+            // Grant a reward.
+            SaveData data = SaveData.Get();
+            data.AddTimeCrystals(3);
+
+            // Load another ad:
+            m_isAdLoaded = false;
+            Advertisement.Load(m_adUnitId, this);
+        }
+    }
+
+    // Implement Load and Show Listener error callbacks:
+    public void OnUnityAdsFailedToLoad(string adUnitId, UnityAdsLoadError error, string message)
+    {
+        Debug.Log($"Error loading Ad Unit {adUnitId}: {error.ToString()} - {message}");
+        // Use the error details to determine whether to try to load another ad.
+    }
+
+    public void OnUnityAdsShowFailure(string adUnitId, UnityAdsShowError error, string message)
+    {
+        Debug.Log($"Error showing Ad Unit {adUnitId}: {error.ToString()} - {message}");
+        // Use the error details to determine whether to try to load another ad.
+    }
+
+    public void OnUnityAdsShowStart(string adUnitId) { }
+    public void OnUnityAdsShowClick(string adUnitId) { }
 }
