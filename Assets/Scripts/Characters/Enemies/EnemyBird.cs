@@ -328,16 +328,16 @@ public class EnemyBird : Bird, IHitPoints
         }
     }
 
-    public IHitPoints.DamageReturn Damage(float damage, IHitPoints.HitType hitType)
+    public IHitPoints.DamageReturn Damage(int damage, IHitPoints.HitType hitType)
     {
         if (m_invTimer > 0.0f)
             return IHitPoints.DamageReturn.NO_DAMAGE;
         ++m_hitByType[(int)hitType];
         m_lastHit = hitType;
-        if (m_hitPoints > 0.0f)
+        if (m_hitPoints > 0)
         {
             m_hitPoints -= damage;
-            if (m_hitPoints <= 0.0f)
+            if (m_hitPoints <= 0)
             {
                 Explode();
                 return IHitPoints.DamageReturn.KILLED;    // I've been killed

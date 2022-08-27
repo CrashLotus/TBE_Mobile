@@ -12,6 +12,7 @@ public class SaveData
     public class Data
     {
         public int m_currentLevel = 0;
+        public int m_playerHP = Player.s_startingHP;
         public int m_timeCrystals = 0;
         public List<string> m_upgrades = new List<string>();
     }
@@ -27,7 +28,7 @@ public class SaveData
         return s_theData;
     }
 
-    string GetFilename()
+    static string GetFilename()
     {
         string filename = Application.persistentDataPath + "/tbe.xml";
         return filename;
@@ -97,6 +98,17 @@ public class SaveData
     public void SetCurrentLevel(int level)
     {
         m_data.m_currentLevel = level;
+        Save();
+    }
+
+    public int GetPlayerHP()
+    {
+        return m_data.m_playerHP;
+    }
+
+    public void SetPlayerHP(int hp)
+    {
+        m_data.m_playerHP = hp;
         Save();
     }
 }

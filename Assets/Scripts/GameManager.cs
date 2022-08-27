@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
     {
         "Levels/Level01",
         "Levels/Level02",
+        "Levels/Level03",
+        "Levels/Level04",
     };
 
     public static GameManager Get()
@@ -68,12 +70,16 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        SaveData save = SaveData.Get();
+        save.SetCurrentLevel(0);
+        save.SetPlayerHP(Player.s_startingHP);
         ChangeState(State.GAME_OVER);
     }
 
     public void StageClear()
     {
         SaveData save = SaveData.Get();
+        save.SetPlayerHP(Player.Get().NumEgg());
         int nextLevel = save.GetCurrentLevel();
         ++nextLevel;
         if (nextLevel >= s_levels.Length)

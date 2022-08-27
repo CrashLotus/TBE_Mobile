@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : PooledObject
 {
     public float m_speed = 14.0f;
-    public float m_damage = 1.0f;
+    public int m_damage = 1;
     public float m_force = 0.75f;
     public IHitPoints.HitType m_hitType = IHitPoints.HitType.BULLET;
     public GameObject m_impactPow;

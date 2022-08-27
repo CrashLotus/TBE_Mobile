@@ -6,7 +6,7 @@ public class Bird : PooledObject
 {
     public float m_vertSpeed = 2.0f;
     public float m_horizSpeed = 2.0f;
-    public float m_maxHitPoints = 1.0f;
+    public int m_maxHitPoints = 1;
     public GameObject m_deathEffect;
     public Sound m_deathSound;
 
@@ -14,7 +14,7 @@ public class Bird : PooledObject
     protected Vector3 m_push = Vector3.zero;
     protected float m_pushTimer = 0.0f;
     protected float m_pushFactor;
-    protected float m_hitPoints = 1.0f;
+    protected int m_hitPoints = 1;
     protected int[] m_hitByType;
     protected IHitPoints.HitType m_lastHit;
     protected SpriteRenderer m_sprite;

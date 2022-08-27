@@ -37,11 +37,10 @@ public class Player : Bird, IHitPoints
     Animator m_eggShieldAnim;
 
     const int s_maxEggStart = 10;
-    const float s_startingHP = 3.0f;
+    public const int s_startingHP = 3;
 
     static Player s_thePlayer;
     static int s_score = 0;
-    static float s_saveHitPoints = s_startingHP;
     //mrwTODO these were for achievements
     static int s_bossesKilled = 0;
     static int s_bossesMissiled = 0;
@@ -52,7 +51,7 @@ public class Player : Bird, IHitPoints
 
     public static Player Get()
     {
-        if (null != s_thePlayer && s_thePlayer.m_hitPoints > 0.0f)
+        if (null != s_thePlayer && s_thePlayer.m_hitPoints > 0)
             return s_thePlayer;
         return null;
     }
@@ -66,7 +65,7 @@ public class Player : Bird, IHitPoints
     {
         base.Init(pool);
         m_joystick = FindObjectOfType<Joystick>();
-        m_hitPoints = s_saveHitPoints;
+        m_hitPoints = SaveData.Get().GetPlayerHP();
         m_eggShieldAnim = m_eggShield.GetComponent<Animator>();
         m_eggShield.SetActive(false);
         if (null != m_missileButton)
@@ -149,7 +148,7 @@ public class Player : Bird, IHitPoints
 //        Debug.Log("Player hit a " + collision.gameObject.name);
     }
 
-    public IHitPoints.DamageReturn Damage(float damage, IHitPoints.HitType hitType)
+    public IHitPoints.DamageReturn Damage(int damage, IHitPoints.HitType hitType)
     {
         if (m_isEggShieldOn)
         {
@@ -175,7 +174,7 @@ public class Player : Bird, IHitPoints
         int maxEgg = MaxEgg();
         if (m_hitPoints > maxEgg)   // you can have more than max eggs, but you can't have more than max hit points
             m_hitPoints = maxEgg;
-        float eggDamage = Mathf.Min(damage, m_hitPoints);
+        int eggDamage = Mathf.Min(damage, m_hitPoints);
         int numEgg = (int)eggDamage;
         Vector3 pos = transform.position;
         while (numEgg >= 3)
@@ -199,11 +198,11 @@ public class Player : Bird, IHitPoints
         IHitPoints.DamageReturn ret = IHitPoints.DamageReturn.PASS_THROUGH;
         ++m_hitByType[(int)hitType];
         m_lastHit = hitType;
-        if (m_hitPoints > 0.0f)
+        if (m_hitPoints > 0)
         {
             ret = IHitPoints.DamageReturn.DAMAGED;
             m_hitPoints -= damage;
-            if (m_hitPoints <= 0.0f)
+            if (m_hitPoints <= 0)
             {
                 Explode();
                 ret = IHitPoints.DamageReturn.KILLED;    // I've been killed
@@ -294,7 +293,7 @@ public class Player : Bird, IHitPoints
             maxEgg *= 3;
         if (data.HasUpgrade("MULTISHOT"))
             maxEgg *= 2;
-        m_hitPoints += 1.0f;
+        m_hitPoints += 1;
         if (m_hitPoints > maxEgg)
             m_hitPoints = maxEgg;
 
@@ -334,7 +333,7 @@ public class Player : Bird, IHitPoints
 
     public int NumEgg()
     {
-        int numEgg = (int)m_hitPoints;
+        int numEgg = m_hitPoints;
         if (numEgg < 0)
             numEgg = 0;
         return numEgg;

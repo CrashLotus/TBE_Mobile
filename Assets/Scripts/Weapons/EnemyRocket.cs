@@ -6,11 +6,11 @@ public class EnemyRocket : Bullet, IHitPoints
 {
     public float m_timeOut = 2.0f;
     public float m_turnSpd = 0.5f;
-    public float m_maxHitPoints = 2.0f;
+    public int m_maxHitPoints = 2;
     public Sound m_destroyedSound;
 
     float m_timer;
-    float m_hitPoints;
+    int m_hitPoints;
 
     public override void Init(ObjectPool pool)
     {
@@ -18,12 +18,12 @@ public class EnemyRocket : Bullet, IHitPoints
         m_hitPoints = m_maxHitPoints;
     }
 
-    public IHitPoints.DamageReturn Damage(float damage, IHitPoints.HitType hitType)
+    public IHitPoints.DamageReturn Damage(int damage, IHitPoints.HitType hitType)
     {
-        if (m_hitPoints > 0.0f)
+        if (m_hitPoints > 0)
         {
             m_hitPoints -= damage;
-            if (m_hitPoints <= 0.0f)
+            if (m_hitPoints <= 0)
             {
                 if (null != m_destroyedSound)
                     m_destroyedSound.Play();
