@@ -11,6 +11,7 @@ public class SaveData
 
     public class Data
     {
+        public int m_currentLevel = 0;
         public int m_timeCrystals = 0;
         public List<string> m_upgrades = new List<string>();
     }
@@ -85,6 +86,17 @@ public class SaveData
     public void Reset()
     {
         m_data = new Data();
+        Save();
+    }
+
+    public int GetCurrentLevel()
+    {
+        return m_data.m_currentLevel;
+    }
+
+    public void SetCurrentLevel(int level)
+    {
+        m_data.m_currentLevel = level;
         Save();
     }
 }

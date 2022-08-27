@@ -23,6 +23,12 @@ public class GameManager : MonoBehaviour
     State m_state = State.MAIN_MENU;
     bool m_isPaused = false;
 
+    static readonly string[] s_levels =
+    {
+        "Levels/Level01",
+        "Levels/Level02",
+    };
+
     public static GameManager Get()
     {
         if (null == s_theManager)
@@ -51,6 +57,7 @@ public class GameManager : MonoBehaviour
 
     public void OnNewGame()
     {
+        SaveData.Get().SetCurrentLevel(0);
         ChangeState(State.GAME_ON);
     }
 
@@ -66,6 +73,12 @@ public class GameManager : MonoBehaviour
 
     public void StageClear()
     {
+        SaveData save = SaveData.Get();
+        int nextLevel = save.GetCurrentLevel();
+        ++nextLevel;
+        if (nextLevel >= s_levels.Length)
+            nextLevel = s_levels.Length;
+        save.SetCurrentLevel(nextLevel);
         ChangeState(State.STAGE_CLEAR);
     }
 
