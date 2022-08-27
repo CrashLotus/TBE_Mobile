@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     State m_state = State.MAIN_MENU;
     bool m_isPaused = false;
 
-    static readonly string[] s_levels =
+    public static readonly string[] s_levels =
     {
         "Levels/Level01",
         "Levels/Level02",
@@ -77,9 +77,15 @@ public class GameManager : MonoBehaviour
         int nextLevel = save.GetCurrentLevel();
         ++nextLevel;
         if (nextLevel >= s_levels.Length)
-            nextLevel = s_levels.Length;
+            nextLevel = s_levels.Length - 1;
         save.SetCurrentLevel(nextLevel);
         ChangeState(State.STAGE_CLEAR);
+    }
+
+    public static string GetCurrentLevelName()
+    {
+        SaveData save = SaveData.Get();
+        return s_levels[save.GetCurrentLevel()];
     }
 
     IEnumerator GameOverCountDown()

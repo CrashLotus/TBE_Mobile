@@ -295,7 +295,7 @@ public class Egg : PooledObject, IHitPoints
         m_magnetPower = 0.0f;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void CheckPickup(Collision2D collision)
     {
         if (State.FLY_TO_HUD != m_state)
         {
@@ -313,5 +313,15 @@ public class Egg : PooledObject, IHitPoints
                 }
             }
         }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        CheckPickup(collision);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        CheckPickup(collision);
     }
 }

@@ -191,6 +191,8 @@ public class MissileLauncher : Weapon
 
     void OnDisable()
     {
+        if (null == m_crosshairs)
+            return;
         for (int i = m_crosshairs.Count - 1; i >= 0; --i)
         {
             m_crosshairs[i].Free();

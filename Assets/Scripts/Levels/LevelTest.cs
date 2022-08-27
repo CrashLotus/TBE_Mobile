@@ -4,22 +4,11 @@ using UnityEngine;
 
 public class LevelTest : MonoBehaviour
 {
-    public List<string> m_levelName;
-
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(LoadLevel(m_levelName[0]));     
-    }
-
-    // mrwTODO
-    IEnumerator DoSequnece()
-    {
-        foreach (string level in m_levelName)
-        {
-            yield return LoadLevel(level);
-        }
-        Debug.Log("All Levels Complete");
+        string level = GameManager.GetCurrentLevelName();
+        StartCoroutine(LoadLevel(level));     
     }
 
     IEnumerator LoadLevel(string name)
