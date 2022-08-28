@@ -141,14 +141,14 @@ public class StoreMenu : MonoBehaviour
             return;
         
         SaveData data = SaveData.Get();
-        if (data.HasUpgrade(m_allUpgrades[m_selectedIndex].m_key))
+        if (m_allUpgrades[m_selectedIndex].IsOwned() || m_allUpgrades[m_selectedIndex].IsLocked())
             return;
 
         int cost = m_allUpgrades[m_selectedIndex].m_cost;
         if (data.GetTimeCrystals() >= cost)
         {   // buy it
             data.AddTimeCrystals(-cost);
-            data.AddUpgrade(m_allUpgrades[m_selectedIndex].m_key);
+            m_allUpgrades[m_selectedIndex].Buy();
             Debug.Log("Buy Item");
             m_buySound.Play();
             for (int i = 0; i < m_allButtons.Count; ++i)
