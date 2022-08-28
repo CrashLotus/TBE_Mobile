@@ -243,11 +243,10 @@ public class PurchaseManager : MonoBehaviour, IStoreListener, IUnityAdsInitializ
             // Grant a reward.
             SaveData data = SaveData.Get();
             data.AddTimeCrystals(3);
-
-            // Load another ad:
-            m_isAdLoaded = false;
-            Advertisement.Load(m_adUnitId, this);
         }
+        // Load another ad:
+        m_isAdLoaded = false;
+        Advertisement.Load(m_adUnitId, this);
     }
 
     // Implement Load and Show Listener error callbacks:
