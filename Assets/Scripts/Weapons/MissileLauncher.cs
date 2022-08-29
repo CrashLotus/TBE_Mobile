@@ -6,10 +6,12 @@ public class MissileLauncher : Weapon
 {
     public Sound m_failSound;
     public Sound m_missileAppearSound;
+    public Sound m_missile2AppearSound;
     public GameObject m_crosshairPrefab;
+    public GameObject m_missile2Prefab;
 
     static int[] s_numMissile = { 6, 10 };
-    static float[] s_maxRange = { 5.6f, 7.8f };
+    static float[] s_maxRange = { 6.0f, 10.0f };
 
     bool m_isReady = false;
     SpriteRenderer m_missile;
@@ -21,7 +23,14 @@ public class MissileLauncher : Weapon
     public override void WarmUp()
     {
         base.WarmUp();
-        ObjectPool.GetPool(m_crosshairPrefab, 10);
+        ObjectPool.GetPool(m_crosshairPrefab, s_numMissile[1]);
+        if (null != m_missile2Prefab)
+        {
+            ObjectPool.GetPool(m_missile2Prefab, s_numMissile[1]);
+            Bullet bullet = m_missile2Prefab.GetComponent<Bullet>();
+            if (null != bullet)
+                bullet.WarmUp();
+        }
     }
 
     protected override void Start()
@@ -93,7 +102,10 @@ public class MissileLauncher : Weapon
 
     protected override bool Fire()
     {
-        ObjectPool pool = ObjectPool.GetPool(m_bulletPrefab, 64);
+        GameObject missilePrefab = m_bulletPrefab;
+        if (SaveData.Get().HasUpgrade("MISSILE2"))
+            missilePrefab = m_missile2Prefab;
+        ObjectPool pool = ObjectPool.GetPool(missilePrefab, s_numMissile[1]);
         if (null == pool)
             return false;
 
@@ -109,11 +121,6 @@ public class MissileLauncher : Weapon
                 Vector3 finalDir = new Vector3(Mathf.Cos(ang), Mathf.Sin(ang));
                 finalDir -= dir;
                 ang += angDelta;
-//mrwTODO Missile2
-//                if (Player.IsAbilityUnlocked(Upgrade.Type.MISSILE2))
-//                    new Missile2(pos, dir, finalDir, target);
-//                else
-
                 GameObject bulletObj = pool.Allocate(pos);
                 if (null != bulletObj)
                 {
@@ -138,9 +145,17 @@ public class MissileLauncher : Weapon
     void ShowMissile()
     {
         m_missile.enabled = true;
-        m_anim.Play("Appear", -1, 0.0f);
+        if (SaveData.Get().HasUpgrade("MISSILE2"))
+        {
+            m_anim.Play("Appear2", -1, 0.0f);
+            m_missile2AppearSound.Play();
+        }
+        else
+        {
+            m_anim.Play("Appear", -1, 0.0f);
+            m_missileAppearSound.Play();
+        }
         m_isReady = true;
-        m_missileAppearSound.Play();
     }
 
     List<GameObject> GetTargets()
@@ -156,7 +171,9 @@ public class MissileLauncher : Weapon
 
     void TargetCheck(GameObject enemy)
     {
-        int missileLevel = 0;   //mrwTODO Player.GetMissileLevel();
+        int missileLevel = 0;
+        if (SaveData.Get().HasUpgrade("MISSILE2"))
+            missileLevel = 1;
         float rangeSq = s_maxRange[missileLevel] * s_maxRange[missileLevel];
         Vector3 pos = GetFirePos();
         Vector3 delta = enemy.transform.position - pos;

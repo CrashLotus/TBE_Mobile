@@ -44,6 +44,8 @@ public class StoreMenu : MonoBehaviour
             int itemCount = 0;
             foreach (string line in lines)
             {
+                if (line.Length == 0)
+                    continue;
                 m_allUpgrades.Add(Resources.Load<Upgrade>("Upgrades/" + line.TrimEnd()));
                 GameObject newItem = Instantiate(m_itemPrefab);
                 UpgradeButton upgradeButton = newItem.GetComponent<UpgradeButton>();
@@ -66,6 +68,10 @@ public class StoreMenu : MonoBehaviour
                 ++itemCount;
             }
             Resources.UnloadAsset(list);
+            RectTransform contentRect = m_itemArea.GetComponent<RectTransform>();
+            Vector2 size = contentRect.sizeDelta;
+            size.y = -itemCount * m_itemSpacing;
+            contentRect.sizeDelta = size;
         }
 
         OnSelectItem(-1);
