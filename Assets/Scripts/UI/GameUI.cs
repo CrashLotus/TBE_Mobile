@@ -8,6 +8,7 @@ public class GameUI : MonoBehaviour
     public GameObject m_gameOver;
     public GameObject m_stageClear;
     public GameObject m_labelText;
+    public GameObject m_stageText;
     public GameObject m_hintText;
 
     static GameUI s_theUI;
@@ -24,6 +25,17 @@ public class GameUI : MonoBehaviour
             m_labelText.SetActive(false);
         if (null != m_hintText)
             m_hintText.SetActive(false);
+        if (null != m_stageText)
+        {
+            TextMeshProUGUI text = m_stageText.GetComponent<TextMeshProUGUI>();
+            if (null != text)
+            {
+                text.text = "Stage " + SaveData.Get().GetCurrentLevel();
+                Animator anim = m_stageText.GetComponent<Animator>();
+                if (null != anim)
+                    anim.Play("Stage", -1, 0.0f);
+            }
+        }
     }
 
     public static GameUI Get()
