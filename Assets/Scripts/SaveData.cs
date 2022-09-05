@@ -59,6 +59,13 @@ public class SaveData
         sw.Close();
     }
 
+    public void ResetGame()
+    {
+        m_data.m_currentLevel = 0;
+        m_data.m_playerHP = Player.s_startingHP;
+        Save();
+    }
+
     public bool HasUpgrade(string key)
     {
         return m_data.m_upgrades.Contains(key);

@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
 
     public void OnNewGame()
     {
-        SaveData.Get().SetCurrentLevel(0);
+        SaveData.Get().ResetGame();
         ChangeState(State.GAME_ON);
     }
 
@@ -71,8 +71,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         SaveData save = SaveData.Get();
-        save.SetCurrentLevel(0);
-        save.SetPlayerHP(Player.s_startingHP);
+        save.ResetGame();
         ChangeState(State.GAME_OVER);
     }
 

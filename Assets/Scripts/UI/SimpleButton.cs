@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SimpleButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class SimpleButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerMoveHandler
 {
     bool m_isDown = false;
     bool m_wasDown = false;
+    Vector2 m_touchPos;
 
     public bool IsButtonHold()
     {
@@ -18,6 +19,11 @@ public class SimpleButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         return m_isDown && (false == m_wasDown);
     }
 
+    public Vector2 GetTouchPos()
+    {
+        return m_touchPos;
+    }
+
     public void OnPointerUp(PointerEventData eventData)
     {
         m_isDown = false;
@@ -26,6 +32,13 @@ public class SimpleButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public void OnPointerDown(PointerEventData eventData)
     {
         m_isDown = true;
+        m_touchPos = eventData.position;
+    }
+
+    public void OnPointerMove(PointerEventData eventData)
+    {
+        if (m_isDown)
+            m_touchPos = eventData.position;
     }
 
     void LateUpdate()

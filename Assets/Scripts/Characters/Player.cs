@@ -14,6 +14,8 @@ public class Player : Bird, IHitPoints
 
     public float m_moveSpeed = 7.0f;
     public float m_accel = 70.0f;
+    public SimpleButton m_steering;
+    public float m_gain = 1.0f;
     public Weapon m_laserWeapon;
     public SimpleButton m_fireButton;
     public Weapon m_missileWeapon;
@@ -29,7 +31,6 @@ public class Player : Bird, IHitPoints
     public Sound m_eggShieldOn;
     public Sound m_eggShieldOff;
 
-    Joystick m_joystick;
     Vector3 m_vel = Vector3.zero;
     bool m_fireLaser = false;
     bool m_fireLaserOld = false;
@@ -64,7 +65,6 @@ public class Player : Bird, IHitPoints
     public override void Init(ObjectPool pool)
     {
         base.Init(pool);
-        m_joystick = FindObjectOfType<Joystick>();
         m_hitPoints = SaveData.Get().GetPlayerHP();
         m_eggShieldAnim = m_eggShield.GetComponent<Animator>();
         m_eggShield.SetActive(false);
@@ -84,15 +84,7 @@ public class Player : Bird, IHitPoints
         float dt = Time.deltaTime;
 
         // Input
-        Vector3 move = new Vector3(m_joystick.Horizontal, m_joystick.Vertical, 0.0f);
-        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
-            move.y += 1.0f;
-        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
-            move.y -= 1.0f;
-        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
-            move.x += 1.0f;
-        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
-            move.x -= 1.0f;
+        Vector3 target = Utility.ScreenToWorldPos(m_steering.GetTouchPos());
 
         m_fireLaser = m_fireButton.IsButtonHold();
         m_fireLaser |= Input.GetKey(KeyCode.Space);
@@ -101,14 +93,19 @@ public class Player : Bird, IHitPoints
         bool fireMissile = m_missileButton.IsButtonPress();
         fireMissile |= Input.GetKeyDown(KeyCode.Tab);
 
-        // face the right direction
-        if (move.x < 0.0f)
-            m_sprite.flipX = true;
-        else if (move.x > 0.0f)
-            m_sprite.flipX = false;
-
         // update velocity
-        Vector3 vel = move * m_moveSpeed;
+        Vector3 pos = transform.position;
+        Vector3 delta = target - pos;
+        Vector3 vel = Vector3.zero;
+        if (m_steering.IsButtonHold() && dt > 0.0f)
+        {
+            vel = m_gain * delta;
+            float mag = vel.magnitude;
+            if (mag > m_moveSpeed)
+            {
+                vel = m_moveSpeed * vel / mag;
+            }
+        }
         Vector3 dV = vel - m_vel;
         float accel = dV.magnitude;
         float maxAccel = m_accel * dt;
@@ -116,7 +113,6 @@ public class Player : Bird, IHitPoints
             dV = dV / accel * maxAccel;
         m_vel += dV;
 
-        Vector3 pos = transform.position;
         pos += m_vel * dt;
 
         // constrain the player to the top and bottom of the screen

@@ -553,6 +553,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 356f2c3338cac4c41acd2dc4a8a98c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1677622788 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 152643405899974350, guid: e21f56918989b3047b40ae7fbf94ce60, type: 3}
+  m_PrefabInstance: {fileID: 7389636558173448858}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29fa5d27ffb44af47b3ed471127f521b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1742798433
 GameObject:
   m_ObjectHideFlags: 0
@@ -676,6 +687,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 25891693911960411, guid: 701238fa9ce28b0489fa5acd08b1589a, type: 3}
+      propertyPath: m_gain
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 25891693911960411, guid: 701238fa9ce28b0489fa5acd08b1589a, type: 3}
+      propertyPath: m_steering
+      value: 
+      objectReference: {fileID: 1677622788}
     - target: {fileID: 25891693911960411, guid: 701238fa9ce28b0489fa5acd08b1589a, type: 3}
       propertyPath: m_fireButton
       value: 

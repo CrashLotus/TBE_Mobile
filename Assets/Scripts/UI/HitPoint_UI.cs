@@ -42,7 +42,11 @@ public class HitPoint_UI : MonoBehaviour
     {
         int numEgg = 0;
         Player player = Player.Get();
-        if (null != player)
+        if (null == player)
+        {
+            numEgg = SaveData.Get().GetPlayerHP();
+        }
+        else
         {
             numEgg = player.NumEgg();
         }
@@ -57,7 +61,8 @@ public class HitPoint_UI : MonoBehaviour
         }
         UpdateWave(numEgg);
 
-        m_points.text = Player.GetScore().ToString();
+        if (null != m_points)
+            m_points.text = Player.GetScore().ToString();
     }
 
     public static HitPoint_UI Get()
