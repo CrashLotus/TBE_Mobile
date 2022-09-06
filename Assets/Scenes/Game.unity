@@ -211,7 +211,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ae3f7842f3deaa428c27b83f8868a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_noMoveZone: 2
+  m_noMoveZoneLeft: 4
+  m_noMoveZoneRight: 2
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -689,16 +690,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 25891693911960411, guid: 701238fa9ce28b0489fa5acd08b1589a, type: 3}
       propertyPath: m_gain
-      value: 10
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 25891693911960411, guid: 701238fa9ce28b0489fa5acd08b1589a, type: 3}
+      propertyPath: m_gainX
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 25891693911960411, guid: 701238fa9ce28b0489fa5acd08b1589a, type: 3}
       propertyPath: m_steering
       value: 
       objectReference: {fileID: 1677622788}
     - target: {fileID: 25891693911960411, guid: 701238fa9ce28b0489fa5acd08b1589a, type: 3}
+      propertyPath: m_vertSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 25891693911960411, guid: 701238fa9ce28b0489fa5acd08b1589a, type: 3}
       propertyPath: m_fireButton
       value: 
       objectReference: {fileID: 7389636558173448859}
+    - target: {fileID: 25891693911960411, guid: 701238fa9ce28b0489fa5acd08b1589a, type: 3}
+      propertyPath: m_horizSpeed
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 25891693911960411, guid: 701238fa9ce28b0489fa5acd08b1589a, type: 3}
       propertyPath: m_missileButton
       value: 

@@ -15,7 +15,8 @@ public class Player : Bird, IHitPoints
     public float m_moveSpeed = 7.0f;
     public float m_accel = 70.0f;
     public SimpleButton m_steering;
-    public float m_gain = 1.0f;
+    public float m_gainX = 0.02f;
+    public float m_gainY = 0.2f;
     public Weapon m_laserWeapon;
     public SimpleButton m_fireButton;
     public Weapon m_missileWeapon;
@@ -82,10 +83,9 @@ public class Player : Bird, IHitPoints
     protected override void Update()
     {
         float dt = Time.deltaTime;
+        Vector3 pos = transform.position;
 
         // Input
-        Vector3 target = Utility.ScreenToWorldPos(m_steering.GetTouchPos());
-
         m_fireLaser = m_fireButton.IsButtonHold();
         m_fireLaser |= Input.GetKey(KeyCode.Space);
         bool fireLaser = m_fireLaser && (!m_fireLaserOld);
@@ -94,17 +94,26 @@ public class Player : Bird, IHitPoints
         fireMissile |= Input.GetKeyDown(KeyCode.Tab);
 
         // update velocity
-        Vector3 pos = transform.position;
-        Vector3 delta = target - pos;
         Vector3 vel = Vector3.zero;
         if (m_steering.IsButtonHold() && dt > 0.0f)
         {
-            vel = m_gain * delta;
+            Vector3 screenPos = Camera.main.WorldToViewportPoint(pos);
+            Vector3 target = Camera.main.ScreenToViewportPoint(m_steering.GetTouchPos());
+            Vector3 start = Camera.main.ScreenToViewportPoint(m_steering.GetTouchStart());
+            Vector3 delta = Vector3.zero;
+            delta.x = target.x - start.x;
+            delta.y = target.y - screenPos.y;
+            vel = new Vector3(m_gainX * delta.x, m_gainY * delta.y, 0.0f);
+#if true
+            vel.x = Mathf.Clamp(vel.x, -m_horizSpeed, m_horizSpeed);
+            vel.y = Mathf.Clamp(vel.y, -m_vertSpeed, m_vertSpeed);
+#else
             float mag = vel.magnitude;
             if (mag > m_moveSpeed)
             {
                 vel = m_moveSpeed * vel / mag;
             }
+#endif
         }
         Vector3 dV = vel - m_vel;
         float accel = dV.magnitude;
@@ -114,6 +123,14 @@ public class Player : Bird, IHitPoints
         m_vel += dV;
 
         pos += m_vel * dt;
+
+#if false
+        // face the right direction
+        if (m_vel.x < 0.0f)
+            m_sprite.flipX = true;
+        else if (m_vel.x > 0.0f)
+            m_sprite.flipX = false;
+#endif
 
         // constrain the player to the top and bottom of the screen
         Vector3 topLeft = new Vector3(0.0f, m_topBoundary, 0.0f);   // top-left corner in view coords

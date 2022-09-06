@@ -110,6 +110,9 @@ MonoBehaviour:
   m_deathSound: {fileID: 0}
   m_moveSpeed: 7
   m_accel: 70
+  m_steering: {fileID: 0}
+  m_gainX: 50
+  m_gainY: 40
   m_laserWeapon: {fileID: 25891694241100729}
   m_fireButton: {fileID: 0}
   m_missileWeapon: {fileID: 4212318836659544078}

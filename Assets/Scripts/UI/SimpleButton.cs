@@ -8,6 +8,7 @@ public class SimpleButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     bool m_isDown = false;
     bool m_wasDown = false;
     Vector2 m_touchPos;
+    Vector2 m_touchStart;
 
     public bool IsButtonHold()
     {
@@ -24,6 +25,11 @@ public class SimpleButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         return m_touchPos;
     }
 
+    public Vector2 GetTouchStart()
+    {
+        return m_touchStart;
+    }
+
     public void OnPointerUp(PointerEventData eventData)
     {
         m_isDown = false;
@@ -32,7 +38,7 @@ public class SimpleButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public void OnPointerDown(PointerEventData eventData)
     {
         m_isDown = true;
-        m_touchPos = eventData.position;
+        m_touchPos = m_touchStart = eventData.position;
     }
 
     public void OnPointerMove(PointerEventData eventData)

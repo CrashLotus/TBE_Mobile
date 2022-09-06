@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class FollowCamera : MonoBehaviour
 {
-    public float m_noMoveZone = 10.0f;
+    public float m_noMoveZoneLeft = 4.0f;
+    public float m_noMoveZoneRight = 2.0f;
 
     Player m_player;
 
@@ -19,10 +20,10 @@ public class FollowCamera : MonoBehaviour
     {
         Vector3 pos = transform.position;
         float deltaX = m_player.transform.position.x - pos.x;
-        if (deltaX > m_noMoveZone)
-            deltaX -= m_noMoveZone;
-        else if (deltaX < -m_noMoveZone)
-            deltaX += m_noMoveZone;
+        if (deltaX > m_noMoveZoneRight)
+            deltaX -= m_noMoveZoneRight;
+        else if (deltaX < -m_noMoveZoneLeft)
+            deltaX += m_noMoveZoneLeft;
         else
             deltaX = 0;
         pos.x += deltaX;
