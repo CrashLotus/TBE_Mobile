@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Options : MonoBehaviour
 {
     public Slider m_sfxSlider;
     public Slider m_musicSlider;
     public Sound m_sfxAdjust;
+    public TMP_Dropdown m_steeringDropdown;
 
     float m_sfxLastPlay = 0.0f;
     const float s_sfxPlayRate = 0.2f;
@@ -16,6 +18,7 @@ public class Options : MonoBehaviour
     {
         m_sfxSlider.value = GetSFXVolume();
         m_musicSlider.value = GetMusicVolume();
+        m_steeringDropdown.SetValueWithoutNotify(PlayerPrefs.GetInt("steering", 0));
     }
 
     public void OnSFXVolume()
@@ -36,6 +39,12 @@ public class Options : MonoBehaviour
         PlayerPrefs.SetFloat("musicVolume", m_musicSlider.value);
         PlayerPrefs.Save();
         MusicManager.Get().SetVolume(m_musicSlider.value);
+    }
+
+    public void OnSteeringSelect(int select)
+    {
+        PlayerPrefs.SetInt("steering", select);
+        PlayerPrefs.Save();
     }
 
     public static float GetSFXVolume()

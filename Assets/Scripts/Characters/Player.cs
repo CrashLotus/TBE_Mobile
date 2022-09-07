@@ -12,7 +12,6 @@ public class Player : Bird, IHitPoints
         MEGA_LASER
     }
 
-    public float m_moveSpeed = 7.0f;
     public float m_accel = 70.0f;
     public SimpleButton m_steering;
     public float m_gainX = 0.02f;
@@ -104,16 +103,8 @@ public class Player : Bird, IHitPoints
             delta.x = target.x - start.x;
             delta.y = target.y - screenPos.y;
             vel = new Vector3(m_gainX * delta.x, m_gainY * delta.y, 0.0f);
-#if true
             vel.x = Mathf.Clamp(vel.x, -m_horizSpeed, m_horizSpeed);
             vel.y = Mathf.Clamp(vel.y, -m_vertSpeed, m_vertSpeed);
-#else
-            float mag = vel.magnitude;
-            if (mag > m_moveSpeed)
-            {
-                vel = m_moveSpeed * vel / mag;
-            }
-#endif
         }
         Vector3 dV = vel - m_vel;
         float accel = dV.magnitude;
@@ -124,13 +115,27 @@ public class Player : Bird, IHitPoints
 
         pos += m_vel * dt;
 
-#if false
-        // face the right direction
-        if (m_vel.x < 0.0f)
-            m_sprite.flipX = true;
-        else if (m_vel.x > 0.0f)
-            m_sprite.flipX = false;
-#endif
+        switch(PlayerPrefs.GetInt("steering", 0))
+        {
+            case 0: // free aim
+                if (m_vel.x < 0.0f)
+                    m_sprite.flipX = true;
+                else if (m_vel.x > 0.0f)
+                    m_sprite.flipX = false;
+                break;
+            case 1: // face right
+                m_sprite.flipX = false;
+                break;
+            case 2: // locked fire
+                if (false == m_fireLaser)
+                {
+                    if (m_vel.x < 0.0f)
+                        m_sprite.flipX = true;
+                    else if (m_vel.x > 0.0f)
+                        m_sprite.flipX = false;
+                }
+                break;
+        }
 
         // constrain the player to the top and bottom of the screen
         Vector3 topLeft = new Vector3(0.0f, m_topBoundary, 0.0f);   // top-left corner in view coords
