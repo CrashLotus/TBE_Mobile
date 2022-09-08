@@ -10,6 +10,10 @@ public class GameUI : MonoBehaviour
     public GameObject m_labelText;
     public GameObject m_stageText;
     public GameObject m_hintText;
+    public Joystick m_fixedJoystick;
+    public Joystick m_floatJoystick;
+
+    Joystick m_joystick;
 
     static GameUI s_theUI;
 
@@ -36,11 +40,39 @@ public class GameUI : MonoBehaviour
                     anim.Play("Stage", -1, 0.0f);
             }
         }
+        UpdateJoystick();
     }
 
     public static GameUI Get()
     {
         return s_theUI;
+    }
+
+    public void UpdateJoystick()
+    {
+        switch (PlayerPrefs.GetInt("joystick", 0))
+        {
+            case 0: // fixed
+                m_fixedJoystick.gameObject.SetActive(true);
+                m_floatJoystick.gameObject.SetActive(false);
+                m_joystick = m_fixedJoystick;
+                break;
+            case 1: // float
+                m_fixedJoystick.gameObject.SetActive(false);
+                m_floatJoystick.gameObject.SetActive(true);
+                m_joystick = m_floatJoystick;
+                break;
+            case 2: // split x/y
+                m_fixedJoystick.gameObject.SetActive(false);
+                m_floatJoystick.gameObject.SetActive(false);
+                m_joystick = null;
+                break;
+        }
+    }
+
+    public Joystick GetJoystick()
+    {
+        return m_joystick;
     }
 
     public void GameOver()

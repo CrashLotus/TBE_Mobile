@@ -10,6 +10,7 @@ public class Options : MonoBehaviour
     public Slider m_musicSlider;
     public Sound m_sfxAdjust;
     public TMP_Dropdown m_steeringDropdown;
+    public TMP_Dropdown m_joystickDropdown;
 
     float m_sfxLastPlay = 0.0f;
     const float s_sfxPlayRate = 0.2f;
@@ -19,6 +20,7 @@ public class Options : MonoBehaviour
         m_sfxSlider.value = GetSFXVolume();
         m_musicSlider.value = GetMusicVolume();
         m_steeringDropdown.SetValueWithoutNotify(PlayerPrefs.GetInt("steering", 0));
+        m_joystickDropdown.SetValueWithoutNotify(PlayerPrefs.GetInt("joystick", 0));
     }
 
     public void OnSFXVolume()
@@ -45,6 +47,15 @@ public class Options : MonoBehaviour
     {
         PlayerPrefs.SetInt("steering", select);
         PlayerPrefs.Save();
+    }
+
+    public void OnJoystickSelect(int select)
+    {
+        PlayerPrefs.SetInt("joystick", select);
+        PlayerPrefs.Save();
+        GameUI ui = GameUI.Get();
+        if (null != ui)
+            ui.UpdateJoystick();
     }
 
     public static float GetSFXVolume()

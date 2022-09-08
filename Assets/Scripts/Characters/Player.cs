@@ -94,17 +94,34 @@ public class Player : Bird, IHitPoints
 
         // update velocity
         Vector3 vel = Vector3.zero;
-        if (m_steering.IsButtonHold() && dt > 0.0f)
+        Joystick joystick = GameUI.Get().GetJoystick();
+        if (null == joystick)
         {
-            Vector3 screenPos = Camera.main.WorldToViewportPoint(pos);
-            Vector3 target = Camera.main.ScreenToViewportPoint(m_steering.GetTouchPos());
-            Vector3 start = Camera.main.ScreenToViewportPoint(m_steering.GetTouchStart());
-            Vector3 delta = Vector3.zero;
-            delta.x = target.x - start.x;
-            delta.y = target.y - screenPos.y;
-            vel = new Vector3(m_gainX * delta.x, m_gainY * delta.y, 0.0f);
-            vel.x = Mathf.Clamp(vel.x, -m_horizSpeed, m_horizSpeed);
-            vel.y = Mathf.Clamp(vel.y, -m_vertSpeed, m_vertSpeed);
+            if (m_steering.IsButtonHold() && dt > 0.0f)
+            {
+                Vector3 screenPos = Camera.main.WorldToViewportPoint(pos);
+                Vector3 target = Camera.main.ScreenToViewportPoint(m_steering.GetTouchPos());
+                Vector3 start = Camera.main.ScreenToViewportPoint(m_steering.GetTouchStart());
+                Vector3 delta = Vector3.zero;
+                delta.x = target.x - start.x;
+                delta.y = target.y - screenPos.y;
+                vel = new Vector3(m_gainX * delta.x, m_gainY * delta.y, 0.0f);
+                vel.x = Mathf.Clamp(vel.x, -m_horizSpeed, m_horizSpeed);
+                vel.y = Mathf.Clamp(vel.y, -m_vertSpeed, m_vertSpeed);
+            }
+        }
+        else
+        {
+            Vector3 move = new Vector3(joystick.Horizontal, joystick.Vertical, 0.0f);
+            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+                move.y += 1.0f;
+            if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+                move.y -= 1.0f;
+            if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+                move.x += 1.0f;
+            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+                move.x -= 1.0f;
+            vel = new Vector3(move.x * m_horizSpeed, move.y * m_vertSpeed, 0.0f);
         }
         Vector3 dV = vel - m_vel;
         float accel = dV.magnitude;
