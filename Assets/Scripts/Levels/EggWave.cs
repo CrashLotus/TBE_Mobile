@@ -8,6 +8,7 @@ public class EggWave : Wave
     public int m_numEgg1 = 0;
     public int m_numEgg2 = 0;
     public int m_numEgg3 = 0;
+    public bool m_addTimeCrytal = false;
     public float m_duration = 0.0f;   //zero time means use the default calculation
     public bool m_waitOnEggs = true;
     public bool m_waitOnEnemies = true;
@@ -67,8 +68,6 @@ public class EggWave : Wave
             m_spawnCenterX = player.transform.position.x;
 
         m_eggsLeft = m_numEgg;
-        m_timePerEgg = m_totalTime / m_numEgg;
-        m_eggTimer = m_timePerEgg;
 
         m_eggList = new List<int>();
         for (int i = 0; i < m_numEgg1; ++i)
@@ -86,6 +85,16 @@ public class EggWave : Wave
             m_eggList[index] = swap;
         }
 
+        if (m_addTimeCrytal)
+        {
+            m_eggList.Insert(0, -1);
+            ++m_numEgg;
+            ++m_eggsLeft;
+        }
+
+        m_timePerEgg = m_totalTime / m_numEgg;
+        m_eggTimer = m_timePerEgg;
+
         base.Start();
     }
 
@@ -102,7 +111,10 @@ public class EggWave : Wave
             Vector2 spawnPos = new Vector2(this.m_spawnCenterX, s_eggPosY);
             spawnPos.x += Random.Range(-s_eggSpacing, s_eggSpacing);
             --m_eggsLeft;
-            Egg.Spawn(spawnPos, m_eggList[m_eggsLeft], s_eggSpeedY);
+            if (m_eggList[m_eggsLeft] > 0)
+                Egg.Spawn(spawnPos, m_eggList[m_eggsLeft], s_eggSpeedY);
+            else
+                TimeCrystal.Spawn(spawnPos, s_eggSpeedY);
             m_eggTimer += m_timePerEgg;
         }
         base.Update();

@@ -72,8 +72,7 @@ public class EnemyWave : Wave
         foreach (string enemy in enemyShuffle)
         {
             Vector3 enemyPos = new Vector3(Random.Range(-6.7f, 6.7f), groundY, 0.0f);
-            AddSpawn("Flame", enemyPos, 1.0f);
-            AddSpawn(enemy, enemyPos, 0.0f);
+            AddSpawn(enemy, enemyPos, 1.0f);
         }
 
         if (m_spawnList.Count > 0)

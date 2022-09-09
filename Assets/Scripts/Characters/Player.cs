@@ -66,8 +66,19 @@ public class Player : Bird, IHitPoints
     {
         base.Init(pool);
         m_hitPoints = SaveData.Get().GetPlayerHP();
+        m_isEggShieldOn = false;
         m_eggShieldAnim = m_eggShield.GetComponent<Animator>();
         m_eggShield.SetActive(false);
+        
+        // check the egg shield
+        SaveData data = SaveData.Get();
+        if (data.HasUpgrade("EGGSHIELD"))
+        {
+            EggBonus startBonus = GetBonusMode();
+            if (EggBonus.NONE != startBonus)
+                EggShieldOn();
+        }
+
         if (null != m_missileButton)
         {
             if (SaveData.Get().HasUpgrade("MISSILE1"))

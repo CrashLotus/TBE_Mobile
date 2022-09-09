@@ -17,6 +17,7 @@ MonoBehaviour:
   m_numEgg1: 8
   m_numEgg2: 0
   m_numEgg3: 0
+  m_addTimeCrytal: 1
   m_duration: 0
   m_waitOnEggs: 1
   m_waitOnEnemies: 1

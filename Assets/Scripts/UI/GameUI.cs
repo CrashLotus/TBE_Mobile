@@ -34,7 +34,7 @@ public class GameUI : MonoBehaviour
             TextMeshProUGUI text = m_stageText.GetComponent<TextMeshProUGUI>();
             if (null != text)
             {
-                text.text = "Stage " + SaveData.Get().GetCurrentLevel();
+                text.text = "Stage " + (SaveData.Get().GetCurrentLevel() + 1);
                 Animator anim = m_stageText.GetComponent<Animator>();
                 if (null != anim)
                     anim.Play("Stage", -1, 0.0f);
@@ -91,7 +91,7 @@ public class GameUI : MonoBehaviour
         if (null != m_stageClear)
         {
             m_stageClear.SetActive(true);
-            Animator anim = m_gameOver.GetComponent<Animator>();
+            Animator anim = m_stageClear.GetComponent<Animator>();
             if (null != anim)
                 anim.Play("GameOver");  // we're re-using the same animation here
         }

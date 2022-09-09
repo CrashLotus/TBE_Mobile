@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 540e3762f93f0344cabd440e7c4f30b3, type: 3}
   m_Name: EggShieldOn
   m_EditorClassIdentifier: 
-  m_clip: {fileID: 0}
+  m_clip: {fileID: 8300000, guid: e20a5d114428dde4d99f3a40617a554a, type: 3}
   m_minPitch: 0.8
   m_maxPitch: 1.4
   m_minVol: 0.8

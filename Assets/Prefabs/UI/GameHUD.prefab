@@ -1920,7 +1920,7 @@ MonoBehaviour:
   m_gameOver: {fileID: 3620925697287228473}
   m_stageClear: {fileID: 1955943724970282077}
   m_labelText: {fileID: 1439884773060384499}
-  m_stageText: {fileID: 0}
+  m_stageText: {fileID: 944960622436143506}
   m_hintText: {fileID: 2187571406829801999}
   m_fixedJoystick: {fileID: 2078676383863682959}
   m_floatJoystick: {fileID: 8223306456013496696}

@@ -147,6 +147,7 @@ public class GameManager : MonoBehaviour
         UpdateScreenBounds();
         SoundInstance.WarmUp();
         Egg.MakeEggPool();
+        TimeCrystal.MakeCrystalPool();
         EnemyBird.WarmUp();
         {   // warm up the player
             GameObject playerObject = Resources.Load<GameObject>("Player");
