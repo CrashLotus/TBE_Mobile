@@ -366,9 +366,12 @@ public class Player : Bird, IHitPoints
         ++s_eggsCaught;
     }
 
-    public int NumEgg()
+    public static int NumEgg()
     {
-        int numEgg = m_hitPoints;
+        if (null == s_thePlayer)
+            return SaveData.Get().GetPlayerHP();
+
+        int numEgg = s_thePlayer.m_hitPoints;
         if (numEgg < 0)
             numEgg = 0;
         return numEgg;
