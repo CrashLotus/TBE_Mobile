@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_label: 
   m_text: Old New York 500 yrs After Ape
-  m_numEgg1: 4
+  m_numEgg1: 3
   m_numEgg2: 0
   m_numEgg3: 0
+  m_addTimeCrytal: 0
   m_duration: 0
   m_waitOnEggs: 1
   m_waitOnEnemies: 1

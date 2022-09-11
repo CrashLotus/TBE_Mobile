@@ -18,6 +18,8 @@ public class Player : Bird, IHitPoints
     public float m_gainY = 0.2f;
     public Weapon m_laserWeapon;
     public SimpleButton m_fireButton;
+    public SimpleButton m_fireLeft;
+    public SimpleButton m_fireRight;
     public Weapon m_missileWeapon;
     public SimpleButton m_missileButton;
     public GameObject m_eggShield;
@@ -96,7 +98,7 @@ public class Player : Bird, IHitPoints
         Vector3 pos = transform.position;
 
         // Input
-        m_fireLaser = m_fireButton.IsButtonHold();
+        m_fireLaser = m_fireButton.IsButtonHold() | m_fireLeft.IsButtonHold() | m_fireRight.IsButtonHold();
         m_fireLaser |= Input.GetKey(KeyCode.Space);
         bool fireLaser = m_fireLaser && (!m_fireLaserOld);
 
@@ -164,6 +166,11 @@ public class Player : Bird, IHitPoints
                 }
                 break;
         }
+
+        if (m_fireLeft.IsButtonHold())
+            m_sprite.flipX = true;
+        if (m_fireRight.IsButtonHold())
+            m_sprite.flipX = false;
 
         // constrain the player to the top and bottom of the screen
         Vector3 topLeft = new Vector3(0.0f, m_topBoundary, 0.0f);   // top-left corner in view coords

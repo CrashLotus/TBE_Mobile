@@ -12,6 +12,8 @@ public class GameUI : MonoBehaviour
     public GameObject m_hintText;
     public Joystick m_fixedJoystick;
     public Joystick m_floatJoystick;
+    public GameObject m_fireButtonSingle;
+    public GameObject m_fireButtonSplit;
 
     Joystick m_joystick;
 
@@ -40,7 +42,7 @@ public class GameUI : MonoBehaviour
                     anim.Play("Stage", -1, 0.0f);
             }
         }
-        UpdateJoystick();
+        UpdateOptions();
     }
 
     public static GameUI Get()
@@ -48,7 +50,7 @@ public class GameUI : MonoBehaviour
         return s_theUI;
     }
 
-    public void UpdateJoystick()
+    public void UpdateOptions()
     {
         switch (PlayerPrefs.GetInt("joystick", 0))
         {
@@ -67,6 +69,17 @@ public class GameUI : MonoBehaviour
                 m_floatJoystick.gameObject.SetActive(false);
                 m_joystick = null;
                 break;
+        }
+
+        if (PlayerPrefs.GetInt("splitFire", 0) == 0)
+        {
+            m_fireButtonSingle.SetActive(true);
+            m_fireButtonSplit.SetActive(false);
+        }
+        else
+        {
+            m_fireButtonSingle.SetActive(false);
+            m_fireButtonSplit.SetActive(true);
         }
     }
 

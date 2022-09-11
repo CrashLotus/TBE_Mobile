@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ae3f7842f3deaa428c27b83f8868a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_noMoveZoneLeft: 4
+  m_noMoveZoneLeft: 2
   m_noMoveZoneRight: 2
 --- !u!20 &519420031
 Camera:
@@ -565,6 +565,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29fa5d27ffb44af47b3ed471127f521b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1678968109 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 636568092927152203, guid: e21f56918989b3047b40ae7fbf94ce60, type: 3}
+  m_PrefabInstance: {fileID: 7389636558173448858}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29fa5d27ffb44af47b3ed471127f521b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1742798433
 GameObject:
   m_ObjectHideFlags: 0
@@ -633,6 +644,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1988896974 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6953582788308914258, guid: e21f56918989b3047b40ae7fbf94ce60, type: 3}
+  m_PrefabInstance: {fileID: 7389636558173448858}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29fa5d27ffb44af47b3ed471127f521b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &25891694652248859
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -697,9 +719,17 @@ PrefabInstance:
       value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 25891693911960411, guid: 701238fa9ce28b0489fa5acd08b1589a, type: 3}
+      propertyPath: m_fireLeft
+      value: 
+      objectReference: {fileID: 1988896974}
+    - target: {fileID: 25891693911960411, guid: 701238fa9ce28b0489fa5acd08b1589a, type: 3}
       propertyPath: m_steering
       value: 
       objectReference: {fileID: 1677622788}
+    - target: {fileID: 25891693911960411, guid: 701238fa9ce28b0489fa5acd08b1589a, type: 3}
+      propertyPath: m_fireRight
+      value: 
+      objectReference: {fileID: 1678968109}
     - target: {fileID: 25891693911960411, guid: 701238fa9ce28b0489fa5acd08b1589a, type: 3}
       propertyPath: m_vertSpeed
       value: 7

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_label: 
   m_text: 
-  m_numEgg1: 6
+  m_numEgg1: 4
   m_numEgg2: 0
   m_numEgg3: 0
   m_addTimeCrytal: 1
