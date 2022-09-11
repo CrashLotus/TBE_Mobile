@@ -108,18 +108,19 @@ MonoBehaviour:
   m_maxHitPoints: 1
   m_deathEffect: {fileID: 0}
   m_deathSound: {fileID: 0}
-  m_moveSpeed: 7
   m_accel: 70
   m_steering: {fileID: 0}
   m_gainX: 50
   m_gainY: 40
   m_laserWeapon: {fileID: 25891694241100729}
   m_fireButton: {fileID: 0}
+  m_fireLeft: {fileID: 0}
+  m_fireRight: {fileID: 0}
   m_missileWeapon: {fileID: 4212318836659544078}
   m_missileButton: {fileID: 0}
   m_eggShield: {fileID: 4918232897406178973}
   m_topBoundary: 0.94
-  m_bottomBoundary: 0.16
+  m_bottomBoundary: 0.18
   m_hitSound: {fileID: 11400000, guid: 4c91af20ab1400440b5133efe22d86a9, type: 2}
   m_powerUp1: {fileID: 11400000, guid: 81822105b72d50843908f77f85d517e7, type: 2}
   m_powerUp2: {fileID: 11400000, guid: da20ad3b7e697b3408d2f93a6a8f23fc, type: 2}
