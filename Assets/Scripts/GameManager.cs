@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,9 +17,16 @@ public class GameManager : MonoBehaviour
         STORE,
         STAGE_CLEAR,
     }
+    public enum GameOverAdResult
+    { 
+        WAITING,
+        SUCCESS,
+        FAIL
+    }
     static GameManager s_theManager;
     Bounds m_screenBounds;  // screen boundaries in world space
     State m_state = State.MAIN_MENU;
+    static GameOverAdResult s_adResult = GameOverAdResult.WAITING;
     bool m_isPaused = false;
 
     public static readonly string[] s_levels =
@@ -70,8 +76,6 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        SaveData save = SaveData.Get();
-        save.ResetGame();
         ChangeState(State.GAME_OVER);
     }
 
@@ -95,17 +99,50 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GameOverCountDown()
     {
-        GameUI.Get().GameOver();
+        SaveData save = SaveData.Get();
+        s_adResult = GameOverAdResult.WAITING;
+        bool showAd = save.GetCurrentLevel() > 0;
+        GameUI.Get().GameOver(showAd);
         GameUI.Get().SetHint("Catch the eggs before they hit the lava!");
 
         // wait for all the eggs to hit the lava
         while (Egg.GetCount() > 0)
             yield return null;
+
+        // wait for the user to watch the ad - or not
+        if (showAd)
+        {
+            while (s_adResult == GameOverAdResult.WAITING)
+                yield return null;
+            if (s_adResult == GameOverAdResult.FAIL)
+            {
+                save.ResetGame();
+                ChangeState(State.MAIN_MENU);
+                yield break;
+            }
+            ChangeState(State.GAME_ON);
+            yield break;
+        }
+
         // and then wait 2 more seconds
         yield return new WaitForSecondsRealtime(2.0f);
 
         // return to main menu
+        save.ResetGame();
         ChangeState(State.MAIN_MENU);
+    }
+
+    static void OnGameOverAdCompleted(bool success)
+    {
+        s_adResult = success ? GameOverAdResult.SUCCESS : GameOverAdResult.FAIL;
+    }
+
+    public void ShowGameOverAd(bool show)
+    {
+        if (show)
+            PurchaseManager.Get().ShowAd(OnGameOverAdCompleted);
+        else
+            OnGameOverAdCompleted(false);
     }
 
     IEnumerator StageClearCountDown()
@@ -179,21 +216,28 @@ public class GameManager : MonoBehaviour
         switch (newState)
         {
             case State.MAIN_MENU:
-                Egg.DeleteAll();
-                EnemyBird.DeleteAll();
-                Bullet.DeleteAll();
+                ClearGame();
                 SceneManager.LoadScene("MainMenu");
                 break;
             case State.GAME_ON:
+                ClearGame();
                 SceneManager.LoadScene("Game");
                 break;
             case State.STORE:
+                ClearGame();
                 SceneManager.LoadScene("Store");
                 break;
             default:
                 break;
         }
         SetState(newState);
+    }
+
+    void ClearGame()
+    {
+        Egg.DeleteAll();
+        EnemyBird.DeleteAll();
+        Bullet.DeleteAll();
     }
 
     void SetState(State newState)

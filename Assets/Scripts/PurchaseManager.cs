@@ -18,12 +18,14 @@ public class PurchaseManager : MonoBehaviour, IStoreListener, IUnityAdsInitializ
     ConfigurationBuilder builder;
 
     // Ad Stuff
+    public delegate void OnAdCompleted(bool success);
     const string s_android_id = "4888923";
     const string s_iOS_id = "4888922";
     const string s_androidAdUnitId = "Rewarded_Android";
     const string s_iOSAdUnitId = "Rewarded_iOS";
     string m_adUnitId = null; // This will remain null for unsupported platforms
     bool m_isAdLoaded = false;
+    OnAdCompleted m_onAdCompleted;
 
     public static PurchaseManager Get()
     {
@@ -223,11 +225,12 @@ public class PurchaseManager : MonoBehaviour, IStoreListener, IUnityAdsInitializ
         }
     }
 
-    public bool ShowAd()
+    public bool ShowAd(OnAdCompleted callback)
     {
         if (m_isAdLoaded)
         {
             // show the ad:
+            m_onAdCompleted = callback;
             Advertisement.Show(m_adUnitId, this);
             return true;
         }
@@ -237,12 +240,14 @@ public class PurchaseManager : MonoBehaviour, IStoreListener, IUnityAdsInitializ
     // Implement the Show Listener's OnUnityAdsShowComplete callback method to determine if the user gets a reward:
     public void OnUnityAdsShowComplete(string adUnitId, UnityAdsShowCompletionState showCompletionState)
     {
-        if (adUnitId.Equals(m_adUnitId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
+        if (adUnitId.Equals(m_adUnitId))
         {
-            Debug.Log("Unity Ads Rewarded Ad Completed");
             // Grant a reward.
-            SaveData data = SaveData.Get();
-            data.AddTimeCrystals(3);
+            if (null != m_onAdCompleted)
+            {   // call the callback on success or fail
+                m_onAdCompleted(showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED));
+                m_onAdCompleted = null;
+            }
         }
         // Load another ad:
         m_isAdLoaded = false;

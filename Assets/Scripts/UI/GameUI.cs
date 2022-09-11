@@ -88,15 +88,25 @@ public class GameUI : MonoBehaviour
         return m_joystick;
     }
 
-    public void GameOver()
+    public void GameOver(bool showAd)
     {
         if (null != m_gameOver)
         {
             m_gameOver.SetActive(true);
             Animator anim = m_gameOver.GetComponent<Animator>();
             if (null != anim)
-                anim.Play("GameOver");
+            {
+                if (showAd)
+                    anim.Play("GameOverAd", -1, 0.0f);
+                else
+                    anim.Play("GameOver", -1, 0.0f);
+            }
         }
+    }
+
+    public void OnShowAd(bool show)
+    {
+        GameManager.Get().ShowGameOverAd(show);
     }
 
     public void StageClear()

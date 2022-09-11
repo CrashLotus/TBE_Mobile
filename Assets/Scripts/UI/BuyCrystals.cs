@@ -19,9 +19,18 @@ public class BuyCrystals : MonoBehaviour
 
     public void OnPlayAd()
     {
-        if (PurchaseManager.Get().ShowAd())
+        if (PurchaseManager.Get().ShowAd(OnAdCompleted))
         {
             gameObject.SetActive(false);
+        }
+    }
+
+    static void OnAdCompleted(bool success)
+    {
+        if (success)
+        {
+            SaveData data = SaveData.Get();
+            data.AddTimeCrystals(3);
         }
     }
 }
