@@ -9,7 +9,6 @@ public class Egg : PickUp
     static ObjectPool s_eggPool;
     static List<Egg> s_theList = new List<Egg>();
     static int s_numHitLava = 0;
-    const float s_minPickUpDelay = 0.5f;
     const int s_score = 50;
     const float s_hudFlyTime = 0.3f;
     static readonly Vector2 s_magnetOffset = new Vector2(85.0f, 87.5f);
@@ -87,12 +86,11 @@ public class Egg : PickUp
         base.Update();
         if (State.FLY_TO_HUD != m_state)
         {
-            float dt = Time.deltaTime;
             m_magnetPower = 0.0f;
-            Player player = Player.Get();
-            m_pickUpTimer -= Time.unscaledDeltaTime;
-            Vector3 pos = transform.position;
             //mrwTODO
+//            Vector3 pos = transform.position;
+            //            float dt = Time.deltaTime;
+            //            Player player = Player.Get();
             //if (null != player)
             //{
             //    int magnetLevel = Player.GetEggMagnetLevel();
@@ -112,7 +110,7 @@ public class Egg : PickUp
             //        }
             //    }
             //}
-            transform.position = pos;
+//            transform.position = pos;
         }
 
         //m_magnet.Update(dt);
@@ -186,10 +184,6 @@ public class Egg : PickUp
     override public void Init(ObjectPool pool)
     {
         base.Init(pool);
-        m_pickUpTimer = s_minPickUpDelay;
-        m_vel = Vector3.zero;
-        m_state = State.IDLE;
-        m_stateTimer = 0.0f;
         m_magnetPower = 0.0f;
     }
 

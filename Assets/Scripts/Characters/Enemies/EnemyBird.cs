@@ -125,6 +125,7 @@ public class EnemyBird : Bird, IHitPoints
         m_jukeFreq = Random.Range(0.6f, 1.4f) * m_jukeFreq;
         m_fireDelay = Random.Range(s_fireDelayMin, s_fireDelayMax);
         m_invTimer = s_invTime;
+        GetComponent<Collider2D>().enabled = false;
         Vector3 pos = transform.position;
         pos = Camera.main.WorldToViewportPoint(pos);
         if (pos.y > 1.0f)
@@ -151,9 +152,15 @@ public class EnemyBird : Bird, IHitPoints
         if (m_fireDelay <= 0.0f)
             m_fireDelay = 0.0f;
 
-        m_invTimer -= dt;
-        if (m_invTimer <= 0.0f)
-            m_invTimer = 0.0f;
+        if (m_invTimer > 0.0f)
+        {
+            m_invTimer -= dt;
+            if (m_invTimer <= 0.0f)
+            {
+                m_invTimer = 0.0f;
+                GetComponent<Collider2D>().enabled = true;
+            }
+        }
 
         // find the player
         Player player = Player.Get();

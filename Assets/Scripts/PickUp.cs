@@ -27,11 +27,17 @@ public class PickUp : PooledObject, IHitPoints
     protected const float s_gravity = 1.7f;
     protected const float s_spinTime = 0.5f;
     protected const float s_wobbleTime = 2.0f;
+    protected const float s_minPickUpDelay = 0.5f;
 
     public override void Init(ObjectPool pool)
     {
         base.Init(pool);
+        m_pickUpTimer = s_minPickUpDelay;
+        GetComponent<Collider2D>().enabled = false;
         transform.localRotation = Quaternion.identity;
+        m_vel = Vector3.zero;
+        m_state = State.IDLE;
+        m_stateTimer = 0.0f;
         SetState(State.IDLE);
     }
 
@@ -45,7 +51,15 @@ public class PickUp : PooledObject, IHitPoints
         }
         else
         {
-            m_pickUpTimer -= Time.unscaledDeltaTime;
+            if (m_pickUpTimer > 0.0f)
+            {
+                m_pickUpTimer -= Time.unscaledDeltaTime;
+                if (m_pickUpTimer <= 0.0f)
+                {
+                    GetComponent<Collider2D>().enabled = true;
+                    m_pickUpTimer = 0.0f;
+                }
+            }
             Vector3 pos = transform.position;
             m_vel.y -= s_gravity * dt;
             pos += m_vel * dt;
@@ -98,6 +112,7 @@ public class PickUp : PooledObject, IHitPoints
                 break;
             case State.FLY_TO_HUD:
                 {
+                    GetComponent<Collider2D>().enabled = false;
                     m_startPos = transform.position;
                     m_startRot = transform.localEulerAngles.z;
                 }
