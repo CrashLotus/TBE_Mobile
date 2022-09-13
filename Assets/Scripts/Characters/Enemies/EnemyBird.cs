@@ -14,7 +14,7 @@ public class EnemyBird : Bird, IHitPoints
     const float s_chaseDist = 100.0f;
     const float s_minPlayerDist = 2.0f;
     const float s_repulseForce = 0.75f;
-    const float s_repulseForceEgg = 3.0f;
+    const float s_repulseForceEgg = 2.25f;
     const float s_maxPush = 0.5f;
     protected const float s_wanderSpeed = 0.4f;
     protected const float s_centerForce = 0.4f;
@@ -124,6 +124,7 @@ public class EnemyBird : Bird, IHitPoints
         base.Init(pool);
         m_jukeFreq = Random.Range(0.6f, 1.4f) * m_jukeFreq;
         m_fireDelay = Random.Range(s_fireDelayMin, s_fireDelayMax);
+        m_repulse = Vector3.zero;
         m_invTimer = s_invTime;
         GetComponent<Collider2D>().enabled = false;
         Vector3 pos = transform.position;
@@ -299,26 +300,24 @@ public class EnemyBird : Bird, IHitPoints
                 bird2.m_repulse -= delta * push;
             }
 
-#if false   //mrwTODO
             foreach (Egg egg in Egg.GetList())
             {
-                // get delta to each other bird
-                Vector2 delta = pos1 - egg.GetPos();
+                // get delta to each egg
+                Vector3 delta = pos1 - egg.transform.position;
                 // get distance squared
-                float distSq = delta.LengthSquared();
+                float distSq = delta.sqrMagnitude;
                 if (distSq > 0.0001f)
                 {
                     delta.Normalize();
                 }
                 else
                 {   // he's right on top of you... just push on the x axis to separate
-                    delta = Vector2.UnitX;
+                    delta = Vector3.right;
                     distSq = 0.0001f;
                 }
-                float push = MathHelper.Min(s_repulseForceEgg / distSq, s_maxPush);
+                float push = Mathf.Min(s_repulseForceEgg / distSq, s_maxPush);
                 bird1.m_repulse += delta * push;
             }
-#endif
         }
     }
 

@@ -40,6 +40,8 @@ public class Bird : PooledObject
     public override void Init(ObjectPool pool)
     {
         base.Init(pool);
+        m_push = Vector3.zero;
+        m_pushTimer = 0.0f;
         m_sprite = GetComponent<SpriteRenderer>();
         m_anim = GetComponent<Animator>();
         m_pushFactor = Mathf.Sqrt(m_horizSpeed / 100.0f);
