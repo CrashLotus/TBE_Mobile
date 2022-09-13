@@ -1,5 +1,6 @@
 AddEgg
 PowerLaser
+Multishot
 EggShield
 Missile
 Missile2

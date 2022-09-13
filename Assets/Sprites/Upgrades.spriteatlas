@@ -45,6 +45,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: bec143d5750c2554e8abf2d6ef219bc7, type: 3}
   - {fileID: 21300000, guid: 8a3bae675af17a848a572b252197adab, type: 3}
   - {fileID: 21300000, guid: d11f538906ad2a04a9c2cd929a00ed56, type: 3}
+  - {fileID: 21300000, guid: 3037625a972184c46a78879177308c35, type: 3}
   - {fileID: 21300000, guid: 8ac7706be85fe544b900702b45aa5ae6, type: 3}
   - {fileID: -947610302, guid: b577aebb093e3614e82a30b51eb2e19f, type: 3}
   - {fileID: 21300000, guid: 9865ac1c149c6014680a40709e42a551, type: 3}
@@ -59,6 +60,7 @@ SpriteAtlas:
   - Icon_PowerLaser
   - Selected
   - Button_Buy
+  - Icon_MultiLaser
   - PowerLaser
   - Frame_ScreenShot_0
   - Icon_Missile1

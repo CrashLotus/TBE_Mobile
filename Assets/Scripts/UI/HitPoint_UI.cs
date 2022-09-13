@@ -16,6 +16,7 @@ public class HitPoint_UI : MonoBehaviour
     public float m_waveOffset = 0.75f;
 
     List<Image> m_eggSlots;
+    List<Animator> m_eggAnims;
     float m_waveTimer = 0.0f;
     static HitPoint_UI s_theUI;
 
@@ -24,33 +25,62 @@ public class HitPoint_UI : MonoBehaviour
     {
         s_theUI = this;
         m_eggSlots = new List<Image>();
-        m_eggSlots.Add(m_eggSlot);
+        m_eggAnims = new List<Animator>();
         RectTransform rect = m_eggSlot.transform as RectTransform;
         Vector3 pos = rect.anchoredPosition3D;
-        for (int i = 1; i < Player.MaxEgg(); ++i)
+        for (int i = 0; i < Player.MaxEgg(); ++i)
         {
             GameObject copy = Instantiate(m_eggSlot.gameObject, transform);
-            pos.x += m_eggSpacing;
             RectTransform copyRect = copy.transform as RectTransform;
             copyRect.anchoredPosition3D = pos;
             m_eggSlots.Add(copy.GetComponent<Image>());
+            m_eggAnims.Add(copy.GetComponent<Animator>());
+            pos.x += m_eggSpacing;
         }
+        m_eggSlot.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
         int numEgg = Player.NumEgg();
-        for (int i = 0; i < numEgg; ++i)
-        {
-            m_eggSlots[i].color = Color.white;
-        }
         int maxEgg = Player.MaxEgg();
-        for (int i = numEgg; i < maxEgg; ++i)
+
+        int eggCount = 1;
+        while (eggCount <= numEgg - 2 * maxEgg)
         {
-            m_eggSlots[i].color = m_noEggColor;
+            // Gold Egg
+            m_eggAnims[eggCount - 1].Play("GoldEgg");
+            m_eggSlots[eggCount - 1].color = Color.white;
+            ++eggCount;
         }
-        UpdateWave(numEgg);
+        if (numEgg > 2 * maxEgg)
+            numEgg = 2 * maxEgg;
+        while (eggCount <= numEgg - maxEgg)
+        {
+            // Silver Egg
+            m_eggAnims[eggCount - 1].Play("SilverEgg");
+            m_eggSlots[eggCount - 1].color = Color.white;
+            ++eggCount;
+        }
+        if (numEgg > maxEgg)
+            numEgg = maxEgg;
+        while (eggCount <= numEgg)
+        {
+            // Regular Egg
+            m_eggAnims[eggCount - 1].Play("BaseEgg");
+            m_eggSlots[eggCount - 1].color = Color.white;
+            ++eggCount;
+        }
+        while (eggCount <= maxEgg)
+        {
+            // Empty Egg
+            m_eggAnims[eggCount - 1].Play("BaseEgg");
+            m_eggSlots[eggCount - 1].color = m_noEggColor;
+            ++eggCount;
+        }
+
+        UpdateWave(maxEgg);
 
         if (null != m_points)
             m_points.text = Player.GetScore().ToString();
