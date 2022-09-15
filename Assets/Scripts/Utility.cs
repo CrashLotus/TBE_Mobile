@@ -18,4 +18,14 @@ public class Utility
         float t = (worldPos_near.z - zDepth) / (worldPos_near.z - worldPos_far.z);
         return (worldPos_far - worldPos_near) * t + worldPos_near;
     }
+
+    public static float WrapAngleDeg(float angle)
+    {
+        while (angle > 180.0f)
+            angle -= 360.0f;
+        while (angle <= -180.0f)
+            angle += 360.0f;
+
+        return angle;
+    }
 }

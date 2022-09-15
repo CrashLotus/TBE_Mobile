@@ -186,6 +186,7 @@ public class GameManager : MonoBehaviour
         Egg.MakeEggPool();
         TimeCrystal.MakeCrystalPool();
         EnemyBird.WarmUp();
+        Meteor.MakeMeteorPool();
         {   // warm up the player
             GameObject playerObject = Resources.Load<GameObject>("Player");
             Player player = playerObject.GetComponent<Player>();

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3336990240916480327}
   - component: {fileID: 1236592488460313663}
   - component: {fileID: 3171818381500561424}
+  - component: {fileID: 7588523862829455487}
   - component: {fileID: 3660458023847903829}
   m_Layer: 10
   m_Name: TimeCrystal
@@ -87,6 +88,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_collectSound: {fileID: 11400000, guid: dd2498e1e0f3f0749a789c2937071c4c, type: 2}
   m_spawnSound: {fileID: 11400000, guid: ea8f839fe867df44a975054553adf662, type: 2}
+--- !u!114 &7588523862829455487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2905893276230125341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a21264afc9f52cb45b15086bac1de896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &3660458023847903829
 Animator:
   serializedVersion: 4

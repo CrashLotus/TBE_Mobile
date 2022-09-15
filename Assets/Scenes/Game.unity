@@ -715,10 +715,6 @@ PrefabInstance:
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 25891693911960411, guid: 701238fa9ce28b0489fa5acd08b1589a, type: 3}
-      propertyPath: m_gainX
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 25891693911960411, guid: 701238fa9ce28b0489fa5acd08b1589a, type: 3}
       propertyPath: m_fireLeft
       value: 
       objectReference: {fileID: 1988896974}
@@ -731,17 +727,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1678968109}
     - target: {fileID: 25891693911960411, guid: 701238fa9ce28b0489fa5acd08b1589a, type: 3}
-      propertyPath: m_vertSpeed
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 25891693911960411, guid: 701238fa9ce28b0489fa5acd08b1589a, type: 3}
       propertyPath: m_fireButton
       value: 
       objectReference: {fileID: 7389636558173448859}
-    - target: {fileID: 25891693911960411, guid: 701238fa9ce28b0489fa5acd08b1589a, type: 3}
-      propertyPath: m_horizSpeed
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 25891693911960411, guid: 701238fa9ce28b0489fa5acd08b1589a, type: 3}
       propertyPath: m_missileButton
       value: 

@@ -103,14 +103,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a07a5cc562251e46868d092fe6d6f13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_vertSpeed: 2
-  m_horizSpeed: 2
+  m_vertSpeed: 7
+  m_horizSpeed: 7
   m_maxHitPoints: 1
   m_deathEffect: {fileID: 0}
   m_deathSound: {fileID: 0}
-  m_accel: 70
+  m_accel: 100
   m_steering: {fileID: 0}
-  m_gainX: 50
+  m_gainX: 80
   m_gainY: 40
   m_laserWeapon: {fileID: 25891694241100729}
   m_fireButton: {fileID: 0}
