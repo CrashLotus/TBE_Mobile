@@ -50,6 +50,7 @@ MonoBehaviour:
   m_ball: {fileID: 3189676518822708553}
   m_flame: {fileID: 3189676518127795392}
   m_explode: {fileID: 6123965144867231853, guid: 5691f77f4e91ca24d857a703e32ea554, type: 3}
+  m_miniPrefab: {fileID: 6024315093346773890, guid: 739759eb676283c4d884a31cabe4c980, type: 3}
   m_spawnSound: {fileID: 11400000, guid: 02578fb91bb3d6144a2392edc9936d7b, type: 2}
 --- !u!114 &4563347275849354928
 MonoBehaviour:

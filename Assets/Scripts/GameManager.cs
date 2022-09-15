@@ -239,6 +239,7 @@ public class GameManager : MonoBehaviour
         Egg.DeleteAll();
         EnemyBird.DeleteAll();
         Bullet.DeleteAll();
+        Meteor.DeleteAll();
     }
 
     void SetState(State newState)
