@@ -55,6 +55,7 @@ public class GameUI : MonoBehaviour
         switch (PlayerPrefs.GetInt("joystick", 0))
         {
             case 0: // fixed
+            default:
                 m_fixedJoystick.gameObject.SetActive(true);
                 m_floatJoystick.gameObject.SetActive(false);
                 m_joystick = m_fixedJoystick;
@@ -63,11 +64,6 @@ public class GameUI : MonoBehaviour
                 m_fixedJoystick.gameObject.SetActive(false);
                 m_floatJoystick.gameObject.SetActive(true);
                 m_joystick = m_floatJoystick;
-                break;
-            case 2: // split x/y
-                m_fixedJoystick.gameObject.SetActive(false);
-                m_floatJoystick.gameObject.SetActive(false);
-                m_joystick = null;
                 break;
         }
 

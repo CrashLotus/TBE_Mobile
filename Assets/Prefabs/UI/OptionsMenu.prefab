@@ -222,8 +222,6 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: Dynamic
       m_Image: {fileID: 0}
-    - m_Text: Split X/Y
-      m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
