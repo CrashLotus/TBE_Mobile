@@ -17,7 +17,7 @@ public class Meteor : PooledObject
     const float s_spawnAng = 20.0f;
     const float s_ballScaleMin = 0.9f;
     const float s_ballScaleMax = 1.3f;
-    const float s_damage = 3.0f;
+    const int s_damage = 3;
     const float s_ballRotSpd = 360.0f;
     const float s_lavaHitOffset = 0.12f;
     const float s_animSpeedMin = 10.0f;
@@ -121,6 +121,27 @@ public class Meteor : PooledObject
         if (pos.y < GameManager.Get().GetLavaHeight() + s_lavaHitOffset)
         {
             Explode();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Player player = collision.gameObject.GetComponent<Player>();
+        if (null != player)
+        {   // you hit the player
+            if (false == m_hitPlayer)
+            {
+                player.Damage(s_damage, IHitPoints.HitType.METEOR);
+                m_hitPlayer = true;
+            }
+        }
+        else
+        {
+            EnemyBird enemy = collision.gameObject.GetComponent<EnemyBird>();
+            if (null != enemy)
+            {
+                enemy.Damage(s_damage, IHitPoints.HitType.METEOR);
+            }
         }
     }
 

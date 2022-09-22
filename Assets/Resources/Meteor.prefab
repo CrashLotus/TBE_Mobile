@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 3189676517644535797}
   - component: {fileID: -808865934798246088}
   - component: {fileID: 4563347275849354928}
-  m_Layer: 0
+  - component: {fileID: 7971134449615626998}
+  m_Layer: 11
   m_Name: Meteor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,6 +65,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21264afc9f52cb45b15086bac1de896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &7971134449615626998
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3189676517644535796}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.008485496, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.3896885
 --- !u!1 &3189676518127795392
 GameObject:
   m_ObjectHideFlags: 0
@@ -75,7 +92,7 @@ GameObject:
   - component: {fileID: 3189676518127795393}
   - component: {fileID: 3189676518127795423}
   - component: {fileID: 3189676518127795422}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Flame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3189676518822708550}
   - component: {fileID: 3189676518822708551}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}

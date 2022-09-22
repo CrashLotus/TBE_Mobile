@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 895f6eb2e1de88d40b8381a95a613ee7, type: 3}
+  m_Script: {fileID: 11500000, guid: 41475b24fc84cc84991612822b19995a, type: 3}
   m_Name: Wave4c
   m_EditorClassIdentifier: 
   m_label: 
   m_text: 
-  m_numEnemy1: 3
-  m_numEnemy2: 2
-  m_numEnemy3: 0
-  m_waitOnEnemies: 1
+  m_numSpawn: 12
+  m_duration: 0
+  m_waitOnMeteors: 1
