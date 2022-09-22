@@ -51,6 +51,12 @@ public class Player : Bird, IHitPoints
     static int s_enemiesMissiled = 0;
     static int s_enemiesLasered = 0;
     static int s_eggsCaught = 0;
+    static readonly Vector2[] s_hitShake =
+{
+        new Vector2(2.0f, 0.3f),
+        new Vector2(4.0f, 0.3f),
+        new Vector2(10.0f, 0.4f),
+    };
 
     public static Player Get()
     {
@@ -196,12 +202,12 @@ public class Player : Bird, IHitPoints
             return IHitPoints.DamageReturn.NO_DAMAGE;
         }
 
+        int shake = Mathf.Min((int)damage, s_hitShake.Length - 1);
+        FollowCamera.Shake(s_hitShake[shake].x, s_hitShake[shake].y);
+
 #if false
         m_comboTimer = 0.0f;
         m_comboPoints = 0;
-
-        int shake = Math.Min((int)damage, s_hitShake.Length - 1);
-        Camera.Shake(s_hitShake[shake].X, s_hitShake[shake].Y);
 
 #if CHEAT_INVULNERABLE
         return DamageReturn.NO_DAMAGE;

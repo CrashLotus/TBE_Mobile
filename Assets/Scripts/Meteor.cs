@@ -82,7 +82,7 @@ public class Meteor : PooledObject
         if (m_spawnSound)
             m_spawnSound.Play();
 
-//        Camera.Shake(1.0f, 2.0f);
+        FollowCamera.Shake(1.0f, 2.0f);
 
         ObjectPool miniPool = ObjectPool.GetPool(m_miniPrefab, 64 * s_numMini);
         if (null == miniPool)
