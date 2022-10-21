@@ -28,7 +28,7 @@ public class SimpleAnim : PooledObject
         base.Init(pool);
         SetUp();
         if (null != m_anim)
-            m_anim.Play("Start", -1, 0.0f);
+            m_anim.Play(0, -1, 0.0f);
         if (null != m_sound)
             m_sound.Play();
     }

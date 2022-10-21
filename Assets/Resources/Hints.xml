@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Hint xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<m_theList>
+		<Entry>
+			<m_text>Catch the eggs before they hit the lava!</m_text>
+			<m_minLevel>1</m_minLevel>
+			<m_maxLevel>3</m_maxLevel>
+			<m_weight>100.0</m_weight>
+		</Entry>
+		<Entry>
+			<m_text>You can juggle eggs with bullets and lasers.</m_text>
+			<m_minLevel>1</m_minLevel>
+			<m_maxLevel>5</m_maxLevel>
+			<m_weight>50.0</m_weight>
+		</Entry>
+		<Entry>
+			<m_text>You can shoot enemy rockets.</m_text>
+			<m_minLevel>3</m_minLevel>
+			<m_maxLevel>8</m_maxLevel>
+			<m_weight>50.0</m_weight>
+		</Entry>
+		<Entry>
+			<m_text>You get to keep your upgrades forever!</m_text>
+			<m_minLevel>2</m_minLevel>
+			<m_maxLevel>15</m_maxLevel>
+			<m_weight>50.0</m_weight>
+		</Entry>
+		<Entry>
+			<m_text>Red eggs hatch the most dangerous enemies.</m_text>
+			<m_minLevel>1</m_minLevel>
+			<m_maxLevel>8</m_maxLevel>
+			<m_weight>100.0</m_weight>
+		</Entry>
+		<Entry>
+			<m_text>Your missiles are both a blessing and a curse, catch what they kill!</m_text>
+			<m_minLevel>6</m_minLevel>
+			<m_maxLevel>15</m_maxLevel>
+			<m_weight>100.0</m_weight>
+		</Entry>
+		<Entry>
+			<m_text>Missiles will target ALL enemies within their range.</m_text>
+			<m_minLevel>3</m_minLevel>
+			<m_maxLevel>8</m_maxLevel>
+			<m_weight>100.0</m_weight>
+		</Entry>
+		<Entry>
+			<m_text>Missiles can get you out of a jam, or into one.</m_text>
+			<m_minLevel>4</m_minLevel>
+			<m_maxLevel>15</m_maxLevel>
+			<m_weight>100.0</m_weight>
+		</Entry>
+		<Entry>
+			<m_text>Ninjas are good at dodging missiles.</m_text>
+			<m_minLevel>10</m_minLevel>
+			<m_maxLevel>18</m_maxLevel>
+			<m_weight>0.0</m_weight>
+		</Entry>
+		<Entry>
+			<m_text>Worms have soft bellies.</m_text>
+			<m_minLevel>4</m_minLevel>
+			<m_maxLevel>14</m_maxLevel>
+			<m_weight>0.0</m_weight>
+		</Entry>
+		<Entry>
+			<m_text>Worms lay eggs, eggs make enemies.</m_text>
+			<m_minLevel>4</m_minLevel>
+			<m_maxLevel>14</m_maxLevel>
+			<m_weight>0.0</m_weight>
+		</Entry>
+		<Entry>
+			<m_text>Falling meteors hurt players and enemies alike.</m_text>
+			<m_minLevel>2</m_minLevel>
+			<m_maxLevel>10</m_maxLevel>
+			<m_weight>50.0</m_weight>
+		</Entry>
+		<Entry>
+			<m_text>You drop an egg color that matches the enemy that shot you.</m_text>
+			<m_minLevel>1</m_minLevel>
+			<m_maxLevel>6</m_maxLevel>
+			<m_weight>100.0</m_weight>
+		</Entry>
+		<Entry>
+			<m_text>Enemies drop an egg one tier higher than them.</m_text>
+			<m_minLevel>1</m_minLevel>
+			<m_maxLevel>6</m_maxLevel>
+			<m_weight>100.0</m_weight>
+		</Entry>
+		<Entry>
+			<m_text>Lasers are great at juggling a lot of eggs.</m_text>
+			<m_minLevel>10</m_minLevel>
+			<m_maxLevel>20</m_maxLevel>
+			<m_weight>50.0</m_weight>
+		</Entry>
+		<Entry>
+			<m_text>Continually fire your weapon by holding the fire button.</m_text>
+			<m_minLevel>1</m_minLevel>
+			<m_maxLevel>4</m_maxLevel>
+			<m_weight>30.0</m_weight>
+		</Entry>
+		<Entry>
+			<m_text>Certain upgrades only work when your egg meter is full.</m_text>
+			<m_minLevel>3</m_minLevel>
+			<m_maxLevel>10</m_maxLevel>
+			<m_weight>100.0</m_weight>
+		</Entry>
+		<Entry>
+			<m_text>Try not to get surrounded!</m_text>
+			<m_minLevel>1</m_minLevel>
+			<m_maxLevel>20</m_maxLevel>
+			<m_weight>100.0</m_weight>
+		</Entry>
+		<Entry>
+			<m_text>When penguins fly!</m_text>
+			<m_minLevel>0</m_minLevel>
+			<m_maxLevel>0</m_maxLevel>
+			<m_weight>10.0</m_weight>
+		</Entry>
+		<Entry>
+			<m_text>When penguins cry!</m_text>
+			<m_minLevel>0</m_minLevel>
+			<m_maxLevel>0</m_maxLevel>
+			<m_weight>10.0</m_weight>
+		</Entry>
+		<Entry>
+			<m_text>Vikings in space?</m_text>
+			<m_minLevel>0</m_minLevel>
+			<m_maxLevel>0</m_maxLevel>
+			<m_weight>10.0</m_weight>
+		</Entry>
+		<Entry>
+			<m_text>What lies under the lava?</m_text>
+			<m_minLevel>1</m_minLevel>
+			<m_maxLevel>5</m_maxLevel>
+			<m_weight>100.0</m_weight>
+		</Entry>
+		<Entry>
+			<m_text>Lava is the ultimate incubator.</m_text>
+			<m_minLevel>0</m_minLevel>
+			<m_maxLevel>0</m_maxLevel>
+			<m_weight>10.0</m_weight>
+		</Entry>
+		<Entry>
+			<m_text>Things just got weird!</m_text>
+			<m_minLevel>0</m_minLevel>
+			<m_maxLevel>0</m_maxLevel>
+			<m_weight>10.0</m_weight>
+		</Entry>
+		<Entry>
+			<m_text>Barbarian... please.</m_text>
+			<m_minLevel>0</m_minLevel>
+			<m_maxLevel>0</m_maxLevel>
+			<m_weight>10.0</m_weight>
+		</Entry>
+		<Entry>
+			<m_text>YES! THAT WAS AWESOME!!!</m_text>
+			<m_minLevel>0</m_minLevel>
+			<m_maxLevel>0</m_maxLevel>
+			<m_weight>10.0</m_weight>
+		</Entry>
+		<Entry>
+			<m_text>Barbarian! Look out!!</m_text>
+			<m_minLevel>0</m_minLevel>
+			<m_maxLevel>0</m_maxLevel>
+			<m_weight>10.0</m_weight>
+		</Entry>
+	</m_theList>
+</Hint>

@@ -213,6 +213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_noMoveZoneLeft: 2
   m_noMoveZoneRight: 2
+  m_shakeScale: 0.016666668
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0

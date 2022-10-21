@@ -1,4 +1,8 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -36,6 +40,22 @@ public class GameManager : MonoBehaviour
         "Levels/Level03",
         "Levels/Level04",
     };
+
+    public class Hint
+    {
+        public class Entry
+        {
+            public string m_text;
+            public int m_minLevel;
+            public int m_maxLevel;
+            public float m_weight;
+        }
+
+        public List<Entry> m_theList;
+    }
+    Hint m_hints;
+    string m_hintText;
+    const float s_stageClearWaitTime = 3.0f;
 
     public static GameManager Get()
     {
@@ -103,7 +123,8 @@ public class GameManager : MonoBehaviour
         s_adResult = GameOverAdResult.WAITING;
         bool showAd = save.GetCurrentLevel() > 0;
         GameUI.Get().GameOver(showAd);
-        GameUI.Get().SetHint("Catch the eggs before they hit the lava!");
+        NextHint();
+        GameUI.Get().SetHint(m_hintText);
 
         // wait for all the eggs to hit the lava
         while (Egg.GetCount() > 0)
@@ -148,10 +169,11 @@ public class GameManager : MonoBehaviour
     IEnumerator StageClearCountDown()
     {
         GameUI.Get().StageClear();
-        GameUI.Get().SetHint("Catch the eggs before they hit the lava!");
+        NextHint();
+        GameUI.Get().SetHint(m_hintText);
 
         // wait 2 more seconds
-        yield return new WaitForSecondsRealtime(2.0f);
+        yield return new WaitForSecondsRealtime(s_stageClearWaitTime);
 
         // return to main menu
         OnContinueGame();
@@ -191,6 +213,14 @@ public class GameManager : MonoBehaviour
             GameObject playerObject = Resources.Load<GameObject>("Player");
             Player player = playerObject.GetComponent<Player>();
             player.WarmUp();
+        }
+        {   // load the hints
+            TextAsset textAsset = Resources.Load<TextAsset>("Hints");
+            StringReader textRead = new StringReader(textAsset.text);
+            XmlSerializer xml = new XmlSerializer(typeof(Hint));
+            m_hints = xml.Deserialize(textRead) as Hint;
+            textRead.Close();
+            Resources.UnloadAsset(textAsset);
         }
     }
 
@@ -288,5 +318,39 @@ public class GameManager : MonoBehaviour
     public void OnContinueGame()
     {
         ChangeState(State.GAME_ON);
+    }
+
+    void NextHint()
+    {
+        m_hintText = null;
+        int levelIndex = SaveData.Get().GetCurrentLevel();
+        List<Hint.Entry> hints = new List<Hint.Entry>();
+        float totalWeight = 0.0f;
+        foreach (Hint.Entry entry in m_hints.m_theList)
+        {
+            if (entry.m_minLevel <= levelIndex + 1)
+            {
+                if ((entry.m_maxLevel <= 0)
+                    || (entry.m_maxLevel >= levelIndex + 1)
+                    )
+                {
+                    hints.Add(entry);
+                    totalWeight += entry.m_weight;
+                }
+            }
+        }
+        if (hints.Count > 0)
+        {
+            float rand = Random.Range(0.0f, totalWeight);
+            foreach (Hint.Entry entry in hints)
+            {
+                if (rand <= entry.m_weight)
+                {
+                    m_hintText = entry.m_text;
+                    break;
+                }
+                rand -= entry.m_weight;
+            }
+        }
     }
 }
