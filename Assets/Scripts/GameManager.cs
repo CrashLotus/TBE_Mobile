@@ -280,15 +280,18 @@ public class GameManager : MonoBehaviour
                 MusicManager.Get().Play(MusicManager.SongType.TITLE);
                 break;
             case State.GAME_ON:
+                AnalyticsManager.Get().LevelStart(SaveData.Get().GetCurrentLevel());
                 MusicManager.Get().Play(MusicManager.SongType.GAME);
                 break;
             case State.GAME_OVER:
+                AnalyticsManager.Get().GameOver(SaveData.Get().GetCurrentLevel());
                 StartCoroutine(GameOverCountDown());
                 break;
             case State.STORE:
                 MusicManager.Get().Play(MusicManager.SongType.SHOP);
                 break;
             case State.STAGE_CLEAR:
+                AnalyticsManager.Get().LevelComplete(SaveData.Get().GetCurrentLevel());
                 StartCoroutine(StageClearCountDown());
                 break;
         }

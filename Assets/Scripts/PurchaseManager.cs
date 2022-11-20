@@ -231,6 +231,7 @@ public class PurchaseManager : MonoBehaviour, IStoreListener, IUnityAdsInitializ
         {
             // show the ad:
             m_onAdCompleted = callback;
+            AnalyticsManager.Get().ShowAd(m_adUnitId);
             Advertisement.Show(m_adUnitId, this);
             return true;
         }

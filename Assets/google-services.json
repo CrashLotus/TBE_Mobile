@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "349638937998",
+    "project_id": "time-barbarian-extreme",
+    "storage_bucket": "time-barbarian-extreme.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:349638937998:android:6ca8645ddc3669aa96a8df",
+        "android_client_info": {
+          "package_name": "com.WholesaleAlgorithms.TBE"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "349638937998-86l4oo2chi7vlpa5im0slq9g7kl5ganr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.WholesaleAlgorithms.TBE",
+            "certificate_hash": "05b9b436438ff06651dbbac427f10b98cc7b14cc"
+          }
+        },
+        {
+          "client_id": "349638937998-e3ee2ado523qioocp2hm4bfrb2qre8ek.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGNS3-TRrlHF9pjUXda4lAqmUgFVOn0eU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "349638937998-e3ee2ado523qioocp2hm4bfrb2qre8ek.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "349638937998-gjfaef61teqfe7ps7prt5p1o31qmms42.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.WholesaleAlgorithms.TBE",
+                "app_store_id": "1643184245"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
