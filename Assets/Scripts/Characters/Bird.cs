@@ -15,8 +15,6 @@ public class Bird : PooledObject
     protected float m_pushTimer = 0.0f;
     protected float m_pushFactor;
     protected int m_hitPoints = 1;
-    protected int[] m_hitByType;
-    protected IHitPoints.HitType m_lastHit;
     protected SpriteRenderer m_sprite;
     protected Animator m_anim;
     protected Vector3 m_oldPos;
@@ -46,8 +44,6 @@ public class Bird : PooledObject
         m_anim = GetComponent<Animator>();
         m_pushFactor = Mathf.Sqrt(m_horizSpeed / 100.0f);
         m_hitPoints = m_maxHitPoints;
-        m_hitByType = new int[(int)IHitPoints.HitType.TOTAL];
-        m_lastHit = IHitPoints.HitType.NONE;
         m_oldPos = transform.position;
     }
 

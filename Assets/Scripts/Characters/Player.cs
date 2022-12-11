@@ -44,13 +44,6 @@ public class Player : Bird, IHitPoints
 
     static Player s_thePlayer;
     static int s_score = 0;
-    //mrwTODO these were for achievements
-    static int s_bossesKilled = 0;
-    static int s_bossesMissiled = 0;
-    static int s_enemiesKilled = 0;
-    static int s_enemiesMissiled = 0;
-    static int s_enemiesLasered = 0;
-    static int s_eggsCaught = 0;
     static readonly Vector2[] s_hitShake =
 {
         new Vector2(2.0f, 0.3f),
@@ -223,8 +216,6 @@ public class Player : Bird, IHitPoints
         if (null != m_hitSound)
             m_hitSound.Play();
         IHitPoints.DamageReturn ret = IHitPoints.DamageReturn.PASS_THROUGH;
-        ++m_hitByType[(int)hitType];
-        m_lastHit = hitType;
         if (m_hitPoints > 0)
         {
             ret = IHitPoints.DamageReturn.DAMAGED;
@@ -277,26 +268,6 @@ public class Player : Bird, IHitPoints
     public static int GetScore()
     {
         return s_score;
-    }
-
-    public static void KilledEnemy(IHitPoints.HitType hitType)
-    {
-        ++s_enemiesKilled;
-        if (IHitPoints.HitType.MISSILE == hitType)
-        {
-            ++s_enemiesMissiled;
-        }
-        if (IHitPoints.HitType.LASER == hitType)
-        {
-            ++s_enemiesLasered;
-        }
-    }
-
-    public static void KilledBoss(IHitPoints.HitType hitType)
-    {
-        ++s_bossesKilled;
-        if (IHitPoints.HitType.MISSILE == hitType)
-            ++s_bossesMissiled;
     }
 
     void EggShieldOn()
@@ -355,7 +326,6 @@ public class Player : Bird, IHitPoints
                     break;
             }
         }
-        ++s_eggsCaught;
     }
 
     public static int NumEgg()

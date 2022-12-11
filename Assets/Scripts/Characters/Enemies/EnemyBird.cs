@@ -338,8 +338,6 @@ public class EnemyBird : Bird, IHitPoints
     {
         if (m_invTimer > 0.0f)
             return IHitPoints.DamageReturn.NO_DAMAGE;
-        ++m_hitByType[(int)hitType];
-        m_lastHit = hitType;
         if (m_hitPoints > 0)
         {
             m_hitPoints -= damage;
@@ -351,7 +349,7 @@ public class EnemyBird : Bird, IHitPoints
             return IHitPoints.DamageReturn.DAMAGED;
         }
 
-        return IHitPoints.DamageReturn.PASS_THROUGH;       // I'm already dead    }
+        return IHitPoints.DamageReturn.PASS_THROUGH;       // I'm already dead
     }
 
     void Explode()
@@ -366,7 +364,6 @@ public class EnemyBird : Bird, IHitPoints
             m_deathSound.Play();
         Player.AddScore(m_score);
         Egg.Spawn(transform.position, m_eggPower);
-        Player.KilledEnemy(m_lastHit);
 
         Free();
     }
