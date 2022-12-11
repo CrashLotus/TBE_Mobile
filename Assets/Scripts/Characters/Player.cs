@@ -89,7 +89,7 @@ public class Player : Bird, IHitPoints
 
         if (null != m_missileButton)
         {
-            if (SaveData.Get().HasUpgrade("MISSILE1"))
+            if (data.HasUpgrade("MISSILE1"))
                 m_missileButton.gameObject.SetActive(true);
             else
                 m_missileButton.gameObject.SetActive(false);
@@ -136,27 +136,10 @@ public class Player : Bird, IHitPoints
 
         pos += m_vel * dt;
 
-        switch(PlayerPrefs.GetInt("steering", 0))
-        {
-            case 0: // free aim
-                if (m_vel.x < 0.0f)
-                    m_sprite.flipX = true;
-                else if (m_vel.x > 0.0f)
-                    m_sprite.flipX = false;
-                break;
-            case 1: // face right
-                m_sprite.flipX = false;
-                break;
-            case 2: // locked fire
-                if (false == m_fireLaser)
-                {
-                    if (m_vel.x < 0.0f)
-                        m_sprite.flipX = true;
-                    else if (m_vel.x > 0.0f)
-                        m_sprite.flipX = false;
-                }
-                break;
-        }
+        if (m_vel.x < 0.0f)
+            m_sprite.flipX = true;
+        else if (m_vel.x > 0.0f)
+            m_sprite.flipX = false;
 
         if (m_fireLeft.IsButtonHold())
             m_sprite.flipX = true;

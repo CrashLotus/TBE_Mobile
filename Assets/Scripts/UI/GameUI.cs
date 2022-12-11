@@ -67,15 +67,16 @@ public class GameUI : MonoBehaviour
                 break;
         }
 
-        if (PlayerPrefs.GetInt("splitFire", 0) == 0)
-        {
-            m_fireButtonSingle.SetActive(true);
-            m_fireButtonSplit.SetActive(false);
-        }
-        else
+        SaveData data = SaveData.Get();
+        if (data.HasUpgrade("AIM"))
         {
             m_fireButtonSingle.SetActive(false);
             m_fireButtonSplit.SetActive(true);
+        }
+        else
+        {
+            m_fireButtonSingle.SetActive(true);
+            m_fireButtonSplit.SetActive(false);
         }
     }
 
