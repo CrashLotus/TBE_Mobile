@@ -36,6 +36,11 @@ public class WormSection : PooledObject
         return TransformPoint(m_headJoint);
     }
 
+    public SpriteRenderer GetSprite()
+    {
+        return m_sprite;
+    }
+
     public void UpdatePosition(WormSection parent)
     {
         if (null != parent)

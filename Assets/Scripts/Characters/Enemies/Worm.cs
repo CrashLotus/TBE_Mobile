@@ -8,9 +8,6 @@ public class Worm : WormSection
     {
         ARC_RIGHT,
         ARC_LEFT,
-        ARC_REPEAT_TILL_DEAD_RIGHT,
-        ARC_REPEAT_TILL_DEAD_LEFT,
-        FOLLOW,
         S_UP_RIGHT,
         S_UP_LEFT,
         S_DOWN_RIGHT,
@@ -31,7 +28,7 @@ public class Worm : WormSection
 
     List<WormSection> m_sections;
     Pattern m_pattern;
-    Pattern m_subPattern;
+    bool m_tailOnScreen = false;
     Vector3 m_arcCenter;
     const float s_arcWidth = 6.5f;
     const float s_arcHeight = 4.5f;
@@ -40,15 +37,18 @@ public class Worm : WormSection
     void Start()
     {
         Init(null);
-        m_pattern = Pattern.ARC_LEFT;
-        m_subPattern = m_pattern;
+        SpawnSections();
+#if false   //ARC_LEFT
         m_arcCenter = transform.position;
         m_arcCenter.x -= s_arcWidth;
         m_arcCenter.y = 0.0f;
-        transform.localEulerAngles = new Vector3(0.0f, 0.0f, 90.0f);
-        if (null != m_sprite)
-            m_sprite.flipY = true;
-        SpawnSections();
+        BeginPattern(Pattern.ARC_LEFT);
+#else       //ARC_RIGHT
+        m_arcCenter = transform.position;
+        m_arcCenter.x += s_arcWidth;
+        m_arcCenter.y = 0.0f;
+        BeginPattern(Pattern.ARC_RIGHT);
+#endif
     }
 
     void SpawnSections()
@@ -56,10 +56,6 @@ public class Worm : WormSection
         WormSection parent = this;
         m_sections = new List<WormSection>();
         float animTime = 0.0f;
-        Vector3 ang = transform.localEulerAngles;
-        bool flipY = false;
-        if (null != m_sprite)
-            flipY = m_sprite.flipY;
         for (int i = 0; i < m_numSection; ++i)
         {
             GameObject section;
@@ -71,20 +67,66 @@ public class Worm : WormSection
             Vector3 pos = parent.GetTailPos() - transform.TransformDirection(worm.m_headJoint);
             pos.z += 0.1f;
             section.transform.position = pos;
-            section.transform.localEulerAngles = ang;
             Animator anim = section.GetComponent<Animator>();
             if (null != anim)
             {
                 anim.Play("Loop", -1, animTime);
             }
             worm.Init(null);
-            SpriteRenderer wormSprite = section.GetComponent<SpriteRenderer>();
-            if (null != wormSprite)
-                wormSprite.flipY = flipY;
             m_sections.Add(worm);
             parent = worm;
             animTime += 0.2f;
         }
+    }
+
+    void BeginPattern(Pattern pattern)
+    {
+        bool flipY = false;
+        float ang = 0.0f;
+        switch (pattern)
+        {
+            case Pattern.ARC_LEFT:
+                {
+                    ang = 90.0f;
+                    flipY = true;
+                    Vector3 pos = m_arcCenter;
+                    pos.x += s_arcWidth;
+                    pos.y = GameManager.Get().GetLavaHeight() - 3.0f;
+                    pos.z = 0.1f;
+                    transform.position = pos;
+                }
+                break;
+            case Pattern.ARC_RIGHT:
+                {
+                    ang = 90.0f;
+                    flipY = false;
+                    Vector3 pos = m_arcCenter;
+                    pos.x -= s_arcWidth;
+                    pos.y = GameManager.Get().GetLavaHeight() - 3.0f;
+                    pos.z = 0.1f;
+                    transform.position = pos;
+                }
+                break;
+        }
+
+        // update the positions of the sections
+        WormSection parent = this;
+        transform.localEulerAngles = new Vector3(0.0f, 0.0f, ang);
+        if (null != m_sprite)
+            m_sprite.flipY = flipY;
+        foreach (WormSection worm in m_sections)
+        {
+            Vector3 pos = parent.GetTailPos() - parent.transform.TransformDirection(worm.m_headJoint);
+            pos.z += 0.1f;
+            worm.transform.position = pos;
+            worm.transform.localEulerAngles = new Vector3(0.0f, 0.0f, ang);
+            SpriteRenderer wormSprite = worm.GetComponent<SpriteRenderer>();
+            if (null != wormSprite)
+                wormSprite.flipY = flipY;
+            parent = worm;
+        }
+
+        m_pattern = pattern;
     }
 
     // Update is called once per frame
@@ -93,13 +135,12 @@ public class Worm : WormSection
         float dt = Time.deltaTime;
 
         Pattern doPattern = m_pattern;
-        if ((Pattern.ARC_REPEAT_TILL_DEAD_LEFT == m_pattern) || (Pattern.ARC_REPEAT_TILL_DEAD_RIGHT == m_pattern))
-            doPattern = m_subPattern;
 
         Vector3 pos = transform.position;
         float ang = transform.localEulerAngles.z;
         float targetAng = ang;
         Vector3 dir = transform.right;
+        bool isDone = false;
 
         switch (doPattern)
         {
@@ -113,6 +154,8 @@ public class Worm : WormSection
                     {
                         targetPos.x -= s_arcWidth;
                         targetPos.y = pos.y - 0.25f * m_speed;
+                        if (false == m_tailOnScreen)
+                            isDone = true;
                     }
                     else if (targetAng < 0.0f)
                     {
@@ -131,6 +174,30 @@ public class Worm : WormSection
                 break;
             case Pattern.ARC_RIGHT:
                 {
+                    Vector3 forecast = pos + 0.25f * m_speed * dir;
+                    Vector3 offset = forecast - m_arcCenter;
+                    targetAng = Mathf.Atan2(offset.y * s_arcWidth / s_arcHeight, offset.x);
+                    Vector3 targetPos = m_arcCenter;
+                    if (targetAng < -0.5f * Mathf.PI)
+                    {
+                        targetPos.x -= s_arcWidth;
+                        targetPos.y = pos.y + 0.25f * m_speed;
+                    }
+                    else if (targetAng < 0.0f)
+                    {
+                        targetPos.x += s_arcWidth;
+                        targetPos.y = pos.y - 0.25f * m_speed;
+                        if (false == m_tailOnScreen)
+                            isDone = true;
+                    }
+                    else
+                    {
+                        targetPos.x += s_arcWidth * Mathf.Cos(targetAng);
+                        targetPos.y += s_arcHeight * Mathf.Sin(targetAng);
+                    }
+                    offset = targetPos - pos;
+                    targetAng = Mathf.Atan2(offset.y, offset.x);
+                    targetAng = Mathf.Rad2Deg * targetAng;
                 }
                 break;
             case Pattern.DEBUG_CHASE:
@@ -160,17 +227,6 @@ public class Worm : WormSection
         pos += m_speed * dir * dt;
         transform.position = pos;
 
-#if false   //mrwTODO control the flip
-        // flip the sprite when upside-down
-        if (null != m_sprite)
-        {
-            if (dir.x < 0.0f)
-                m_sprite.flipY = true;
-            else
-                m_sprite.flipY = false;
-        }
-#endif
-
         // Update the sections
         WormSection parent = this;
         foreach (WormSection section in m_sections)
@@ -178,5 +234,30 @@ public class Worm : WormSection
             section.UpdatePosition(parent);
             parent = section;
         }
+
+        if (isDone)
+        {
+            switch (m_pattern)
+            {
+                case Pattern.ARC_RIGHT:
+                    BeginPattern(Pattern.ARC_LEFT);
+                    break;
+                case Pattern.ARC_LEFT:
+                    BeginPattern(Pattern.ARC_RIGHT);
+                    break;
+            }
+        }
+
+        // is the tail on screen?
+        WormSection tail = m_sections[m_sections.Count - 1];
+        SpriteRenderer tailSprite = tail.GetSprite();
+        Vector3 tailMin = Camera.main.WorldToViewportPoint(tailSprite.bounds.min);
+        Vector3 tailMax = Camera.main.WorldToViewportPoint(tailSprite.bounds.max);
+        if (tailMax.y < 0.0f)
+            m_tailOnScreen = false;
+        else if (tailMin.y > 1.0f)
+            m_tailOnScreen = false;
+        else
+            m_tailOnScreen = true;
     }
 }
