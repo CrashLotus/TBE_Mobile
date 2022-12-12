@@ -2,18 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WormSection : PooledObject
+public class WormSection : PooledObject, IHitPoints
 {
     public Vector3 m_headJoint;
     public Vector3 m_tailJoint;
-    const float m_minAng = -30.0f;
-    const float m_maxAng = 30.0f;
+    const float s_minAng = -30.0f;
+    const float s_maxAng = 30.0f;
+    const int s_hitDamage = 1;
     protected SpriteRenderer m_sprite;
+    protected int m_hitPoints = 5;
+    protected Worm m_head;
+    protected WormSection m_prevSection;
+    protected WormSection m_nextSection;
 
     public override void Init(ObjectPool pool)
     {
         base.Init(pool);
         m_sprite = GetComponent<SpriteRenderer>();
+    }
+
+    public void SetHead(Worm head)
+    {
+        m_head = head;
+    }
+
+    public void SetNext(WormSection next)
+    {
+        m_nextSection = next;
+    }
+
+    public void SetPrev(WormSection prev)
+    {
+        m_prevSection = prev;
+    }
+
+    public void Connect(WormSection prev, WormSection next)
+    {
+        m_prevSection = prev;
+        m_nextSection = next;
     }
 
     Vector3 TransformPoint(Vector3 point)
@@ -58,7 +84,7 @@ public class WormSection : PooledObject
                 angle += 360.0f;
             while (angle > 180.0f)
                 angle -= 360.0f;
-            angle = Mathf.Clamp(angle, m_minAng, m_maxAng);
+            angle = Mathf.Clamp(angle, s_minAng, s_maxAng);
             transform.localEulerAngles = new Vector3(0.0f, 0.0f, parent.transform.localEulerAngles.z + angle);
             Vector3 pos = transform.position;
             Vector3 headPos = GetHeadPos();
@@ -76,6 +102,55 @@ public class WormSection : PooledObject
                     m_sprite.flipY = false;
             }
 #endif
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        IHitPoints hit = collision.gameObject.GetComponent<IHitPoints>();
+        if (null != hit)
+        {
+            hit.Damage(s_hitDamage, IHitPoints.HitType.NONE);
+        }
+    }
+
+    public IHitPoints.DamageReturn Damage(int damage, IHitPoints.HitType hitType)
+    {
+        if (null == m_prevSection)
+        {   // head passes damage onto next section
+            return m_head.HeadDamage(damage, hitType);
+        }
+        if (null == m_nextSection)
+        {   // tail passes damage onto prev section
+            return m_prevSection.Damage(damage, hitType);
+        }
+        if (m_hitPoints > 0)
+        {
+            m_hitPoints -= damage;
+            if (m_hitPoints <= 0)
+            {
+                Explode();
+                return IHitPoints.DamageReturn.KILLED;    // I've been killed
+            }
+            return IHitPoints.DamageReturn.DAMAGED;
+        }
+
+        return IHitPoints.DamageReturn.PASS_THROUGH;       // I'm already dead
+    }
+
+    protected virtual void Explode()
+    {
+        if (m_prevSection == null)
+        {   // this is the head
+
+        }
+        else if (m_nextSection == null)
+        {   // this is the tail
+
+        }
+        else
+        {
+            m_head.SectionDestroyed(this);
         }
     }
 }

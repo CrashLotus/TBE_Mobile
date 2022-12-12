@@ -77,6 +77,25 @@ public class Worm : WormSection
             parent = worm;
             animTime += 0.2f;
         }
+
+        // connect the sections
+        parent = this;
+        SetHead(this);       
+        SetNext(m_sections[0]);
+        SetPrev(null);
+        WormSection next;
+        for (int i = 0; i < m_sections.Count; ++i)
+        { 
+            WormSection worm = m_sections[i];
+            if (i < m_sections.Count - 1)
+                next = m_sections[i + 1];
+            else
+                next = null;
+            worm.SetHead(this);
+            worm.SetNext(next);
+            worm.SetPrev(parent);
+            parent = worm;
+        }
     }
 
     void BeginPattern(Pattern pattern)
@@ -259,5 +278,57 @@ public class Worm : WormSection
             m_tailOnScreen = false;
         else
             m_tailOnScreen = true;
+    }
+
+    public IHitPoints.DamageReturn HeadDamage(int damage, IHitPoints.HitType hitType)
+    {
+        if (m_sections.Count > 1)
+        {   // pass the damage down to the next section
+            return m_sections[0].Damage(damage, hitType);
+        }
+        // we're out of sections...
+        if (m_hitPoints > 0)
+        {
+            m_hitPoints -= damage;
+            if (m_hitPoints <= 0)
+            {
+                Explode();
+                return IHitPoints.DamageReturn.KILLED;    // I've been killed
+            }
+            return IHitPoints.DamageReturn.DAMAGED;
+        }
+
+        return IHitPoints.DamageReturn.PASS_THROUGH;       // I'm already dead
+    }
+
+    protected override void Explode()
+    {
+        foreach (WormSection section in m_sections)
+        {
+            section.Free();
+        }
+        Free();
+    }
+
+    public void SectionDestroyed(WormSection section)
+    {
+        WormSection prev = this;
+        for (int i = 0; i < m_sections.Count; i++)
+        {
+            WormSection worm = m_sections[i];
+            if (section == worm)
+            {   // this is it
+                WormSection next = null;
+                if (i < m_sections.Count - 1)
+                    next = m_sections[i + 1];
+                prev.SetNext(next);
+                if (null != next)
+                    next.SetPrev(prev);
+                m_sections.RemoveAt(i);
+                section.Free();
+                return;
+            }
+            prev = worm;
+        }
     }
 }
