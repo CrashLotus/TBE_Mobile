@@ -20,12 +20,21 @@ public class LevelTest : MonoBehaviour
         Level level = Instantiate(loadLevel.asset as Level);
         level.Start();
         while (false == level.IsDone())
-        {
+        {   // wait for the level to end
             level.Update();
             yield return null;
         }
         Debug.Log("Level Over");
         Resources.UnloadAsset(loadLevel.asset);
+        // just in case, make sure the scene is completely cleared out
+        while ( (Egg.GetCount() > 0)
+            || (EnemyBird.GetCount() > 0)
+            || (Worm.GetCount() > 0)
+            )
+        {
+            yield return null;
+        }
+        // all done
         GameManager.Get().StageClear();
     }
 }

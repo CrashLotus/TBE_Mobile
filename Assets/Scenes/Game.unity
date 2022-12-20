@@ -429,6 +429,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Worm_Head
       objectReference: {fileID: 0}
+    - target: {fileID: 8982917145794915687, guid: 482c5879354f4f74d886a923f7160b42, type: 3}
+      propertyPath: m_speed
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 482c5879354f4f74d886a923f7160b42, type: 3}
 --- !u!1001 &1278346455

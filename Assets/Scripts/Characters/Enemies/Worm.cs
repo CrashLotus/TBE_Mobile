@@ -30,8 +30,33 @@ public class Worm : WormSection
     Pattern m_pattern;
     bool m_tailOnScreen = false;
     Vector3 m_arcCenter;
-    const float s_arcWidth = 6.5f;
-    const float s_arcHeight = 4.5f;
+    const float s_arcWidth = 6.0f;
+    const float s_arcHeight = 4.0f;
+
+    static List<Worm> s_theList = new List<Worm>();
+
+    public static int GetCount()
+    {
+        return s_theList.Count;
+    }
+
+    public static void DeleteAll()
+    {
+        for (int i = s_theList.Count - 1; i >= 0; --i)
+        {
+            s_theList[i].DeleteWorm();
+        }
+    }
+
+    private void OnEnable()
+    {
+        s_theList.Add(this);
+    }
+
+    private void OnDisable()
+    {
+        s_theList.Remove(this);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +74,16 @@ public class Worm : WormSection
         m_arcCenter.y = 0.0f;
         BeginPattern(Pattern.ARC_RIGHT);
 #endif
+    }
+
+    void DeleteWorm()
+    {
+        foreach (WormSection section in m_sections)
+        {
+            section.Free();
+            m_sections.Clear();
+        }
+        Free();
     }
 
     void SpawnSections()
@@ -329,6 +364,16 @@ public class Worm : WormSection
                 return;
             }
             prev = worm;
+        }
+    }
+
+    public static void ProcessEachSegment(GameManager.ProcessObject process)
+    {
+        foreach (Worm worm in s_theList)
+        {
+            foreach (WormSection section in worm.m_sections)
+                process(section.gameObject);
+            process(worm.gameObject);
         }
     }
 }

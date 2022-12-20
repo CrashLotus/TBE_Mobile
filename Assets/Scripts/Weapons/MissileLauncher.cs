@@ -163,20 +163,28 @@ public class MissileLauncher : Weapon
         m_targets.Clear();
         m_targetDist.Clear();
         EnemyBird.ProcessAll(TargetCheck);
-        // mrwTODO Worms
-//        Worm.ProcessEachSegment(TargetCheck);
+        Worm.ProcessEachSegment(TargetCheck);
 
         return m_targets;
     }
 
     void TargetCheck(GameObject enemy)
     {
+        // don't fire at things below the lava
+        Vector3 enemyPos = enemy.transform.position;
+        if (enemyPos.y < GameManager.Get().GetLavaHeight())
+            return;
+        // don't fire at anything off screen
+        Bounds screenBounds = GameManager.Get().GetScreenBounds();
+        if (false == screenBounds.Contains(enemyPos))
+            return;
+
         int missileLevel = 0;
         if (SaveData.Get().HasUpgrade("MISSILE2"))
             missileLevel = 1;
         float rangeSq = s_maxRange[missileLevel] * s_maxRange[missileLevel];
         Vector3 pos = GetFirePos();
-        Vector3 delta = enemy.transform.position - pos;
+        Vector3 delta = enemyPos - pos;
         {
             float distSq = delta.sqrMagnitude;
             if (distSq < rangeSq)

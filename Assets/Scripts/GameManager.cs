@@ -268,6 +268,7 @@ public class GameManager : MonoBehaviour
     {
         Egg.DeleteAll();
         EnemyBird.DeleteAll();
+        Worm.DeleteAll();
         Bullet.DeleteAll();
         Meteor.DeleteAll();
     }
