@@ -122,8 +122,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_headJoint: {x: 0, y: 0, z: 0}
   m_tailJoint: {x: -1.59, y: -0.27, z: 0}
+  m_type: 0
   m_numSection: 10
-  m_speed: 2
+  m_speed: 3
   m_turnSpeed: 180
   m_midPrefab: {fileID: 976046275874575346, guid: 31c9a57c7d3e2f24fbf9aab658a39f2d, type: 3}
   m_tailPrefab: {fileID: 8395077646368649269, guid: fd532195674ee444b8033ec1ed01477b, type: 3}

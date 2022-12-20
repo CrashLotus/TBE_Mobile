@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class Worm : WormSection
 {
+    public enum WormType
+    {
+        WORM,
+        SUPER,
+        MECHA,
+
+        TOTAL
+    }
     public enum Pattern
     {
         ARC_RIGHT,
@@ -20,6 +28,7 @@ public class Worm : WormSection
         DEBUG_CHASE,     // chase the player - just for debugging
     }
 
+    public WormType m_type = WormType.WORM;
     public int m_numSection = 10;
     public float m_speed = 2.0f;
     public float m_turnSpeed = 180.0f;
@@ -34,6 +43,86 @@ public class Worm : WormSection
     const float s_arcHeight = 4.0f;
 
     static List<Worm> s_theList = new List<Worm>();
+    static ObjectPool[] s_wormPool = new ObjectPool[(int)WormType.TOTAL];
+
+    static readonly string[] s_wormName =
+    {
+        "Worm_Head",
+        "SuperWorm_Head",
+        "MechaWorm_Head"
+    };
+
+    public static void WarmUp()
+    {
+        for (int i = 0; i < (int)WormType.TOTAL; ++i)
+        {
+            MakeWormPool(i);
+            if (null != s_wormPool[i])
+            {
+                Worm worm = s_wormPool[i].m_prefab.GetComponent<Worm>();
+                worm._WarmUp();
+            }
+        }
+    }
+
+    public static Worm Spawn(Vector3 pos, WormType power, Pattern pattern)
+    {
+        //        new Warning(pos);
+        int index = (int)power;
+        if (null == s_wormPool)
+        {
+            MakeWormPool(index);
+        }
+        if (null != s_wormPool)
+        {
+            GameObject enemyObj = s_wormPool[index].Allocate(pos);
+            if (null != enemyObj)
+            {
+                Worm worm = enemyObj.GetComponent<Worm>();
+                worm.SpawnSections();
+                switch (pattern)
+                {
+                    case Pattern.ARC_LEFT:
+                        worm.m_arcCenter = pos;
+                        worm.m_arcCenter.x -= s_arcWidth;
+                        worm.m_arcCenter.y = 0.0f;
+                        break;
+                    case Pattern.ARC_RIGHT:
+                        worm.m_arcCenter = pos;
+                        worm.m_arcCenter.x += s_arcWidth;
+                        worm.m_arcCenter.y = 0.0f;
+                        break;
+                }
+                worm.BeginPattern(pattern);
+                //if (null != enemy.m_spawnEffect)
+                //{
+                //    pos.z -= 1.0f;  // sort the flames to the front
+                //    ObjectPool pool = ObjectPool.GetPool(enemy.m_spawnEffect, 16);
+                //    if (null != pool)
+                //        pool.Allocate(pos);
+                //}
+                return worm;
+            }
+        }
+        return null;
+
+//        new Head(pos, Pattern.ARC_REPEAT_TILL_DEAD_LEFT, s_data);
+//        AudioComponent.Get().PlaySound("Worm1BubbleExitScreech");
+    }
+
+    public static void MakeWormPool(int index)
+    {
+        if (null == s_wormPool[index])
+        {
+            GameObject wormPrefab = Resources.Load<GameObject>(s_wormName[index]);
+            if (null == wormPrefab)
+            {
+                Debug.LogError("Unable to load enemy prefab " + s_wormName[index]);
+                return;
+            }
+            s_wormPool[index] = ObjectPool.GetPool(wormPrefab, 4);
+        }
+    }
 
     public static int GetCount()
     {
@@ -58,22 +147,12 @@ public class Worm : WormSection
         s_theList.Remove(this);
     }
 
-    // Start is called before the first frame update
-    void Start()
+    protected void _WarmUp()
     {
-        Init(null);
-        SpawnSections();
-#if false   //ARC_LEFT
-        m_arcCenter = transform.position;
-        m_arcCenter.x -= s_arcWidth;
-        m_arcCenter.y = 0.0f;
-        BeginPattern(Pattern.ARC_LEFT);
-#else       //ARC_RIGHT
-        m_arcCenter = transform.position;
-        m_arcCenter.x += s_arcWidth;
-        m_arcCenter.y = 0.0f;
-        BeginPattern(Pattern.ARC_RIGHT);
-#endif
+        if (null != m_midPrefab)
+            ObjectPool.GetPool(m_midPrefab, 40);
+        if (null != m_tailPrefab)
+            ObjectPool.GetPool(m_tailPrefab, 4);
     }
 
     void DeleteWorm()
@@ -93,24 +172,28 @@ public class Worm : WormSection
         float animTime = 0.0f;
         for (int i = 0; i < m_numSection; ++i)
         {
-            GameObject section;
+            ObjectPool pool;
             if (i < m_numSection - 1)
-                section = Instantiate(m_midPrefab);
+                pool = ObjectPool.GetPool(m_midPrefab, 64);
             else
-                section = Instantiate(m_tailPrefab);
-            WormSection worm = section.GetComponent<WormSection>();
-            Vector3 pos = parent.GetTailPos() - transform.TransformDirection(worm.m_headJoint);
-            pos.z += 0.1f;
-            section.transform.position = pos;
-            Animator anim = section.GetComponent<Animator>();
-            if (null != anim)
+                pool = ObjectPool.GetPool(m_tailPrefab, 64);
+            if (null != pool)
             {
-                anim.Play("Loop", -1, animTime);
+                GameObject section = pool.Allocate(transform.position);
+                WormSection worm = section.GetComponent<WormSection>();
+                Vector3 pos = parent.GetTailPos() - transform.TransformDirection(worm.m_headJoint);
+                pos.z += 0.1f;
+                section.transform.position = pos;
+                Animator anim = section.GetComponent<Animator>();
+                if (null != anim)
+                {
+                    anim.Play("Loop", -1, animTime);
+                }
+                worm.Init(null);
+                m_sections.Add(worm);
+                parent = worm;
+                animTime += 0.2f;
             }
-            worm.Init(null);
-            m_sections.Add(worm);
-            parent = worm;
-            animTime += 0.2f;
         }
 
         // connect the sections

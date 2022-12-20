@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
         "Levels/Level02",
         "Levels/Level03",
         "Levels/Level04",
+        "Levels/Level05",
+        "Levels/Level06",
     };
 
     public class Hint
@@ -209,6 +211,7 @@ public class GameManager : MonoBehaviour
         TimeCrystal.MakeCrystalPool();
         EnemyBird.WarmUp();
         Meteor.MakeMeteorPool();
+        Worm.WarmUp();
         {   // warm up the player
             GameObject playerObject = Resources.Load<GameObject>("Player");
             Player player = playerObject.GetComponent<Player>();
