@@ -34,6 +34,7 @@ public class Worm : WormSection
     public float m_turnSpeed = 180.0f;
     public GameObject m_midPrefab;
     public GameObject m_tailPrefab;
+    public GameObject m_warning;
 
     List<WormSection> m_sections;
     Pattern m_pattern;
@@ -150,9 +151,19 @@ public class Worm : WormSection
     protected void _WarmUp()
     {
         if (null != m_midPrefab)
+        {
             ObjectPool.GetPool(m_midPrefab, 40);
+        }
         if (null != m_tailPrefab)
+        {
             ObjectPool.GetPool(m_tailPrefab, 4);
+            WormTail tail = m_tailPrefab.GetComponent<WormTail>();
+            tail._WarmUp();
+        }
+        if (null != m_warning)
+        {
+            ObjectPool.GetPool(m_warning, 12);
+        }
     }
 
     void DeleteWorm()
@@ -231,6 +242,7 @@ public class Worm : WormSection
                     pos.y = GameManager.Get().GetLavaHeight() - 3.0f;
                     pos.z = 0.1f;
                     transform.position = pos;
+                    Warning(pos);
                 }
                 break;
             case Pattern.ARC_RIGHT:
@@ -242,6 +254,7 @@ public class Worm : WormSection
                     pos.y = GameManager.Get().GetLavaHeight() - 3.0f;
                     pos.z = 0.1f;
                     transform.position = pos;
+                    Warning(pos);
                 }
                 break;
         }
@@ -426,6 +439,18 @@ public class Worm : WormSection
             section.Free();
         }
         Free();
+    }
+
+    protected void Warning(Vector3 pos)
+    {
+        if (null != m_warning)
+        {
+            pos.y = GameManager.Get().GetLavaHeight();
+            pos.z = -1.1f;
+            ObjectPool pool = ObjectPool.GetPool(m_warning, 12);
+            if (null != pool)
+                pool.Allocate(pos);
+        }
     }
 
     public void SectionDestroyed(WormSection section)

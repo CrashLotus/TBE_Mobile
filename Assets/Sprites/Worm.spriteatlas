@@ -34,11 +34,13 @@ SpriteAtlas:
     packables:
     - {fileID: 102900000, guid: 2c97858641f544743909946237d5f324, type: 3}
     - {fileID: 102900000, guid: 4af0ce77674075f4598057d0694dfdfe, type: 3}
+    - {fileID: 102900000, guid: acc6650a30c233a4eac4712ac6eef3ae, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 2bbec750019b22649a7b7ca911f66895, type: 3}
   - {fileID: 21300000, guid: d0804460732d9634ca786bd4fbcdb65b, type: 3}
   - {fileID: 21300000, guid: 33ff9a80d8b8a2844a2db1a383fd93b1, type: 3}
   - {fileID: 21300000, guid: ef93dc9081b308349b7335a14b7d3521, type: 3}
@@ -49,14 +51,22 @@ SpriteAtlas:
   - {fileID: 21300000, guid: e76e752214f174a4abf5e719117032d7, type: 3}
   - {fileID: 21300000, guid: bae73762bf88f2443b3aede6c747744e, type: 3}
   - {fileID: 21300000, guid: 35d67962b1af49d4a8eaf06a3bae3da5, type: 3}
+  - {fileID: 21300000, guid: ff01b6928c6a3d54fada1951fe42ee9f, type: 3}
   - {fileID: 21300000, guid: a77ea8e2cecbed64a96d31d3a88837a2, type: 3}
+  - {fileID: 21300000, guid: fea2fbf2db6a2d94e919553649193e4f, type: 3}
   - {fileID: 21300000, guid: 0e533803c69cf244697724e0e388b776, type: 3}
+  - {fileID: 21300000, guid: c60e3c53a9a229b4abdff68af9cf4d68, type: 3}
+  - {fileID: 21300000, guid: 626d6073eaa8055478e6114419ad00fd, type: 3}
   - {fileID: 21300000, guid: 9612c4049ff047b40add3c4d4be38725, type: 3}
   - {fileID: 21300000, guid: 8f88d114efa596f40b7942cc5613bd89, type: 3}
+  - {fileID: 21300000, guid: 93be84147b2615b4fb284f700b8b577d, type: 3}
+  - {fileID: 21300000, guid: 936e0b941460f9347afc679035efb344, type: 3}
   - {fileID: 21300000, guid: 65ea74a42eb80dc4bb992c8192f985d0, type: 3}
   - {fileID: 21300000, guid: abf05425c3adbcd4d98068a72b497d51, type: 3}
+  - {fileID: 21300000, guid: 6eec1685211dcad40aadc7e2b8ce7ea1, type: 3}
   - {fileID: 21300000, guid: 0e27fca50613a9a46ab8000e8608175d, type: 3}
   - {fileID: 21300000, guid: cf5d85b5af30e9e43810bb512c8696c7, type: 3}
+  - {fileID: 21300000, guid: 28561ab56bce1d043a27b6c1126c0c85, type: 3}
   - {fileID: 21300000, guid: a83220c52bb3d674abc83baccc9ac001, type: 3}
   - {fileID: 21300000, guid: 10ec1bc5f8e504842877422a8fba89b9, type: 3}
   - {fileID: 21300000, guid: eef70216bf4a3504d9877de73b482a17, type: 3}
@@ -72,6 +82,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: b2ef494707ea0cd4f8d6aff0af00cc06, type: 3}
   - {fileID: 21300000, guid: 19014097f45ae65429dc8bb55ed2d2d0, type: 3}
   - {fileID: 21300000, guid: a7a46497e0bbc124a9ee90ec0a3bc30c, type: 3}
+  - {fileID: 21300000, guid: 5a20abc741271d04d9bc9da54b44b05a, type: 3}
   - {fileID: 21300000, guid: 82e909d755120e34c9ffb90c11c2d6b1, type: 3}
   - {fileID: 21300000, guid: d2332bf771c6bcd458d0a2162c61dd52, type: 3}
   - {fileID: 21300000, guid: c5834ff7d18c4d44ead148eb0bf9cc20, type: 3}
@@ -86,10 +97,14 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 2d39401a1e5e8b143bedad85f8dd1f43, type: 3}
   - {fileID: 21300000, guid: 6b2472bae952c204eb2df85edc463bb9, type: 3}
   - {fileID: 21300000, guid: 50d0e1ea93a06654cac04524d696d85d, type: 3}
+  - {fileID: 21300000, guid: 5a73030bade72b24782ecbb282bd6056, type: 3}
   - {fileID: 21300000, guid: ce4a061b6151e5e4e833142b022b6544, type: 3}
+  - {fileID: 21300000, guid: 78d22f2b505e59b4fa0b8f250eb740fc, type: 3}
   - {fileID: 21300000, guid: 0aa7d64ba533f034f934d28cf9877d44, type: 3}
   - {fileID: 21300000, guid: 1c0c069bbb9740746a3953e127599852, type: 3}
+  - {fileID: 21300000, guid: b69585ab92f9e124a9b5c3a38cf2270a, type: 3}
   - {fileID: 21300000, guid: 99b1dbabd2466a64194347035152f4c7, type: 3}
+  - {fileID: 21300000, guid: 6be58a0ceea4f424b80d85e04dbf2fb4, type: 3}
   - {fileID: 21300000, guid: a536515c5a9d0ca4fa029d1956b902ea, type: 3}
   - {fileID: 21300000, guid: e6a92cbc2951f2a4199be31d48d8048d, type: 3}
   - {fileID: 21300000, guid: fcab9dbcfdfa5b24a9d09e4f4eadbf2d, type: 3}
@@ -100,16 +115,19 @@ SpriteAtlas:
   - {fileID: 21300000, guid: f3386eede5230a447890537e28f2f7e7, type: 3}
   - {fileID: 21300000, guid: d0120ffd1195d1d429e10c534f09d692, type: 3}
   - {fileID: 21300000, guid: 2db7b10ec80830b41afe27511b3992af, type: 3}
+  - {fileID: 21300000, guid: ee991b2efbd88404ca3f29dd846d5f92, type: 3}
   - {fileID: 21300000, guid: cf09a64ed114c2a4db8ec8c4c013f397, type: 3}
   - {fileID: 21300000, guid: 733ec57e4ee11cf4aa555827926b6d31, type: 3}
   - {fileID: 21300000, guid: dc13118ec001c86488b893d9a8ceabe5, type: 3}
   - {fileID: 21300000, guid: af79a1de9f844514f98e31783d8d6126, type: 3}
+  - {fileID: 21300000, guid: 459ed43f087495343822a43163a59c96, type: 3}
   - {fileID: 21300000, guid: fe111c3fba454764498e51fc0687a190, type: 3}
   - {fileID: 21300000, guid: aeebb89f768cf54439d08587051380b3, type: 3}
   - {fileID: 21300000, guid: 6e12a2af38700424897e49a12667602b, type: 3}
   - {fileID: 21300000, guid: c1b54caf9b779a74f826ee5bf86eca46, type: 3}
   - {fileID: 21300000, guid: 90f1beff7f1396945b5b1d1b663857e1, type: 3}
   m_PackedSpriteNamesToIndex:
+  - Worm_Warning_010013
   - Worm_Mid_Straight_0110015
   - Butt_Splat00010004
   - Butt_Splat00010005
@@ -120,14 +138,22 @@ SpriteAtlas:
   - Worm_Head_Straight_010003
   - Butt_Splat00010010
   - Worm_End_Straight_010003
+  - Worm_Warning_010008
   - Worm_Head_Straight_010005
+  - Worm_Warning_010012
   - Worm_Head_Straight_010014
+  - Worm_Warning_010010
+  - Worm_Warning_010011
   - Butt_Splat00010009
   - Worm_End_Straight_010002
+  - Worm_Warning_010003
+  - Worm_Warning_010009
   - Worm_Mid_Straight_0110011
   - Worm_End_Straight_010013
+  - Worm_Warning_010004
   - Worm_Head_Straight_010012
   - Worm_Mid_Straight_0110002
+  - Worm_Warning_010016
   - Worm_End_Straight_010011
   - Worm_Mid_Straight_0110009
   - Worm_Mid_Straight_0110020
@@ -143,6 +169,7 @@ SpriteAtlas:
   - Worm_Mid_Straight_0110006
   - Worm_End_Straight_010020
   - Worm_End_Straight_010006
+  - Worm_Warning_010014
   - Butt_Splat00010001
   - Worm_Mid_Straight_0110004
   - Worm_Mid_Straight_0110018
@@ -157,10 +184,14 @@ SpriteAtlas:
   - Worm_Head_Straight_010008
   - Worm_End_Straight_010007
   - Worm_Head_Straight_010017
+  - Worm_Warning_010006
   - Worm_End_Straight_010010
+  - Worm_Warning_010015
   - Butt_Splat00010007
   - Worm_Head_Straight_010011
+  - Worm_Warning_010005
   - Worm_Head_Straight_010007
+  - Worm_Warning_010002
   - Worm_Mid_Straight_0110010
   - Butt_Splat00010008
   - Worm_End_Straight_010004
@@ -171,10 +202,12 @@ SpriteAtlas:
   - Worm_Mid_Straight_0110019
   - Worm_End_Straight_010005
   - Worm_End_Straight_010001
+  - Worm_Warning_010007
   - Worm_Head_Straight_010016
   - Worm_Mid_Straight_0110008
   - Worm_Mid_Straight_0110007
   - Worm_Head_Straight_010018
+  - Worm_Warning_010001
   - Worm_Head_Straight_010019
   - Worm_End_Straight_010017
   - Worm_Mid_Straight_0110003

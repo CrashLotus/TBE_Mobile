@@ -69,7 +69,7 @@ public class Egg : PickUp
         Spawn(pos, power, s_spawnSpeed);
     }
 
-    public static void Spawn(Vector2 pos, int power, Vector2 vel)
+    public static void Spawn(Vector3 pos, int power, Vector3 vel)
     {
         Egg egg = MakeEgg(pos, power);
         if (null != egg)

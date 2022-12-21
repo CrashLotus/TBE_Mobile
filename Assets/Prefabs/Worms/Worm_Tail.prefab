@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6644632317831161275
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1218423401426596576}
+  m_Layer: 12
+  m_Name: PoopSpot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1218423401426596576
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6644632317831161275}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.6, y: -0.219, z: -0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4661383780655653269}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8395077646368649269
 GameObject:
   m_ObjectHideFlags: 0
@@ -32,7 +63,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1218423401426596576}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -117,11 +149,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 8395077646368649269}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d43d0deb8db780b4b81e336db52b57a7, type: 3}
+  m_Script: {fileID: 11500000, guid: deb3e242b82ba974da2341a0a6664b3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_headJoint: {x: 1.0600002, y: -0.19999999, z: 0}
   m_tailJoint: {x: -0.955, y: -0.2, z: 0}
+  m_poopEffect: {fileID: 4710921818973256664, guid: ece2ac8acd28808478de18d7c9638803, type: 3}
+  m_poopSpot: {fileID: 1218423401426596576}
+  m_eggSpeed: 1
 --- !u!61 &8165366653124599357
 BoxCollider2D:
   m_ObjectHideFlags: 0
