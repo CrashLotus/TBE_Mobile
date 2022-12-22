@@ -38,6 +38,7 @@ public class Worm : WormSection
     public GameObject m_explosion;
     public int m_numExplode = 5;
     public float m_explodeRadius = 1.0f;
+    public int m_score = 500;
 
     List<WormSection> m_sections;
     Pattern m_pattern;
@@ -433,9 +434,13 @@ public class Worm : WormSection
         foreach (WormSection section in m_sections)
         {
             ExplodeEffect(section.transform.position);
+			Egg.Spawn(section.transform.position, 1);
+            Player.AddScore(m_score);
             section.Free();
         }
         ExplodeEffect(transform.position);
+		Egg.Spawn(section.transform.position, 1);
+        Player.AddScore(m_score);
         FollowCamera.Shake(10.0f, 1.0f);
         Free();
     }
@@ -479,6 +484,8 @@ public class Worm : WormSection
                     next.SetPrev(prev);
                 m_sections.RemoveAt(i);
                 ExplodeEffect(section.transform.position);
+                Egg.Spawn(section.transform.position, 1);
+                Player.AddScore(m_score);
                 section.Free();
                 return;
             }
