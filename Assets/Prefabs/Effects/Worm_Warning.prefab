@@ -123,4 +123,4 @@ MonoBehaviour:
   m_maxSpeed: 1.2
   m_minScale: 0.8
   m_maxScale: 1.2
-  m_sound: {fileID: 0}
+  m_sound: {fileID: 11400000, guid: 5a315799ca7c8c34c81a6797f3f18791, type: 2}

@@ -71,7 +71,6 @@ public class Worm : WormSection
 
     public static Worm Spawn(Vector3 pos, WormType power, Pattern pattern)
     {
-        //        new Warning(pos);
         int index = (int)power;
         if (null == s_wormPool)
         {
@@ -98,20 +97,10 @@ public class Worm : WormSection
                         break;
                 }
                 worm.BeginPattern(pattern);
-                //if (null != enemy.m_spawnEffect)
-                //{
-                //    pos.z -= 1.0f;  // sort the flames to the front
-                //    ObjectPool pool = ObjectPool.GetPool(enemy.m_spawnEffect, 16);
-                //    if (null != pool)
-                //        pool.Allocate(pos);
-                //}
                 return worm;
             }
         }
         return null;
-
-//        new Head(pos, Pattern.ARC_REPEAT_TILL_DEAD_LEFT, s_data);
-//        AudioComponent.Get().PlaySound("Worm1BubbleExitScreech");
     }
 
     public static void MakeWormPool(int index)
@@ -447,6 +436,7 @@ public class Worm : WormSection
             section.Free();
         }
         ExplodeEffect(transform.position);
+        FollowCamera.Shake(10.0f, 1.0f);
         Free();
     }
 
@@ -462,6 +452,7 @@ public class Worm : WormSection
 
     protected void Warning(Vector3 pos)
     {
+        FollowCamera.Shake(8.0f, 2.0f);
         if (null != m_warning)
         {
             pos.y = GameManager.Get().GetLavaHeight();

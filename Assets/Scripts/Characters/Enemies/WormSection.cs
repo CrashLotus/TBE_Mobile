@@ -140,15 +140,7 @@ public class WormSection : PooledObject, IHitPoints
 
     protected virtual void Explode()
     {
-        if (m_prevSection == null)
-        {   // this is the head
-
-        }
-        else if (m_nextSection == null)
-        {   // this is the tail
-
-        }
-        else
+        if (null != m_head)
         {
             m_head.SectionDestroyed(this);
         }
