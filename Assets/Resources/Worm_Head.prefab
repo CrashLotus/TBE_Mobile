@@ -126,10 +126,12 @@ MonoBehaviour:
   m_numSection: 10
   m_speed: 3
   m_turnSpeed: 180
-  m_delayTime: 1
   m_midPrefab: {fileID: 976046275874575346, guid: 31c9a57c7d3e2f24fbf9aab658a39f2d, type: 3}
   m_tailPrefab: {fileID: 8395077646368649269, guid: fd532195674ee444b8033ec1ed01477b, type: 3}
   m_warning: {fileID: 3139438539129782037, guid: c40cddacd5b43234f971424adf3407f1, type: 3}
+  m_explosion: {fileID: 4234046206340094728, guid: 7edfa5faa808ada4ebb4dbf2928029bd, type: 3}
+  m_numExplode: 3
+  m_explodeRadius: 1
 --- !u!61 &2866055144855362478
 BoxCollider2D:
   m_ObjectHideFlags: 0

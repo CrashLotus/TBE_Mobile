@@ -24,6 +24,17 @@ public class ObjectPool : MonoBehaviour
         return s_allPools[prefab];
     }
 
+    public static GameObject Allocate(GameObject prefab, int num, Vector3 pos)
+    {
+        if (null != prefab)
+        {
+            ObjectPool pool = GetPool(prefab, num);
+            if (null != pool)
+                return pool.Allocate(pos);
+        }
+        return null;
+    }
+
     public virtual void Start()
     {
         s_allPools[m_prefab] = this;

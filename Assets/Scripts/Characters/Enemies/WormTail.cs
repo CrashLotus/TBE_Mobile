@@ -6,7 +6,7 @@ public class WormTail : WormSection
 {
     public GameObject m_poopEffect;
     public Transform m_poopSpot;
-    public float m_eggSpeed = 3.0f;
+    public float m_eggSpeed = 1.0f;
 
     public void _WarmUp()
     {
@@ -21,13 +21,9 @@ public class WormTail : WormSection
             Vector3 pos = m_poopSpot.transform.position;
             if (pos.y > GameManager.Get().GetLavaHeight())
             {
-                ObjectPool pool = ObjectPool.GetPool(m_poopEffect, 16);
-                if (null != pool)
-                {
-                    GameObject poop = pool.Allocate(m_poopSpot.position);
-                    if (null != poop)
-                        poop.transform.rotation = m_poopSpot.rotation;
-                }
+                GameObject poop = ObjectPool.Allocate(m_poopEffect, 16, pos);
+                if (null != poop)
+                    poop.transform.rotation = m_poopSpot.rotation;
                 Egg.Spawn(pos, 1, -m_eggSpeed * m_poopSpot.right);
             }
         }

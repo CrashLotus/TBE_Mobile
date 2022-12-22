@@ -35,6 +35,9 @@ public class Worm : WormSection
     public GameObject m_midPrefab;
     public GameObject m_tailPrefab;
     public GameObject m_warning;
+    public GameObject m_explosion;
+    public int m_numExplode = 5;
+    public float m_explodeRadius = 1.0f;
 
     List<WormSection> m_sections;
     Pattern m_pattern;
@@ -163,6 +166,10 @@ public class Worm : WormSection
         if (null != m_warning)
         {
             ObjectPool.GetPool(m_warning, 12);
+        }
+        if (null != m_explosion)
+        {
+            ObjectPool.GetPool(m_explosion, 64);
         }
     }
 
@@ -436,9 +443,21 @@ public class Worm : WormSection
     {
         foreach (WormSection section in m_sections)
         {
+            ExplodeEffect(section.transform.position);
             section.Free();
         }
+        ExplodeEffect(transform.position);
         Free();
+    }
+
+    protected void ExplodeEffect(Vector3 pos)
+    {
+        for (int i = 0; i < m_numExplode; ++i)
+        {
+            Vector2 offset = m_explodeRadius * Random.insideUnitCircle;
+            Vector3 explodePos = new Vector3(pos.x + offset.x, pos.y + offset.y, pos.z - 0.1f);
+            ObjectPool.Allocate(m_explosion, 64, explodePos);
+        }
     }
 
     protected void Warning(Vector3 pos)
@@ -468,6 +487,7 @@ public class Worm : WormSection
                 if (null != next)
                     next.SetPrev(prev);
                 m_sections.RemoveAt(i);
+                ExplodeEffect(section.transform.position);
                 section.Free();
                 return;
             }

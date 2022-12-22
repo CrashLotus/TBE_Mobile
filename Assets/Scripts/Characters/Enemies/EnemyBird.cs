@@ -354,12 +354,7 @@ public class EnemyBird : Bird, IHitPoints
 
     void Explode()
     {
-        if (null != m_deathEffect)
-        {
-            ObjectPool pool = ObjectPool.GetPool(m_deathEffect, 64);
-            if (null != pool)
-                pool.Allocate(transform.position);
-        }
+        ObjectPool.Allocate(m_deathEffect, 64, transform.position);
         if (null != m_deathSound)
             m_deathSound.Play();
         Player.AddScore(m_score);
