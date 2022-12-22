@@ -226,6 +226,7 @@ public class Worm : WormSection
 
     void BeginPattern(Pattern pattern)
     {
+        m_arcCenter = WrapAround.WrapPosition(m_arcCenter);
         bool flipY = false;
         float ang = 0.0f;
         switch (pattern)
@@ -434,12 +435,11 @@ public class Worm : WormSection
         foreach (WormSection section in m_sections)
         {
             ExplodeEffect(section.transform.position);
-			Egg.Spawn(section.transform.position, 1);
             Player.AddScore(m_score);
             section.Free();
         }
         ExplodeEffect(transform.position);
-		Egg.Spawn(section.transform.position, 1);
+        TimeCrystal.Spawn(transform.position);
         Player.AddScore(m_score);
         FollowCamera.Shake(10.0f, 1.0f);
         Free();
@@ -484,7 +484,6 @@ public class Worm : WormSection
                     next.SetPrev(prev);
                 m_sections.RemoveAt(i);
                 ExplodeEffect(section.transform.position);
-                Egg.Spawn(section.transform.position, 1);
                 Player.AddScore(m_score);
                 section.Free();
                 return;

@@ -21,10 +21,13 @@ public class WormTail : WormSection
             Vector3 pos = m_poopSpot.transform.position;
             if (pos.y > GameManager.Get().GetLavaHeight())
             {
-                GameObject poop = ObjectPool.Allocate(m_poopEffect, 16, pos);
-                if (null != poop)
-                    poop.transform.rotation = m_poopSpot.rotation;
-                Egg.Spawn(pos, 1, -m_eggSpeed * m_poopSpot.right);
+                if (GameManager.Get().GetScreenBounds().Contains(pos))
+                {
+                    GameObject poop = ObjectPool.Allocate(m_poopEffect, 16, pos);
+                    if (null != poop)
+                        poop.transform.rotation = m_poopSpot.rotation;
+                    Egg.Spawn(pos, 1, -m_eggSpeed * m_poopSpot.right);
+                }
             }
         }
     }

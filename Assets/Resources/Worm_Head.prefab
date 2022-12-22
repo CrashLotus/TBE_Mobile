@@ -132,6 +132,7 @@ MonoBehaviour:
   m_explosion: {fileID: 4234046206340094728, guid: 7edfa5faa808ada4ebb4dbf2928029bd, type: 3}
   m_numExplode: 3
   m_explodeRadius: 1
+  m_score: 500
 --- !u!61 &2866055144855362478
 BoxCollider2D:
   m_ObjectHideFlags: 0

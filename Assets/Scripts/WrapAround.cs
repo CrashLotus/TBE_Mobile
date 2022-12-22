@@ -6,7 +6,11 @@ public class WrapAround : MonoBehaviour
 {
     void LateUpdate()
     {
-        Vector3 pos = transform.position;
+        transform.position = WrapPosition(transform.position);
+    }
+
+    public static Vector3 WrapPosition(Vector3 pos)
+    {
         Vector3 offset = pos - Camera.main.transform.position;
         float worldWidth = GameManager.Get().m_worldWidth;
         while (offset.x < -worldWidth)
@@ -14,6 +18,6 @@ public class WrapAround : MonoBehaviour
         while (offset.x > worldWidth)
             offset.x -= 2.0f * worldWidth;
         pos = Camera.main.transform.position + offset;
-        transform.position = pos;
+        return pos;
     }
 }
