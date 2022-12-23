@@ -87,6 +87,12 @@ public class MainMenu : MonoBehaviour
         m_menuSelect.Play();
     }
 
+    public void OnCredits()
+    {
+        GameManager.Get().GoToCredits();
+        m_menuSelect.Play();
+    }
+
     public void OnResetSave()
     {
         SaveData.Get().Reset();

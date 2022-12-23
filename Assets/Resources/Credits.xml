@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CreditList xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<m_theList>
+		<Entry>
+			<m_text>Time Barbarian Extreme!!</m_text>
+			<m_size>1.6</m_size>
+			<m_delay>0.0</m_delay>
+		</Entry>
+		<Entry>
+			<m_text>F#@&amp; Yeah!</m_text>
+			<m_size>1.0</m_size>
+			<m_delay>0.8</m_delay>
+		</Entry>
+		<Entry>
+			<m_text>Original Concept</m_text>
+			<m_size>1.0</m_size>
+			<m_delay>1.8</m_delay>
+		</Entry>
+		<Entry>
+			<m_text>Matt Whiting</m_text>
+			<m_size>0.8</m_size>
+			<m_delay>0.5</m_delay>
+		</Entry>
+		<Entry>
+			<m_text>Game Design</m_text>
+			<m_size>1.0</m_size>
+			<m_delay>1.2</m_delay>
+		</Entry>
+		<Entry>
+			<m_text>David Goodrich</m_text>
+			<m_size>0.8</m_size>
+			<m_delay>0.5</m_delay>
+		</Entry>
+		<Entry>
+			<m_text>Programming</m_text>
+			<m_size>1.0</m_size>
+			<m_delay>1.2</m_delay>
+		</Entry>
+		<Entry>
+			<m_text>Matt Whiting</m_text>
+			<m_size>0.8</m_size>
+			<m_delay>0.5</m_delay>
+		</Entry>
+		<Entry>
+			<m_text>Art &amp; Animation</m_text>
+			<m_size>1.0</m_size>
+			<m_delay>1.2</m_delay>
+		</Entry>
+		<Entry>
+			<m_text>David Goodrich</m_text>
+			<m_size>0.8</m_size>
+			<m_delay>0.5</m_delay>
+		</Entry>
+		<Entry>
+			<m_text>Sound Design</m_text>
+			<m_size>1.0</m_size>
+			<m_delay>1.2</m_delay>
+		</Entry>
+		<Entry>
+			<m_text>Corey Redgrift</m_text>
+			<m_size>0.8</m_size>
+			<m_delay>0.5</m_delay>
+		</Entry>
+		<Entry>
+			<m_text>Original Musical Composition</m_text>
+			<m_size>1.0</m_size>
+			<m_delay>1.2</m_delay>
+		</Entry>
+		<Entry>
+			<m_text>Corey Redgrift</m_text>
+			<m_size>0.8</m_size>
+			<m_delay>0.5</m_delay>
+		</Entry>
+		<Entry>
+			<m_text>v.2022-12-22a</m_text>
+			<m_size>1.0</m_size>
+			<m_delay>4.0</m_delay>
+		</Entry>
+		<Entry>
+			<m_text>Super-Secret Pre-Release Beta</m_text>
+			<m_size>1.6</m_size>
+			<m_delay>1.2</m_delay>
+		</Entry>
+		<Entry>
+			<m_text>Look for more Coming Soon!</m_text>
+			<m_size>1.2</m_size>
+			<m_delay>1.2</m_delay>
+		</Entry>
+		<Entry>
+			<m_text>F#@&amp; Yeah!</m_text>
+			<m_size>1.0</m_size>
+			<m_delay>0.8</m_delay>
+		</Entry>
+	</m_theList>
+</CreditList>
