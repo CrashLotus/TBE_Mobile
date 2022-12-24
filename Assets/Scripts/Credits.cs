@@ -3,8 +3,9 @@ using System.IO;
 using System.Xml.Serialization;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Credits : MonoBehaviour
+public class Credits : MonoBehaviour, IPointerDownHandler, IPointerMoveHandler, IPointerUpHandler
 {
     public TextMeshProUGUI m_textProto;
     public float m_spacing = 120.0f;
@@ -25,6 +26,7 @@ public class Credits : MonoBehaviour
     Transform m_root;
     Vector3 m_rootPos;
     TextMeshProUGUI m_lastElement;
+    bool m_isFingerDown = false;
 
     // Start is called before the first frame update
     void Start()
@@ -60,10 +62,34 @@ public class Credits : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_rootPos.y += m_scrollRate * Time.deltaTime;
-        m_root.transform.localPosition = m_rootPos;
-        Vector3 lastPos = Camera.main.ScreenToViewportPoint(m_lastElement.transform.position);
-        if (lastPos.y > 1.05f)
-            GameManager.Get().ReturnToMainMenu();
+        if (false == m_isFingerDown)
+        {
+            m_rootPos.y += m_scrollRate * Time.deltaTime;
+            m_root.transform.localPosition = m_rootPos;
+            Vector3 lastPos = Camera.main.ScreenToViewportPoint(m_lastElement.transform.position);
+            if (lastPos.y > 1.05f)
+                GameManager.Get().ReturnToMainMenu();
+        }
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        m_isFingerDown = true;
+    }
+
+    public void OnPointerMove(PointerEventData eventData)
+    {
+        if (m_isFingerDown)
+        {
+            m_rootPos.y += 1280.0f * eventData.delta.y / Screen.height;
+            if (m_rootPos.y < 0.0f)
+                m_rootPos.y = 0.0f;
+            m_root.transform.localPosition = m_rootPos;
+        }
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        m_isFingerDown = false;
     }
 }
