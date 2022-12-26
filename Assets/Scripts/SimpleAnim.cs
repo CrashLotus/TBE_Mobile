@@ -18,7 +18,7 @@ public class SimpleAnim : PooledObject
         if (null != m_anim)
         {
             var state = m_anim.GetCurrentAnimatorStateInfo(0);
-            yield return new WaitForSeconds(state.length * state.speed);
+            yield return new WaitForSeconds(state.length / m_anim.speed);
         }
         Free();
     }

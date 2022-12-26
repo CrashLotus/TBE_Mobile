@@ -10,6 +10,7 @@ public class Level : ScriptableObject
     int m_currentWave;
     bool m_isDone;
     bool m_isActive;
+    bool m_isAbort = false;
     protected bool m_doTransition;
 
     static Level s_currentLevel = null;
@@ -17,6 +18,13 @@ public class Level : ScriptableObject
     public static Level Get()
     {
         return s_currentLevel;
+    }
+
+    public void Abort()
+    {
+        foreach (Wave wave in m_waves)
+            wave.Stop();
+        m_isAbort = true;
     }
 
     public Wave FindWave(string label)
@@ -58,6 +66,11 @@ public class Level : ScriptableObject
     public bool IsActive()
     {
         return m_isActive;
+    }
+
+    public bool IsAbort()
+    {
+        return m_isAbort;
     }
 
     public bool DoTransition()

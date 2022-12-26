@@ -21,6 +21,8 @@ public class LevelTest : MonoBehaviour
         level.Start();
         while (false == level.IsDone())
         {   // wait for the level to end
+            if (level.IsAbort())
+                yield break;
             level.Update();
             yield return null;
         }

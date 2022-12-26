@@ -274,6 +274,9 @@ public class GameManager : MonoBehaviour
 
     void ClearGame()
     {
+        Level level = Level.Get();
+        if (null != level)
+            level.Abort();
         Egg.DeleteAll();
         EnemyBird.DeleteAll();
         Worm.DeleteAll();
