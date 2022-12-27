@@ -156,6 +156,7 @@ public class Egg : PickUp
     protected override void HitLava()
     {
         base.HitLava();
+        TutorialManager.Get().EggHitLava(transform.position);
         EnemyBird enemy = EnemyBird.Spawn(transform.position, m_power);
         if (null != enemy)
         {

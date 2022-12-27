@@ -197,6 +197,7 @@ public class Player : Bird, IHitPoints
         int eggDamage = Mathf.Min(damage, m_hitPoints);
         int numEgg = (int)eggDamage;
         Vector3 pos = transform.position;
+        TutorialManager.Get().PlayerDamaged(transform.position);
         while (numEgg >= 3)
         {
             Egg.Spawn(pos, 3);

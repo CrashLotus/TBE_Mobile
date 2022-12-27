@@ -14,6 +14,7 @@ public class GameUI : MonoBehaviour
     public Joystick m_floatJoystick;
     public GameObject m_fireButtonSingle;
     public GameObject m_fireButtonSplit;
+    public TutorialUI m_tutorial;
 
     Joystick m_joystick;
 
@@ -42,6 +43,8 @@ public class GameUI : MonoBehaviour
                     anim.Play("Stage", -1, 0.0f);
             }
         }
+        if (null != m_tutorial)
+            m_tutorial.gameObject.SetActive(false);
         UpdateOptions();
     }
 
@@ -146,6 +149,30 @@ public class GameUI : MonoBehaviour
                 if (null != anim)
                     anim.Play("Hint");
             }
+        }
+    }
+
+    public void SetTutorial(string tutorial, Vector3 pos)
+    {
+        if (null != m_tutorial)
+        {
+            m_tutorial.gameObject.SetActive(true);
+            Vector2 viewPos = Camera.main.WorldToViewportPoint(pos);
+            Debug.Log("pos = " + pos);
+            Debug.Log("viewPos = " + viewPos);
+            RectTransform rect = m_tutorial.GetComponent<RectTransform>();
+            Vector2 pivot = rect.pivot;
+            if (viewPos.x > 0.5f)
+                pivot.x = 1.0f;
+            else
+                pivot.x = 0.0f;
+            if (viewPos.y > 0.5f)
+                pivot.y = 1.0f;
+            else
+                pivot.y = 0.0f;
+            rect.pivot = pivot;
+            rect.anchorMin = rect.anchorMax = viewPos;
+            m_tutorial.SetText(tutorial);
         }
     }
 }

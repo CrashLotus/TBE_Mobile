@@ -15,6 +15,7 @@ public class SaveData
         public int m_playerHP = Player.s_startingHP;
         public int m_timeCrystals = 0;
         public List<string> m_upgrades = new List<string>();
+        public List<string> m_tutorial = new List<string>();
     }
     Data m_data;
 
@@ -76,6 +77,20 @@ public class SaveData
         if (false == HasUpgrade(key))
         {
             m_data.m_upgrades.Add(key);
+            Save();
+        }
+    }
+
+    public bool HasSeenTutorial(string key)
+    {
+        return m_data.m_tutorial.Contains(key);
+    }
+
+    public void SeeTutorial(string key)
+    {
+        if (false == HasSeenTutorial(key))
+        {
+            m_data.m_tutorial.Add(key);
             Save();
         }
     }

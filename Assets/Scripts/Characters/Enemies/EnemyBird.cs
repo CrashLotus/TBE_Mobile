@@ -359,7 +359,7 @@ public class EnemyBird : Bird, IHitPoints
             m_deathSound.Play();
         Player.AddScore(m_score);
         Egg.Spawn(transform.position, m_eggPower);
-
+        TutorialManager.Get().EnemyKilled(transform.position);
         Free();
     }
 
