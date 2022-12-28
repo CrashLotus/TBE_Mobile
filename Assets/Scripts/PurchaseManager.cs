@@ -1,3 +1,5 @@
+//#define DEBUG_ADS
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,6 +28,11 @@ public class PurchaseManager : MonoBehaviour, IStoreListener, IUnityAdsInitializ
     string m_adUnitId = null; // This will remain null for unsupported platforms
     bool m_isAdLoaded = false;
     OnAdCompleted m_onAdCompleted;
+#if DEBUG_ADS
+    bool m_isDebugMode = true;
+#else
+    bool m_isDebugMode = false;
+#endif
 
     public static PurchaseManager Get()
     {
@@ -92,7 +99,8 @@ public class PurchaseManager : MonoBehaviour, IStoreListener, IUnityAdsInitializ
         builder.AddProduct("50_time_crystals", ProductType.Consumable);
         builder.AddProduct("100_time_crystals", ProductType.Consumable);
 
-        builder.Configure<IGooglePlayConfiguration>().SetObfuscatedAccountId("test1");
+        if (m_isDebugMode)
+            builder.Configure<IGooglePlayConfiguration>().SetObfuscatedAccountId("test1");
 
         builder.Configure<IGooglePlayConfiguration>().SetDeferredPurchaseListener(OnDeferredPurchase);
 
@@ -186,7 +194,7 @@ public class PurchaseManager : MonoBehaviour, IStoreListener, IUnityAdsInitializ
         string gameId = (Application.platform == RuntimePlatform.IPhonePlayer)
             ? s_iOS_id
             : s_android_id;
-        Advertisement.Initialize(gameId, true, this);
+        Advertisement.Initialize(gameId, m_isDebugMode, this);
     }
 
     public void OnInitializationComplete()
