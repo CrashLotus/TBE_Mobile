@@ -17,5 +17,5 @@ MonoBehaviour:
   m_cost: 20
   m_desc: Bigger, blacker, longer... ranged missiles.
   m_icon: {fileID: 21300000, guid: 2fa2b6349f922a3448b3ce67dea60218, type: 3}
-  m_display: {fileID: 21300000, guid: e10c5d51a8d58414fbbf01dca7f6e0aa, type: 3}
+  m_display: {fileID: 21300000, guid: 6b5dbfac082fceb46a3d69608e406969, type: 3}
   m_preReq: MISSILE1
