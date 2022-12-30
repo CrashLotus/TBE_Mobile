@@ -17,5 +17,5 @@ MonoBehaviour:
   m_cost: 1
   m_desc: Add 1 Egg to your Health
   m_icon: {fileID: 21300000, guid: bd1dea81f0f7c32419ad82d690b6279f, type: 3}
-  m_display: {fileID: 21300000, guid: f9a7fc2389f2f7a41809ac9cb5716f59, type: 3}
+  m_display: {fileID: 21300000, guid: 6b1f85a650df8b74699b5f547fc7058a, type: 3}
   m_preReq: 

@@ -41,9 +41,11 @@ SpriteAtlas:
   - {fileID: 21300000, guid: e10c5d51a8d58414fbbf01dca7f6e0aa, type: 3}
   - {fileID: 21300000, guid: f9a7fc2389f2f7a41809ac9cb5716f59, type: 3}
   - {fileID: 21300000, guid: 02511a43419ee324aa2216709eb3913d, type: 3}
+  - {fileID: 21300000, guid: 87172f730bc57644aaf0c1290d2fae83, type: 3}
   - {fileID: 21300000, guid: d39ca9a3a76489a409ea11d32a54f684, type: 3}
   - {fileID: 21300000, guid: 2fa2b6349f922a3448b3ce67dea60218, type: 3}
   - {fileID: 21300000, guid: bec143d5750c2554e8abf2d6ef219bc7, type: 3}
+  - {fileID: 21300000, guid: 6b1f85a650df8b74699b5f547fc7058a, type: 3}
   - {fileID: 21300000, guid: 8a3bae675af17a848a572b252197adab, type: 3}
   - {fileID: 21300000, guid: d11f538906ad2a04a9c2cd929a00ed56, type: 3}
   - {fileID: 21300000, guid: 3037625a972184c46a78879177308c35, type: 3}
@@ -51,15 +53,19 @@ SpriteAtlas:
   - {fileID: -947610302, guid: b577aebb093e3614e82a30b51eb2e19f, type: 3}
   - {fileID: 21300000, guid: 9865ac1c149c6014680a40709e42a551, type: 3}
   - {fileID: 21300000, guid: 7446569c430514b41b923dea2323d14a, type: 3}
+  - {fileID: 21300000, guid: 6b5dbfac082fceb46a3d69608e406969, type: 3}
   - {fileID: 21300000, guid: c34ae9dcb30861c49942174a15cf63a0, type: 3}
+  - {fileID: 21300000, guid: accee0eed12ed9b479db9e807789d21e, type: 3}
   - {fileID: -736876375, guid: 3218180f0c46c1d449595e77ac52cf3c, type: 3}
   m_PackedSpriteNamesToIndex:
   - Missile1
   - EggShield
   - Icon_Aim
+  - TripleShot
   - Icon_Check
   - Icon_Missile2
   - Icon_PowerLaser
+  - Add_Egg
   - Selected
   - Button_Buy
   - Icon_MultiLaser
@@ -67,7 +73,9 @@ SpriteAtlas:
   - Frame_ScreenShot_0
   - Icon_Missile1
   - Icon_Shield
+  - Missile2
   - Icon_Lock
+  - Split_Fire
   - Frame_Full_0
   m_RenderDataMap: {}
   m_Tag: Upgrades

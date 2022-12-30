@@ -12,8 +12,8 @@ public class EnergyBlast : Bullet
     protected override void Update()
     {
         float dt = Time.deltaTime;
-        m_speed += m_accel * dt;
-        m_vel = m_dir * m_speed;
+        m_curSpeed += m_accel * dt;
+        m_vel = m_dir * m_curSpeed;
         m_rot = m_rot + m_spinRate * dt;
         if (m_rot < 0.0f)
             m_rot += 360.0f;

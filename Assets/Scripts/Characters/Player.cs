@@ -186,9 +186,10 @@ public class Player : Bird, IHitPoints
         m_comboPoints = 0;
 
 #if CHEAT_INVULNERABLE
-        return DamageReturn.NO_DAMAGE;
+        return IHitPoints.DamageReturn.NO_DAMAGE;
 #endif
 #endif
+
         EggBonus startBonus = GetBonusMode();
 
         int maxEgg = MaxEgg();

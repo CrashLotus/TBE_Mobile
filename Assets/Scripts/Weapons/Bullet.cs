@@ -14,12 +14,19 @@ public class Bullet : PooledObject
     static List<Bullet> s_theList = new List<Bullet>();
     protected Vector3 m_vel;
     protected Vector3 m_dir;
+    protected float m_curSpeed;
     Renderer m_renderer;
 
     public void WarmUp()
     {
         if (null != m_impactPow)
             ObjectPool.GetPool(m_impactPow, 32);
+    }
+
+    public override void Init(ObjectPool pool)
+    {
+        base.Init(pool);
+        m_curSpeed = m_speed;
     }
 
     protected virtual void Start()
@@ -31,7 +38,7 @@ public class Bullet : PooledObject
     {
         m_dir = dir;
         transform.eulerAngles = new Vector3(0.0f, 0.0f, Mathf.Rad2Deg * Mathf.Atan2(dir.y, dir.x));
-        m_vel = m_dir * m_speed;
+        m_vel = m_dir * m_curSpeed;
     }
 
     // Update is called once per frame

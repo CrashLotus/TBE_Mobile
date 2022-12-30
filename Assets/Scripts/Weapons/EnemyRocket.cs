@@ -67,7 +67,7 @@ public class EnemyRocket : Bullet, IHitPoints
             ang = Mathf.Clamp(ang, -m_turnSpd * dt, m_turnSpd * dt);
             rot += ang;
             transform.localEulerAngles = new Vector3(0.0f, 0.0f, Mathf.Rad2Deg * rot);
-            m_vel = m_speed * new Vector3(Mathf.Cos(rot), Mathf.Sin(rot), 0.0f);
+            m_vel = m_curSpeed * new Vector3(Mathf.Cos(rot), Mathf.Sin(rot), 0.0f);
         }
 
         base.Update();
