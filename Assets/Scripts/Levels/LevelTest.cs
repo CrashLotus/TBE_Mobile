@@ -37,6 +37,8 @@ public class LevelTest : MonoBehaviour
             yield return null;
         }
         // all done
+        if (level.IsAbort())
+            yield break;
         GameManager.Get().StageClear();
     }
 }

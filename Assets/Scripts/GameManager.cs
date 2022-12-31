@@ -129,10 +129,6 @@ public class GameManager : MonoBehaviour
         NextHint();
         GameUI.Get().SetHint(m_hintText);
 
-        // wait for all the eggs to hit the lava
-        while (Egg.GetCount() > 0)
-            yield return null;
-
         // wait for the user to watch the ad - or not
         if (showAd)
         {
@@ -147,6 +143,10 @@ public class GameManager : MonoBehaviour
             ChangeState(State.GAME_ON);
             yield break;
         }
+
+        // wait for all the eggs to hit the lava
+        while (Egg.GetCount() > 0)
+            yield return null;
 
         // and then wait 2 more seconds
         yield return new WaitForSecondsRealtime(2.0f);

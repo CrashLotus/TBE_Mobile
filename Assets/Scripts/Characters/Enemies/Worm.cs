@@ -168,8 +168,8 @@ public class Worm : WormSection
         foreach (WormSection section in m_sections)
         {
             section.Free();
-            m_sections.Clear();
         }
+        m_sections.Clear();
         Free();
     }
 
