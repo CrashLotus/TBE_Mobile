@@ -203,6 +203,15 @@ public class EnemyBird : Bird, IHitPoints
                         move = delta;
                         move.y *= m_vertSpeed / m_horizSpeed;
                     }
+
+                    float avoidLava = pos.y - GameManager.Get().GetLavaHeight();
+                    avoidLava = s_riseHeight - avoidLava;
+                    Debug.Log("avoidLava = " + avoidLava);
+                    if (avoidLava > 0.0f)
+                    {
+                        avoidLava = avoidLava / s_riseHeight;
+                        move.y += m_vertSpeed * avoidLava * dt;
+                    }
                 }
             }
 
