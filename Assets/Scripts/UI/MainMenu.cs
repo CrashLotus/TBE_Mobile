@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     public GameObject m_optionsMenu;
-    public GameObject m_dialogBox;
+    public DialogBox m_dialogBox;
     public GameObject m_continueGame;
     public Sound m_menuSelect;
     public Sound m_startGameSound;
@@ -60,7 +60,7 @@ public class MainMenu : MonoBehaviour
         }
         else
         {
-            m_dialogBox.SetActive(true);
+            m_dialogBox.ShowDialog("Creating a new game will erase your current progress.\n\nDo you want to start a new game?", OnNewGameYes, null);
         }
     }
     public void OnContinueGame()
@@ -95,6 +95,12 @@ public class MainMenu : MonoBehaviour
 
     public void OnResetSave()
     {
+        m_dialogBox.ShowDialog("This will erase your current save.\n\nAll upgrades and Time Crystals will be removed.", DoResetSave, null);
+    }
+
+    void DoResetSave()
+    {
+        Debug.Log("DoResetSave()");
         SaveData.Get().Reset();
     }
 
@@ -102,10 +108,5 @@ public class MainMenu : MonoBehaviour
     {
         GameManager.Get().OnNewGame();
         m_startGameSound.Play();
-    }
-
-    public void OnNewGameNo()
-    {
-        m_dialogBox.SetActive(false);
     }
 }
