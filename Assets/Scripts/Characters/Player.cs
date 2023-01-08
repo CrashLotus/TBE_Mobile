@@ -257,6 +257,16 @@ public class Player : Bird, IHitPoints
         return EggBonus.NONE;
     }
 
+    public static int GetEggMagnetLevel()
+    {
+        SaveData data = SaveData.Get();
+        if (data.HasUpgrade("EGGMAGNET2"))
+            return 2;
+        if (data.HasUpgrade("EGGMAGNET1"))
+            return 1;
+        return 0;
+    }
+
     public static void AddScore(int score)
     {
         int oldScore = s_score;

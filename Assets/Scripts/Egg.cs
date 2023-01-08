@@ -5,6 +5,7 @@ using UnityEngine;
 public class Egg : PickUp
 {
     public Sprite[] m_sprites;
+    public SpriteRenderer m_magnet;
 
     static ObjectPool s_eggPool;
     static List<Egg> s_theList = new List<Egg>();
@@ -14,7 +15,6 @@ public class Egg : PickUp
     static readonly Vector2 s_magnetOffset = new Vector2(85.0f, 87.5f);
 
     int m_power;
-    //mrwTODO add magnet sprite
     float m_magnetPower = 0.0f;
 
     public static void MakeEggPool()
@@ -87,33 +87,43 @@ public class Egg : PickUp
         if (State.FLY_TO_HUD != m_state)
         {
             m_magnetPower = 0.0f;
-            //mrwTODO
-//            Vector3 pos = transform.position;
-            //            float dt = Time.deltaTime;
-            //            Player player = Player.Get();
-            //if (null != player)
-            //{
-            //    int magnetLevel = Player.GetEggMagnetLevel();
-            //    if (magnetLevel > 0)
-            //    {
-            //        float[] s_magnetRange = { 0.0f, 200.0f, 400.0f };
-            //        float[] s_magnetPower = { 0.0f, 500.0f, 1000.0f };
-            //        Vector2 delta = m_pos - player.GetPos();
-            //        float dist = delta.Length();
-            //        if (dist < s_magnetRange[magnetLevel] && dist > 1.0f)
-            //        {
-            //            m_magnetPower = 1.0f - dist / s_magnetRange[magnetLevel];
-            //            float magnetSpd = m_magnetPower * s_magnetPower[magnetLevel];
-            //            float damp = m_magnetPower * 0.05f * dt * 60.0f;
-            //            m_vel -= m_vel * damp;
-            //            m_vel -= magnetSpd * delta / dist * dt;
-            //        }
-            //    }
-            //}
-//            transform.position = pos;
+            Vector3 pos = transform.position;
+            float dt = Time.deltaTime;
+            Player player = Player.Get();
+            if (null != player)
+            {
+                Vector3 delta = pos - player.transform.position;
+                int magnetLevel = Player.GetEggMagnetLevel();
+                if (magnetLevel > 0)
+                {
+                    float[] s_magnetRange = { 0.0f, 3.0f, 5.0f };
+                    float[] s_magnetPower = { 0.0f, 5.0f, 7.0f };
+                    float dist = delta.magnitude;
+                    if (dist < s_magnetRange[magnetLevel] && dist > 0.01f)
+                    {
+                        m_magnetPower = 1.0f - dist / s_magnetRange[magnetLevel];
+                        float magnetSpd = m_magnetPower * s_magnetPower[magnetLevel];
+                        float damp = m_magnetPower * 0.05f * dt * 60.0f;
+                        m_vel -= m_vel * damp;
+                        m_vel -= magnetSpd * delta / dist * dt;
+                    }
+                }
+                if (null != m_magnet)
+                {
+                    if (m_magnetPower > 0.0f)
+                    {
+                        m_magnet.gameObject.SetActive(true);
+                        m_magnet.color = new Color(1.0f, 1.0f, 1.0f, 2.0f * m_magnetPower);
+                        m_magnet.flipX = delta.x > 0.0f;
+                    }
+                    else
+                    {
+                        m_magnet.gameObject.SetActive(false);
+                    }
+                }
+            }
+            transform.position = pos;
         }
-
-        //m_magnet.Update(dt);
     }
 
     protected override void UpdateFlyToHud(float dt)
@@ -185,6 +195,13 @@ public class Egg : PickUp
     override public void Init(ObjectPool pool)
     {
         base.Init(pool);
+        if (null != m_magnet)
+        {
+            Animator anim = m_magnet.GetComponent<Animator>();
+            if (null != anim)
+                anim.speed = Random.Range(0.5f, 2.0f);
+            m_magnet.gameObject.SetActive(false);
+        }
         m_magnetPower = 0.0f;
     }
 

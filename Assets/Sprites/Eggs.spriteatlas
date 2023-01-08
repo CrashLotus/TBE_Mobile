@@ -38,54 +38,86 @@ SpriteAtlas:
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 7016fe10023fd114ea17723ce325f5ae, type: 3}
   - {fileID: 21300000, guid: 1c02e7600fb2ef8468b80694a6a005fd, type: 3}
   - {fileID: 21300000, guid: 5ca32c51183c3c2459331b6e42810ab0, type: 3}
   - {fileID: 21300000, guid: 9fe5738175c95cd4ca727c0ad6ae3621, type: 3}
   - {fileID: 21300000, guid: 6a8136810b05d284c8efe6ea270c5410, type: 3}
   - {fileID: 21300000, guid: bd1dea81f0f7c32419ad82d690b6279f, type: 3}
   - {fileID: 21300000, guid: 0fee9cc10c7b6374d80efb1b61df1da7, type: 3}
+  - {fileID: 21300000, guid: 118aa72286831ff42a4b79d303488532, type: 3}
   - {fileID: 21300000, guid: ede51332b9bc25448825d6128e2cc896, type: 3}
+  - {fileID: 21300000, guid: b0e34b321b7d5fe4f8419f5bd288428d, type: 3}
+  - {fileID: 21300000, guid: 37524fa213eb6594ab37d3147cebbbe6, type: 3}
+  - {fileID: 21300000, guid: e7870923983ede14eb133f8344505b26, type: 3}
+  - {fileID: 21300000, guid: f1818ca5176884c43ba1a52c49ddf138, type: 3}
   - {fileID: 21300000, guid: 41ef1286283114b43bb0becfe06ca074, type: 3}
+  - {fileID: 21300000, guid: 0eb3b4b69d3501f4f942b2ee9e9450b6, type: 3}
   - {fileID: 21300000, guid: 82386277e3d8be942b77fe2e3f176bff, type: 3}
   - {fileID: 21300000, guid: 734571e7dbb5cf040bbe3a279a138c59, type: 3}
+  - {fileID: 21300000, guid: 191ad208195912d4e9f2fe98db36f034, type: 3}
+  - {fileID: 21300000, guid: 3ea29d284c2012f41887319e84b7222e, type: 3}
   - {fileID: 21300000, guid: 51c9e3794d26c7f439cefe03f2d70a81, type: 3}
   - {fileID: 21300000, guid: 6186f299f4a01f54090ac02642663765, type: 3}
   - {fileID: 21300000, guid: 2feacd0a786ec494da56f76b8d480211, type: 3}
+  - {fileID: 21300000, guid: 58b9ae2a6e1b75747acd99ae8e892439, type: 3}
+  - {fileID: 21300000, guid: 64a0389aebc82b843980ae955f6c83f9, type: 3}
   - {fileID: 21300000, guid: b3c309daf6c431d4fa0288ac79bc6641, type: 3}
+  - {fileID: 21300000, guid: b232b0ea554be2749b9c939b5695ee63, type: 3}
   - {fileID: 21300000, guid: 71ae260ba6883144780d5d851c718296, type: 3}
+  - {fileID: 21300000, guid: c3ea512c101081744b169fe5dbf577d1, type: 3}
   - {fileID: 21300000, guid: 982a89ace3322d04c91807b6816d02f3, type: 3}
+  - {fileID: 21300000, guid: 9b99eedc370962c43842f105f43ce52e, type: 3}
   - {fileID: 21300000, guid: 9703c1ecbf686f044bf1297fa3390a96, type: 3}
   - {fileID: 21300000, guid: 5c9820fc61cabd243aef33532e20b90a, type: 3}
+  - {fileID: 21300000, guid: 381a401df7ca9054cbf3307dc1d5f424, type: 3}
   - {fileID: 21300000, guid: d9350d9df12be9b47ad0b2dcc5491b3b, type: 3}
   - {fileID: 21300000, guid: c67d4e0ebd86eac4e8aded94c1b0b2ae, type: 3}
   - {fileID: 21300000, guid: e83eec8e759d05f488ea1900d7fecda4, type: 3}
   - {fileID: 21300000, guid: 717cd7ced38987845b9394dd6dfb45e4, type: 3}
   - {fileID: 21300000, guid: 006f3f8f0cc23d441b6be5d093d8ed45, type: 3}
+  - {fileID: 21300000, guid: ce58349fab011284580b3683b33ec808, type: 3}
   - {fileID: 21300000, guid: 7ea396ff58891214d83d0f0240775412, type: 3}
   m_PackedSpriteNamesToIndex:
+  - Egg_magnet_Pull0015
   - Gold_Egg0002
   - Egg_Empty
   - Silver_Egg0006
   - Gold_Egg0008
   - Egg_1
   - Gold_Egg0003
+  - Egg_magnet_Pull0003
   - Gold_Egg0010
+  - Egg_magnet_Pull0012
+  - Egg_magnet_Pull0004
+  - Egg_magnet_Pull0009
+  - Egg_magnet_Pull0016
   - Gold_Egg0001
+  - Egg_magnet_Pull0001
   - Silver_Egg0004
   - Silver_Egg0009
+  - Egg_magnet_Pull0013
+  - Egg_magnet_Pull0002
   - Egg_2
   - Gold_Egg0006
   - Silver_Egg0008
+  - Egg_magnet_Pull0011
+  - Egg_magnet_Pull0010
   - Silver_Egg0010
+  - Egg_magnet_Pull0005
   - Silver_Egg0005
+  - Egg_magnet_Pull0014
   - Egg_3
+  - Egg_magnet_Pull0006
   - Silver_Egg0003
   - Silver_Egg0007
+  - Egg_magnet_Pull0008
   - Silver_Egg0002
   - Gold_Egg0007
   - Gold_Egg0004
   - Gold_Egg0005
   - Silver_Egg0001
+  - Egg_magnet_Pull0007
   - Gold_Egg0009
   m_RenderDataMap: {}
   m_Tag: Eggs

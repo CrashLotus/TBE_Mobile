@@ -5,3 +5,5 @@ Multishot
 EggShield
 Missile
 Missile2
+Magnet1
+Magnet2
