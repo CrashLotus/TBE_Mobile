@@ -30,7 +30,7 @@ public class Missile : Bullet
 
     protected override void Update()
     {
-        float dt = Time.deltaTime;
+        float dt = Time.unscaledDeltaTime;
         m_timer -= dt;
         if (m_timer <= 0.0f)
         {

@@ -45,7 +45,7 @@ public class Player : Bird, IHitPoints
     static Player s_thePlayer;
     static int s_score = 0;
     static readonly Vector2[] s_hitShake =
-{
+    {
         new Vector2(2.0f, 0.3f),
         new Vector2(4.0f, 0.3f),
         new Vector2(10.0f, 0.4f),
@@ -93,7 +93,7 @@ public class Player : Bird, IHitPoints
     // Update is called once per frame
     protected override void Update()
     {
-        float dt = Time.deltaTime;
+        float dt = Time.unscaledDeltaTime;
         Vector3 pos = transform.position;
 
         // Input
@@ -103,6 +103,9 @@ public class Player : Bird, IHitPoints
 
         bool fireMissile = m_missileButton.IsButtonPress();
         fireMissile |= Input.GetKeyDown(KeyCode.Tab);
+
+        bool timeWarp = false;  //mrwTODO
+        timeWarp |= Input.GetKeyDown(KeyCode.BackQuote);
 
         // update velocity
         Vector3 vel = Vector3.zero;
@@ -159,6 +162,15 @@ public class Player : Bird, IHitPoints
         // fire the missile
         if (fireMissile)
             m_missileWeapon.HitTrigger();
+
+        if (true)   //mrwTODO TimeWarpBar.IsFull()
+        {
+            if (timeWarp)
+            {
+                BulletTime.Begin();
+                //mrwTODO TimeWarpBar.Empty();
+            }
+        }
 
         base.Update();
     }

@@ -10,6 +10,7 @@ public class Bullet : PooledObject
     public IHitPoints.HitType m_hitType = IHitPoints.HitType.BULLET;
     public GameObject m_impactPow;
     public Sound m_impactSound;
+    public bool m_isPlayerBullet = false;
 
     static List<Bullet> s_theList = new List<Bullet>();
     protected Vector3 m_vel;
@@ -44,8 +45,9 @@ public class Bullet : PooledObject
     // Update is called once per frame
     protected virtual void Update()
     {
+        float dt = m_isPlayerBullet ? Time.unscaledDeltaTime : Time.deltaTime;
         Vector3 pos = transform.position;
-        pos += m_vel * Time.deltaTime;
+        pos += m_vel * dt;
         transform.position = pos;
 
         if (null != m_renderer)

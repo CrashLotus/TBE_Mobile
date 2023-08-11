@@ -177,7 +177,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: bd6ea4ae69f05a741b0d902ba6a4879a, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -233,6 +233,7 @@ MonoBehaviour:
   m_fireDelay: 0.25
   m_recoil: 8
   m_fireSound: {fileID: 11400000, guid: 04f2bdef1e0215b4a93b58c45dd326e1, type: 2}
+  m_isPlayerWeapon: 1
   m_powerBullet: {fileID: 5540659085790315851, guid: 9c4a44bb80730d744b3fc71d65332097, type: 3}
   m_powerSound: {fileID: 11400000, guid: 6331f47c5cf9818468f43c61dc016357, type: 2}
 --- !u!1001 &2403427821568228908
@@ -242,6 +243,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 25891693911960356}
     m_Modifications:
+    - target: {fileID: 3721663255088211693, guid: d235be0e709e1254eaf0b5420358007c, type: 3}
+      propertyPath: m_UpdateMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7285595070044334257, guid: d235be0e709e1254eaf0b5420358007c, type: 3}
       propertyPath: m_Name
       value: EggShield
@@ -312,6 +317,14 @@ PrefabInstance:
     - target: {fileID: 1904584894996223520, guid: b30aea605244f9642b0383e8c8ffba74, type: 3}
       propertyPath: m_Name
       value: MissileLauncher
+      objectReference: {fileID: 0}
+    - target: {fileID: 2116170919180016666, guid: b30aea605244f9642b0383e8c8ffba74, type: 3}
+      propertyPath: m_isPlayerWeapon
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4736387004037792689, guid: b30aea605244f9642b0383e8c8ffba74, type: 3}
+      propertyPath: m_UpdateMode
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6541226392870492966, guid: b30aea605244f9642b0383e8c8ffba74, type: 3}
       propertyPath: m_RootOrder

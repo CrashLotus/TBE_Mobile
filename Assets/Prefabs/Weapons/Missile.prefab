@@ -99,7 +99,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: d371055fedb02f940b3b2ac7bfd3ace0, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -125,6 +125,7 @@ MonoBehaviour:
   m_hitType: 2
   m_impactPow: {fileID: 0}
   m_impactSound: {fileID: 0}
+  m_isPlayerBullet: 1
 --- !u!1 &8389658917882492355
 GameObject:
   m_ObjectHideFlags: 0

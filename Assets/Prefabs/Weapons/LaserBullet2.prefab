@@ -105,6 +105,7 @@ MonoBehaviour:
   m_hitType: 1
   m_impactPow: {fileID: 6780026397869737092, guid: a012f3f5b6e12f741b9864c1ed05c36c, type: 3}
   m_impactSound: {fileID: 11400000, guid: cb136753d77be8b43a7364efcf3c2e8e, type: 2}
+  m_isPlayerBullet: 1
 --- !u!58 &1975991465654109600
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -133,7 +134,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 6b7595dd192ae314ebfe5bc274977b5d, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0

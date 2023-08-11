@@ -38,10 +38,14 @@ SpriteAtlas:
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 33b8ded0c943de94fa563de1f160db0f, type: 3}
+  - {fileID: 21300000, guid: 3ad13e21b9fbf50469c80a2e3c9f4f40, type: 3}
   - {fileID: 21300000, guid: e10c5d51a8d58414fbbf01dca7f6e0aa, type: 3}
+  - {fileID: 21300000, guid: a27972d1e47ddea47b050a1155fab79b, type: 3}
   - {fileID: 21300000, guid: b85cb2623946a2e4bb10b9c8e9441632, type: 3}
   - {fileID: 21300000, guid: f9a7fc2389f2f7a41809ac9cb5716f59, type: 3}
   - {fileID: 21300000, guid: 02511a43419ee324aa2216709eb3913d, type: 3}
+  - {fileID: 21300000, guid: e5920353ea72822439c122b5687fa3a6, type: 3}
   - {fileID: 21300000, guid: 87172f730bc57644aaf0c1290d2fae83, type: 3}
   - {fileID: 21300000, guid: 2a42cf737fd556048bd9c3cd7d5d52f0, type: 3}
   - {fileID: 21300000, guid: d39ca9a3a76489a409ea11d32a54f684, type: 3}
@@ -62,10 +66,14 @@ SpriteAtlas:
   - {fileID: 21300000, guid: accee0eed12ed9b479db9e807789d21e, type: 3}
   - {fileID: -736876375, guid: 3218180f0c46c1d449595e77ac52cf3c, type: 3}
   m_PackedSpriteNamesToIndex:
+  - TimeWarp
+  - Icon_TimeWarp
   - Missile1
+  - Icon_TimeWarp2
   - EggMagnet1
   - EggShield
   - Icon_Aim
+  - TimeWarp2
   - TripleShot
   - EggMagnet2
   - Icon_Check

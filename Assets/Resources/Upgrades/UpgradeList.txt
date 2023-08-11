@@ -5,5 +5,7 @@ Multishot
 EggShield
 Missile
 Missile2
+TimeWarp
+TimeWarp2
 Magnet1
 Magnet2

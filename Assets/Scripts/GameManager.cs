@@ -206,6 +206,7 @@ public class GameManager : MonoBehaviour
         }
         // Boot Strap
         PurchaseManager.Get();
+        BulletTime.Get();
         UpdateScreenBounds();
         SoundInstance.WarmUp();
         Egg.MakeEggPool();

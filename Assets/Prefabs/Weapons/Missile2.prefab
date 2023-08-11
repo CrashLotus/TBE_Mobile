@@ -105,6 +105,7 @@ MonoBehaviour:
   m_hitType: 2
   m_impactPow: {fileID: 0}
   m_impactSound: {fileID: 0}
+  m_isPlayerBullet: 1
 --- !u!95 &6522558422338288737
 Animator:
   serializedVersion: 4
@@ -117,7 +118,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: ab10e2f88c52420418f4cec7d680461e, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0

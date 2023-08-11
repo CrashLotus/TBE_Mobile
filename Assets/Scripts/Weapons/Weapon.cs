@@ -8,6 +8,7 @@ public class Weapon : MonoBehaviour
     public float m_fireDelay = 0.25f;   //time between bullets (in seconds)
     public float m_recoil = 8.0f;
     public Sound m_fireSound;
+    public bool m_isPlayerWeapon = false;
 
     protected float m_fireTimer;        //countdown timer for next bullet
     protected bool m_triggerHold;
@@ -58,7 +59,7 @@ public class Weapon : MonoBehaviour
 
     public virtual void Update()
     {
-        float dt = Time.deltaTime;
+        float dt = m_isPlayerWeapon? Time.unscaledDeltaTime : Time.deltaTime;
 
         m_fireTimer -= dt;
         while (m_fireTimer < 0.0f)
