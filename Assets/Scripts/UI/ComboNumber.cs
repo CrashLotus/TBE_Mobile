@@ -37,7 +37,6 @@ public class ComboNumber : PooledObject
                 if (null != textMesh)
                 {
                     Vector2 screenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, worldPos);
-                    Debug.Log(screenPos);
                     textMesh.rectTransform.anchoredPosition = textMesh.transform.InverseTransformPoint(screenPos);
                     StringBuilder sb = new StringBuilder("+", 3);
                     sb.Append(number);

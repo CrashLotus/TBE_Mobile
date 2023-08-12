@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class TimeWarpBar : MonoBehaviour
 {
+    public Sound m_soundFill;
+
     Slider m_slider;
     TextMeshProUGUI m_combo;
     float m_value = 0.0f;
@@ -64,7 +66,8 @@ public class TimeWarpBar : MonoBehaviour
             m_color = Color.Lerp(s_color, s_flashColor, lerp);
             if (false == wasFull)
             {
-//                AudioComponent.Get().PlaySound("TimeWarpBarFill");    //mrwTODO
+                if (null != m_soundFill)
+                    m_soundFill.Play();
                 m_pulseTimer = 0.0f;
 //                m_sparkAnim.Reset();  //mrwTODO
             }

@@ -21,9 +21,17 @@ public class BulletTime : MonoBehaviour
     public static BulletTime Get()
     {
         if (null == s_theManager)
-        {   // just add this as a component to the existing GameManager object
-            GameManager gm = GameManager.Get();
-            s_theManager = gm.gameObject.AddComponent<BulletTime>();
+        {
+            GameObject timeObj = Resources.Load<GameObject>("BulletTime");
+            if (null == timeObj)
+            {
+                Debug.LogError("Unable to load BulletTime prefab");
+                return null;
+            }
+            GameObject newObj = Instantiate(timeObj);
+            newObj.name = "BulletTime";
+            DontDestroyOnLoad(newObj);
+            s_theManager = newObj.GetComponent<BulletTime>();
             s_theManager.Initialize();
         }
         return s_theManager;

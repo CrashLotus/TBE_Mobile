@@ -186,6 +186,9 @@ public class Player : Bird, IHitPoints
                 m_comboTimer += s_comboCountDown;
         }
 
+//        if (Input.GetKeyDown(KeyCode.P))
+//            ComboKill(transform.position);
+
         base.Update();
     }
 
