@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameUI : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class GameUI : MonoBehaviour
     public GameObject m_fireButtonSingle;
     public GameObject m_fireButtonSplit;
     public TutorialUI m_tutorial;
+    public GameObject m_timeBar;
 
     Joystick m_joystick;
 
@@ -45,6 +47,11 @@ public class GameUI : MonoBehaviour
         }
         if (null != m_tutorial)
             m_tutorial.gameObject.SetActive(false);
+        if (null != m_timeBar)
+        {
+            int bt = BulletTime.GetBulletTimeLevel();
+            m_timeBar.SetActive(bt >= 0);
+        }
         UpdateOptions();
     }
 
@@ -174,5 +181,15 @@ public class GameUI : MonoBehaviour
             rect.anchorMin = rect.anchorMax = viewPos;
             m_tutorial.SetText(tutorial);
         }
+    }
+
+    public bool IsTimeBarFull()
+    {
+        return false;
+    }
+
+    public void EmptyTimeBar()
+    {
+
     }
 }

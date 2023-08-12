@@ -95,6 +95,16 @@ public class Bullet : PooledObject
         Bird bird = other.GetComponent<Bird>();
         if (null != bird)
             bird.Push(m_vel * m_force);
+        if (m_isPlayerBullet)
+        {
+            if (damageReturn == IHitPoints.DamageReturn.KILLED)
+            {
+                if (m_hitType == IHitPoints.HitType.BULLET || m_hitType == IHitPoints.HitType.LASER)
+                {
+                    Player.ComboKill(other.transform.position);
+                }
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

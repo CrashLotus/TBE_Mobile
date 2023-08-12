@@ -15,6 +15,7 @@ public class BulletTime : MonoBehaviour
     const float s_bulletTimeRamp = 0.5f;
     static float[] s_timeWarpFactor = { 0.1f, 0.05f };
     static float[] s_timeWarpTime = { 3.0f, 5.0f };
+    public const int s_timeWarpPoints = 200;
 
 
     public static BulletTime Get()
@@ -57,16 +58,15 @@ public class BulletTime : MonoBehaviour
         Time.timeScale = bulletTime;
     }
 
-    public static void Begin()
+    public void Begin()
     {
-        BulletTime bt = Get();
         int bulletTimeLevel = GetBulletTimeLevel();
         if (bulletTimeLevel >= 0)
         {
-            bt.m_bulletTimeFactor = s_timeWarpFactor[bulletTimeLevel];
-            bt.m_bulletTimeTimer = s_timeWarpTime[bulletTimeLevel];
-            if (null != bt.m_timeWarpBegin)
-                bt.m_timeWarpBegin.Play();
+            m_bulletTimeFactor = s_timeWarpFactor[bulletTimeLevel];
+            m_bulletTimeTimer = s_timeWarpTime[bulletTimeLevel];
+            if (null != m_timeWarpBegin)
+                m_timeWarpBegin.Play();
         }
     }
 
@@ -80,5 +80,35 @@ public class BulletTime : MonoBehaviour
             return 0;
         }
         return -1;
+    }
+
+    public bool IsReady()
+    {
+        if (GetBulletTimeLevel() >= 0)
+            return SaveData.Get().GetTimeWarp() >= s_timeWarpPoints;
+        return false;
+    }
+
+    public int GetTimeBarValue()
+    {
+        if (GetBulletTimeLevel() >= 0)
+            return SaveData.Get().GetTimeWarp();
+        return 0;
+    }
+
+    public void AddPoints(int points)
+    {
+        SaveData data = SaveData.Get();
+        int timePoints = data.GetTimeWarp();
+        timePoints += points;
+        if (timePoints > s_timeWarpPoints)
+            timePoints = s_timeWarpPoints;
+        data.SetTimeWarp(timePoints);
+    }
+
+    public void Empty()
+    {
+        SaveData data = SaveData.Get();
+        data.SetTimeWarp(0);
     }
 }

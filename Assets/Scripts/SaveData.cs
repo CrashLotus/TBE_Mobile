@@ -14,6 +14,7 @@ public class SaveData
         public int m_currentLevel = 0;
         public int m_playerHP = Player.s_startingHP;
         public int m_timeCrystals = 0;
+        public int m_timeWarp = 0;
         public List<string> m_upgrades = new List<string>();
         public List<string> m_tutorial = new List<string>();
     }
@@ -131,6 +132,17 @@ public class SaveData
     public void SetPlayerHP(int hp)
     {
         m_data.m_playerHP = hp;
+        Save();
+    }
+
+    public int GetTimeWarp()
+    {
+        return m_data.m_timeWarp;
+    }
+
+    public void SetTimeWarp(int points)
+    {
+        m_data.m_timeWarp = points;
         Save();
     }
 }

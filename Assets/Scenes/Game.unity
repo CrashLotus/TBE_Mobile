@@ -732,6 +732,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7389636558173448859}
     - target: {fileID: 25891693911960411, guid: 701238fa9ce28b0489fa5acd08b1589a, type: 3}
+      propertyPath: m_timeButton
+      value: 
+      objectReference: {fileID: 7389636558173448861}
+    - target: {fileID: 25891693911960411, guid: 701238fa9ce28b0489fa5acd08b1589a, type: 3}
       propertyPath: m_missileButton
       value: 
       objectReference: {fileID: 7389636558173448860}
@@ -744,10 +748,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 778742627}
     m_Modifications:
+    - target: {fileID: 2404641052227741616, guid: e21f56918989b3047b40ae7fbf94ce60, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2404641052227741616, guid: e21f56918989b3047b40ae7fbf94ce60, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3062004253087996193, guid: e21f56918989b3047b40ae7fbf94ce60, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4899773588630436461, guid: e21f56918989b3047b40ae7fbf94ce60, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1667665205}
+    - target: {fileID: 6095779053887827326, guid: e21f56918989b3047b40ae7fbf94ce60, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7389636558133790601, guid: e21f56918989b3047b40ae7fbf94ce60, type: 3}
       propertyPath: m_Name
       value: GameHUD
@@ -852,6 +872,17 @@ MonoBehaviour:
 --- !u!114 &7389636558173448860 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4577412616775826736, guid: e21f56918989b3047b40ae7fbf94ce60, type: 3}
+  m_PrefabInstance: {fileID: 7389636558173448858}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29fa5d27ffb44af47b3ed471127f521b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7389636558173448861 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3077984521185094195, guid: e21f56918989b3047b40ae7fbf94ce60, type: 3}
   m_PrefabInstance: {fileID: 7389636558173448858}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

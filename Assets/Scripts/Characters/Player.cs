@@ -22,6 +22,7 @@ public class Player : Bird, IHitPoints
     public SimpleButton m_fireRight;
     public Weapon m_missileWeapon;
     public SimpleButton m_missileButton;
+    public SimpleButton m_timeButton;
     public GameObject m_eggShield;
     public float m_topBoundary = 0.94f;
     public float m_bottomBoundary = 0.16f;
@@ -38,6 +39,8 @@ public class Player : Bird, IHitPoints
     bool m_fireLaserOld = false;
     bool m_isEggShieldOn = false;
     Animator m_eggShieldAnim;
+    float m_comboTimer = 0.0f;
+    int m_comboPoints = 0;
 
     const int s_maxEggStart = 10;
     public const int s_startingHP = 3;
@@ -50,6 +53,8 @@ public class Player : Bird, IHitPoints
         new Vector2(4.0f, 0.3f),
         new Vector2(10.0f, 0.4f),
     };
+    const float s_comboDelay = 1.5f;        // kill a guy every 1.5 seconds to keep combo running
+    const float s_comboCountDown = 0.25f;   // if you don't, they'll tick down every 1/4 second
 
     public static Player Get()
     {
@@ -87,6 +92,7 @@ public class Player : Bird, IHitPoints
             else
                 m_missileButton.gameObject.SetActive(false);
         }
+
         s_thePlayer = this;
     }
 
@@ -104,7 +110,7 @@ public class Player : Bird, IHitPoints
         bool fireMissile = m_missileButton.IsButtonPress();
         fireMissile |= Input.GetKeyDown(KeyCode.Tab);
 
-        bool timeWarp = false;  //mrwTODO
+        bool timeWarp = m_timeButton.IsButtonPress();
         timeWarp |= Input.GetKeyDown(KeyCode.BackQuote);
 
         // update velocity
@@ -163,13 +169,21 @@ public class Player : Bird, IHitPoints
         if (fireMissile)
             m_missileWeapon.HitTrigger();
 
-        if (true)   //mrwTODO TimeWarpBar.IsFull()
+        BulletTime bt = BulletTime.Get();
+        if (bt.IsReady() && timeWarp)
         {
-            if (timeWarp)
-            {
-                BulletTime.Begin();
-                //mrwTODO TimeWarpBar.Empty();
-            }
+            bt.Begin();
+            bt.Empty();
+        }
+
+        m_comboTimer -= dt;
+        if (m_comboTimer <= 0.0f)
+        {
+            --m_comboPoints;
+            if (m_comboPoints < 0)
+                m_comboPoints = 0;
+            else
+                m_comboTimer += s_comboCountDown;
         }
 
         base.Update();
@@ -193,13 +207,11 @@ public class Player : Bird, IHitPoints
         int shake = Mathf.Min((int)damage, s_hitShake.Length - 1);
         FollowCamera.Shake(s_hitShake[shake].x, s_hitShake[shake].y);
 
-#if false
         m_comboTimer = 0.0f;
         m_comboPoints = 0;
 
 #if CHEAT_INVULNERABLE
         return IHitPoints.DamageReturn.NO_DAMAGE;
-#endif
 #endif
 
         EggBonus startBonus = GetBonusMode();
@@ -383,5 +395,32 @@ public class Player : Bird, IHitPoints
     void Explode()
     {
         //mrwTODO nothing for now
+    }
+
+    public static void ComboKill(Vector3 pos)
+    {
+        SaveData data = SaveData.Get();
+        if (data.HasUpgrade("BULLETTIME"))
+        {
+            Player player = Player.Get();
+            if (null != player)
+            {
+                if (player.m_comboPoints > 0)
+                {
+                    ComboNumber.Spawn(pos, GetComboPoints());
+                    BulletTime.Get().AddPoints(Mathf.Min(player.m_comboPoints, 10));
+                }
+                ++player.m_comboPoints;
+                player.m_comboTimer = s_comboDelay;
+            }
+        }
+    }
+
+    public static int GetComboPoints()
+    {
+        Player player = Player.Get();
+        if (null != player)
+            return player.m_comboPoints;
+        return 0;
     }
 }

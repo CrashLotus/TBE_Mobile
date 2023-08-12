@@ -155,7 +155,7 @@ public class EnemyBird : Bird, IHitPoints
 
         if (m_invTimer > 0.0f)
         {
-            m_invTimer -= dt;
+            m_invTimer -= Time.unscaledDeltaTime;
             if (m_invTimer <= 0.0f)
             {
                 m_invTimer = 0.0f;
