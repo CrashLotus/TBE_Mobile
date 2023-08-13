@@ -118,6 +118,7 @@ MonoBehaviour:
   m_fireRight: {fileID: 0}
   m_missileWeapon: {fileID: 4212318836659544078}
   m_missileButton: {fileID: 0}
+  m_timeButton: {fileID: 0}
   m_eggShield: {fileID: 4918232897406178973}
   m_topBoundary: 0.94
   m_bottomBoundary: 0.18
@@ -243,10 +244,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 25891693911960356}
     m_Modifications:
-    - target: {fileID: 3721663255088211693, guid: d235be0e709e1254eaf0b5420358007c, type: 3}
-      propertyPath: m_UpdateMode
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 7285595070044334257, guid: d235be0e709e1254eaf0b5420358007c, type: 3}
       propertyPath: m_Name
       value: EggShield
@@ -321,10 +318,6 @@ PrefabInstance:
     - target: {fileID: 2116170919180016666, guid: b30aea605244f9642b0383e8c8ffba74, type: 3}
       propertyPath: m_isPlayerWeapon
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4736387004037792689, guid: b30aea605244f9642b0383e8c8ffba74, type: 3}
-      propertyPath: m_UpdateMode
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6541226392870492966, guid: b30aea605244f9642b0383e8c8ffba74, type: 3}
       propertyPath: m_RootOrder

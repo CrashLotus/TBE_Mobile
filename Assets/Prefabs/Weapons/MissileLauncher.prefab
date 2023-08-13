@@ -47,7 +47,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 2461ee95a4a61614abe326d65c9b9545, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -71,6 +71,7 @@ MonoBehaviour:
   m_fireDelay: 5
   m_recoil: 8
   m_fireSound: {fileID: 11400000, guid: 8ff917ca6568802468ec9484409d9bd8, type: 2}
+  m_isPlayerWeapon: 0
   m_failSound: {fileID: 11400000, guid: 72d1b41c76f6f7943a8c2d8a96470ebc, type: 2}
   m_missileAppearSound: {fileID: 11400000, guid: e303f32d431b61842a3922d11878a747, type: 2}
   m_missile2AppearSound: {fileID: 11400000, guid: fff05e84a0807934c8c1eb0084060ff1, type: 2}
