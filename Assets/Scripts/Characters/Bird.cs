@@ -54,7 +54,11 @@ public class Bird : PooledObject
 
         if (null != m_anim)
         {
-            if (m_anim.GetCurrentAnimatorStateInfo(0).IsName("Fly"))
+            if (dt <= 0.0f)
+            {
+                m_anim.speed = 0.0f;
+            }
+            else if (m_anim.GetCurrentAnimatorStateInfo(0).IsName("Fly"))
             {
                 if (dt > 0.0f)
                 {

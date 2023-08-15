@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7619707803025125811}
   - component: {fileID: 263169852663596723}
   - component: {fileID: 3721663255088211693}
+  - component: {fileID: 1450037757182858447}
   m_Layer: 0
   m_Name: EggShield
   m_TagString: Untagged
@@ -105,3 +106,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1450037757182858447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7285595070044334257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c36f72b211554e46925c8757d4b61ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
