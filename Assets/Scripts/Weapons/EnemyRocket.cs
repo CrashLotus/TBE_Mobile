@@ -44,7 +44,7 @@ public class EnemyRocket : Bullet, IHitPoints
 
     protected override void Update()
     {
-        float dt = Time.deltaTime;
+        float dt = BulletTime.Get().GetDeltaTime();
         m_timer -= dt;
         if (m_timer <= 0.0f)
         {

@@ -49,7 +49,7 @@ public class Bird : PooledObject
 
     protected virtual void Update()
     {
-        float dt = Time.deltaTime;
+        float dt = BulletTime.Get().GetDeltaTime(this is Player);
         UpdatePush(dt);
 
         if (null != m_anim)

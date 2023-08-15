@@ -43,7 +43,7 @@ public class PickUp : PooledObject, IHitPoints
 
     protected virtual void Update()
     {
-        float dt = Time.deltaTime;
+        float dt = BulletTime.Get().GetDeltaTime();
 
         if (State.FLY_TO_HUD == m_state)
         {

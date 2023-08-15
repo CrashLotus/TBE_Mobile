@@ -46,7 +46,7 @@ public class FollowCamera : MonoBehaviour
         pos.x += deltaX;
 
         {   // Camera Shake
-            float dt = Time.deltaTime;
+            float dt = Time.unscaledDeltaTime;
             float shakeAmount = 0.0f;
             for (int i = 0; i < 3; ++i)
             {

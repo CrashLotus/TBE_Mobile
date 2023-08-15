@@ -56,7 +56,7 @@ public class ComboNumber : PooledObject
     // Update is called once per frame
     void Update()
     {
-        m_timer -= Time.unscaledDeltaTime;
+        m_timer -= BulletTime.Get().GetDeltaTime(true);
         if (m_timer <= 0.0f)
             Free();
         else

@@ -59,7 +59,7 @@ public class Weapon : MonoBehaviour
 
     public virtual void Update()
     {
-        float dt = m_isPlayerWeapon? Time.unscaledDeltaTime : Time.deltaTime;
+        float dt = BulletTime.Get().GetDeltaTime(m_isPlayerWeapon);
 
         m_fireTimer -= dt;
         while (m_fireTimer < 0.0f)

@@ -88,7 +88,7 @@ public class Egg : PickUp
         {
             m_magnetPower = 0.0f;
             Vector3 pos = transform.position;
-            float dt = Time.deltaTime;
+            float dt = BulletTime.Get().GetDeltaTime(false);
             Player player = Player.Get();
             if (null != player)
             {

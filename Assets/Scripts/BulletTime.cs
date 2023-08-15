@@ -43,6 +43,11 @@ public class BulletTime : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Get().GetPause())
+        {
+            Time.timeScale = 0.0f;
+            return;
+        }
         float dt = Time.unscaledDeltaTime;
         float bulletTime = m_bulletTimeFactor;
         bool wasBulletTime = m_bulletTimeTimer > s_bulletTimeRamp;
@@ -122,5 +127,12 @@ public class BulletTime : MonoBehaviour
     {
         SaveData data = SaveData.Get();
         data.SetTimeWarp(0);
+    }
+
+    public float GetDeltaTime(bool isPlayer=false)
+    {
+        if (GameManager.Get().GetPause())
+            return 0.0f;
+        return isPlayer? Time.unscaledDeltaTime : Time.deltaTime;
     }
 }

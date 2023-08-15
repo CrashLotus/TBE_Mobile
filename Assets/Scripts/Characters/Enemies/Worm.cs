@@ -280,7 +280,7 @@ public class Worm : WormSection
     // Update is called once per frame
     void Update()
     {
-        float dt = Time.deltaTime;
+        float dt = BulletTime.Get().GetDeltaTime(false);
 
         Pattern doPattern = m_pattern;
 

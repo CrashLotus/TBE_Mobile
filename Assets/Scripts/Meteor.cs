@@ -109,7 +109,7 @@ public class Meteor : PooledObject
 
     void Update()
     {
-        float dt = Time.deltaTime;
+        float dt = BulletTime.Get().GetDeltaTime();
         Vector3 pos = transform.position;
         pos += m_vel * dt;
 

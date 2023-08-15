@@ -45,7 +45,7 @@ public class Bullet : PooledObject
     // Update is called once per frame
     protected virtual void Update()
     {
-        float dt = m_isPlayerBullet ? Time.unscaledDeltaTime : Time.deltaTime;
+        float dt = BulletTime.Get().GetDeltaTime(m_isPlayerBullet);
         Vector3 pos = transform.position;
         pos += m_vel * dt;
         transform.position = pos;

@@ -147,7 +147,7 @@ public class EnemyBird : Bird, IHitPoints
 
     protected override void Update()
     {
-        float dt = Time.deltaTime;
+        float dt = BulletTime.Get().GetDeltaTime(false);
 
         m_fireDelay -= dt;
         if (m_fireDelay <= 0.0f)

@@ -107,7 +107,7 @@ public class HitPoint_UI : MonoBehaviour
 
     void UpdateWave(int numEgg)
     {
-        float dt = Time.deltaTime;
+        float dt = Time.unscaledDeltaTime;
         m_waveTimer += m_waveFreq * dt;
         float eggWaveTime = m_waveTimer;
         for (int i = 0; i < numEgg; ++i)

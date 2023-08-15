@@ -99,7 +99,7 @@ public class Player : Bird, IHitPoints
     // Update is called once per frame
     protected override void Update()
     {
-        float dt = Time.unscaledDeltaTime;
+        float dt = BulletTime.Get().GetDeltaTime(true);
         Vector3 pos = transform.position;
 
         // Input

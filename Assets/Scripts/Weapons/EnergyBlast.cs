@@ -11,7 +11,7 @@ public class EnergyBlast : Bullet
 
     protected override void Update()
     {
-        float dt = Time.deltaTime;
+        float dt = BulletTime.Get().GetDeltaTime();
         m_curSpeed += m_accel * dt;
         m_vel = m_dir * m_curSpeed;
         m_rot = m_rot + m_spinRate * dt;

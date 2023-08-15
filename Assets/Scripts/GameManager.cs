@@ -244,7 +244,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         UpdateScreenBounds();
-        EnemyBird.DoRepulse(Time.deltaTime);
+        EnemyBird.DoRepulse(BulletTime.Get().GetDeltaTime(false));
     }
 
     void ChangeState(State newState)
@@ -318,14 +318,17 @@ public class GameManager : MonoBehaviour
     {
         if (set)
         {
-            Time.timeScale = 0.0f;
             m_isPaused = true;
         }
         else
         {
-            Time.timeScale = 1.0f;
             m_isPaused = false;
         }
+    }
+
+    public bool GetPause()
+    {
+        return m_isPaused;
     }
 
     public void ReturnToMainMenu()
