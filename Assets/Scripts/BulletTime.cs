@@ -46,12 +46,14 @@ public class BulletTime : MonoBehaviour
         float dt = Time.unscaledDeltaTime;
         float bulletTime = m_bulletTimeFactor;
         bool wasBulletTime = m_bulletTimeTimer > s_bulletTimeRamp;
+        float invert = 1.0f;
         m_bulletTimeTimer -= dt;
         if (m_bulletTimeTimer <= 0.0f)
         {
             bulletTime = 1.0f;
             m_bulletTimeFactor = 1.0f;
             m_bulletTimeTimer = 0.0f;
+            invert = 0.0f;
         }
         else if (m_bulletTimeTimer <= s_bulletTimeRamp)
         {
@@ -62,8 +64,11 @@ public class BulletTime : MonoBehaviour
                 if (null != m_timeWarpOver)
                     m_timeWarpOver.Play();
             }
+            invert = lerp;
         }
         Time.timeScale = bulletTime;
+        Shader.SetGlobalFloat("_Invert", invert);
+        Shader.SetGlobalFloat("_Depth", invert);
     }
 
     public void Begin()
