@@ -150,7 +150,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e667814cfbba6b74a93c4b8102161f32, type: 2}
+  - {fileID: 2100000, guid: 2d9cb505ba8182849bacfb4067898f2e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -234,7 +234,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e667814cfbba6b74a93c4b8102161f32, type: 2}
+  - {fileID: 2100000, guid: 2d9cb505ba8182849bacfb4067898f2e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -352,7 +352,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e667814cfbba6b74a93c4b8102161f32, type: 2}
+  - {fileID: 2100000, guid: 2d9cb505ba8182849bacfb4067898f2e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -436,7 +436,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e667814cfbba6b74a93c4b8102161f32, type: 2}
+  - {fileID: 2100000, guid: 2d9cb505ba8182849bacfb4067898f2e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -475,6 +475,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4661975760766321655, guid: f32145ae13497154686328df16302b3c, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4661975760766321655, guid: f32145ae13497154686328df16302b3c, type: 3}
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4661975760766321655, guid: f32145ae13497154686328df16302b3c, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4661975760766321655, guid: f32145ae13497154686328df16302b3c, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4661975760766321655, guid: f32145ae13497154686328df16302b3c, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4661975760766321655, guid: f32145ae13497154686328df16302b3c, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4661975761746430696, guid: f32145ae13497154686328df16302b3c, type: 3}
       propertyPath: m_Name
       value: NYBackground
