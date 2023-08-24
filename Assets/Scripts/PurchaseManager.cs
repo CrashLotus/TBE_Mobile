@@ -278,4 +278,9 @@ public class PurchaseManager : MonoBehaviour, IStoreListener, IUnityAdsInitializ
 
     public void OnUnityAdsShowStart(string adUnitId) { }
     public void OnUnityAdsShowClick(string adUnitId) { }
+
+    public void OnInitializeFailed(InitializationFailureReason error, string message)
+    {
+        throw new NotImplementedException();
+    }
 }
