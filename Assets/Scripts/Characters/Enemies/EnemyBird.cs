@@ -22,7 +22,7 @@ public class EnemyBird : Bird, IHitPoints
     const float s_fireDelayMin = 2.0f;
     const float s_fireDelayMax = 5.0f;
     protected const float s_wanderJuke = 1.0f;
-    const float s_riseHeight = 0.2f;
+    const float s_riseHeight = 1.0f;
     const float s_fallHeight = -3.0f;
     const float s_invTime = 1.0f;
     protected const float s_jukeAmp = 1.0f;
