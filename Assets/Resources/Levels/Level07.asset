@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f92e051b6ada1d4595224226f1ef9e0, type: 3}
   m_Name: Level07
   m_EditorClassIdentifier: 
-  m_waves: []
+  m_waves:
+  - {fileID: 11400000, guid: 5eb581708995a2e4e812a658f4e31e4c, type: 2}
+  - {fileID: 11400000, guid: bfe747b8d8dd8924b8723cc712140b11, type: 2}
+  - {fileID: 11400000, guid: 98f42fc508538684cb14ecbe4154c17a, type: 2}
+  - {fileID: 11400000, guid: 16f729304f9ddc24899465fecce2e960, type: 2}

@@ -9,8 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 5f04f7730a0acca4f84dd37162ce4cbf
   - enabled: 1
-    path: Assets/Scenes/Game.unity
-    guid: fc2829d77ed9f6d4cadc69734e73265a
+    path: Assets/Scenes/Game_NY.unity
+    guid: 2124f67d31a00654bbb0669cb370854d
+  - enabled: 1
+    path: Assets/Scenes/Game_Tunguska.unity
+    guid: 1a123c3d937b4914783b11ac73d367ad
   - enabled: 1
     path: Assets/Scenes/Store.unity
     guid: 7c7388b42111e074b9f232ced4bf71cf

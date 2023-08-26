@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Background_Background2
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: ded36c492e40bda40bca952a845a913a, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - 6e6e8070bf9ddfc4f99da3b33d5221e5: 21300000
+    - f4ff6601cf67154428837f55b2b4216f: 21300000
+    - b937cac1dd017b949be83a082c965902: 21300000
+    - 7e9c677208622ad449252cb202f3b390: 21300000
+    - eeefd453924ea59498057a12a76c1d5b: 21300000
+    - ffdb39637b4352c4a90b507f089f0d53: 21300000
+    - 7a659f839d69e6d4383cf07c11cffe06: 21300000
+    - 52dfdce33a9533647a36e003d232d957: 21300000
+    - 0fe37d24a907f4d46bfb4b2459c602a0: 21300000
+    - 75212e659a52dde4b9fd829b18909c33: 21300000
+    - 2bfbce36d2b9aa141bd3100ec012ebeb: 21300000
+    - 15a3b47619f882247841beddc41f7b14: 21300000
+    - 1b4ddc762d0910c4b858b29e1d80615d: 21300000
+    - 5e910b1785d745e499b29bc32e107f12: 21300000
+    - 503637872f047b248a530e80e6ee677a: 21300000
+    - 8d94ffc7023cc5d4cbd995301890a5d7: 21300000
+    - 414c2ae8ce017b547bc3ad865dadf63f: 21300000
+    - 34b29ef827accc14693388c5c940ba26: 21300000
+    - 3aa895895cbbed344800ff30748741a1: 21300000
+    - 14cc29ca793991b4b95c838736bdf247: 21300000
+    - 676a049b783932d4b9a2fb4525542ae0: 21300000
+    - 5980a7eb4e2b5564cb4e6e2ea8029c0b: 21300000
+    - 0fb67d4c15479cd428fbf0eb4757195a: 21300000
+    - 2f7e51fc4135d2349becbab95d9641be: 21300000
+    - 403b940ec938e804c8a5ba5001de7989: 21300000
+    - 75ff0f8f659a6784183f2d166607b201: 21300000
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 6e6e8070bf9ddfc4f99da3b33d5221e5, type: 3}
+  - {fileID: 21300000, guid: f4ff6601cf67154428837f55b2b4216f, type: 3}
+  - {fileID: 21300000, guid: b937cac1dd017b949be83a082c965902, type: 3}
+  - {fileID: 21300000, guid: 7e9c677208622ad449252cb202f3b390, type: 3}
+  - {fileID: 21300000, guid: eeefd453924ea59498057a12a76c1d5b, type: 3}
+  - {fileID: 21300000, guid: ffdb39637b4352c4a90b507f089f0d53, type: 3}
+  - {fileID: 21300000, guid: 7a659f839d69e6d4383cf07c11cffe06, type: 3}
+  - {fileID: 21300000, guid: 52dfdce33a9533647a36e003d232d957, type: 3}
+  - {fileID: 21300000, guid: 0fe37d24a907f4d46bfb4b2459c602a0, type: 3}
+  - {fileID: 21300000, guid: 75212e659a52dde4b9fd829b18909c33, type: 3}
+  - {fileID: 21300000, guid: 2bfbce36d2b9aa141bd3100ec012ebeb, type: 3}
+  - {fileID: 21300000, guid: 15a3b47619f882247841beddc41f7b14, type: 3}
+  - {fileID: 21300000, guid: 1b4ddc762d0910c4b858b29e1d80615d, type: 3}
+  - {fileID: 21300000, guid: 5e910b1785d745e499b29bc32e107f12, type: 3}
+  - {fileID: 21300000, guid: 503637872f047b248a530e80e6ee677a, type: 3}
+  - {fileID: 21300000, guid: 8d94ffc7023cc5d4cbd995301890a5d7, type: 3}
+  - {fileID: 21300000, guid: 414c2ae8ce017b547bc3ad865dadf63f, type: 3}
+  - {fileID: 21300000, guid: 34b29ef827accc14693388c5c940ba26, type: 3}
+  - {fileID: 21300000, guid: 3aa895895cbbed344800ff30748741a1, type: 3}
+  - {fileID: 21300000, guid: 14cc29ca793991b4b95c838736bdf247, type: 3}
+  - {fileID: 21300000, guid: 676a049b783932d4b9a2fb4525542ae0, type: 3}
+  - {fileID: 21300000, guid: 5980a7eb4e2b5564cb4e6e2ea8029c0b, type: 3}
+  - {fileID: 21300000, guid: 0fb67d4c15479cd428fbf0eb4757195a, type: 3}
+  - {fileID: 21300000, guid: 2f7e51fc4135d2349becbab95d9641be, type: 3}
+  - {fileID: 21300000, guid: 403b940ec938e804c8a5ba5001de7989, type: 3}
+  - {fileID: 21300000, guid: 75ff0f8f659a6784183f2d166607b201, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Floating Rocks0004
+  - Floating Rocks0005
+  - Floating Rocks0009
+  - Floating Rocks0006
+  - Floating Rocks0020
+  - Floating Rocks0015
+  - Floating Rocks0008
+  - Ground_Mid_4
+  - Floating Rocks0012
+  - Floating Rocks0003
+  - Floating Rocks0001
+  - Floating Rocks0002
+  - Floating Rocks0019
+  - Floating Rocks0018
+  - Floating Rocks0013
+  - Floating Rocks0014
+  - Floating Rocks0016
+  - Ground_Mid_1
+  - Ground_Mid_3
+  - Floating Rocks0017
+  - Floating Rocks0021
+  - Floating Rocks0011
+  - Floating Rocks0010
+  - Ground_Mid_2
+  - Floating Rocks0007
+  - Ground
+  m_RenderDataMap: {}
+  m_Tag: Background_Background2
+  m_IsVariant: 0

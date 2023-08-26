@@ -127,6 +127,15 @@ public class GameManager : MonoBehaviour
         return s_levels[level];
     }
 
+    public static string GetCurrentScene()
+    {
+        SaveData save = SaveData.Get();
+        int level = save.GetCurrentLevel();
+        if (level >= 6)
+            return "Game_Tunguska";
+        return "Game_NY";
+    }
+
     IEnumerator GameOverCountDown()
     {
         SaveData save = SaveData.Get();
@@ -264,7 +273,7 @@ public class GameManager : MonoBehaviour
                 break;
             case State.GAME_ON:
                 ClearGame();
-                SceneManager.LoadScene("Game");
+                SceneManager.LoadScene(GetCurrentScene());
                 break;
             case State.STORE:
                 ClearGame();

@@ -1,0 +1,139 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Moon
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 0cc350c92ebdbe24284518180b889b40, type: 3}
+    - {fileID: 2800000, guid: 7f7fcfe93a3dfbe418461fdb516cda78, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - 9e2f432077af11940874f6abcc187a06: 21300000
+    - 0d8adc4085c151949951b0ef2e813462: 21300000
+    - ae4f49b0ce182324599774bc4cb16f4d: 21300000
+    - 575e4e71caa29cf49bf6886353deabea: 21300000
+    - 3d329381087dbd9469e7f51bffec9921: 21300000
+    - cbea0602d76c95e41acbbb34416dd678: 21300000
+    - dc42ff72514c7284ba392e35fd72c3bb: 21300000
+    - 85cb51b29b297194995c9c5e0123e821: 21300000
+    - aef8ff14f47eb684a91628d68ee37462: 21300000
+    - 165af554ae2ebab4982ffea97a1f2895: 21300000
+    - 74dcfbc48d6b4f04083c18b1a2350b5c: 21300000
+    - 81b8fa356f230114097634695d795215: 21300000
+    - 4516f2078bd55364da465096bc546e0f: 21300000
+    - 24d10517abb7b2d4ca589eb5e1aec2dd: 21300000
+    - 7061162795d4e614a81e67672a4cf96e: 21300000
+    - 7f7fcfe93a3dfbe418461fdb516cda78: 21300000
+    - 00b51a1adf253f94a8b9773d3eef99fa: 21300000
+    - e6f6a88bc873fa3468f86b042bf158e9: 21300000
+    - 95469c9bb6d23274f8af59eb0ce7be1f: 21300000
+    - b688faab52866364ca43d698ab30574b: 21300000
+    - 66128cab84eaa3a47bbe207475ddf845: 21300000
+    - bd6d674c3e413714cb29dd5c9229c0ca: 21300000
+    - 4c5e730d5a3ef5a469aa6485f37dbe22: 21300000
+    - ecf8c25d973da7e4bac8cc428ccfdc8b: 21300000
+    - 4955a12ece70be94295fa952d2bde78a: 21300000
+    - d03b154e0e57b524e8d96caecb5da466: 21300000
+    - 2f4f21be373f2324080bdceabe0c2a64: 21300000
+    - f07d88ee9d6db194580898ae254e8637: 21300000
+    - 1847d27f1a7900f47ac39f7d6d601d08: 21300000
+    - b608009f5bd010e44ac0c94b25591d8e: 21300000
+    - e46dd3cf76805674e889e7841213f2cb: 21300000
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 9e2f432077af11940874f6abcc187a06, type: 3}
+  - {fileID: 21300000, guid: 0d8adc4085c151949951b0ef2e813462, type: 3}
+  - {fileID: 21300000, guid: ae4f49b0ce182324599774bc4cb16f4d, type: 3}
+  - {fileID: 21300000, guid: 575e4e71caa29cf49bf6886353deabea, type: 3}
+  - {fileID: 21300000, guid: 3d329381087dbd9469e7f51bffec9921, type: 3}
+  - {fileID: 21300000, guid: cbea0602d76c95e41acbbb34416dd678, type: 3}
+  - {fileID: 21300000, guid: dc42ff72514c7284ba392e35fd72c3bb, type: 3}
+  - {fileID: 21300000, guid: 85cb51b29b297194995c9c5e0123e821, type: 3}
+  - {fileID: 21300000, guid: aef8ff14f47eb684a91628d68ee37462, type: 3}
+  - {fileID: 21300000, guid: 165af554ae2ebab4982ffea97a1f2895, type: 3}
+  - {fileID: 21300000, guid: 74dcfbc48d6b4f04083c18b1a2350b5c, type: 3}
+  - {fileID: 21300000, guid: 81b8fa356f230114097634695d795215, type: 3}
+  - {fileID: 21300000, guid: 4516f2078bd55364da465096bc546e0f, type: 3}
+  - {fileID: 21300000, guid: 24d10517abb7b2d4ca589eb5e1aec2dd, type: 3}
+  - {fileID: 21300000, guid: 7061162795d4e614a81e67672a4cf96e, type: 3}
+  - {fileID: 21300000, guid: 7f7fcfe93a3dfbe418461fdb516cda78, type: 3}
+  - {fileID: 21300000, guid: 00b51a1adf253f94a8b9773d3eef99fa, type: 3}
+  - {fileID: 21300000, guid: e6f6a88bc873fa3468f86b042bf158e9, type: 3}
+  - {fileID: 21300000, guid: 95469c9bb6d23274f8af59eb0ce7be1f, type: 3}
+  - {fileID: 21300000, guid: b688faab52866364ca43d698ab30574b, type: 3}
+  - {fileID: 21300000, guid: 66128cab84eaa3a47bbe207475ddf845, type: 3}
+  - {fileID: 21300000, guid: bd6d674c3e413714cb29dd5c9229c0ca, type: 3}
+  - {fileID: 21300000, guid: 4c5e730d5a3ef5a469aa6485f37dbe22, type: 3}
+  - {fileID: 21300000, guid: ecf8c25d973da7e4bac8cc428ccfdc8b, type: 3}
+  - {fileID: 21300000, guid: 4955a12ece70be94295fa952d2bde78a, type: 3}
+  - {fileID: 21300000, guid: d03b154e0e57b524e8d96caecb5da466, type: 3}
+  - {fileID: 21300000, guid: 2f4f21be373f2324080bdceabe0c2a64, type: 3}
+  - {fileID: 21300000, guid: f07d88ee9d6db194580898ae254e8637, type: 3}
+  - {fileID: 21300000, guid: 1847d27f1a7900f47ac39f7d6d601d08, type: 3}
+  - {fileID: 21300000, guid: b608009f5bd010e44ac0c94b25591d8e, type: 3}
+  - {fileID: 21300000, guid: e46dd3cf76805674e889e7841213f2cb, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Moon_010002
+  - Moon_010021
+  - Moon_010025
+  - Moon_010023
+  - Moon_010008
+  - Moon_010001
+  - Moon_010004
+  - Moon_010026
+  - Moon_010009
+  - Moon_010014
+  - Moon_010012
+  - Moon_010013
+  - Moon_010024
+  - Moon_010028
+  - Moon_010015
+  - Sky
+  - Moon_010003
+  - Moon_010016
+  - Moon_010019
+  - Moon_010005
+  - Moon_010017
+  - Moon_010011
+  - Moon_010029
+  - Moon_010006
+  - Moon_010007
+  - Moon_010022
+  - Moon_010030
+  - Moon_010027
+  - Moon_010018
+  - Moon_010010
+  - Moon_010020
+  m_RenderDataMap: {}
+  m_Tag: Moon
+  m_IsVariant: 0
