@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
 
     public static readonly string[] s_levels =
     {
+//        "Levels/TestWorm",
         "Levels/Level01",
         "Levels/Level02",
         "Levels/Level03",
@@ -44,6 +45,8 @@ public class GameManager : MonoBehaviour
         "Levels/Level06",
         "Levels/Level07",
         "Levels/Level08",
+        "Levels/Level09",
+        "Levels/Level10",
     };
 
     public class Hint
@@ -119,7 +122,9 @@ public class GameManager : MonoBehaviour
     public static string GetCurrentLevelName()
     {
         SaveData save = SaveData.Get();
-        return s_levels[save.GetCurrentLevel()];
+        int level = save.GetCurrentLevel();
+        level = Mathf.Min(level, s_levels.Length - 1);
+        return s_levels[level];
     }
 
     IEnumerator GameOverCountDown()
