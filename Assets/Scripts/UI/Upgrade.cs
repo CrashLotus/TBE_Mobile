@@ -11,7 +11,6 @@ public class Upgrade : ScriptableObject
     [TextArea]
     public string m_desc;
     public Sprite m_icon;
-    public Sprite m_display;
     public string m_preReq;
 
     public virtual bool IsOwned()

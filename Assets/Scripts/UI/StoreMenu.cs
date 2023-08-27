@@ -16,8 +16,8 @@ public class StoreMenu : MonoBehaviour
     public GameObject m_buyButton;
     public GameObject m_offerPanel;
 
-    public Image m_display;
     public TextMeshProUGUI m_cost;
+    public GameObject m_icon;
     public TextMeshProUGUI m_desc;
 
     public Sound m_menuSelect;
@@ -62,7 +62,7 @@ public class StoreMenu : MonoBehaviour
                 }
                 newItem.transform.SetParent(m_itemArea.transform, false);
                 Vector3 itemPos = m_itemPos;
-                itemPos.y += itemCount * m_itemSpacing;
+                itemPos.x += itemCount * m_itemSpacing;
                 RectTransform rect = newItem.transform as RectTransform;
                 rect.anchoredPosition3D = itemPos;
                 ++itemCount;
@@ -70,7 +70,7 @@ public class StoreMenu : MonoBehaviour
             Resources.UnloadAsset(list);
             RectTransform contentRect = m_itemArea.GetComponent<RectTransform>();
             Vector2 size = contentRect.sizeDelta;
-            size.y = -itemCount * m_itemSpacing;
+            size.x = itemCount * m_itemSpacing;
             contentRect.sizeDelta = size;
         }
 
@@ -97,19 +97,24 @@ public class StoreMenu : MonoBehaviour
                 Transform xform = m_itemArea.transform.GetChild(item + 1);
                 m_selection.transform.localPosition = xform.localPosition + m_selectionOffset;
             }
-            if (null != m_display)
-            {
-                m_display.enabled = true;
-                m_display.sprite = m_allUpgrades[item].m_display;
-            }
             if (null != m_cost)
             {
+                bool showIcon = true;
                 if (isLocked)
+                {
                     m_cost.text = "Locked";
+                    showIcon = false;
+                }
                 else if (isOwned)
+                {
                     m_cost.text = "0";
+                }
                 else
+                {
                     m_cost.text = m_allUpgrades[item].m_cost.ToString();
+                }
+                if (null != m_icon)
+                    m_icon.SetActive(showIcon);
             }
             if (null != m_desc)
             {
@@ -128,8 +133,6 @@ public class StoreMenu : MonoBehaviour
         {
             if (null != m_selection)
                 m_selection.SetActive(false);
-            if (null != m_display)
-                m_display.enabled = false;
             if (null != m_cost)
                 m_cost.text = "??";
             if (null != m_desc)
