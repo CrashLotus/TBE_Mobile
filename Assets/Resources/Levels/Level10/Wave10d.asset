@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_label: 
   m_text: 
-  m_numEgg1: 8
-  m_numEgg2: 3
-  m_numEgg3: 3
+  m_numEgg1: 6
+  m_numEgg2: 2
+  m_numEgg3: 2
   m_addTimeCrytal: 1
   m_duration: 0
   m_waitOnEggs: 1

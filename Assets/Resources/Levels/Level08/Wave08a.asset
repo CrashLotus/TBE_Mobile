@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_label: 
   m_text: 
-  m_numEnemy1: 12
+  m_numEnemy1: 10
   m_numEnemy2: 0
   m_numEnemy3: 0
   m_waitOnEnemies: 1

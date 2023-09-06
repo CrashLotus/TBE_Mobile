@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour
     {
         SaveData save = SaveData.Get();
         int level = save.GetCurrentLevel();
-        if (level >= 5)
+        if (level > 5)
             return "Game_Tunguska";
         return "Game_NY";
     }
