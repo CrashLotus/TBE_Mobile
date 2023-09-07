@@ -9,9 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f92e051b6ada1d4595224226f1ef9e0, type: 3}
-  m_Name: TestWorm
+  m_Script: {fileID: 11500000, guid: 895f6eb2e1de88d40b8381a95a613ee7, type: 3}
+  m_Name: Wave12h
   m_EditorClassIdentifier: 
-  m_waves:
-  - {fileID: 11400000, guid: 6236df449a1dcd34badb53f8d84e3d19, type: 2}
-  - {fileID: 11400000, guid: f1b5a677692287a479e0a85ef32f1d63, type: 2}
+  m_label: 
+  m_text: 
+  m_numEnemy1: 3
+  m_numEnemy2: 3
+  m_numEnemy3: 2
+  m_waitOnEnemies: 1

@@ -31,7 +31,16 @@ public class WormWave : Wave
         Vector3 pos = Player.Get().transform.position;
         pos.x += m_xOffset;
         Worm.Spawn(pos, m_wormType, m_pattern);
+    }
 
-        m_isDone = true;
+    public override bool IsDone()
+    {
+        if (m_isDone)
+            return true;
+
+        if (Worm.GetCount() > 0)
+            return false;
+
+        return true;
     }
 }

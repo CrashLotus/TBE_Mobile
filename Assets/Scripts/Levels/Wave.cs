@@ -21,7 +21,7 @@ public class Wave : ScriptableObject
     {
         m_isActive = true;
         m_isDone = false;
-        if (null != m_text && m_text.Length > 0)
+        if (null != m_text && m_text.Length > 0 && m_text != "-")
         {
             GameUI.Get().SetLabel(m_text);
         }

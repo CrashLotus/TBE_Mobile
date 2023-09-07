@@ -47,13 +47,13 @@ public class EggWave : Wave
             m_totalTime = m_duration;
         if (m_text.Length == 0)
         {   // default text
-            if (m_numEgg > 60)
+            if (m_numEgg > 45)
                 m_text = "Huevos Rancheros";
-            else if (m_numEgg > 40)
+            else if (m_numEgg > 30)
                 m_text = "Egg Tsunami";
-            else if (m_numEgg > 20)
+            else if (m_numEgg > 15)
                 m_text = "Grade A Extra Large Egg Wave";
-            else if (m_numEgg > 13)
+            else if (m_numEgg > 9)
                 m_text = "Big Egg Wave";
             else
                 m_text = "Egg Wave";
