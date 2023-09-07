@@ -38,6 +38,8 @@ public class Worm : WormSection
     public GameObject m_explosion;
     public int m_numExplode = 5;
     public float m_explodeRadius = 1.0f;
+    public GameObject m_explodeBullet;
+    public int m_numExplodeBullet = 6;
     public int m_score = 500;
 
     List<WormSection> m_sections;
@@ -160,6 +162,10 @@ public class Worm : WormSection
         if (null != m_explosion)
         {
             ObjectPool.GetPool(m_explosion, 64);
+        }
+        if (null != m_explodeBullet)
+        {
+            ObjectPool.GetPool(m_explodeBullet, 32);
         }
     }
 
@@ -445,13 +451,34 @@ public class Worm : WormSection
         Free();
     }
 
-    protected void ExplodeEffect(Vector3 pos)
+    protected void ExplodeEffect(Vector3 pos, float rot = 0.0f)
     {
         for (int i = 0; i < m_numExplode; ++i)
         {
             Vector2 offset = m_explodeRadius * Random.insideUnitCircle;
             Vector3 explodePos = new Vector3(pos.x + offset.x, pos.y + offset.y, pos.z - 0.1f);
             ObjectPool.Allocate(m_explosion, 64, explodePos);
+        }
+        if (null != m_explodeBullet)
+        {
+            float s_angPer = 2.0f * Mathf.PI / m_numExplodeBullet;
+            float ang = Mathf.Deg2Rad * (rot + 90.0f) + 0.5f * s_angPer;
+            for (int i = 0; i < m_numExplodeBullet; ++i)
+            {
+                //                        ang = RandomHelper.Range(0.0f, MathHelper.TwoPi);
+                Vector3 dir = new Vector3(Mathf.Cos(ang), Mathf.Sin(ang), 0.0f);
+                Vector3 objPos = pos + 0.4f * dir;
+                GameObject obj = ObjectPool.Allocate(m_explodeBullet, 32, objPos);
+                if (null != obj)
+                {
+                    Bullet bullet = obj.GetComponent<Bullet>();
+                    if (null != bullet)
+                    {
+                        bullet.Fire(dir);
+                    }
+                }
+                ang += s_angPer;
+            }
         }
     }
 

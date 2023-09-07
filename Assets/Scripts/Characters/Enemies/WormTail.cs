@@ -7,6 +7,7 @@ public class WormTail : WormSection
     public GameObject m_poopEffect;
     public Transform m_poopSpot;
     public float m_eggSpeed = 1.0f;
+    public int m_eggPower = 1;
 
     public void _WarmUp()
     {
@@ -26,7 +27,7 @@ public class WormTail : WormSection
                     GameObject poop = ObjectPool.Allocate(m_poopEffect, 16, pos);
                     if (null != poop)
                         poop.transform.rotation = m_poopSpot.rotation;
-                    Egg.Spawn(pos, 1, -m_eggSpeed * m_poopSpot.right);
+                    Egg.Spawn(pos, m_eggPower, -m_eggSpeed * m_poopSpot.right);
                 }
             }
         }

@@ -10,7 +10,7 @@ public class WormSection : PooledObject, IHitPoints
     const float s_maxAng = 30.0f;
     const int s_hitDamage = 1;
     protected SpriteRenderer m_sprite;
-    protected int m_maxHitPoints = 20;
+    public int m_maxHitPoints = 20;
     protected int m_hitPoints = 20;
     protected Worm m_head;
     protected WormSection m_prevSection;

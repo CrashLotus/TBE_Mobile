@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: TestWorm
   m_EditorClassIdentifier: 
   m_waves:
-  - {fileID: 11400000, guid: 6236df449a1dcd34badb53f8d84e3d19, type: 2}
-  - {fileID: 11400000, guid: f1b5a677692287a479e0a85ef32f1d63, type: 2}
+  - {fileID: 11400000, guid: 5885258718d5d9b45a5686f2f6e4ad8f, type: 2}
