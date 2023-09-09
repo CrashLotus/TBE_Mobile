@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wave12d
   m_EditorClassIdentifier: 
   m_label: 
-  m_text: 
+  m_text: '-'
   m_numEnemy1: 4
   m_numEnemy2: 5
   m_numEnemy3: 0

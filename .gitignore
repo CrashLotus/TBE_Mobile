@@ -20,10 +20,6 @@ ipch/
 *.cachefile
 *.opendb
 # Build results
-[Dd]ebug/
-[Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
 build/
 bld/
 [Bb]in/

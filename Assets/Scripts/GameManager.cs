@@ -49,6 +49,8 @@ public class GameManager : MonoBehaviour
         "Levels/Level10",
         "Levels/Level11",
         "Levels/Level12",
+        "Levels/Level13",
+        "Levels/Level14",
     };
 
     public class Hint
@@ -133,9 +135,16 @@ public class GameManager : MonoBehaviour
     {
         SaveData save = SaveData.Get();
         int level = save.GetCurrentLevel();
+        if (level > 9)
+            return "Game_Paris";
         if (level > 5)
             return "Game_Tunguska";
         return "Game_NY";
+    }
+
+    public static int GetNumLevels()
+    {
+        return s_levels.Length;
     }
 
     IEnumerator GameOverCountDown()

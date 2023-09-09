@@ -15,7 +15,7 @@ MonoBehaviour:
   m_label: 
   m_text: 
   m_wormType: 0
-  m_pattern: 0
+  m_pattern: 1
   m_xOffset: 0
   m_waitOnWorms: 1
   m_waitOnEnemies: 1

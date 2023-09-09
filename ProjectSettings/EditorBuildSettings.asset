@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Game_Tunguska.unity
     guid: 1a123c3d937b4914783b11ac73d367ad
   - enabled: 1
+    path: Assets/Scenes/Game_Paris.unity
+    guid: f3c905e26aadc684da9b4f3da29fcf17
+  - enabled: 1
     path: Assets/Scenes/Store.unity
     guid: 7c7388b42111e074b9f232ced4bf71cf
   - enabled: 1

@@ -1,0 +1,114 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Background_Paris
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 9c9487cfb465585469d38f9b00e090fb, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - e60d107016fa82146aaff0c680e6b045: 21300000
+    - 3c83ee803e57662439e36076094fe8d4: 21300000
+    - a81176b1b92712b40a86e86628130c7f: 21300000
+    - 6431e9b1f0033154fab4273b5e7bf525: 21300000
+    - 2e9d27723ddca744d80b5d5af529d768: 21300000
+    - b21c9eb29bb41494aa3b45d321f059d0: 21300000
+    - 5b521a05b977826489ae0b752d5f7429: 21300000
+    - d5dec535abbdcad46beafd6bd7dbb32d: 21300000
+    - 4b5b3036f8a5302478f847f7ee51756f: 21300000
+    - 0145a8372228e09448a83ee9e3999cd6: 21300000
+    - 580e1587ab30aea46bc6fbecdaa913ea: 21300000
+    - d2078b87f2e2698438859cf37a80e1fa: 21300000
+    - 79e96d289a0f7cf479eedf859c77f7e4: 21300000
+    - 045bea68549cec746b7854e0fd978c7c: 21300000
+    - ed8dcac82d1601c4ab7ae98650ef5392: 21300000
+    - c2fce2d985f1e2e4c942ea0fd65b19f9: 21300000
+    - a63d4bfbf5658844dab94cd1d1b94eaf: 21300000
+    - f0f7ed5cb480345419be4bb90058ca94: 21300000
+    - 9fa90d6c7740ae24d9ebb7932b956fce: 21300000
+    - c9f6cf8d767111f4eb7ec9cf079acf51: 21300000
+    - 8eba9a5ee61a0d04f8f1ef1e0778485c: 21300000
+    - bee992fec3fc67a4fade84a5ea76e993: 21300000
+    - 91c6fd7fa7bc58a499d155f7ab8c7470: 21300000
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: e60d107016fa82146aaff0c680e6b045, type: 3}
+  - {fileID: 21300000, guid: 3c83ee803e57662439e36076094fe8d4, type: 3}
+  - {fileID: 21300000, guid: a81176b1b92712b40a86e86628130c7f, type: 3}
+  - {fileID: 21300000, guid: 6431e9b1f0033154fab4273b5e7bf525, type: 3}
+  - {fileID: 21300000, guid: 2e9d27723ddca744d80b5d5af529d768, type: 3}
+  - {fileID: 21300000, guid: b21c9eb29bb41494aa3b45d321f059d0, type: 3}
+  - {fileID: 21300000, guid: 5b521a05b977826489ae0b752d5f7429, type: 3}
+  - {fileID: 21300000, guid: d5dec535abbdcad46beafd6bd7dbb32d, type: 3}
+  - {fileID: 21300000, guid: 4b5b3036f8a5302478f847f7ee51756f, type: 3}
+  - {fileID: 21300000, guid: 0145a8372228e09448a83ee9e3999cd6, type: 3}
+  - {fileID: 21300000, guid: 580e1587ab30aea46bc6fbecdaa913ea, type: 3}
+  - {fileID: 21300000, guid: d2078b87f2e2698438859cf37a80e1fa, type: 3}
+  - {fileID: 21300000, guid: 79e96d289a0f7cf479eedf859c77f7e4, type: 3}
+  - {fileID: 21300000, guid: 045bea68549cec746b7854e0fd978c7c, type: 3}
+  - {fileID: 21300000, guid: ed8dcac82d1601c4ab7ae98650ef5392, type: 3}
+  - {fileID: 21300000, guid: c2fce2d985f1e2e4c942ea0fd65b19f9, type: 3}
+  - {fileID: 21300000, guid: a63d4bfbf5658844dab94cd1d1b94eaf, type: 3}
+  - {fileID: 21300000, guid: f0f7ed5cb480345419be4bb90058ca94, type: 3}
+  - {fileID: 21300000, guid: 9fa90d6c7740ae24d9ebb7932b956fce, type: 3}
+  - {fileID: 21300000, guid: c9f6cf8d767111f4eb7ec9cf079acf51, type: 3}
+  - {fileID: 21300000, guid: 8eba9a5ee61a0d04f8f1ef1e0778485c, type: 3}
+  - {fileID: 21300000, guid: bee992fec3fc67a4fade84a5ea76e993, type: 3}
+  - {fileID: 21300000, guid: 91c6fd7fa7bc58a499d155f7ab8c7470, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - FIre_Sprite0012
+  - FIre_Sprite0014
+  - Ground_3
+  - Ground_Mid_2
+  - Ground_2
+  - FIre_Sprite0015
+  - FIre_Sprite0004
+  - Ground_Mid_4
+  - FIre_Sprite0010
+  - FIre_Sprite0001
+  - FIre_Sprite0003
+  - FIre_Sprite0002
+  - Ground_Mid_3
+  - FIre_Sprite0009
+  - Ground_Mid_1
+  - FIre_Sprite0006
+  - FIre_Sprite0005
+  - FIre_Sprite0008
+  - Ground_4
+  - FIre_Sprite0007
+  - FIre_Sprite0013
+  - FIre_Sprite0011
+  - Ground_1
+  m_RenderDataMap: {}
+  m_Tag: Background_Paris
+  m_IsVariant: 0

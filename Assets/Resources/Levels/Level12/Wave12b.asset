@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wave12b
   m_EditorClassIdentifier: 
   m_label: 
-  m_text: 
+  m_text: '-'
   m_numEgg1: 4
   m_numEgg2: 5
   m_numEgg3: 0
