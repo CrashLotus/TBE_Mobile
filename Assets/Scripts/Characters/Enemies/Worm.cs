@@ -44,6 +44,8 @@ public class Worm : WormSection
 
     List<WormSection> m_sections;
     Pattern m_pattern;
+    float m_tailYMin = 0.0f;
+    float m_tailYMax = 0.0f;
     bool m_tailOnScreen = false;
     Vector3 m_arcCenter;
     const float s_arcWidth = 6.0f;
@@ -261,6 +263,27 @@ public class Worm : WormSection
                     Warning(pos);
                 }
                 break;
+            case Pattern.UP:
+                {
+                    ang = 90.0f;
+                    flipY = false;
+                    Vector3 pos = m_arcCenter;
+                    pos.y = GameManager.Get().GetLavaHeight() - 3.0f;
+                    pos.z = 0.1f;
+                    transform.position = pos;
+                    Warning(pos);
+                }
+                break;
+            case Pattern.DOWN:
+                {
+                    ang = -90.0f;
+                    flipY = false;
+                    Vector3 pos = m_arcCenter;
+                    pos.y = GameManager.Get().GetScreenBounds().max.y + 1.0f;
+                    pos.z = 0.1f;
+                    transform.position = pos;
+                }
+                break;
         }
 
         // update the positions of the sections
@@ -354,6 +377,20 @@ public class Worm : WormSection
                     targetAng = Mathf.Rad2Deg * targetAng;
                 }
                 break;
+            case Pattern.UP:
+                {
+                    targetAng = 90.0f;
+                    if (m_tailYMin > 1.1f)
+                        isDone = true;
+                }
+                break;
+            case Pattern.DOWN:
+                {
+                    targetAng = -90.0f;
+                    if (m_tailYMax < -0.1f)
+                        isDone = true;
+                }
+                break;
             case Pattern.DEBUG_CHASE:
                 {
                     Player player = Player.Get();
@@ -394,9 +431,18 @@ public class Worm : WormSection
             switch (m_pattern)
             {
                 case Pattern.ARC_RIGHT:
-                    BeginPattern(Pattern.ARC_LEFT);
+                    if (WormType.SUPER == m_type)
+                        BeginPattern(Pattern.UP);
+                    else
+                        BeginPattern(Pattern.ARC_LEFT);
                     break;
                 case Pattern.ARC_LEFT:
+                    BeginPattern(Pattern.ARC_RIGHT);
+                    break;
+                case Pattern.UP:
+                    BeginPattern(Pattern.DOWN);
+                    break;
+                case Pattern.DOWN:
                     BeginPattern(Pattern.ARC_RIGHT);
                     break;
             }
@@ -406,10 +452,12 @@ public class Worm : WormSection
         WormSection tail = m_sections[m_sections.Count - 1];
         SpriteRenderer tailSprite = tail.GetSprite();
         Vector3 tailMin = Camera.main.WorldToViewportPoint(tailSprite.bounds.min);
+        m_tailYMin = tailMin.y;
         Vector3 tailMax = Camera.main.WorldToViewportPoint(tailSprite.bounds.max);
-        if (tailMax.y < 0.0f)
+        m_tailYMax = tailMax.y;
+        if (m_tailYMax < 0.0f)
             m_tailOnScreen = false;
-        else if (tailMin.y > 1.0f)
+        else if (m_tailYMin > 1.0f)
             m_tailOnScreen = false;
         else
             m_tailOnScreen = true;
@@ -440,11 +488,11 @@ public class Worm : WormSection
     {
         foreach (WormSection section in m_sections)
         {
-            ExplodeEffect(section.transform.position);
+            ExplodeEffect(section.transform.position, section.transform.eulerAngles.z);
             Player.AddScore(m_score);
             section.Free();
         }
-        ExplodeEffect(transform.position);
+        ExplodeEffect(transform.position, transform.eulerAngles.z);
         TimeCrystal.Spawn(transform.position);
         Player.AddScore(m_score);
         FollowCamera.Shake(10.0f, 1.0f);
@@ -465,7 +513,6 @@ public class Worm : WormSection
             float ang = Mathf.Deg2Rad * (rot + 90.0f) + 0.5f * s_angPer;
             for (int i = 0; i < m_numExplodeBullet; ++i)
             {
-                //                        ang = RandomHelper.Range(0.0f, MathHelper.TwoPi);
                 Vector3 dir = new Vector3(Mathf.Cos(ang), Mathf.Sin(ang), 0.0f);
                 Vector3 objPos = pos + 0.4f * dir;
                 GameObject obj = ObjectPool.Allocate(m_explodeBullet, 32, objPos);
@@ -510,7 +557,7 @@ public class Worm : WormSection
                 if (null != next)
                     next.SetPrev(prev);
                 m_sections.RemoveAt(i);
-                ExplodeEffect(section.transform.position);
+                ExplodeEffect(section.transform.position, section.transform.eulerAngles.z);
                 Player.AddScore(m_score);
                 section.Free();
                 return;
