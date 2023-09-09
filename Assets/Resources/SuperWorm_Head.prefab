@@ -105,8 +105,11 @@ MonoBehaviour:
   m_maxHitPoints: 40
   m_type: 1
   m_numSection: 10
-  m_speed: 3
+  m_minSpeed: 3
+  m_maxSpeed: 7
   m_turnSpeed: 180
+  m_animSpeedMin: 0.6
+  m_animSpeedMax: 2
   m_midPrefab: {fileID: 6878218497030643979, guid: 692d05b29b1f06c44b0e489a6ae1d16d, type: 3}
   m_tailPrefab: {fileID: 3356187320606659978, guid: f8780ca941b19ea40aea949093de20b8, type: 3}
   m_warning: {fileID: 3139438539129782037, guid: c40cddacd5b43234f971424adf3407f1, type: 3}

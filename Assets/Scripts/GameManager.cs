@@ -36,19 +36,19 @@ public class GameManager : MonoBehaviour
 
     public static readonly string[] s_levels =
     {
-        "Levels/TestWorm",
-        //"Levels/Level01",
-        //"Levels/Level02",
-        //"Levels/Level03",
-        //"Levels/Level04",
-        //"Levels/Level05",
-        //"Levels/Level06",
-        //"Levels/Level07",
-        //"Levels/Level08",
-        //"Levels/Level09",
-        //"Levels/Level10",
-        //"Levels/Level11",
-        //"Levels/Level12",
+//        "Levels/TestWorm",
+        "Levels/Level01",
+        "Levels/Level02",
+        "Levels/Level03",
+        "Levels/Level04",
+        "Levels/Level05",
+        "Levels/Level06",
+        "Levels/Level07",
+        "Levels/Level08",
+        "Levels/Level09",
+        "Levels/Level10",
+        "Levels/Level11",
+        "Levels/Level12",
     };
 
     public class Hint

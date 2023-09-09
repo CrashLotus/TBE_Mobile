@@ -30,8 +30,11 @@ public class Worm : WormSection
 
     public WormType m_type = WormType.WORM;
     public int m_numSection = 10;
-    public float m_speed = 2.0f;
+    public float m_minSpeed = 3.0f;
+    public float m_maxSpeed = 7.0f;
     public float m_turnSpeed = 180.0f;
+    public float m_animSpeedMin = 0.6f;
+    public float m_animSpeedMax = 1.2f;
     public GameObject m_midPrefab;
     public GameObject m_tailPrefab;
     public GameObject m_warning;
@@ -313,6 +316,19 @@ public class Worm : WormSection
 
         Pattern doPattern = m_pattern;
 
+        float sizeRatio = (float)m_sections.Count / (float)m_numSection;
+        float speed = Mathf.Lerp(m_maxSpeed, m_minSpeed, sizeRatio);
+        float animSpeed = Mathf.Lerp(m_animSpeedMax, m_animSpeedMin, sizeRatio);
+        var anim = GetComponent<Animator>();
+        if (null != anim)
+            anim.speed = animSpeed;
+        foreach (WormSection worm in m_sections)
+        {
+            anim = worm.GetComponent<Animator>();
+            if (null != anim)
+                anim.speed = animSpeed;
+        }
+
         Vector3 pos = transform.position;
         float ang = transform.localEulerAngles.z;
         float targetAng = ang;
@@ -323,21 +339,21 @@ public class Worm : WormSection
         {
             case Pattern.ARC_LEFT:
                 {
-                    Vector3 forecast = pos + 0.25f * m_speed * dir;
+                    Vector3 forecast = pos + 0.25f * speed * dir;
                     Vector3 offset = forecast - m_arcCenter;
                     targetAng = Mathf.Atan2(offset.y * s_arcWidth / s_arcHeight, offset.x);
                     Vector3 targetPos = m_arcCenter;
                     if (targetAng < -0.5f * Mathf.PI)
                     {
                         targetPos.x -= s_arcWidth;
-                        targetPos.y = pos.y - 0.25f * m_speed;
+                        targetPos.y = pos.y - 0.25f * speed;
                         if (false == m_tailOnScreen)
                             isDone = true;
                     }
                     else if (targetAng < 0.0f)
                     {
                         targetPos.x += s_arcWidth;
-                        targetPos.y = pos.y + 0.25f * m_speed;
+                        targetPos.y = pos.y + 0.25f * speed;
                     }
                     else
                     {
@@ -351,19 +367,19 @@ public class Worm : WormSection
                 break;
             case Pattern.ARC_RIGHT:
                 {
-                    Vector3 forecast = pos + 0.25f * m_speed * dir;
+                    Vector3 forecast = pos + 0.25f * speed * dir;
                     Vector3 offset = forecast - m_arcCenter;
                     targetAng = Mathf.Atan2(offset.y * s_arcWidth / s_arcHeight, offset.x);
                     Vector3 targetPos = m_arcCenter;
                     if (targetAng < -0.5f * Mathf.PI)
                     {
                         targetPos.x -= s_arcWidth;
-                        targetPos.y = pos.y + 0.25f * m_speed;
+                        targetPos.y = pos.y + 0.25f * speed;
                     }
                     else if (targetAng < 0.0f)
                     {
                         targetPos.x += s_arcWidth;
-                        targetPos.y = pos.y - 0.25f * m_speed;
+                        targetPos.y = pos.y - 0.25f * speed;
                         if (false == m_tailOnScreen)
                             isDone = true;
                     }
@@ -415,7 +431,7 @@ public class Worm : WormSection
 
         // move forward
         dir = transform.right;
-        pos += m_speed * dir * dt;
+        pos += speed * dir * dt;
         transform.position = pos;
 
         // Update the sections

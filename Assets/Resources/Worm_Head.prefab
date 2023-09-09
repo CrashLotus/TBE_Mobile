@@ -90,7 +90,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &485330360706565129
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -107,7 +107,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &8982917145794915687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,9 +123,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_headJoint: {x: 0, y: 0, z: 0}
   m_tailJoint: {x: -1.59, y: -0.27, z: 0}
+  m_maxHitPoints: 20
   m_type: 0
   m_numSection: 10
-  m_speed: 3
+  m_minSpeed: 3
+  m_maxSpeed: 7
   m_turnSpeed: 180
   m_midPrefab: {fileID: 976046275874575346, guid: 31c9a57c7d3e2f24fbf9aab658a39f2d, type: 3}
   m_tailPrefab: {fileID: 8395077646368649269, guid: fd532195674ee444b8033ec1ed01477b, type: 3}
@@ -132,6 +135,8 @@ MonoBehaviour:
   m_explosion: {fileID: 4234046206340094728, guid: 7edfa5faa808ada4ebb4dbf2928029bd, type: 3}
   m_numExplode: 3
   m_explodeRadius: 1
+  m_explodeBullet: {fileID: 0}
+  m_numExplodeBullet: 6
   m_score: 500
 --- !u!61 &2866055144855362478
 BoxCollider2D:
@@ -143,6 +148,25 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -176,6 +200,12 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
