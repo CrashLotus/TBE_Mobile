@@ -33,6 +33,20 @@ public class Bullet : PooledObject
     protected virtual void Start()
     {
         m_renderer = GetComponent<Renderer>();
+        if (null == m_renderer)
+        {
+            Renderer[] renders = GetComponentsInChildren<Renderer>();
+            Bounds biggest = new Bounds();
+            foreach (Renderer render in renders)
+            {
+                Bounds bound = render.bounds;
+                if (bound.size.sqrMagnitude > biggest.size.sqrMagnitude)
+                {
+                    biggest = bound;
+                    m_renderer = render;
+                }
+            }
+        }
     }
 
     public virtual void Fire(Vector3 dir)
