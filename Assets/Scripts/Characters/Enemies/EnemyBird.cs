@@ -344,6 +344,11 @@ public class EnemyBird : Bird, IHitPoints
 
     public IHitPoints.DamageReturn Damage(int damage, IHitPoints.HitType hitType)
     {
+        return DoDamage(damage, hitType);
+    }
+
+    protected virtual IHitPoints.DamageReturn DoDamage(int damage, IHitPoints.HitType hitType)
+    {
         if (m_invTimer > 0.0f)
             return IHitPoints.DamageReturn.NO_DAMAGE;
         if (m_hitPoints > 0)

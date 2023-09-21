@@ -227,14 +227,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_vertSpeed: 1
   m_horizSpeed: 1
-  m_maxHitPoints: 2
+  m_maxHitPoints: 150
   m_deathEffect: {fileID: 4234046206340094728, guid: 7edfa5faa808ada4ebb4dbf2928029bd, type: 3}
   m_deathSound: {fileID: 11400000, guid: 63f8240c27825f74595de4e378e55b7e, type: 2}
   m_weapon: {fileID: 7880512789143022297}
-  m_fireDelay: 5
+  m_fireDelay: 3
   m_jukeFreq: 1
   m_eggPower: 2
-  m_score: 100
+  m_score: 1000
   m_spawnEffect: {fileID: 7310939739548605333, guid: f385b209e7275a149813edcd33d60dcb, type: 3}
 --- !u!95 &683597066786156820
 Animator:
