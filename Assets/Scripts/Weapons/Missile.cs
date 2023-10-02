@@ -15,6 +15,8 @@ public class Missile : Bullet
     Vector3 m_targetPos;
     float m_timer;
 
+    static int s_numMissile = 0;
+
     public void Launch(Vector3 pos, Vector3 dir, Vector3 finalDir, GameObject target)
     {
         Fire(dir);
@@ -26,6 +28,7 @@ public class Missile : Bullet
         m_bezier.SetStart(pos, m_vel);
         CalcBezier();
         m_oldPos = pos;
+        ++s_numMissile;
     }
 
     protected override void Update()
@@ -38,6 +41,7 @@ public class Missile : Bullet
             {
                 Hit(m_target);
             }
+            --s_numMissile;
             Free();
         }
         else
@@ -47,8 +51,6 @@ public class Missile : Bullet
             Vector3 dir = pos - m_oldPos;
             transform.eulerAngles = new Vector3(0.0f, 0.0f, Mathf.Rad2Deg * Mathf.Atan2(dir.y, dir.x));
             m_oldPos = pos;
-            // mrwTODO
-//            new SmokePuff(m_pos, m_scale);
         }
     }
 
@@ -61,5 +63,10 @@ public class Missile : Bullet
         m_bezier.SetEnd(m_targetPos, dir);
         float time = 1.0f - m_timer / s_timeOut;
         transform.position = m_bezier.Evaluate(time);
+    }
+
+    public static int GetNumMissiles()
+    {
+        return s_numMissile;
     }
 }

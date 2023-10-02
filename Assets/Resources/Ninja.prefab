@@ -85,7 +85,7 @@ Transform:
   m_Children:
   - {fileID: 280573413140575655}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1509658680530989131
 SpriteRenderer:
@@ -222,7 +222,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4992926392983268841}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 090de1bb82105964289a0b8dfaab5258, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ee051289125e5c4185279d92fb1fc04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_vertSpeed: 1
@@ -236,6 +236,9 @@ MonoBehaviour:
   m_eggPower: 2
   m_score: 1000
   m_spawnEffect: {fileID: 7310939739548605333, guid: f385b209e7275a149813edcd33d60dcb, type: 3}
+  m_poopEffect: {fileID: 0}
+  m_poopSpot: {fileID: 0}
+  m_eggSpeed: 1
 --- !u!95 &683597066786156820
 Animator:
   serializedVersion: 5
