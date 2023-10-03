@@ -223,6 +223,9 @@ public class Player : Bird, IHitPoints
         if (m_hitPoints > maxEgg)   // you can have more than max eggs, but you can't have more than max hit points
             m_hitPoints = maxEgg;
         int eggDamage = Mathf.Min(damage, m_hitPoints);
+        if (IHitPoints.HitType.NONE == hitType)
+            eggDamage = Mathf.Min(eggDamage, 3);    // max damage of 3 if you hit an enemy
+        Debug.Log("Taking Damage " + eggDamage);
         int numEgg = (int)eggDamage;
         Vector3 pos = transform.position;
         TutorialManager.Get().PlayerDamaged(transform.position);
@@ -248,7 +251,7 @@ public class Player : Bird, IHitPoints
         if (m_hitPoints > 0)
         {
             ret = IHitPoints.DamageReturn.DAMAGED;
-            m_hitPoints -= damage;
+            m_hitPoints -= eggDamage;
             if (m_hitPoints <= 0)
             {
                 Explode();

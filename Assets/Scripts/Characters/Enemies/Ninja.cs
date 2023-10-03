@@ -28,8 +28,8 @@ public class Ninja : EnemyBird
     const float s_shellTime = 3.0f;
     const float s_gravity = 4.0f;
 
-    const float s_underLavaOffset = 0.0f;
-    const float s_popUpSpeed = 2.9f;
+    const float s_underLavaOffset = 1.5f;
+    const float s_popUpSpeed = 6.0f;
     const float s_popUpAng = 45.0f;
     const float s_spinTime = 0.5f;
     const float s_wobbleTime = 2.0f;
@@ -90,13 +90,13 @@ public class Ninja : EnemyBird
         float dt = BulletTime.Get().GetDeltaTime();
         m_damageTimer -= dt;
         Vector3 pos = transform.position;
+        Vector3 oldPos = pos;
         Vector3 rot = transform.localEulerAngles;
 
         switch ((State_Ninja)m_state)
         {
             case State_Ninja.SHELL:
                 {
-                    UpdatePush(dt);
                     m_fireDelay = 1.0f;
                     m_vel.y -= s_gravity * dt;
                     pos += m_vel * dt;
@@ -115,7 +115,6 @@ public class Ninja : EnemyBird
                 }
             case State_Ninja.SPIN:
                 {
-                    UpdatePush(dt);
                     m_fireDelay = 1.0f;
                     m_spinTimer -= dt;
                     m_vel.y -= s_gravity * dt;
@@ -131,11 +130,10 @@ public class Ninja : EnemyBird
                 }
             case State_Ninja.WOBBLE:
                 {
-                    UpdatePush(dt);
                     m_fireDelay = 1.0f;
                     m_vel.y -= s_gravity * dt;
                     pos += m_vel * dt;
-                    rot.z = m_spinTimer * Mathf.Sin(Mathf.Deg2Rad * 360.0f * m_spinTimer);
+                    rot.z = Mathf.Rad2Deg * m_spinTimer * Mathf.Sin(Mathf.Deg2Rad * 360.0f * m_spinTimer);
                     m_spinTimer -= dt;
                     if (m_spinTimer <= 0.0f)
                     {
@@ -149,6 +147,7 @@ public class Ninja : EnemyBird
                     if (Missile.GetNumMissiles() > 0)
                     {
                         m_state = (State)State_Ninja.SHELL;
+//                        m_vel = Vector3.zero;
                         m_shellTimer = s_shellTime;
                         if (null != m_anim)
                             m_anim.Play("Hide");
@@ -171,26 +170,26 @@ public class Ninja : EnemyBird
 
         base.Update();
 
-        if (State.CUSTOM >= m_state)
-            m_vel = (pos - m_oldPos) / dt;
+        if (State.CUSTOM > m_state)
+            m_vel = (transform.position - oldPos) / dt;
     }
 
     void UpdatePos(Vector3 pos, Vector3 rot)
     {
-        //float bottomHeight = GameManager.Get().GetLavaHeight() + s_underLavaOffset;
-        //if (pos.y > bottomHeight)
-        //{
-        //    pos.y = bottomHeight;
-        //    m_vel.y = 0.0f;
-        //}
+        float bottomHeight = GameManager.Get().GetLavaHeight() - s_underLavaOffset;
+        if (pos.y < bottomHeight)
+        {
+            pos.y = bottomHeight;
+            m_vel.y = 0.0f;
+        }
         transform.position = pos;
         transform.localEulerAngles = rot;
     }
 
     protected override IHitPoints.DamageReturn DoDamage(int damage, IHitPoints.HitType hitType)
     {
-        if (hitType == IHitPoints.HitType.MISSILE)
-        {
+        if (hitType == HitType.MISSILE)
+        {   // ninja is immune to missiles... he hides in his shell
             switch ((State_Ninja)m_state)
             {
                 case State_Ninja.SHELL:
@@ -202,7 +201,11 @@ public class Ninja : EnemyBird
                 case State_Ninja.SPIN:
                     break;
             }
-            return IHitPoints.DamageReturn.NO_DAMAGE;
+            return DamageReturn.NO_DAMAGE;
+        }
+        if (hitType == HitType.NONE)
+        {   // ninja is immune to collision damage
+            return DamageReturn.NO_DAMAGE;
         }
         return base.DoDamage(damage, hitType);
     }
@@ -210,7 +213,7 @@ public class Ninja : EnemyBird
     void PopUp(float power)
     {
         float ang = Mathf.Deg2Rad * Random.Range(-s_popUpAng, s_popUpAng);
-        m_vel = new Vector2(Mathf.Sin(ang), -Mathf.Cos(ang)) * power;
+        m_vel += new Vector3(Mathf.Sin(ang), Mathf.Cos(ang), 0.0f) * power;
     }
 
     void NextEggTime()
