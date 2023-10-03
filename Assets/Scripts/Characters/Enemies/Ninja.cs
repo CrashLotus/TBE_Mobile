@@ -33,8 +33,8 @@ public class Ninja : EnemyBird
     const float s_popUpAng = 45.0f;
     const float s_spinTime = 0.5f;
     const float s_wobbleTime = 2.0f;
-    const float s_eggDelayMin = 1.0f;
-    const float s_eggDelayMax = 2.5f;
+    const float s_eggDelayMin = 2.0f;
+    const float s_eggDelayMax = 4.0f;
 
     public static new void WarmUp()
     {
@@ -78,6 +78,7 @@ public class Ninja : EnemyBird
     public override void Init(ObjectPool pool)
     {
         base.Init(pool);
+        m_pushFactor = 0.05f;
         m_shellTimer = 0.0f;
         m_damageTimer = 0.0f;
         m_spinTimer = 0.0f;
@@ -154,7 +155,7 @@ public class Ninja : EnemyBird
                     }
                     else
                     {
-                        if (pos.y < GameManager.Get().GetLavaHeight())
+                        if (pos.y > GameManager.Get().GetLavaHeight())
                         {
                             m_eggTimer -= dt;
                             if (m_eggTimer <= 0.0f && GameManager.State.GAME_OVER != GameManager.Get().GetState())
@@ -223,25 +224,29 @@ public class Ninja : EnemyBird
 
     public void Poop()
     {
-        //Vector3 eggDir = s_eggSpawnSpeed;
-        //Vector3 eggPos = s_eggSpawnPos;
-        //if (m_sprite.flipX)
-        //{
-        //    eggDir.x = -eggDir.x;
-        //    eggPos.x = -eggPos.x;
-        //}
-        //eggPos += pos;
         if (null != m_poopEffect && null != m_poopSpot)
         {
-            Vector3 pos = m_poopSpot.transform.position;
+            Vector3 pos = m_poopSpot.transform.localPosition;
+            Vector3 dir = m_poopSpot.right;
+            if (m_sprite.flipX)
+            {
+                pos.x = -pos.x;
+                dir.x = -dir.x;
+            }
+            pos = m_poopSpot.transform.parent.TransformPoint(pos);
             if (pos.y > GameManager.Get().GetLavaHeight())
             {
                 if (GameManager.Get().GetScreenBounds().Contains(pos))
                 {
                     GameObject poop = ObjectPool.Allocate(m_poopEffect, 16, pos);
                     if (null != poop)
+                    {
                         poop.transform.rotation = m_poopSpot.rotation;
-                    Egg.Spawn(pos, m_eggPower, -m_eggSpeed * m_poopSpot.right);
+                        SpriteRenderer poopSprite = poop.GetComponent<SpriteRenderer>();
+                        if (null != poopSprite)
+                            poopSprite.flipX = m_sprite.flipX;
+                    }
+                    Egg.Spawn(pos, m_eggPower, -m_eggSpeed * dir);
                 }
             }
         }
