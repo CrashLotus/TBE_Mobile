@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1225877172120917245}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.448, y: 0.065, z: 0}
+  m_LocalPosition: {x: 1.86, y: 0.49, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1225877172120917245}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ca96a5591a7b9b458df043effec4b5a, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b0e730cff0e1a841b52c29241a4c0e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_bulletPrefab: {fileID: 3064997521842465661, guid: dd1760b5111003c45aec3f1ea441186e, type: 3}
@@ -49,6 +49,7 @@ MonoBehaviour:
   m_recoil: 8
   m_fireSound: {fileID: 11400000, guid: 262b90bf0d518364fbf05fc67a4f4c0f, type: 2}
   m_isPlayerWeapon: 0
+  m_blastPrefab: {fileID: 2576857734935278903, guid: f08e9c948e3a62b459554b68f8a541fb, type: 3}
 --- !u!1 &4992926392983268841
 GameObject:
   m_ObjectHideFlags: 0
