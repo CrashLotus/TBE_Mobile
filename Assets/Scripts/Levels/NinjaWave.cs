@@ -21,6 +21,8 @@ public class NinjaWave : Wave
 
         Vector3 pos = Player.Get().transform.position;
         pos.x += m_xOffset;
+        pos.y = GameManager.Get().GetScreenBounds().max.y + 2.0f;
+        
         Ninja.Spawn(pos);
     }
 

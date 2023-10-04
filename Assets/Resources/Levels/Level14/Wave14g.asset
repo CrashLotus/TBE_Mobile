@@ -14,6 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_label: 
   m_text: Cowabunga
-  m_xOffset: 0
-  m_waitOnNinja: 1
+  m_xOffset: 5
   m_waitOnEnemies: 1
