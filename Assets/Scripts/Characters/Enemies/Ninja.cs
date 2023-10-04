@@ -20,10 +20,10 @@ public class Ninja : EnemyBird
         WOBBLE
     };
     float m_shellTimer;
-    float m_damageTimer;
     float m_spinTimer;
     float m_eggTimer;
     Vector3 m_vel;
+    Rigidbody2D m_rigidBody;
 
     const float s_shellTime = 3.0f;
     const float s_gravity = 4.0f;
@@ -80,16 +80,15 @@ public class Ninja : EnemyBird
         base.Init(pool);
         m_pushFactor = 0.05f;
         m_shellTimer = 0.0f;
-        m_damageTimer = 0.0f;
         m_spinTimer = 0.0f;
         NextEggTime();
         m_vel = Vector3.zero;
+        m_rigidBody = GetComponent<Rigidbody2D>();
     }
 
     protected override void Update()
     {
         float dt = BulletTime.Get().GetDeltaTime();
-        m_damageTimer -= dt;
         Vector3 pos = transform.position;
         Vector3 oldPos = pos;
         Vector3 rot = transform.localEulerAngles;
@@ -109,6 +108,8 @@ public class Ninja : EnemyBird
                         if (null != m_anim)
                             m_anim.Play("Fly", 0, 0.0f);
                         NextEggTime();
+                        if (null != m_rigidBody)
+                            m_rigidBody.isKinematic = false;
                     }
                     Debug.Log(m_vel);
                     UpdatePos(pos, rot);
@@ -148,10 +149,11 @@ public class Ninja : EnemyBird
                     if (Missile.GetNumMissiles() > 0)
                     {
                         m_state = (State)State_Ninja.SHELL;
-//                        m_vel = Vector3.zero;
                         m_shellTimer = s_shellTime;
                         if (null != m_anim)
                             m_anim.Play("Hide");
+                        if (null != m_rigidBody)
+                            m_rigidBody.isKinematic = true;
                     }
                     else
                     {
