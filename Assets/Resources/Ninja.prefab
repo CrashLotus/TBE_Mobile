@@ -299,14 +299,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ee051289125e5c4185279d92fb1fc04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_vertSpeed: 1
-  m_horizSpeed: 1
+  m_vertSpeed: 2
+  m_horizSpeed: 2
   m_maxHitPoints: 150
   m_deathEffect: {fileID: 4234046206340094728, guid: 7edfa5faa808ada4ebb4dbf2928029bd, type: 3}
   m_deathSound: {fileID: 11400000, guid: 63f8240c27825f74595de4e378e55b7e, type: 2}
   m_weapon: {fileID: 7880512789143022297}
   m_fireDelay: 3
-  m_jukeFreq: 1
+  m_jukeFreq: 2
   m_eggPower: 2
   m_score: 1000
   m_spawnEffect: {fileID: 7310939739548605333, guid: f385b209e7275a149813edcd33d60dcb, type: 3}

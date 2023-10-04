@@ -16,6 +16,7 @@ public class Bullet : PooledObject
     protected Vector3 m_vel;
     protected Vector3 m_dir;
     protected float m_curSpeed;
+    bool m_isOnScreen;
     Renderer m_renderer;
 
     public void WarmUp()
@@ -28,6 +29,7 @@ public class Bullet : PooledObject
     {
         base.Init(pool);
         m_curSpeed = m_speed;
+        m_isOnScreen = false;
     }
 
     protected virtual void Start()
@@ -65,11 +67,15 @@ public class Bullet : PooledObject
         transform.position = pos;
 
         if (null != m_renderer)
-        {
+        {   // once the bullet has appeared on screen, kill it as soon as it leaves the screen
             Bounds bounds = m_renderer.bounds;
             Bounds screenBounds = GameManager.Get().GetScreenBounds();
-            if (false == bounds.Intersects(screenBounds))
-            {
+            if (bounds.Intersects(screenBounds))
+            {   // wait for the bullet to appear on screen (in case fired from off-screen)
+                m_isOnScreen = true;
+            }
+            else if (m_isOnScreen)
+            {   // then once it has left the screen, delete it
                 Free();
             }
         }

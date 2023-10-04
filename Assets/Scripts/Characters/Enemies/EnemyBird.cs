@@ -247,6 +247,10 @@ public class EnemyBird : Bird, IHitPoints
             Vector3 botRight = new Vector3(1.0f, 0.0f, 0.0f);   // bottom-right corner in view coords
             botRight = Camera.main.ViewportToWorldPoint(botRight);    // converted to world coords
             pos.y = Mathf.Max(pos.y, botRight.y);
+            // constrain to top of screen
+            Vector3 topLeft = new Vector3(0.0f, 1.5f, 0.0f);    // half a screen up above the top of the screen
+            topLeft = Camera.main.ViewportToWorldPoint(topLeft);    // converted to world coords
+            pos.y = Mathf.Min(pos.y, topLeft.y);
         }
 
         transform.position = pos;
