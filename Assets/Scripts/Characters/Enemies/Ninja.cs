@@ -35,6 +35,9 @@ public class Ninja : EnemyBird
     const float s_wobbleTime = 2.0f;
     const float s_eggDelayMin = 2.0f;
     const float s_eggDelayMax = 4.0f;
+    static readonly int[] s_numEggExplode = { 5, 3, 1 };
+    static readonly float[] s_eggExplodeSpeed = { 3.0f, 2.0f, 0.0f };
+    static readonly float[] s_eggExplodeUp = { 4.0f, 4.0f, 4.0f };
 
     public static new void WarmUp()
     {
@@ -211,6 +214,27 @@ public class Ninja : EnemyBird
             return DamageReturn.NO_DAMAGE;
         }
         return base.DoDamage(damage, hitType);
+    }
+
+    protected override void Explode()
+    {
+        Vector3 pos = transform.position;
+        for (int eggPower = 0; eggPower < 3; ++eggPower)
+        {
+            float angPerEgg = 2.0f * Mathf.PI / s_numEggExplode[eggPower];
+            float eggAng = 0.0f;
+            for (int i = 0; i < s_numEggExplode[eggPower]; ++i)
+            {
+                Vector3 eggDir = s_eggExplodeSpeed[eggPower] * new Vector3(Mathf.Sin(eggAng), Mathf.Cos(eggAng), 0.0f);
+                eggDir.y += s_eggExplodeUp[eggPower];
+                Egg.Spawn(pos, eggPower + 1, eggDir);
+                eggAng += angPerEgg;
+            }
+        }
+        FollowCamera.Shake(10.0f, 1.0f);
+        TimeCrystal.Spawn(pos);
+        m_eggPower = 0;
+        base.Explode();
     }
 
     void PopUp(float power)

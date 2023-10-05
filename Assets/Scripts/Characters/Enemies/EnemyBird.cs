@@ -369,7 +369,7 @@ public class EnemyBird : Bird, IHitPoints
         return IHitPoints.DamageReturn.PASS_THROUGH;       // I'm already dead
     }
 
-    void Explode()
+    protected virtual void Explode()
     {
         ObjectPool.Allocate(m_deathEffect, 64, transform.position);
         if (null != m_deathSound)

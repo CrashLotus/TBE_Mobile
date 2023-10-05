@@ -20,7 +20,7 @@ public class LavaBubbles : MonoBehaviour
             float x = Camera.main.aspect * Random.Range(-1.0f, 1.0f) * Camera.main.orthographicSize;
             float y = Random.Range(-Camera.main.orthographicSize, m_lavaTop);
             Vector3 pos = new Vector3(x, y, -1.0f + y / 20.0f);
-            pos = WrapAround.WrapPosition(pos);
+            pos.x += Camera.main.transform.position.x;
             ObjectPool.Allocate(m_bubblePrefab, 32, pos);
         }
     }
