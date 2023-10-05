@@ -54,7 +54,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2d9cb505ba8182849bacfb4067898f2e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -121,5 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_wiggleSpeedMin: 0.25
   m_wiggleSpeedMax: 2
-  m_wiggleAmpMin: 10
-  m_wiggleAmpMax: 40
+  m_wiggleAmpMinX: 0.03
+  m_wiggleAmpMaxX: 0.06
+  m_wiggleAmpMinY: 0.1
+  m_wiggleAmpMaxY: 0.4
