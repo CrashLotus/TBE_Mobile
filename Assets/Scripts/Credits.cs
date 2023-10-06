@@ -10,6 +10,9 @@ public class Credits : MonoBehaviour, IPointerDownHandler, IPointerMoveHandler, 
     public TextMeshProUGUI m_textProto;
     public float m_spacing = 120.0f;
     public float m_scrollRate = 100.0f;
+    public float m_circleRate = 1.0f;
+
+    float m_circleTime = 0.0f;
 
     public class CreditList
     {
@@ -70,6 +73,9 @@ public class Credits : MonoBehaviour, IPointerDownHandler, IPointerMoveHandler, 
             if (lastPos.y > 1.05f)
                 GameManager.Get().ReturnToMainMenu();
         }
+
+        m_circleTime += m_circleRate * Time.unscaledDeltaTime;
+        Shader.SetGlobalFloat("_CreditWipe", m_circleTime);
     }
 
     public void OnPointerDown(PointerEventData eventData)
