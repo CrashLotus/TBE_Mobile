@@ -55,6 +55,9 @@ public class Player : Bird, IHitPoints
     };
     const float s_comboDelay = 1.5f;        // kill a guy every 1.5 seconds to keep combo running
     const float s_comboCountDown = 0.25f;   // if you don't, they'll tick down every 1/4 second
+    static readonly float[] s_vertSpeed = { 7.0f, 10.0f };
+    static readonly float[] s_horizSpeed = { 7.0f, 10.0f };
+    static readonly float[] s_accel = { 100.0f, 180.0f };
 
     public static Player Get()
     {
@@ -114,6 +117,11 @@ public class Player : Bird, IHitPoints
         timeWarp |= Input.GetKeyDown(KeyCode.BackQuote);
 
         // update velocity
+        int speedLevel = SaveData.Get().HasUpgrade("FASTFLY") ? 1 : 0;
+        m_vertSpeed = s_vertSpeed[speedLevel];
+        m_horizSpeed = s_horizSpeed[speedLevel];
+        m_accel = s_accel[speedLevel];
+
         Vector3 vel = Vector3.zero;
         Joystick joystick = GameUI.Get().GetJoystick();
         if (null != joystick)
@@ -293,6 +301,16 @@ public class Player : Bird, IHitPoints
         if (data.HasUpgrade("EGGMAGNET2"))
             return 2;
         if (data.HasUpgrade("EGGMAGNET1"))
+            return 1;
+        return 0;
+    }
+
+    public static int GetBulletSpeedLevel()
+    {
+        SaveData data = SaveData.Get();
+        if (data.HasUpgrade("BULLETSPEED2"))
+            return 2;
+        if (data.HasUpgrade("BULLETSPEED1"))
             return 1;
         return 0;
     }

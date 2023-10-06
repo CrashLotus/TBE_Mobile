@@ -10,3 +10,6 @@ TimeWarp2
 TimeWarp_Refill
 Magnet1
 Magnet2
+BulletSpeed1
+BulletSpeed2
+FastFly

@@ -11,6 +11,8 @@ public class LaserWeapon : Weapon
     Sound m_baseSound;
     const float s_coneAngle = 10.0f;
 
+    static readonly float[] s_fireDelay = { 0.25f, 0.2f, 0.175f };
+
     protected override void Start()
     {
         base.Start();
@@ -40,6 +42,9 @@ public class LaserWeapon : Weapon
 
     protected override bool Fire()
     {
+        int fireRate = Player.GetBulletSpeedLevel();
+        m_fireDelay = s_fireDelay[fireRate];
+
         Player.EggBonus bonusMode = Player.Get().GetBonusMode();
         if (bonusMode == Player.EggBonus.POWER_LASER
             || bonusMode == Player.EggBonus.MULTISHOT

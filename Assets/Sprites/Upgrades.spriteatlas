@@ -37,8 +37,10 @@ SpriteAtlas:
     isAtlasV2: 0
     cachedData: {fileID: 0}
     packedSpriteRenderDataKeys:
+    - 8639eed0dad3e4f41850483ce85c5aa7: 21300000
     - 3ad13e21b9fbf50469c80a2e3c9f4f40: 21300000
     - a27972d1e47ddea47b050a1155fab79b: 21300000
+    - 18c60e132cc23d447a7525e08614c81f: 21300000
     - 02511a43419ee324aa2216709eb3913d: 21300000
     - d39ca9a3a76489a409ea11d32a54f684: 21300000
     - 2fa2b6349f922a3448b3ce67dea60218: 21300000
@@ -49,14 +51,17 @@ SpriteAtlas:
     - b577aebb093e3614e82a30b51eb2e19f: -947610302
     - 9865ac1c149c6014680a40709e42a551: 21300000
     - 8ec6f92c23d47734b95f70d66c84ee49: 21300000
+    - 00077a8cc73d33b4d97f7aec1f866ebd: 21300000
     - 7446569c430514b41b923dea2323d14a: 21300000
     - c34ae9dcb30861c49942174a15cf63a0: 21300000
     - b79f98ecfe1bf3e44a476908dae10efb: 21300000
     - 3218180f0c46c1d449595e77ac52cf3c: -736876375
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 8639eed0dad3e4f41850483ce85c5aa7, type: 3}
   - {fileID: 21300000, guid: 3ad13e21b9fbf50469c80a2e3c9f4f40, type: 3}
   - {fileID: 21300000, guid: a27972d1e47ddea47b050a1155fab79b, type: 3}
+  - {fileID: 21300000, guid: 18c60e132cc23d447a7525e08614c81f, type: 3}
   - {fileID: 21300000, guid: 02511a43419ee324aa2216709eb3913d, type: 3}
   - {fileID: 21300000, guid: d39ca9a3a76489a409ea11d32a54f684, type: 3}
   - {fileID: 21300000, guid: 2fa2b6349f922a3448b3ce67dea60218, type: 3}
@@ -67,13 +72,16 @@ SpriteAtlas:
   - {fileID: -947610302, guid: b577aebb093e3614e82a30b51eb2e19f, type: 3}
   - {fileID: 21300000, guid: 9865ac1c149c6014680a40709e42a551, type: 3}
   - {fileID: 21300000, guid: 8ec6f92c23d47734b95f70d66c84ee49, type: 3}
+  - {fileID: 21300000, guid: 00077a8cc73d33b4d97f7aec1f866ebd, type: 3}
   - {fileID: 21300000, guid: 7446569c430514b41b923dea2323d14a, type: 3}
   - {fileID: 21300000, guid: c34ae9dcb30861c49942174a15cf63a0, type: 3}
   - {fileID: 21300000, guid: b79f98ecfe1bf3e44a476908dae10efb, type: 3}
   - {fileID: -736876375, guid: 3218180f0c46c1d449595e77ac52cf3c, type: 3}
   m_PackedSpriteNamesToIndex:
+  - Icon_SpeedLaser2
   - Icon_TimeWarp
   - Icon_TimeWarp2
+  - Icon_FastFly
   - Icon_Aim
   - Icon_Check
   - Icon_Missile2
@@ -84,6 +92,7 @@ SpriteAtlas:
   - Frame_ScreenShot_0
   - Icon_Missile1
   - Icon_Magnet1
+  - Icon_SpeedLaser1
   - Icon_Shield
   - Icon_Lock
   - Icon_Magnet2
