@@ -57,7 +57,7 @@ public class Player : Bird, IHitPoints
     const float s_comboCountDown = 0.25f;   // if you don't, they'll tick down every 1/4 second
     static readonly float[] s_vertSpeed = { 7.0f, 10.0f };
     static readonly float[] s_horizSpeed = { 7.0f, 10.0f };
-    static readonly float[] s_accel = { 100.0f, 180.0f };
+    static readonly float[] s_accel = { 50.0f, 90.0f };
 
     public static Player Get()
     {
@@ -124,6 +124,7 @@ public class Player : Bird, IHitPoints
 
         Vector3 vel = Vector3.zero;
         Joystick joystick = GameUI.Get().GetJoystick();
+        float throttle = 0.0f;
         if (null != joystick)
         {
             Vector3 move = new Vector3(joystick.Horizontal, joystick.Vertical, 0.0f);
@@ -136,10 +137,13 @@ public class Player : Bird, IHitPoints
             if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
                 move.x -= 1.0f;
             vel = new Vector3(move.x * m_horizSpeed, move.y * m_vertSpeed, 0.0f);
+            throttle = Mathf.Min(move.magnitude, 1.0f);
+            if (throttle <= 0.01f)
+                throttle = 1.0f;
         }
         Vector3 dV = vel - m_vel;
         float accel = dV.magnitude;
-        float maxAccel = m_accel * dt;
+        float maxAccel = throttle * m_accel * dt;
         if (accel > maxAccel)
             dV = dV / accel * maxAccel;
         m_vel += dV;
