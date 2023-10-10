@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BulletSpeed1
   m_EditorClassIdentifier: 
   m_key: BULLETSPEED1
-  m_name: Berserker-gauge
+  m_name: Berserker - gauge
   m_cost: 10
   m_desc: 'Rawwar!!!
 

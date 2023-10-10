@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BulletSpeed2
   m_EditorClassIdentifier: 
   m_key: BULLETSPEED2
-  m_name: Berserker-gauge-ier
+  m_name: Berserker - gaugeier
   m_cost: 20
   m_desc: 'MOAR faster fire!!!
 
