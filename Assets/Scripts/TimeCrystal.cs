@@ -10,6 +10,11 @@ public class TimeCrystal : PickUp
 
     const float s_hudFlyTime = 2.0f;
 
+    void Start()
+    {
+        Init(null);   
+    }
+
     public static void MakeCrystalPool()
     {
         if (null == s_crystalPool)
@@ -25,6 +30,7 @@ public class TimeCrystal : PickUp
         m_anim = GetComponent<Animator>();
         if (null != m_anim)
             m_anim.Play("CrystalIdle", -1, 0.0f);
+        Utility.HitFlashReset(gameObject);
     }
 
     static TimeCrystal MakeCrystal(Vector3 pos)

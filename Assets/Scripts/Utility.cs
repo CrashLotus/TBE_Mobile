@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Utility
 {
+    public static readonly Color s_hitFlashColor = new Color(1.0f, 0.0f, 0.0f, 0.0f);
+    public const float s_hitFlashTime = 0.05f;
+
     /// <summary>
     /// This is the intersection of the screen-space screenPos with the plane z=zDepth
     /// </summary>
@@ -27,5 +30,40 @@ public class Utility
             angle += 360.0f;
 
         return angle;
+    }
+
+    public static void HitFlash(GameObject gameObject)
+    {
+        MonoBehaviour mono = gameObject.GetComponent<MonoBehaviour>();
+        if (null != mono)
+            mono.StartCoroutine(HitFlashUpdate(gameObject));
+    }
+
+    static IEnumerator HitFlashUpdate(GameObject gameObject)
+    {
+        SpriteRenderer sprite = gameObject.GetComponent<SpriteRenderer>();
+        if (null == sprite)
+            sprite = gameObject.GetComponentInChildren<SpriteRenderer>();
+        if (null == sprite)
+            yield break;
+
+        sprite.color = s_hitFlashColor;
+        float timer = s_hitFlashTime;
+        while (timer > 0.0f)
+        {
+            timer -= Time.unscaledDeltaTime;
+            yield return null;
+        }
+        sprite.color = Color.white;
+    }
+
+    public static void HitFlashReset(GameObject gameObject)
+    {
+        SpriteRenderer sprite = gameObject.GetComponent<SpriteRenderer>();
+        if (null == sprite)
+            sprite = gameObject.GetComponentInChildren<SpriteRenderer>();
+        if (null == sprite)
+            return;
+        sprite.color = Color.white;
     }
 }

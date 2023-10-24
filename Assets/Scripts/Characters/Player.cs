@@ -221,6 +221,7 @@ public class Player : Bird, IHitPoints
 
         int shake = Mathf.Min((int)damage, s_hitShake.Length - 1);
         FollowCamera.Shake(s_hitShake[shake].x, s_hitShake[shake].y);
+        Utility.HitFlash(gameObject);
 
         m_comboTimer = 0.0f;
         m_comboPoints = 0;

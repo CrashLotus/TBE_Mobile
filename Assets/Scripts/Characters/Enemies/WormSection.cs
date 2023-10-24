@@ -120,10 +120,12 @@ public class WormSection : PooledObject, IHitPoints
     {
         if (null == m_prevSection)
         {   // head passes damage onto next section
+            Utility.HitFlash(gameObject);
             return m_head.HeadDamage(damage, hitType);
         }
         if (null == m_nextSection)
         {   // tail passes damage onto prev section
+            Utility.HitFlash(gameObject);
             return m_prevSection.Damage(damage, hitType);
         }
         if (m_hitPoints > 0)
@@ -134,6 +136,7 @@ public class WormSection : PooledObject, IHitPoints
                 Explode();
                 return IHitPoints.DamageReturn.KILLED;    // I've been killed
             }
+            Utility.HitFlash(gameObject);
             return IHitPoints.DamageReturn.DAMAGED;
         }
 

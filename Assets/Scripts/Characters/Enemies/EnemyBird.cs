@@ -363,6 +363,7 @@ public class EnemyBird : Bird, IHitPoints
                 Explode();
                 return IHitPoints.DamageReturn.KILLED;    // I've been killed
             }
+            Utility.HitFlash(gameObject);
             return IHitPoints.DamageReturn.DAMAGED;
         }
 

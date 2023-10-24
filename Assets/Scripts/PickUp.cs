@@ -138,6 +138,7 @@ public class PickUp : PooledObject, IHitPoints
         {
             PopUp(s_spawnSpeed);
             SetState(State.SPIN);
+            Utility.HitFlash(gameObject);
             return IHitPoints.DamageReturn.DAMAGED;
         }
         return IHitPoints.DamageReturn.PASS_THROUGH;
