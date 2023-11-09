@@ -132,7 +132,7 @@ public class PickUp : PooledObject, IHitPoints
         // Does Nothing By Default
     }
 
-    public IHitPoints.DamageReturn Damage(int damage, IHitPoints.HitType hitType)
+    public IHitPoints.DamageReturn Damage(float damage, IHitPoints.HitType hitType)
     {
         if (State.SPIN != m_state)
         {

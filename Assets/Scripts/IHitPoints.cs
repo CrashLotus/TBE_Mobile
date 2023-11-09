@@ -22,5 +22,5 @@ public interface IHitPoints
         TOTAL
     }
 
-    public DamageReturn Damage(int damage, HitType hitType);
+    public DamageReturn Damage(float damage, HitType hitType);
 }

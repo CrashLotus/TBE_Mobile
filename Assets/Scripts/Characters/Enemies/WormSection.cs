@@ -11,7 +11,7 @@ public class WormSection : PooledObject, IHitPoints
     const int s_hitDamage = 1;
     protected SpriteRenderer m_sprite;
     public int m_maxHitPoints = 20;
-    protected int m_hitPoints = 20;
+    protected float m_hitPoints;
     protected Worm m_head;
     protected WormSection m_prevSection;
     protected WormSection m_nextSection;
@@ -116,7 +116,7 @@ public class WormSection : PooledObject, IHitPoints
         }
     }
 
-    public IHitPoints.DamageReturn Damage(int damage, IHitPoints.HitType hitType)
+    public IHitPoints.DamageReturn Damage(float damage, IHitPoints.HitType hitType)
     {
         if (null == m_prevSection)
         {   // head passes damage onto next section
@@ -128,10 +128,10 @@ public class WormSection : PooledObject, IHitPoints
             Utility.HitFlash(gameObject);
             return m_prevSection.Damage(damage, hitType);
         }
-        if (m_hitPoints > 0)
+        if (m_hitPoints > 0.0f)
         {
             m_hitPoints -= damage;
-            if (m_hitPoints <= 0)
+            if (m_hitPoints <= 0.0f)
             {
                 Explode();
                 return IHitPoints.DamageReturn.KILLED;    // I've been killed

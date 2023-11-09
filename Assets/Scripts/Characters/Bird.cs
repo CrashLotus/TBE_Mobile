@@ -14,7 +14,7 @@ public class Bird : PooledObject
     protected Vector3 m_push = Vector3.zero;
     protected float m_pushTimer = 0.0f;
     protected float m_pushFactor;
-    protected int m_hitPoints = 1;
+    protected float m_hitPoints;
     protected SpriteRenderer m_sprite;
     protected Animator m_anim;
     protected Vector3 m_oldPos;

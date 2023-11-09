@@ -188,7 +188,7 @@ public class Ninja : EnemyBird
         transform.localEulerAngles = rot;
     }
 
-    protected override IHitPoints.DamageReturn DoDamage(int damage, IHitPoints.HitType hitType)
+    protected override IHitPoints.DamageReturn DoDamage(float damage, IHitPoints.HitType hitType)
     {
         if (hitType == HitType.MISSILE)
         {   // ninja is immune to missiles... he hides in his shell

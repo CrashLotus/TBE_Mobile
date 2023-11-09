@@ -10,7 +10,7 @@ public class EnemyRocket : Bullet, IHitPoints
     public Sound m_destroyedSound;
 
     float m_timer;
-    int m_hitPoints;
+    float m_hitPoints;
 
     public override void Init(ObjectPool pool)
     {
@@ -18,12 +18,12 @@ public class EnemyRocket : Bullet, IHitPoints
         m_hitPoints = m_maxHitPoints;
     }
 
-    public IHitPoints.DamageReturn Damage(int damage, IHitPoints.HitType hitType)
+    public IHitPoints.DamageReturn Damage(float damage, IHitPoints.HitType hitType)
     {
-        if (m_hitPoints > 0)
+        if (m_hitPoints > 0.0f)
         {
             m_hitPoints -= damage;
-            if (m_hitPoints <= 0)
+            if (m_hitPoints <= 0.0f)
             {
                 if (null != m_destroyedSound)
                     m_destroyedSound.Play();

@@ -209,7 +209,7 @@ public class Player : Bird, IHitPoints
 //        Debug.Log("Player hit a " + collision.gameObject.name);
     }
 
-    public IHitPoints.DamageReturn Damage(int damage, IHitPoints.HitType hitType)
+    public IHitPoints.DamageReturn Damage(float damage, IHitPoints.HitType hitType)
     {
         if (m_isEggShieldOn)
         {
@@ -235,11 +235,11 @@ public class Player : Bird, IHitPoints
         int maxEgg = MaxEgg();
         if (m_hitPoints > maxEgg)   // you can have more than max eggs, but you can't have more than max hit points
             m_hitPoints = maxEgg;
-        int eggDamage = Mathf.Min(damage, m_hitPoints);
+        int eggDamage = (int)Mathf.Min(damage, m_hitPoints);
         if (IHitPoints.HitType.NONE == hitType)
             eggDamage = Mathf.Min(eggDamage, 3);    // max damage of 3 if you hit an enemy
         Debug.Log("Taking Damage " + eggDamage);
-        int numEgg = (int)eggDamage;
+        int numEgg = eggDamage;
         Vector3 pos = transform.position;
         TutorialManager.Get().PlayerDamaged(transform.position);
         while (numEgg >= 3)
@@ -398,7 +398,7 @@ public class Player : Bird, IHitPoints
         if (null == s_thePlayer)
             return SaveData.Get().GetPlayerHP();
 
-        int numEgg = s_thePlayer.m_hitPoints;
+        int numEgg = (int)s_thePlayer.m_hitPoints;
         if (numEgg < 0)
             numEgg = 0;
         return numEgg;

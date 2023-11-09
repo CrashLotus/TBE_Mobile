@@ -479,17 +479,17 @@ public class Worm : WormSection
             m_tailOnScreen = true;
     }
 
-    public IHitPoints.DamageReturn HeadDamage(int damage, IHitPoints.HitType hitType)
+    public IHitPoints.DamageReturn HeadDamage(float damage, IHitPoints.HitType hitType)
     {
         if (m_sections.Count > 1)
         {   // pass the damage down to the next section
             return m_sections[0].Damage(damage, hitType);
         }
         // we're out of sections...
-        if (m_hitPoints > 0)
+        if (m_hitPoints > 0.0f)
         {
             m_hitPoints -= damage;
-            if (m_hitPoints <= 0)
+            if (m_hitPoints <= 0.0f)
             {
                 Explode();
                 return IHitPoints.DamageReturn.KILLED;    // I've been killed
