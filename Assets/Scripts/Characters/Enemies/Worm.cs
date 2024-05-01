@@ -51,8 +51,19 @@ public class Worm : WormSection
     float m_tailYMax = 0.0f;
     bool m_tailOnScreen = false;
     Vector3 m_arcCenter;
+
+    enum SubState
+    {
+        RISING,
+        FLAT,
+        SINKING
+    }
+    SubState m_subState;
+
     const float s_arcWidth = 6.0f;
     const float s_arcHeight = 4.0f;
+    const float s_skimHeight = 0.75f;
+    const float s_diveRate = 40.0f; // degrees per second
 
     static List<Worm> s_theList = new List<Worm>();
     static ObjectPool[] s_wormPool = new ObjectPool[(int)WormType.TOTAL];
@@ -267,6 +278,7 @@ public class Worm : WormSection
                 }
                 break;
             case Pattern.UP:
+            case Pattern.SKIM_LOW_RIGHT:
                 {
                     ang = 90.0f;
                     flipY = false;
@@ -285,6 +297,17 @@ public class Worm : WormSection
                     pos.y = GameManager.Get().GetScreenBounds().max.y + 1.0f;
                     pos.z = 0.1f;
                     transform.position = pos;
+                }
+                break;
+            case Pattern.SKIM_LOW_LEFT:
+                {
+                    ang = 90.0f;
+                    flipY = true;
+                    Vector3 pos = m_arcCenter;
+                    pos.y = GameManager.Get().GetLavaHeight() - 3.0f;
+                    pos.z = 0.1f;
+                    transform.position = pos;
+                    Warning(pos);
                 }
                 break;
         }
@@ -306,6 +329,7 @@ public class Worm : WormSection
             parent = worm;
         }
 
+        m_subState = SubState.RISING;
         m_pattern = pattern;
     }
 
@@ -347,8 +371,6 @@ public class Worm : WormSection
                     {
                         targetPos.x -= s_arcWidth;
                         targetPos.y = pos.y - 0.25f * speed;
-                        if (false == m_tailOnScreen)
-                            isDone = true;
                     }
                     else if (targetAng < 0.0f)
                     {
@@ -363,6 +385,15 @@ public class Worm : WormSection
                     offset = targetPos - pos;
                     targetAng = Mathf.Atan2(offset.y, offset.x);
                     targetAng = Mathf.Rad2Deg * targetAng;
+                    if (m_subState == SubState.RISING)
+                    {
+                        if (m_tailOnScreen)
+                            m_subState = SubState.SINKING;
+                    }
+                    else
+                    {
+                        isDone = !m_tailOnScreen;
+                    }
                 }
                 break;
             case Pattern.ARC_RIGHT:
@@ -405,6 +436,59 @@ public class Worm : WormSection
                     targetAng = -90.0f;
                     if (m_tailYMax < -0.1f)
                         isDone = true;
+                }
+                break;
+            case Pattern.SKIM_LOW_RIGHT:
+                {
+                    if (m_subState == SubState.RISING)
+                    {
+                        float lerp = (pos.y - GameManager.Get().GetLavaHeight()) / s_skimHeight;
+                        lerp = Mathf.Clamp01(lerp);
+                        targetAng = Mathf.Lerp(90.0f, 0.0f, lerp);
+                        if (pos.y > GameManager.Get().GetLavaHeight() + s_skimHeight)
+                            m_subState = SubState.FLAT;
+
+                    }
+                    else if (m_subState == SubState.FLAT)
+                    {
+                        targetAng = 0.0f;
+                        if (m_tailOnScreen)
+                            m_subState = SubState.SINKING;
+                    }
+                    else
+                    {
+                        if (ang > 180.0f)
+                            ang -= 360.0f;
+                        targetAng = ang - s_diveRate * Time.deltaTime;
+                        if (targetAng < -90.0f)
+                            targetAng = -90.0f;
+                        isDone = !m_tailOnScreen;
+                    }
+                }
+                break;
+            case Pattern.SKIM_LOW_LEFT:
+                {
+                    if (m_subState == SubState.RISING)
+                    {
+                        float lerp = (pos.y - GameManager.Get().GetLavaHeight()) / s_skimHeight;
+                        lerp = Mathf.Clamp01(lerp);
+                        targetAng = Mathf.Lerp(90.0f, 180.0f, lerp);
+                        if (pos.y > GameManager.Get().GetLavaHeight() + s_skimHeight)
+                            m_subState = SubState.FLAT;
+                    }
+                    else if (m_subState == SubState.FLAT)
+                    {
+                        targetAng = 180.0f;
+                        if (m_tailOnScreen)
+                            m_subState = SubState.SINKING;
+                    }
+                    else
+                    {
+                        targetAng = ang + s_diveRate * Time.deltaTime;
+                        if (targetAng > 270.0f)
+                            targetAng = 270.0f;
+                        isDone = !m_tailOnScreen;
+                    }
                 }
                 break;
             case Pattern.DEBUG_CHASE:
@@ -472,11 +556,17 @@ public class Worm : WormSection
         Vector3 tailMax = Camera.main.WorldToViewportPoint(tailSprite.bounds.max);
         m_tailYMax = tailMax.y;
         if (m_tailYMax < 0.0f)
+        {
             m_tailOnScreen = false;
+        }
         else if (m_tailYMin > 1.0f)
+        {
             m_tailOnScreen = false;
+        }
         else
+        {
             m_tailOnScreen = true;
+        }
     }
 
     public IHitPoints.DamageReturn HeadDamage(float damage, IHitPoints.HitType hitType)

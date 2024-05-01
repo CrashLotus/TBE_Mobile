@@ -73,6 +73,31 @@ public class WormSection : PooledObject, IHitPoints
     {
         if (null != parent)
         {
+#if false
+            // connect to the parent
+            Vector3 pos = transform.position;
+            Vector3 targetPos = parent.GetTailPos();
+            Vector3 headPos = GetHeadPos();
+            Vector3 tailPos = GetTailPos();
+            Vector3 delta = targetPos - headPos;
+            delta.z = 0.0f;
+            pos += delta;
+            transform.position = pos;
+
+            // rotate to aim at the parent's tail
+            Vector3 targetDelta = targetPos - tailPos;
+            float targetAng = Mathf.Atan2(targetDelta.y, targetDelta.x);
+            Vector3 rest = m_headJoint - m_tailJoint;
+            float restAng = Mathf.Atan2(rest.y, rest.x);
+            targetAng -= restAng;
+            float angle = Mathf.Rad2Deg * targetAng - parent.transform.localEulerAngles.z;
+            while (angle < -180.0f)
+                angle += 360.0f;
+            while (angle > 180.0f)
+                angle -= 360.0f;
+            angle = Mathf.Clamp(angle, s_minAng, s_maxAng);
+            transform.localEulerAngles = new Vector3(0.0f, 0.0f, parent.transform.localEulerAngles.z + angle);
+#else
             // rotate to aim at the parent's tail
             Vector3 targetPos = parent.GetTailPos();
             Vector3 tailPos = GetTailPos();
@@ -94,6 +119,16 @@ public class WormSection : PooledObject, IHitPoints
             delta.z = 0.0f;
             pos += delta;
             transform.position = pos;
+#endif
+
+#if false
+            headPos += delta;
+            Vector3 newHeadPos = GetHeadPos();
+            delta = headPos - newHeadPos;
+            delta.z = 0.0f;
+            pos += delta;
+            transform.position = pos;
+#endif
 
 #if false   //mrwTODO make the body follow the head flip
             if (null != m_sprite)

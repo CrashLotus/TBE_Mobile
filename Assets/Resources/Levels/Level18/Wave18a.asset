@@ -9,8 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f92e051b6ada1d4595224226f1ef9e0, type: 3}
-  m_Name: TestWorm
+  m_Script: {fileID: 11500000, guid: ee7e54a32cf8aaa408e0e601cb42446e, type: 3}
+  m_Name: Wave18a
   m_EditorClassIdentifier: 
-  m_waves:
-  - {fileID: 11400000, guid: a478a3f6c1c7bf244b2399b778ac221e, type: 2}
+  m_label: 
+  m_text: Greetings from Comrade Worm!
+  m_wormType: 2
+  m_pattern: 9
+  m_xOffset: 0
+  m_waitOnWorms: 1
+  m_waitOnEnemies: 1
