@@ -59,11 +59,13 @@ public class Worm : WormSection
         SINKING
     }
     SubState m_subState;
+    float m_stateTimer = 0.0f;
 
     const float s_arcWidth = 6.0f;
     const float s_arcHeight = 4.0f;
     const float s_skimHeight = 0.75f;
     const float s_diveRate = 40.0f; // degrees per second
+    const float s_sTurnTime = 2.0f;
 
     static List<Worm> s_theList = new List<Worm>();
     static ObjectPool[] s_wormPool = new ObjectPool[(int)WormType.TOTAL];
@@ -251,64 +253,76 @@ public class Worm : WormSection
         m_arcCenter = WrapAround.WrapPosition(m_arcCenter);
         bool flipY = false;
         float ang = 0.0f;
+
+        // initial position
+        Vector3 pos = m_arcCenter;
+        pos.z = 0.1f;
+        switch (pattern)
+        {
+            case Pattern.ARC_RIGHT:
+                pos.x -= s_arcWidth;
+                pos.y = GameManager.Get().GetLavaHeight() - 3.0f;
+                break;
+            case Pattern.ARC_LEFT:
+                pos.x += s_arcWidth;
+                pos.y = GameManager.Get().GetLavaHeight() - 3.0f;
+                break;
+            case Pattern.S_UP_RIGHT:
+            case Pattern.S_UP_LEFT:
+            case Pattern.UP:
+            case Pattern.SKIM_LOW_RIGHT:
+            case Pattern.SKIM_LOW_LEFT:
+                pos.y = GameManager.Get().GetLavaHeight() - 3.0f;
+                break;
+            case Pattern.S_DOWN_RIGHT:
+            case Pattern.S_DOWN_LEFT:
+            case Pattern.DOWN:
+                pos.y = GameManager.Get().GetScreenBounds().max.y + 1.0f;
+                break;
+        }
+        transform.position = pos;
+
+        // initial angle
+        switch (pattern)
+        {
+            case Pattern.ARC_RIGHT:
+            case Pattern.ARC_LEFT:
+            case Pattern.S_UP_RIGHT:
+            case Pattern.S_UP_LEFT:
+            case Pattern.UP:
+            case Pattern.SKIM_LOW_RIGHT:
+            case Pattern.SKIM_LOW_LEFT:
+                ang = 90.0f;
+                break;
+            case Pattern.DOWN:
+            case Pattern.S_DOWN_RIGHT:
+            case Pattern.S_DOWN_LEFT:
+                ang = -90.0f;
+                break;
+        }
+
+        // flip
         switch (pattern)
         {
             case Pattern.ARC_LEFT:
-                {
-                    ang = 90.0f;
-                    flipY = true;
-                    Vector3 pos = m_arcCenter;
-                    pos.x += s_arcWidth;
-                    pos.y = GameManager.Get().GetLavaHeight() - 3.0f;
-                    pos.z = 0.1f;
-                    transform.position = pos;
-                    Warning(pos);
-                }
+            case Pattern.S_UP_LEFT:
+            case Pattern.S_DOWN_LEFT:
+            case Pattern.SKIM_LOW_LEFT:
+                flipY = true;
                 break;
+        }
+
+        // warning
+        switch (pattern)
+        {
             case Pattern.ARC_RIGHT:
-                {
-                    ang = 90.0f;
-                    flipY = false;
-                    Vector3 pos = m_arcCenter;
-                    pos.x -= s_arcWidth;
-                    pos.y = GameManager.Get().GetLavaHeight() - 3.0f;
-                    pos.z = 0.1f;
-                    transform.position = pos;
-                    Warning(pos);
-                }
-                break;
+            case Pattern.ARC_LEFT:
+            case Pattern.S_UP_RIGHT:
+            case Pattern.S_UP_LEFT:
             case Pattern.UP:
             case Pattern.SKIM_LOW_RIGHT:
-                {
-                    ang = 90.0f;
-                    flipY = false;
-                    Vector3 pos = m_arcCenter;
-                    pos.y = GameManager.Get().GetLavaHeight() - 3.0f;
-                    pos.z = 0.1f;
-                    transform.position = pos;
-                    Warning(pos);
-                }
-                break;
-            case Pattern.DOWN:
-                {
-                    ang = -90.0f;
-                    flipY = false;
-                    Vector3 pos = m_arcCenter;
-                    pos.y = GameManager.Get().GetScreenBounds().max.y + 1.0f;
-                    pos.z = 0.1f;
-                    transform.position = pos;
-                }
-                break;
             case Pattern.SKIM_LOW_LEFT:
-                {
-                    ang = 90.0f;
-                    flipY = true;
-                    Vector3 pos = m_arcCenter;
-                    pos.y = GameManager.Get().GetLavaHeight() - 3.0f;
-                    pos.z = 0.1f;
-                    transform.position = pos;
-                    Warning(pos);
-                }
+                Warning(pos);
                 break;
         }
 
@@ -319,7 +333,7 @@ public class Worm : WormSection
             m_sprite.flipY = flipY;
         foreach (WormSection worm in m_sections)
         {
-            Vector3 pos = parent.GetTailPos() - parent.transform.TransformDirection(worm.m_headJoint);
+            pos = parent.GetTailPos() - parent.transform.TransformDirection(worm.m_headJoint);
             pos.z += 0.1f;
             worm.transform.position = pos;
             worm.transform.localEulerAngles = new Vector3(0.0f, 0.0f, ang);
@@ -330,6 +344,7 @@ public class Worm : WormSection
         }
 
         m_subState = SubState.RISING;
+        m_stateTimer = 0.0f;
         m_pattern = pattern;
     }
 
@@ -337,6 +352,7 @@ public class Worm : WormSection
     void Update()
     {
         float dt = BulletTime.Get().GetDeltaTime(false);
+        m_stateTimer += dt;
 
         Pattern doPattern = m_pattern;
 
@@ -411,8 +427,6 @@ public class Worm : WormSection
                     {
                         targetPos.x += s_arcWidth;
                         targetPos.y = pos.y - 0.25f * speed;
-                        if (false == m_tailOnScreen)
-                            isDone = true;
                     }
                     else
                     {
@@ -422,6 +436,15 @@ public class Worm : WormSection
                     offset = targetPos - pos;
                     targetAng = Mathf.Atan2(offset.y, offset.x);
                     targetAng = Mathf.Rad2Deg * targetAng;
+                    if (m_subState == SubState.RISING)
+                    {
+                        if (m_tailOnScreen)
+                            m_subState = SubState.SINKING;
+                    }
+                    else
+                    {
+                        isDone = !m_tailOnScreen;
+                    }
                 }
                 break;
             case Pattern.UP:
@@ -487,6 +510,110 @@ public class Worm : WormSection
                         targetAng = ang + s_diveRate * Time.deltaTime;
                         if (targetAng > 270.0f)
                             targetAng = 270.0f;
+                        isDone = !m_tailOnScreen;
+                    }
+                }
+                break;
+            case Pattern.S_UP_RIGHT:
+                {
+                    if (m_subState == SubState.RISING)
+                    {
+                        float lerp = (pos.y - 0.0f) / s_skimHeight;
+                        lerp = Mathf.Clamp01(lerp);
+                        targetAng = Mathf.Lerp(90.0f, 0.0f, lerp);
+                        if (pos.y > 0.0f)
+                        {
+                            m_subState = SubState.FLAT;
+                            m_stateTimer = 0.0f;
+                        }
+                    }
+                    else if (m_subState == SubState.FLAT)
+                    {
+                        targetAng = 0.0f;
+                        if (m_stateTimer >= s_sTurnTime)
+                            m_subState = SubState.SINKING;
+                    }
+                    else
+                    {
+                        targetAng = 90.0f;
+                        isDone = !m_tailOnScreen;
+                    }
+                }
+                break;
+            case Pattern.S_UP_LEFT:
+                {
+                    if (m_subState == SubState.RISING)
+                    {
+                        float lerp = (pos.y - 0.0f) / s_skimHeight;
+                        lerp = Mathf.Clamp01(lerp);
+                        targetAng = Mathf.Lerp(90.0f, 180.0f, lerp);
+                        if (pos.y > 0.0f)
+                        {
+                            m_subState = SubState.FLAT;
+                            m_stateTimer = 0.0f;
+                        }
+                    }
+                    else if (m_subState == SubState.FLAT)
+                    {
+                        targetAng = 180.0f;
+                        if (m_stateTimer >= s_sTurnTime)
+                            m_subState = SubState.SINKING;
+                    }
+                    else
+                    {
+                        targetAng = 90.0f;
+                        isDone = !m_tailOnScreen;
+                    }
+                }
+                break;
+            case Pattern.S_DOWN_RIGHT:
+                {
+                    if (m_subState == SubState.RISING)
+                    {
+                        float lerp = 1.0f - (pos.y - 0.0f) / s_skimHeight;
+                        lerp = Mathf.Clamp01(lerp);
+                        targetAng = Mathf.Lerp(-90.0f, 0.0f, lerp);
+                        if (pos.y < 0.0f)
+                        {
+                            m_subState = SubState.FLAT;
+                            m_stateTimer = 0.0f;
+                        }
+                    }
+                    else if (m_subState == SubState.FLAT)
+                    {
+                        targetAng = 0.0f;
+                        if (m_stateTimer >= s_sTurnTime)
+                            m_subState = SubState.SINKING;
+                    }
+                    else
+                    {
+                        targetAng = -90.0f;
+                        isDone = !m_tailOnScreen;
+                    }
+                }
+                break;
+            case Pattern.S_DOWN_LEFT:
+                {
+                    if (m_subState == SubState.RISING)
+                    {
+                        float lerp = 1.0f - (pos.y - 0.0f) / s_skimHeight;
+                        lerp = Mathf.Clamp01(lerp);
+                        targetAng = Mathf.Lerp(270.0f, 180.0f, lerp);
+                        if (pos.y < 0.0f)
+                        {
+                            m_subState = SubState.FLAT;
+                            m_stateTimer = 0.0f;
+                        }
+                    }
+                    else if (m_subState == SubState.FLAT)
+                    {
+                        targetAng = 180.0f;
+                        if (m_stateTimer >= s_sTurnTime)
+                            m_subState = SubState.SINKING;
+                    }
+                    else
+                    {
+                        targetAng = 270.0f;
                         isDone = !m_tailOnScreen;
                     }
                 }

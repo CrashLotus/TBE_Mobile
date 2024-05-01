@@ -6,15 +6,17 @@ public class WormSection : PooledObject, IHitPoints
 {
     public Vector3 m_headJoint;
     public Vector3 m_tailJoint;
-    const float s_minAng = -30.0f;
-    const float s_maxAng = 30.0f;
-    const int s_hitDamage = 1;
     protected SpriteRenderer m_sprite;
     public int m_maxHitPoints = 20;
     protected float m_hitPoints;
     protected Worm m_head;
     protected WormSection m_prevSection;
     protected WormSection m_nextSection;
+
+    const float s_minAng = -30.0f;  // I currently have these disabled
+    const float s_maxAng = 30.0f;
+    const int s_hitDamage = 1;
+    const float s_counterSteer = 0.05f;
 
     public override void Init(ObjectPool pool)
     {
@@ -73,30 +75,41 @@ public class WormSection : PooledObject, IHitPoints
     {
         if (null != parent)
         {
-#if false
-            // connect to the parent
-            Vector3 pos = transform.position;
-            Vector3 targetPos = parent.GetTailPos();
+#if true
             Vector3 headPos = GetHeadPos();
             Vector3 tailPos = GetTailPos();
-            Vector3 delta = targetPos - headPos;
+            Vector3 delta = headPos - tailPos;
+            float curAng = Mathf.Atan2(delta.y, delta.x);
+            Vector3 headTarget = parent.GetTailPos();
+            delta = headTarget - headPos;
+            float headAng = Mathf.Atan2(delta.y, delta.x);
+            float angDelta = headAng - curAng;
+            while (angDelta < -Mathf.PI)
+                angDelta += 2.0f * Mathf.PI;
+            while (angDelta > Mathf.PI)
+                angDelta -= 2.0f * Mathf.PI;
+            float tailAng = curAng - s_counterSteer * angDelta;
+            float dist = delta.magnitude;
+            Vector3 newTail = new Vector3(Mathf.Cos(tailAng), Mathf.Sin(tailAng), 0.0f);
+            newTail = tailPos + dist * newTail;
+            delta = headTarget - newTail;
+            float finalAng = Mathf.Atan2(delta.y, delta.x);
+            float angDiff = finalAng - curAng;
+            angDiff *= Mathf.Rad2Deg;
+            while (angDiff < -180.0f)
+                angDiff += 360.0f;
+            while (angDiff > 180.0f)
+                angDiff -= 360.0f;
+            float ang = transform.localEulerAngles.z;
+            ang += angDiff;
+            transform.localEulerAngles = new Vector3(0.0f, 0.0f, ang);
+
+            Vector3 pos = transform.position;
+            headPos = GetHeadPos();
+            delta = headTarget - headPos;
             delta.z = 0.0f;
             pos += delta;
             transform.position = pos;
-
-            // rotate to aim at the parent's tail
-            Vector3 targetDelta = targetPos - tailPos;
-            float targetAng = Mathf.Atan2(targetDelta.y, targetDelta.x);
-            Vector3 rest = m_headJoint - m_tailJoint;
-            float restAng = Mathf.Atan2(rest.y, rest.x);
-            targetAng -= restAng;
-            float angle = Mathf.Rad2Deg * targetAng - parent.transform.localEulerAngles.z;
-            while (angle < -180.0f)
-                angle += 360.0f;
-            while (angle > 180.0f)
-                angle -= 360.0f;
-            angle = Mathf.Clamp(angle, s_minAng, s_maxAng);
-            transform.localEulerAngles = new Vector3(0.0f, 0.0f, parent.transform.localEulerAngles.z + angle);
 #else
             // rotate to aim at the parent's tail
             Vector3 targetPos = parent.GetTailPos();
