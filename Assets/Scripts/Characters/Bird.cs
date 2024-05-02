@@ -45,6 +45,7 @@ public class Bird : PooledObject
         m_pushFactor = Mathf.Sqrt(m_horizSpeed / 100.0f);
         m_hitPoints = m_maxHitPoints;
         m_oldPos = transform.position;
+        Utility.HitFlashReset(gameObject);
     }
 
     protected virtual void Update()

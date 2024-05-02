@@ -23,6 +23,7 @@ public class WormSection : PooledObject, IHitPoints
         base.Init(pool);
         m_hitPoints = m_maxHitPoints;
         m_sprite = GetComponent<SpriteRenderer>();
+        Utility.HitFlashReset(gameObject);
     }
 
     public void SetHead(Worm head)
@@ -76,34 +77,44 @@ public class WormSection : PooledObject, IHitPoints
         if (null != parent)
         {
 #if true
-            Vector3 headPos = GetHeadPos();
-            Vector3 tailPos = GetTailPos();
+            // modeling this as a tram-car with 2 axels: front and back
+            // first get the current angle from the back axel to the front
+            Vector3 headPos = GetHeadPos(); // front axel rotates here
+            Vector3 tailPos = GetTailPos(); // back axel rotates here
             Vector3 delta = headPos - tailPos;
             float curAng = Mathf.Atan2(delta.y, delta.x);
+            // the front axel steers straight into where the parent car is pulling it
             Vector3 headTarget = parent.GetTailPos();
             delta = headTarget - headPos;
-            float headAng = Mathf.Atan2(delta.y, delta.x);
-            float angDelta = headAng - curAng;
-            while (angDelta < -Mathf.PI)
-                angDelta += 2.0f * Mathf.PI;
-            while (angDelta > Mathf.PI)
-                angDelta -= 2.0f * Mathf.PI;
-            float tailAng = curAng - s_counterSteer * angDelta;
-            float dist = delta.magnitude;
-            Vector3 newTail = new Vector3(Mathf.Cos(tailAng), Mathf.Sin(tailAng), 0.0f);
-            newTail = tailPos + dist * newTail;
-            delta = headTarget - newTail;
-            float finalAng = Mathf.Atan2(delta.y, delta.x);
-            float angDiff = finalAng - curAng;
-            angDiff *= Mathf.Rad2Deg;
-            while (angDiff < -180.0f)
-                angDiff += 360.0f;
-            while (angDiff > 180.0f)
-                angDiff -= 360.0f;
-            float ang = transform.localEulerAngles.z;
-            ang += angDiff;
-            transform.localEulerAngles = new Vector3(0.0f, 0.0f, ang);
+            delta.z = 0.0f;
+            if (delta.sqrMagnitude > 0.0001f)
+            {   // if the game is paused, the motion will be zero and we'll get 0 angles
+                float headAng = Mathf.Atan2(delta.y, delta.x);
+                float angDelta = headAng - curAng;
+                while (angDelta < -Mathf.PI)
+                    angDelta += 2.0f * Mathf.PI;
+                while (angDelta > Mathf.PI)
+                    angDelta -= 2.0f * Mathf.PI;
+                // the back axel counter-steers a bit in the opposite direction to help the tram-car make the turn
+                float tailAng = curAng - s_counterSteer * angDelta;
+                // Each axel rolls forward in its own direction, and from that, we'll extract the final angle of the car itself
+                float dist = delta.magnitude;
+                Vector3 newTail = new Vector3(Mathf.Cos(tailAng), Mathf.Sin(tailAng), 0.0f);
+                newTail = tailPos + dist * newTail;
+                delta = headTarget - newTail;
+                float finalAng = Mathf.Atan2(delta.y, delta.x);
+                float angDiff = finalAng - curAng;
+                angDiff *= Mathf.Rad2Deg;
+                while (angDiff < -180.0f)
+                    angDiff += 360.0f;
+                while (angDiff > 180.0f)
+                    angDiff -= 360.0f;
+                float ang = transform.localEulerAngles.z;
+                ang += angDiff;
+                transform.localEulerAngles = new Vector3(0.0f, 0.0f, ang);
+            }
 
+            // finally move the car so the front axel is attached to the parent's hitch point
             Vector3 pos = transform.position;
             headPos = GetHeadPos();
             delta = headTarget - headPos;

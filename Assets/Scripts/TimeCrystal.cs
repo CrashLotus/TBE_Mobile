@@ -30,7 +30,6 @@ public class TimeCrystal : PickUp
         m_anim = GetComponent<Animator>();
         if (null != m_anim)
             m_anim.Play("CrystalIdle", -1, 0.0f);
-        Utility.HitFlashReset(gameObject);
     }
 
     static TimeCrystal MakeCrystal(Vector3 pos)

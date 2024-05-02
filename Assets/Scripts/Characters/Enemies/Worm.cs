@@ -343,6 +343,7 @@ public class Worm : WormSection
             parent = worm;
         }
 
+        m_tailOnScreen = false;
         m_subState = SubState.RISING;
         m_stateTimer = 0.0f;
         m_pattern = pattern;

@@ -39,6 +39,7 @@ public class PickUp : PooledObject, IHitPoints
         m_state = State.IDLE;
         m_stateTimer = 0.0f;
         SetState(State.IDLE);
+        Utility.HitFlashReset(gameObject);
     }
 
     protected virtual void Update()
