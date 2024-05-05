@@ -49,7 +49,8 @@ public class Missile : Bullet
             CalcBezier();
             Vector3 pos = transform.position;
             Vector3 dir = pos - m_oldPos;
-            transform.eulerAngles = new Vector3(0.0f, 0.0f, Mathf.Rad2Deg * Mathf.Atan2(dir.y, dir.x));
+            if (Mathf.Abs(dir.x) > 0.0f || Mathf.Abs(dir.y) > 0.0f)
+                transform.eulerAngles = new Vector3(0.0f, 0.0f, Mathf.Rad2Deg * Mathf.Atan2(dir.y, dir.x));
             m_oldPos = pos;
         }
     }
