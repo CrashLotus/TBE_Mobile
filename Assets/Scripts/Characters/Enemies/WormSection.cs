@@ -16,7 +16,7 @@ public class WormSection : PooledObject, IHitPoints
     const float s_minAng = -30.0f;  // I currently have these disabled
     const float s_maxAng = 30.0f;
     const int s_hitDamage = 1;
-    const float s_counterSteer = 0.05f;
+    const float s_counterSteer = 0.5f;
 
     public override void Init(ObjectPool pool)
     {
@@ -87,7 +87,7 @@ public class WormSection : PooledObject, IHitPoints
             Vector3 headTarget = parent.GetTailPos();
             delta = headTarget - headPos;
             delta.z = 0.0f;
-            if (delta.sqrMagnitude > 0.0001f)
+            if (Mathf.Abs(delta.x) > 0.0f || Mathf.Abs(delta.y) > 0.0f)
             {   // if the game is paused, the motion will be zero and we'll get 0 angles
                 float headAng = Mathf.Atan2(delta.y, delta.x);
                 float angDelta = headAng - curAng;
