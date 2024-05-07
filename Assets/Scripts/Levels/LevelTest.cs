@@ -7,8 +7,8 @@ public class LevelTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        string level = GameManager.GetCurrentLevelName();
-        //string level = "Levels/TestWorm";
+        //string level = GameManager.GetCurrentLevelName();
+        string level = "Levels/TestWorm";
         StartCoroutine(LoadLevel(level));     
     }
 
