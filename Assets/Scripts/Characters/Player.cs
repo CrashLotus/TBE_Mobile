@@ -24,6 +24,7 @@ public class Player : Bird, IHitPoints
     public SimpleButton m_missileButton;
     public SimpleButton m_timeButton;
     public GameObject m_eggShield;
+    public Weapon m_megaLaser;
     public float m_topBoundary = 0.94f;
     public float m_bottomBoundary = 0.16f;
     public Sound m_hitSound;
@@ -69,6 +70,7 @@ public class Player : Bird, IHitPoints
     public void WarmUp()
     {
         m_laserWeapon.WarmUp();
+        m_megaLaser.WarmUp();
     }
 
     public override void Init(ObjectPool pool)
@@ -169,11 +171,26 @@ public class Player : Bird, IHitPoints
 
         transform.position = pos;
 
+        EggBonus bonusMode = GetBonusMode();
+
         // fire the laser
         if (fireLaser)
+        {
             m_laserWeapon.HitTrigger();
+            if (bonusMode == EggBonus.MEGA_LASER)
+                m_megaLaser.HitTrigger();
+        }
         if (m_fireLaser)
+        {
             m_laserWeapon.HoldTrigger();
+            if (bonusMode == EggBonus.MEGA_LASER)
+                m_megaLaser.HoldTrigger();
+        }
+        else if (m_fireLaserOld)
+        {
+            m_laserWeapon.ReleaseTrigger();
+            m_megaLaser.ReleaseTrigger();
+        }
         m_fireLaserOld = m_fireLaser;
         m_fireLaser = false;
 
@@ -283,6 +300,7 @@ public class Player : Bird, IHitPoints
         else if (GetBonusMode() != startBonus)
         {
             m_powerDown.Play();
+            m_megaLaser.ReleaseTrigger();
         }
         return ret;
     }
@@ -354,7 +372,7 @@ public class Player : Bird, IHitPoints
         int maxEgg = MaxEgg();
         if (data.HasUpgrade("MEGALASER"))
             maxEgg *= 3;
-        if (data.HasUpgrade("MULTISHOT"))
+        else if (data.HasUpgrade("MULTISHOT"))
             maxEgg *= 2;
         m_hitPoints += 1;
         if (m_hitPoints > maxEgg)

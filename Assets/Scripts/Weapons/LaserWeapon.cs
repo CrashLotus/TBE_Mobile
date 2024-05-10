@@ -48,6 +48,7 @@ public class LaserWeapon : Weapon
         Player.EggBonus bonusMode = Player.Get().GetBonusMode();
         if (bonusMode == Player.EggBonus.POWER_LASER
             || bonusMode == Player.EggBonus.MULTISHOT
+            || bonusMode == Player.EggBonus.MEGA_LASER
             )
         {
             m_bulletPrefab = m_powerBullet;
@@ -66,7 +67,9 @@ public class LaserWeapon : Weapon
         }
 
         // multi-shot
-        if (bonusMode == Player.EggBonus.MULTISHOT)
+        if (bonusMode == Player.EggBonus.MULTISHOT
+            || bonusMode == Player.EggBonus.MEGA_LASER
+            )
         {
             FireAtAngle(s_coneAngle);
             FireAtAngle(-s_coneAngle);

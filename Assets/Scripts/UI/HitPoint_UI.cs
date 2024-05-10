@@ -93,9 +93,7 @@ public class HitPoint_UI : MonoBehaviour
 
     public Vector3 GetEggPos()
     {
-        int numEgg = Player.NumEgg();
-        if (numEgg > m_eggSlots.Count - 1)
-            numEgg = m_eggSlots.Count - 1;
+        int numEgg = Player.NumEgg() % m_eggSlots.Count;
         Vector3 pos = m_eggSlots[numEgg].transform.position;
         return pos;
     }

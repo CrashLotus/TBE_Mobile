@@ -2,6 +2,7 @@ AddEgg
 Aim
 PowerLaser
 Multishot
+MegaLaser
 EggShield
 Missile
 Missile2

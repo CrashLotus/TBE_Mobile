@@ -52,7 +52,7 @@ public class Weapon : MonoBehaviour
     /// Normally you should not need to call this explicitly.
     /// Only if you want to make sure the trigger has been released and just maybe you didn't call Update() yet this frame.
     /// </summary>
-    public void ReleaseTrigger()
+    public virtual void ReleaseTrigger()
     {
         m_triggerHold = false;
     }
