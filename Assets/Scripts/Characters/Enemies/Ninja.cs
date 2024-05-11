@@ -110,7 +110,6 @@ public class Ninja : EnemyBird
                         if (null != m_rigidBody)
                             m_rigidBody.isKinematic = false;
                     }
-                    Debug.Log(m_vel);
                     UpdatePos(pos, rot);
                     break;
                 }

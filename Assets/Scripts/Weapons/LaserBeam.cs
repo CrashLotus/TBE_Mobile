@@ -11,6 +11,7 @@ public class LaserBeam : Weapon
     LineRenderer m_line;
     Material m_mat;
     SpriteRenderer m_eyeSprite;
+    AudioSource m_laserSound;
     float m_animTimer;
     int m_curFrame;
     float m_uvOffset = 0.0f;
@@ -42,6 +43,8 @@ public class LaserBeam : Weapon
         m_curFrame = -1;
         m_line.enabled = false;
         m_eyeSprite.enabled = false;
+        m_laserSound = GetComponent<AudioSource>();
+        m_laserSound.Stop();
     }
 
     // Update is called once per frame
@@ -87,11 +90,13 @@ public class LaserBeam : Weapon
         m_mat.SetTextureOffset("_MainTex", new Vector2(m_uvOffset, 0.0f));
     }
 
-    public override void HitTrigger()
+    public override void HoldTrigger()
     {
-        base.HitTrigger();
+        base.HoldTrigger();
         m_line.enabled = true;
         m_eyeSprite.enabled = true;
+        if (false == m_laserSound.isPlaying)
+            m_laserSound.Play();
     }
 
     public override void ReleaseTrigger()
@@ -99,6 +104,7 @@ public class LaserBeam : Weapon
         base.ReleaseTrigger();
         m_line.enabled = false;
         m_eyeSprite.enabled = false;
+        m_laserSound.Stop();
     }
 
     protected override bool Fire()

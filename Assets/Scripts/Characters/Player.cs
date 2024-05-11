@@ -286,18 +286,15 @@ public class Player : Bird, IHitPoints
             }
         }
 
+        m_megaLaser.ReleaseTrigger();
         if (IHitPoints.DamageReturn.KILLED == ret)
         {
-            //mrwTODO shut off the laser - if it is firing
-            //            m_megaLaser.ReleaseTrigger();
-            //            m_megaLaser.Update(0.0f);
             GameManager.Get().GameOver();
             gameObject.SetActive(false);
         }
         else if (GetBonusMode() != startBonus)
         {
             m_powerDown.Play();
-            m_megaLaser.ReleaseTrigger();
         }
 
         SaveData data = SaveData.Get();
