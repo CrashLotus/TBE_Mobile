@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using static Player;
 
 public class HitPoint_UI : MonoBehaviour
 {
@@ -14,10 +15,14 @@ public class HitPoint_UI : MonoBehaviour
     public float m_waveScale = 1.25f;
     public float m_waveFreq = 16.0f;
     public float m_waveOffset = 0.75f;
+    public Sound m_powerUp1;
+    public Sound m_powerUp2;
+    public Sound m_powerUp3;
 
     List<Image> m_eggSlots;
     List<Animator> m_eggAnims;
     float m_waveTimer = 0.0f;
+    Player.EggBonus m_eggBonus = Player.EggBonus.NONE;
     static HitPoint_UI s_theUI;
 
     // Start is called before the first frame update
@@ -43,6 +48,26 @@ public class HitPoint_UI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Player.EggBonus eggBonus = Player.GetBonusMode();
+        if (eggBonus != m_eggBonus)
+        {
+            m_eggBonus = eggBonus;
+            switch (m_eggBonus)
+            {
+                case EggBonus.POWER_LASER:
+                    m_powerUp1.Play();
+                    StartWave();
+                    break;
+                case EggBonus.MULTISHOT:
+                    m_powerUp2.Play();
+                    StartWave();
+                    break;
+                case EggBonus.MEGA_LASER:
+                    m_powerUp3.Play();
+                    StartWave();
+                    break;
+            }
+        }
         int numEgg = Player.NumEgg();
         int maxEgg = Player.MaxEgg();
 

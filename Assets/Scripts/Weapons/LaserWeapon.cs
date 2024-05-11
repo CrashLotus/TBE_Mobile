@@ -45,7 +45,7 @@ public class LaserWeapon : Weapon
         int fireRate = Player.GetBulletSpeedLevel();
         m_fireDelay = s_fireDelay[fireRate];
 
-        Player.EggBonus bonusMode = Player.Get().GetBonusMode();
+        Player.EggBonus bonusMode = Player.GetBonusMode();
         if (bonusMode == Player.EggBonus.POWER_LASER
             || bonusMode == Player.EggBonus.MULTISHOT
             || bonusMode == Player.EggBonus.MEGA_LASER

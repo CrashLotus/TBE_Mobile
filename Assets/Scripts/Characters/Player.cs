@@ -28,9 +28,6 @@ public class Player : Bird, IHitPoints
     public float m_topBoundary = 0.94f;
     public float m_bottomBoundary = 0.16f;
     public Sound m_hitSound;
-    public Sound m_powerUp1;
-    public Sound m_powerUp2;
-    public Sound m_powerUp3;
     public Sound m_powerDown;
     public Sound m_eggShieldOn;
     public Sound m_eggShieldOff;
@@ -58,7 +55,7 @@ public class Player : Bird, IHitPoints
     const float s_comboCountDown = 0.25f;   // if you don't, they'll tick down every 1/4 second
     static readonly float[] s_vertSpeed = { 7.0f, 10.0f };
     static readonly float[] s_horizSpeed = { 7.0f, 10.0f };
-    static readonly float[] s_accel = { 50.0f, 90.0f };
+    static readonly float[] s_accel = { 100.0f, 150.0f };
 
     public static Player Get()
     {
@@ -302,18 +299,22 @@ public class Player : Bird, IHitPoints
             m_powerDown.Play();
             m_megaLaser.ReleaseTrigger();
         }
+
+        SaveData data = SaveData.Get();
+        data.SetPlayerHP((int)m_hitPoints);
         return ret;
     }
 
-    public EggBonus GetBonusMode()
+    public static EggBonus GetBonusMode()
     {
         int maxEgg = MaxEgg();
         SaveData data = SaveData.Get();
-        if (data.HasUpgrade("MEGALASER") && m_hitPoints >= 3 * maxEgg)
+        int numEgg = data.GetPlayerHP();
+        if (data.HasUpgrade("MEGALASER") && numEgg >= 3 * maxEgg)
             return EggBonus.MEGA_LASER;
-        if (data.HasUpgrade("MULTISHOT") && m_hitPoints >= 2 * maxEgg)
+        if (data.HasUpgrade("MULTISHOT") && numEgg >= 2 * maxEgg)
             return EggBonus.MULTISHOT;
-        if (data.HasUpgrade("POWERLASER") && m_hitPoints >= maxEgg)
+        if (data.HasUpgrade("POWERLASER") && numEgg >= maxEgg)
             return EggBonus.POWER_LASER;
         return EggBonus.NONE;
     }
@@ -377,36 +378,14 @@ public class Player : Bird, IHitPoints
         m_hitPoints += 1;
         if (m_hitPoints > maxEgg)
             m_hitPoints = maxEgg;
+        data.SetPlayerHP((int)m_hitPoints);
 
         EggBonus endBonus = GetBonusMode();
         if (endBonus != startBonus)
         {
-            switch (endBonus)
+            if (data.HasUpgrade("EGGSHIELD"))
             {
-                case EggBonus.POWER_LASER:
-                    if (data.HasUpgrade("EGGSHIELD"))
-                    {
-                        EggShieldOn();
-                    }
-                    m_powerUp1.Play();
-                    HitPoint_UI.Get().StartWave();
-                    break;
-                case EggBonus.MULTISHOT:
-                    if (data.HasUpgrade("EGGSHIELD"))
-                    {
-                        EggShieldOn();
-                    }
-                    m_powerUp2.Play();
-                    HitPoint_UI.Get().StartWave();
-                    break;
-                case EggBonus.MEGA_LASER:
-                    if (data.HasUpgrade("EGGSHIELD"))
-                    {
-                        EggShieldOn();
-                    }
-                    m_powerUp3.Play();
-                    HitPoint_UI.Get().StartWave();
-                    break;
+                EggShieldOn();
             }
         }
     }
