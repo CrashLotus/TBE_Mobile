@@ -80,9 +80,14 @@ public class Ninja : EnemyBird
         m_pushFactor = 0.05f;
         m_shellTimer = 0.0f;
         m_spinTimer = 0.0f;
+        m_eggTimer = 0.0f;
         NextEggTime();
         m_vel = Vector3.zero;
+        if (null != m_anim)
+            m_anim.Play("Fly", 0, 0.0f);
         m_rigidBody = GetComponent<Rigidbody2D>();
+        if (null != m_rigidBody)
+            m_rigidBody.isKinematic = false;
     }
 
     protected override void Update()
@@ -228,8 +233,10 @@ public class Ninja : EnemyBird
         }
         FollowCamera.Shake(10.0f, 1.0f);
         TimeCrystal.Spawn(pos);
+        int savePower = m_eggPower;
         m_eggPower = 0;
         base.Explode();
+        m_eggPower = savePower;
     }
 
     void PopUp(float power)

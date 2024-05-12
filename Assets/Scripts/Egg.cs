@@ -28,6 +28,8 @@ public class Egg : PickUp
 
     static Egg MakeEgg(Vector3 pos, int power)
     {
+        if (power < 0)
+            return null;
         if (null == s_eggPool)
         {
             MakeEggPool();
