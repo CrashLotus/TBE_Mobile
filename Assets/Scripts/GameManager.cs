@@ -136,6 +136,10 @@ public class GameManager : MonoBehaviour
     {
         SaveData save = SaveData.Get();
         int level = save.GetCurrentLevel();
+        if (level > 17)
+            return "Game_UFO";
+        if (level > 13)
+            return "Game_Dino";
         if (level > 9)
             return "Game_Paris";
         if (level > 5)
