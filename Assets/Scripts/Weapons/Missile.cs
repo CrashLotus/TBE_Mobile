@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Missile : Bullet
 {
+    public Sound m_explodeSound;
+
     const float s_timeOut = 1.0f;
     const float s_launchSpeed = 5.6f;
     const float s_finalSpeed = 2.2f;
@@ -16,6 +18,7 @@ public class Missile : Bullet
     float m_timer;
 
     static int s_numMissile = 0;
+    static int s_explodeFrame = -1;
 
     public void Launch(Vector3 pos, Vector3 dir, Vector3 finalDir, GameObject target)
     {
@@ -39,6 +42,11 @@ public class Missile : Bullet
         {
             if (null != m_target && m_target.activeSelf)
             {
+                if (s_explodeFrame != Time.frameCount)
+                {
+                    m_explodeSound.Play();
+                    s_explodeFrame = Time.frameCount;
+                }
                 Hit(m_target);
             }
             --s_numMissile;

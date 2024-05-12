@@ -252,7 +252,6 @@ public class Player : Bird, IHitPoints
         int eggDamage = (int)Mathf.Min(damage, m_hitPoints);
         if (IHitPoints.HitType.NONE == hitType)
             eggDamage = Mathf.Min(eggDamage, 3);    // max damage of 3 if you hit an enemy
-        Debug.Log("Taking Damage " + eggDamage);
         int numEgg = eggDamage;
         Vector3 pos = transform.position;
         TutorialManager.Get().PlayerDamaged(transform.position);

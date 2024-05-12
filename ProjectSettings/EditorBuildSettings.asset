@@ -18,6 +18,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Game_Paris.unity
     guid: f3c905e26aadc684da9b4f3da29fcf17
   - enabled: 1
+    path: Assets/Scenes/Game_Dino.unity
+    guid: 604a4a5eb67700d44b98633b2bff6694
+  - enabled: 1
+    path: Assets/Scenes/Game_UFO.unity
+    guid: fe9d59cf2b66db544b69a6f584c4a77b
+  - enabled: 1
     path: Assets/Scenes/Store.unity
     guid: 7c7388b42111e074b9f232ced4bf71cf
   - enabled: 1
