@@ -15,7 +15,7 @@ MonoBehaviour:
   m_label: 
   m_text: Greetings from Comrade Worm!
   m_wormType: 2
-  m_pattern: 0
+  m_pattern: 8
   m_xOffset: 0
   m_waitOnWorms: 1
   m_waitOnEnemies: 1

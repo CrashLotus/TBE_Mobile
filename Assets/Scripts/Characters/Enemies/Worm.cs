@@ -51,12 +51,15 @@ public class Worm : WormSection
     float m_tailYMax = 0.0f;
     bool m_tailOnScreen = false;
     Vector3 m_arcCenter;
+    bool m_useOldPos = false;
+    Vector3 m_oldPos;
 
     enum SubState
     {
         RISING,
         FLAT,
-        SINKING
+        SINKING,
+        WAIT_FOR_TAIL
     }
     SubState m_subState;
     float m_stateTimer = 0.0f;
@@ -117,6 +120,7 @@ public class Worm : WormSection
                         worm.m_arcCenter.y = 0.0f;
                         break;
                 }
+                worm.m_useOldPos = false;
                 worm.BeginPattern(pattern);
                 return worm;
             }
@@ -250,7 +254,9 @@ public class Worm : WormSection
 
     void BeginPattern(Pattern pattern)
     {
+        Debug.Log("BeginPattern " + pattern.ToString());
         m_arcCenter = WrapAround.WrapPosition(m_arcCenter);
+        m_oldPos = WrapAround.WrapPosition(m_oldPos);
         bool flipY = false;
         float ang = 0.0f;
 
@@ -260,23 +266,65 @@ public class Worm : WormSection
         switch (pattern)
         {
             case Pattern.ARC_RIGHT:
-                pos.x -= s_arcWidth;
+            case Pattern.S_UP_RIGHT:
+            case Pattern.SKIM_LOW_RIGHT:
+                if (m_useOldPos)
+                {
+                    pos.x = m_oldPos.x;
+                    m_arcCenter.x = pos.x + s_arcWidth;
+                }
+                else
+                {
+                    pos.x -= s_arcWidth;
+                }
                 pos.y = GameManager.Get().GetLavaHeight() - 3.0f;
                 break;
             case Pattern.ARC_LEFT:
-                pos.x += s_arcWidth;
+            case Pattern.S_UP_LEFT:
+            case Pattern.SKIM_LOW_LEFT:
+                if (m_useOldPos)
+                {
+                    pos.x = m_oldPos.x;
+                    m_arcCenter.x = pos.x - s_arcWidth;
+                }
+                else
+                {
+                    pos.x += s_arcWidth;
+                }
                 pos.y = GameManager.Get().GetLavaHeight() - 3.0f;
                 break;
-            case Pattern.S_UP_RIGHT:
-            case Pattern.S_UP_LEFT:
             case Pattern.UP:
-            case Pattern.SKIM_LOW_RIGHT:
-            case Pattern.SKIM_LOW_LEFT:
+                if (m_useOldPos)
+                    pos.x = m_oldPos.x;
                 pos.y = GameManager.Get().GetLavaHeight() - 3.0f;
+                break;
+            case Pattern.DOWN:
+                if (m_useOldPos)
+                    pos.x = m_oldPos.x;
+                pos.y = GameManager.Get().GetScreenBounds().max.y + 1.0f;
                 break;
             case Pattern.S_DOWN_RIGHT:
+                if (m_useOldPos)
+                {
+                    pos.x = m_oldPos.x;
+                    m_arcCenter.x = pos.x + s_arcWidth;
+                }
+                else
+                {
+                    pos.x -= s_arcWidth;
+                }
+                pos.y = GameManager.Get().GetScreenBounds().max.y + 1.0f;
+                break;
             case Pattern.S_DOWN_LEFT:
-            case Pattern.DOWN:
+                if (m_useOldPos)
+                {
+                    pos.x = m_oldPos.x;
+                    m_arcCenter.x = pos.x - s_arcWidth;
+                }
+                else
+                {
+                    pos.x += s_arcWidth;
+                }
                 pos.y = GameManager.Get().GetScreenBounds().max.y + 1.0f;
                 break;
         }
@@ -534,6 +582,12 @@ public class Worm : WormSection
                         if (m_stateTimer >= s_sTurnTime)
                             m_subState = SubState.SINKING;
                     }
+                    else if (m_subState == SubState.SINKING)
+                    {
+                        targetAng = 90.0f;
+                        if (m_tailOnScreen)
+                            m_subState = SubState.WAIT_FOR_TAIL;
+                    }
                     else
                     {
                         targetAng = 90.0f;
@@ -559,6 +613,12 @@ public class Worm : WormSection
                         targetAng = 180.0f;
                         if (m_stateTimer >= s_sTurnTime)
                             m_subState = SubState.SINKING;
+                    }
+                    else if (m_subState == SubState.SINKING)
+                    {
+                        targetAng = 90.0f;
+                        if (m_tailOnScreen)
+                            m_subState = SubState.WAIT_FOR_TAIL;
                     }
                     else
                     {
@@ -586,6 +646,12 @@ public class Worm : WormSection
                         if (m_stateTimer >= s_sTurnTime)
                             m_subState = SubState.SINKING;
                     }
+                    else if (m_subState == SubState.SINKING)
+                    {
+                        targetAng = -90.0f;
+                        if (m_tailOnScreen)
+                            m_subState = SubState.WAIT_FOR_TAIL;
+                    }
                     else
                     {
                         targetAng = -90.0f;
@@ -611,6 +677,12 @@ public class Worm : WormSection
                         targetAng = 180.0f;
                         if (m_stateTimer >= s_sTurnTime)
                             m_subState = SubState.SINKING;
+                    }
+                    else if (m_subState == SubState.SINKING)
+                    {
+                        targetAng = 270.0f;
+                        if (m_tailOnScreen)
+                            m_subState = SubState.WAIT_FOR_TAIL;
                     }
                     else
                     {
@@ -656,6 +728,8 @@ public class Worm : WormSection
 
         if (isDone)
         {
+            m_useOldPos = true;
+            m_oldPos = pos;
             switch (m_pattern)
             {
                 case Pattern.ARC_RIGHT:
@@ -672,6 +746,24 @@ public class Worm : WormSection
                     break;
                 case Pattern.DOWN:
                     BeginPattern(Pattern.ARC_RIGHT);
+                    break;
+                case Pattern.S_UP_RIGHT:
+                    BeginPattern(Pattern.S_DOWN_LEFT);
+                    break;
+                case Pattern.S_UP_LEFT:
+                    BeginPattern(Pattern.S_DOWN_RIGHT);
+                    break;
+                case Pattern.S_DOWN_RIGHT:
+                    BeginPattern(Pattern.SKIM_LOW_LEFT);
+                    break;
+                case Pattern.S_DOWN_LEFT:
+                    BeginPattern(Pattern.SKIM_LOW_RIGHT);
+                    break;
+                case Pattern.SKIM_LOW_RIGHT:
+                    BeginPattern(Pattern.S_UP_LEFT);
+                    break;
+                case Pattern.SKIM_LOW_LEFT:
+                    BeginPattern(Pattern.S_UP_RIGHT);
                     break;
             }
         }
