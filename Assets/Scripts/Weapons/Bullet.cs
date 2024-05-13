@@ -18,6 +18,8 @@ public class Bullet : PooledObject
     protected float m_curSpeed;
     bool m_isOnScreen;
     Renderer m_renderer;
+    float m_offScreenTimeOut;
+    const float s_offScreenTimeOut = 1.0f;
 
     public void WarmUp()
     {
@@ -30,6 +32,7 @@ public class Bullet : PooledObject
         base.Init(pool);
         m_curSpeed = m_speed;
         m_isOnScreen = false;
+        m_offScreenTimeOut = s_offScreenTimeOut;
     }
 
     protected virtual void Start()
@@ -74,9 +77,18 @@ public class Bullet : PooledObject
             {   // wait for the bullet to appear on screen (in case fired from off-screen)
                 m_isOnScreen = true;
             }
-            else if (m_isOnScreen)
-            {   // then once it has left the screen, delete it
-                Free();
+            else
+            {
+                if (m_isOnScreen)
+                {   // then once it has left the screen, delete it
+                    Free();
+                }
+                else
+                {   // if a bullet is off screen for over a second, delete it
+                    m_offScreenTimeOut -= dt;
+                    if (m_offScreenTimeOut <= 0.0f)
+                        Free();
+                }
             }
         }
     }

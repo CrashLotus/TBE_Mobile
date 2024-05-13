@@ -106,7 +106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_headJoint: {x: 1.378, y: -0.26, z: 0}
   m_tailJoint: {x: -1.2415, y: -0.26, z: 0}
-  m_maxHitPoints: 40
+  m_maxHitPoints: 60
   m_poopEffect: {fileID: 4710921818973256664, guid: ece2ac8acd28808478de18d7c9638803, type: 3}
   m_poopSpot: {fileID: 4216638489658327487}
   m_eggSpeed: 2

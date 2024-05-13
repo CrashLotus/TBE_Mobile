@@ -198,7 +198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_headJoint: {x: 0, y: 0, z: 0}
   m_tailJoint: {x: -2.067, y: -0.351, z: 0}
-  m_maxHitPoints: 40
+  m_maxHitPoints: 60
   m_type: 2
   m_numSection: 10
   m_minSpeed: 3
@@ -214,9 +214,9 @@ MonoBehaviour:
   m_explodeRadius: 1.5
   m_explodeBullet: {fileID: 0}
   m_numExplodeBullet: 6
-  m_score: 1000
+  m_score: 2000
   m_rocketPrefab: {fileID: 4046171867003987607, guid: 8b5efe5dd04c5c24e8cde2fe91e9a064, type: 3}
-  m_fireRate: 1
+  m_fireRate: 1.5
 --- !u!1 &514937256329403669
 GameObject:
   m_ObjectHideFlags: 0

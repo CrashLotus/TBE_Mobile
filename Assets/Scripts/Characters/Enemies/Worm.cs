@@ -252,9 +252,8 @@ public class Worm : WormSection
         }
     }
 
-    void BeginPattern(Pattern pattern)
+    protected virtual void BeginPattern(Pattern pattern)
     {
-        Debug.Log("BeginPattern " + pattern.ToString());
         m_arcCenter = WrapAround.WrapPosition(m_arcCenter);
         m_oldPos = WrapAround.WrapPosition(m_oldPos);
         bool flipY = false;

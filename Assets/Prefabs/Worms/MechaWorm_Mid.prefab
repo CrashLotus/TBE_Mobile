@@ -263,7 +263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_headJoint: {x: 0.78, y: -0.156, z: 0}
   m_tailJoint: {x: -0.949, y: -0.156, z: 0}
-  m_maxHitPoints: 40
+  m_maxHitPoints: 60
 --- !u!58 &7508614702469813470
 CircleCollider2D:
   m_ObjectHideFlags: 0

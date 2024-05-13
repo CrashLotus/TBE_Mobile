@@ -21,6 +21,12 @@ public class MechaWorm : Worm
         ObjectPool.GetPool(m_rocketPrefab, 16);
     }
 
+    protected override void BeginPattern(Pattern pattern)
+    {
+        base.BeginPattern(pattern);
+        m_fireTimer = 0.0f;
+    }
+
     protected override void Update()
     {
         base.Update();
@@ -72,15 +78,20 @@ public class MechaWorm : Worm
             Transform xform = section.transform.GetChild(i);
             if (tail && tail.m_poopSpot == xform)
                 continue;   // don't fire a rocket from the poop spot
-            GameObject obj = pool.Allocate(xform.position);
+            Vector3 pos = xform.localPosition;
+            if (m_sprite.flipY)
+                pos.y = -pos.y;
+            pos = section.transform.TransformPoint(pos);
+            GameObject obj = pool.Allocate(pos);
             if (null == obj)
                 return;
             Bullet bullet = obj.GetComponent<Bullet>();
             if (bullet)
             {
-                Vector3 dir = xform.right;
+                Vector3 dir = section.transform.InverseTransformDirection(xform.right);
                 if (m_sprite.flipY)
-                    dir = -dir;
+                    dir.y = -dir.y;
+                dir = section.transform.TransformDirection(dir);
                 bullet.Fire(dir);
             }
         }
