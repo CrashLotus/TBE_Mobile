@@ -45,7 +45,7 @@ public class Worm : WormSection
     public int m_numExplodeBullet = 6;
     public int m_score = 500;
 
-    List<WormSection> m_sections;
+    protected List<WormSection> m_sections;
     Pattern m_pattern;
     float m_tailYMin = 0.0f;
     float m_tailYMax = 0.0f;
@@ -165,7 +165,7 @@ public class Worm : WormSection
         s_theList.Remove(this);
     }
 
-    protected void _WarmUp()
+    protected virtual void _WarmUp()
     {
         if (null != m_midPrefab)
         {
@@ -398,7 +398,7 @@ public class Worm : WormSection
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         float dt = BulletTime.Get().GetDeltaTime(false);
         m_stateTimer += dt;

@@ -33,7 +33,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7197653197952987962}
+  - {fileID: 7706231245685759615}
+  - {fileID: 6556232389307902209}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7034398377684461948
@@ -190,7 +193,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 331150285512644340}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e9033918126012428d6f9c8c6f516d6, type: 3}
+  m_Script: {fileID: 11500000, guid: f9e88348949f9b54da86380462a05c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_headJoint: {x: 0, y: 0, z: 0}
@@ -212,3 +215,98 @@ MonoBehaviour:
   m_explodeBullet: {fileID: 0}
   m_numExplodeBullet: 6
   m_score: 1000
+  m_rocketPrefab: {fileID: 4046171867003987607, guid: 8b5efe5dd04c5c24e8cde2fe91e9a064, type: 3}
+  m_fireRate: 1
+--- !u!1 &514937256329403669
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6556232389307902209}
+  m_Layer: 0
+  m_Name: Rocket03
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6556232389307902209
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 514937256329403669}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: 0.91348183, w: 0.4068795}
+  m_LocalPosition: {x: -0.54, y: 1.15, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6648737899604568251}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 131.982}
+--- !u!1 &5174352968361475239
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7706231245685759615}
+  m_Layer: 0
+  m_Name: Rocket02
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7706231245685759615
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5174352968361475239}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0.28, y: 1.41, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6648737899604568251}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!1 &7563921102499998602
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7197653197952987962}
+  m_Layer: 0
+  m_Name: Rocket01
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7197653197952987962
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7563921102499998602}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: 0.4081494, w: 0.91291517}
+  m_LocalPosition: {x: 1.09, y: 1.11, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6648737899604568251}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 48.177}

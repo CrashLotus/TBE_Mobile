@@ -209,4 +209,13 @@ public class WormSection : PooledObject, IHitPoints
             m_head.SectionDestroyed(this);
         }
     }
+
+    public void OnLaunchRocket()
+    {
+        MechaWorm mecha = m_head as MechaWorm;
+        if (mecha)
+        {
+            mecha.LaunchRocket(this);
+        }
+    }
 }
