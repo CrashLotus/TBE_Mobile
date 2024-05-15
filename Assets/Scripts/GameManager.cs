@@ -55,6 +55,8 @@ public class GameManager : MonoBehaviour
         "Levels/Level16",
         "Levels/Level17",
         "Levels/Level18",
+        "Levels/Level19",
+        "Levels/Level20",
     };
 
     public class Hint
