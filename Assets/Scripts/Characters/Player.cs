@@ -296,8 +296,8 @@ public class Player : Bird, IHitPoints
             m_powerDown.Play();
         }
 
-        SaveData data = SaveData.Get();
-        data.SetPlayerHP((int)m_hitPoints);
+//        SaveData data = SaveData.Get();
+//        data.SetPlayerHP((int)m_hitPoints);
         return ret;
     }
 
@@ -305,7 +305,7 @@ public class Player : Bird, IHitPoints
     {
         int maxEgg = MaxEgg();
         SaveData data = SaveData.Get();
-        int numEgg = data.GetPlayerHP();
+        int numEgg = NumEgg();
         if (data.HasUpgrade("MEGALASER") && numEgg >= 3 * maxEgg)
             return EggBonus.MEGA_LASER;
         if (data.HasUpgrade("MULTISHOT") && numEgg >= 2 * maxEgg)
@@ -374,7 +374,7 @@ public class Player : Bird, IHitPoints
         m_hitPoints += 1;
         if (m_hitPoints > maxEgg)
             m_hitPoints = maxEgg;
-        data.SetPlayerHP((int)m_hitPoints);
+//        data.SetPlayerHP((int)m_hitPoints);
 
         EggBonus endBonus = GetBonusMode();
         if (endBonus != startBonus)

@@ -13,7 +13,7 @@ public class AddEgg : Upgrade
     public override bool IsLocked()
     {
         SaveData data = SaveData.Get();
-        int numEgg = data.GetPlayerHP();
+        int numEgg = Player.NumEgg();
         int maxEgg = Player.MaxEgg();
         if (data.HasUpgrade("MEGALASER"))
             maxEgg *= 3;
@@ -25,7 +25,7 @@ public class AddEgg : Upgrade
     public override void Buy()
     {
         SaveData data = SaveData.Get();
-        int numEgg = data.GetPlayerHP();
+        int numEgg = Player.NumEgg();
         int maxEgg = Player.MaxEgg();
         if (data.HasUpgrade("MEGALASER"))
             maxEgg *= 3;
