@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f92e051b6ada1d4595224226f1ef9e0, type: 3}
+  m_Name: Level23
+  m_EditorClassIdentifier: 
+  m_waves:
+  - {fileID: 11400000, guid: fc4abcd7bc0b7d74eabfc9ee408b9718, type: 2}
+  - {fileID: 11400000, guid: 4af78b769c1489142a07e85a7286ab97, type: 2}
+  - {fileID: 11400000, guid: fc4abcd7bc0b7d74eabfc9ee408b9718, type: 2}
+  - {fileID: 11400000, guid: 4af78b769c1489142a07e85a7286ab97, type: 2}
+  - {fileID: 11400000, guid: cc68e856add7b324097eab293e02496b, type: 2}
