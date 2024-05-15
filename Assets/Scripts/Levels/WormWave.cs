@@ -15,7 +15,7 @@ public class WormWave : Wave
     {
         Wave insertWave = this;
         if (m_waitOnWorms)
-        {   // wait for the eggs to be done
+        {   // wait for the worms to be done
             WaitOnWave wait = ScriptableObject.CreateInstance<WaitOnWave>();
             Level.Get().AddWave(wait, this);
             insertWave = wait;

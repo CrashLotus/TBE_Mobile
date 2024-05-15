@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee7e54a32cf8aaa408e0e601cb42446e, type: 3}
-  m_Name: Wave20b
+  m_Name: Wave22a
   m_EditorClassIdentifier: 
   m_label: 
   m_text: 
-  m_wormType: 0
-  m_pattern: 1
-  m_xOffset: 6
+  m_wormType: 1
+  m_pattern: 0
+  m_xOffset: -6
   m_waitOnWorms: 0
   m_waitOnEnemies: 0

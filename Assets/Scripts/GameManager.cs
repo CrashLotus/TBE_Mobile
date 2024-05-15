@@ -57,6 +57,8 @@ public class GameManager : MonoBehaviour
         "Levels/Level18",
         "Levels/Level19",
         "Levels/Level20",
+        "Levels/Level21",
+        "Levels/Level22",
     };
 
     public class Hint
@@ -141,9 +143,9 @@ public class GameManager : MonoBehaviour
     {
         SaveData save = SaveData.Get();
         int level = save.GetCurrentLevel();
-        if (level > 17)
+        if (level > 19)
             return "Game_UFO";
-        if (level > 13)
+        if (level > 14)
             return "Game_Dino";
         if (level > 9)
             return "Game_Paris";
