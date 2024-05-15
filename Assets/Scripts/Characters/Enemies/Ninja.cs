@@ -25,7 +25,7 @@ public class Ninja : EnemyBird
     const float s_gravity = 4.0f;
 
     const float s_underLavaOffset = 1.5f;
-    const float s_popUpSpeed = 6.0f;
+    const float s_popUpSpeed = 4.0f;
     const float s_popUpAng = 45.0f;
     const float s_spinTime = 0.5f;
     const float s_wobbleTime = 2.0f;
@@ -152,6 +152,7 @@ public class Ninja : EnemyBird
                     if (Missile.GetNumMissiles() > 0)
                     {
                         m_state = (State)State_Ninja.SHELL;
+                        PopUp(s_popUpSpeed);
                         m_shellTimer = s_shellTime;
                         if (null != m_anim)
                             m_anim.Play("Hide");
@@ -194,15 +195,19 @@ public class Ninja : EnemyBird
 
     protected override IHitPoints.DamageReturn DoDamage(float damage, IHitPoints.HitType hitType)
     {
-        if (hitType == HitType.MISSILE)
+        bool inShell = m_state >= State.CUSTOM;
+        if (hitType == HitType.MISSILE || inShell)
         {   // ninja is immune to missiles... he hides in his shell
             switch ((State_Ninja)m_state)
             {
                 case State_Ninja.SHELL:
                 case State_Ninja.WOBBLE:
-                    PopUp(s_popUpSpeed);
-                    m_state = (State)State_Ninja.SPIN;
-                    m_spinTimer = s_spinTime;
+                    if (m_shellTimer < 2.0f)
+                    {
+                        PopUp(s_popUpSpeed);
+                        m_state = (State)State_Ninja.SPIN;
+                        m_spinTimer = s_spinTime;
+                    }
                     break;
                 case State_Ninja.SPIN:
                     break;

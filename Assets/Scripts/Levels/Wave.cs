@@ -63,4 +63,13 @@ public class Wave : ScriptableObject
         m_isActive = false;
         m_isDone = false;
     }
+
+    protected void SetText(string text)
+    {
+        m_text = text;
+        if (null != m_text && m_text.Length > 0 && m_text != "-")
+        {
+            GameUI.Get().SetLabel(m_text);
+        }
+    }
 }

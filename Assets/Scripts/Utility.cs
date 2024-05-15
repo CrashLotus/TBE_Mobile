@@ -34,9 +34,12 @@ public class Utility
 
     public static void HitFlash(GameObject gameObject)
     {
-        MonoBehaviour mono = gameObject.GetComponent<MonoBehaviour>();
-        if (null != mono)
-            mono.StartCoroutine(HitFlashUpdate(gameObject));
+        if (gameObject.activeInHierarchy)
+        {
+            MonoBehaviour mono = gameObject.GetComponent<MonoBehaviour>();
+            if (null != mono)
+                mono.StartCoroutine(HitFlashUpdate(gameObject));
+        }
     }
 
     static IEnumerator HitFlashUpdate(GameObject gameObject)

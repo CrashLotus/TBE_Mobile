@@ -18,7 +18,7 @@ public class MechaWorm : Worm
     protected override void _WarmUp()
     {
         base._WarmUp();
-        ObjectPool.GetPool(m_rocketPrefab, 16);
+        ObjectPool.GetPool(m_rocketPrefab, 36);
     }
 
     protected override void BeginPattern(Pattern pattern)

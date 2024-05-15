@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
         "Levels/Level21",
         "Levels/Level22",
         "Levels/Level23",
+        "Levels/KillLevel",
     };
 
     public class Hint
