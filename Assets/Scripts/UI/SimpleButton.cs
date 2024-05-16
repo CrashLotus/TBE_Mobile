@@ -51,4 +51,11 @@ public class SimpleButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     {
         m_wasDown = m_isDown;
     }
+
+    public void Show(bool show)
+    {
+        m_isDown = false;
+        m_wasDown = false;
+        gameObject.SetActive(show);
+    }
 }

@@ -753,6 +753,18 @@ PrefabInstance:
       propertyPath: m_missileButton
       value: 
       objectReference: {fileID: 7389636558173448860}
+    - target: {fileID: 25891693911960411, guid: 701238fa9ce28b0489fa5acd08b1589a, type: 3}
+      propertyPath: m_timeButton.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 25891693911960411, guid: 701238fa9ce28b0489fa5acd08b1589a, type: 3}
+      propertyPath: m_timeButton.Array.data[0]
+      value: 
+      objectReference: {fileID: 7389636558173448861}
+    - target: {fileID: 25891693911960411, guid: 701238fa9ce28b0489fa5acd08b1589a, type: 3}
+      propertyPath: m_timeButton.Array.data[1]
+      value: 
+      objectReference: {fileID: 7389636558173448862}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -977,6 +989,17 @@ MonoBehaviour:
 --- !u!114 &7389636558173448861 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3077984521185094195, guid: e21f56918989b3047b40ae7fbf94ce60, type: 3}
+  m_PrefabInstance: {fileID: 7389636558173448858}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29fa5d27ffb44af47b3ed471127f521b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7389636558173448862 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3398592710269300474, guid: e21f56918989b3047b40ae7fbf94ce60, type: 3}
   m_PrefabInstance: {fileID: 7389636558173448858}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

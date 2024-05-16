@@ -17,6 +17,7 @@ public class TimeWarpBar : MonoBehaviour
     Color m_color = Color.white;
     float m_pulseTimer;
     float m_scale;
+    SimpleButton m_subButton;
 
     const float s_valueSpeed = 100.0f;
     static Color s_color = Color.green;
@@ -36,6 +37,17 @@ public class TimeWarpBar : MonoBehaviour
         m_slider = GetComponentInChildren<Slider>();
         m_combo = GetComponentInChildren<TextMeshProUGUI>();
         m_value = BulletTime.Get().GetTimeBarValue();
+        m_subButton = null;
+        for (int i = 0; i < transform.childCount; ++i)
+        {
+            Transform child = transform.GetChild(i);
+            SimpleButton subButton = child.GetComponent<SimpleButton>();
+            if (subButton)
+            {
+                m_subButton = subButton;
+                break;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -71,11 +83,15 @@ public class TimeWarpBar : MonoBehaviour
                 m_pulseTimer = 0.0f;
 //                m_sparkAnim.Reset();  //mrwTODO
             }
+            if (m_subButton)
+                m_subButton.Show(true);
         }
         else
         {
             m_color = s_color;
             m_flashTimer = 0.0f;
+            if (m_subButton)
+                m_subButton.Show(false);
         }
 
         // update pulse

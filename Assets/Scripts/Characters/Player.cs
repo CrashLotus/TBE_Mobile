@@ -22,7 +22,7 @@ public class Player : Bird, IHitPoints
     public SimpleButton m_fireRight;
     public Weapon m_missileWeapon;
     public SimpleButton m_missileButton;
-    public SimpleButton m_timeButton;
+    public SimpleButton[] m_timeButton;
     public GameObject m_eggShield;
     public Weapon m_megaLaser;
     public float m_topBoundary = 0.94f;
@@ -112,7 +112,9 @@ public class Player : Bird, IHitPoints
         bool fireMissile = m_missileButton.IsButtonPress();
         fireMissile |= Input.GetKeyDown(KeyCode.Tab);
 
-        bool timeWarp = m_timeButton.IsButtonPress();
+        bool timeWarp = false;
+        foreach (SimpleButton timeButton in m_timeButton)
+            timeWarp |= timeButton.IsButtonPress();
         timeWarp |= Input.GetKeyDown(KeyCode.BackQuote);
 
         // update velocity
