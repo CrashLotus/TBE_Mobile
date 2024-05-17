@@ -75,14 +75,15 @@ public class Player : Bird, IHitPoints
 
     public override void Init(ObjectPool pool)
     {
+        SaveData data = SaveData.Get();
         base.Init(pool);
-        m_hitPoints = SaveData.Get().GetPlayerHP();
+        m_hitPoints = data.GetPlayerHP();
+        s_score = data.GetScore();
         m_isEggShieldOn = false;
         m_eggShieldAnim = m_eggShield.GetComponent<Animator>();
         m_eggShield.SetActive(false);
         
         // check the egg shield
-        SaveData data = SaveData.Get();
         if (data.HasUpgrade("EGGSHIELD"))
         {
             EggBonus startBonus = GetBonusMode();
@@ -302,8 +303,6 @@ public class Player : Bird, IHitPoints
             m_powerDown.Play();
         }
 
-//        SaveData data = SaveData.Get();
-//        data.SetPlayerHP((int)m_hitPoints);
         return ret;
     }
 
@@ -343,14 +342,9 @@ public class Player : Bird, IHitPoints
 
     public static void AddScore(int score)
     {
-        int oldScore = s_score;
-        //mrwTODO
-        //if (score > 0 && Player.IsAbilityUnlocked(Upgrade.Type.EXTRAPOINTS))
-        //    score += 3 * score / 10;
         s_score += score;
-        //if (s_score < 0)
-        //    s_score = oldScore;
     }
+
     public static int GetScore()
     {
         return s_score;
@@ -380,7 +374,6 @@ public class Player : Bird, IHitPoints
         m_hitPoints += 1;
         if (m_hitPoints > maxEgg)
             m_hitPoints = maxEgg;
-//        data.SetPlayerHP((int)m_hitPoints);
 
         EggBonus endBonus = GetBonusMode();
         if (endBonus != startBonus)

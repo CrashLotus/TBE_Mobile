@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_key: AIM
   m_name: Aim
-  m_cost: 10
+  m_cost: 5
   m_desc: Choose which way to shoot
   m_icon: {fileID: 21300000, guid: 02511a43419ee324aa2216709eb3913d, type: 3}
-  m_display: {fileID: 21300000, guid: accee0eed12ed9b479db9e807789d21e, type: 3}
   m_preReq: 

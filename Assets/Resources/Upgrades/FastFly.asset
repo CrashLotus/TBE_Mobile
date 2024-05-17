@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_key: FASTFLY
   m_name: Must Go Faster!
-  m_cost: 10
+  m_cost: 5
   m_desc: Fly faster than before.
   m_icon: {fileID: 21300000, guid: 18c60e132cc23d447a7525e08614c81f, type: 3}
   m_preReq: 

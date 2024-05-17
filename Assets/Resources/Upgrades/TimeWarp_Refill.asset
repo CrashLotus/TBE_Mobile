@@ -17,5 +17,4 @@ MonoBehaviour:
   m_cost: 2
   m_desc: Fills your Time Freeze bar. This option is available again at each stage.
   m_icon: {fileID: 21300000, guid: 3ad13e21b9fbf50469c80a2e3c9f4f40, type: 3}
-  m_display: {fileID: 21300000, guid: 33b8ded0c943de94fa563de1f160db0f, type: 3}
   m_preReq: BULLETTIME

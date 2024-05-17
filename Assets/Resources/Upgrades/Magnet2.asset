@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_key: EGGMAGNET2
   m_name: Super Chick Magnet
-  m_cost: 15
+  m_cost: 10
   m_desc: Eggs can't resist your strong magnetic pull.
   m_icon: {fileID: 21300000, guid: b79f98ecfe1bf3e44a476908dae10efb, type: 3}
-  m_display: {fileID: 21300000, guid: 2a42cf737fd556048bd9c3cd7d5d52f0, type: 3}
   m_preReq: EGGMAGNET1

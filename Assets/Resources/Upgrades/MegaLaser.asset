@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_key: MEGALASER
   m_name: Pen-guin X5 Laser
-  m_cost: 20
+  m_cost: 10
   m_desc: "Where is this laser coming from? \nFires when the egg meter is all gold."
   m_icon: {fileID: 21300000, guid: 66d38e26c476303498d4cc50828eb7dd, type: 3}
   m_preReq: MULTISHOT

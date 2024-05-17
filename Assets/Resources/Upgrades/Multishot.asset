@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_key: MULTISHOT
   m_name: Three is better than one!
-  m_cost: 20
+  m_cost: 10
   m_desc: Fires three shots at a time when the egg meter is all silver.
   m_icon: {fileID: 21300000, guid: 3037625a972184c46a78879177308c35, type: 3}
-  m_display: {fileID: 21300000, guid: 87172f730bc57644aaf0c1290d2fae83, type: 3}
   m_preReq: POWERLASER

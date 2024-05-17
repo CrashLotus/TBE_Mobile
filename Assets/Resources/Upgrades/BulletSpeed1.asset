@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_key: BULLETSPEED1
   m_name: Berserker - gauge
-  m_cost: 10
+  m_cost: 5
   m_desc: 'Rawwar!!!
 
     Fire shots at a faster rate!'

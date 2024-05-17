@@ -124,6 +124,7 @@ public class GameManager : MonoBehaviour
     public void StageClear()
     {
         SaveData save = SaveData.Get();
+        save.SetScore(Player.GetScore());
         save.SetPlayerHP(Player.NumEgg());
         int nextLevel = save.GetCurrentLevel();
         ++nextLevel;

@@ -11,6 +11,7 @@ public class SaveData
 
     public class Data
     {
+        public int m_score = 0;
         public int m_currentLevel = 0;
         public int m_playerHP = Player.s_startingHP;
         public int m_timeCrystals = 0;
@@ -143,6 +144,17 @@ public class SaveData
     public void SetTimeWarp(int points)
     {
         m_data.m_timeWarp = points;
+        Save();
+    }
+
+    public int GetScore()
+    {
+        return m_data.m_score;
+    }
+
+    public void SetScore(int score)
+    {
+        m_data.m_score = score;
         Save();
     }
 }

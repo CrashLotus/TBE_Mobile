@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_key: MISSILE1
   m_name: Never Miss-iles
-  m_cost: 10
+  m_cost: 5
   m_desc: Fires enemy seeking missiles. Takes time to reload.
   m_icon: {fileID: 21300000, guid: 9865ac1c149c6014680a40709e42a551, type: 3}
-  m_display: {fileID: 21300000, guid: e10c5d51a8d58414fbbf01dca7f6e0aa, type: 3}
+  m_preReq: 

@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_key: BULLETTIME2
   m_name: Extended Time Freeze
-  m_cost: 20
+  m_cost: 10
   m_desc: Time Freeze lasts longer. Who doesn't need more time?
   m_icon: {fileID: 21300000, guid: a27972d1e47ddea47b050a1155fab79b, type: 3}
-  m_display: {fileID: 21300000, guid: e5920353ea72822439c122b5687fa3a6, type: 3}
   m_preReq: BULLETTIME
