@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -19,19 +20,26 @@ public class PauseMenu : MonoBehaviour
         {   // pause
             GameManager.Get().SetPause(true);
             gameObject.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(m_pauseMenu.transform.Find("Resume").gameObject);
         }
         m_menuSelect.Play();
     }
 
     public void OnOptionsMenu()
     {
-        m_optionsMenu.SetActive(!m_optionsMenu.activeSelf);
+        bool openOptions = !m_optionsMenu.activeSelf;
+        m_optionsMenu.SetActive(openOptions);
         m_menuSelect.Play();
+        if (openOptions)
+            EventSystem.current.SetSelectedGameObject(m_optionsMenu.transform.GetChild(0).Find("Close").gameObject);
+        else
+            EventSystem.current.SetSelectedGameObject(m_pauseMenu.transform.Find("Resume").gameObject);
     }
 
     public void OnCloseOptions()
     {
         m_menuSelect.Play();
+        EventSystem.current.SetSelectedGameObject(m_pauseMenu.transform.Find("Resume").gameObject);
     }
 
     public void OnQuit()

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : Bird, IHitPoints
 {
@@ -31,6 +32,8 @@ public class Player : Bird, IHitPoints
     public Sound m_powerDown;
     public Sound m_eggShieldOn;
     public Sound m_eggShieldOff;
+
+    PlayerInput m_input;
 
     Vector3 m_vel = Vector3.zero;
     bool m_fireLaser = false;
@@ -95,6 +98,7 @@ public class Player : Bird, IHitPoints
                 m_missileButton.gameObject.SetActive(false);
         }
 
+        m_input = GetComponent<PlayerInput>();
         s_thePlayer = this;
     }
 
@@ -106,16 +110,16 @@ public class Player : Bird, IHitPoints
 
         // Input
         m_fireLaser = m_fireButton.IsButtonHold() | m_fireLeft.IsButtonHold() | m_fireRight.IsButtonHold();
-        m_fireLaser |= Input.GetKey(KeyCode.Space);
+        m_fireLaser |= m_input.actions.FindAction("Fire").IsPressed();
         bool fireLaser = m_fireLaser && (!m_fireLaserOld);
 
         bool fireMissile = m_missileButton.IsButtonPress();
-        fireMissile |= Input.GetKeyDown(KeyCode.Tab);
+        fireMissile |= m_input.actions.FindAction("Missile").triggered;
 
         bool timeWarp = false;
         foreach (SimpleButton timeButton in m_timeButton)
             timeWarp |= timeButton.IsButtonPress();
-        timeWarp |= Input.GetKeyDown(KeyCode.BackQuote);
+        timeWarp |= m_input.actions.FindAction("TimeWarp").triggered;
 
         // update velocity
         int speedLevel = SaveData.Get().HasUpgrade("FASTFLY") ? 1 : 0;
@@ -129,14 +133,9 @@ public class Player : Bird, IHitPoints
         if (null != joystick)
         {
             Vector3 move = new Vector3(joystick.Horizontal, joystick.Vertical, 0.0f);
-            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
-                move.y += 1.0f;
-            if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
-                move.y -= 1.0f;
-            if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
-                move.x += 1.0f;
-            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
-                move.x -= 1.0f;
+            Vector2 inputMove = m_input.actions.FindAction("Move").ReadValue<Vector2>();
+            move.x += inputMove.x;
+            move.y += inputMove.y;
             vel = new Vector3(move.x * m_horizSpeed, move.y * m_vertSpeed, 0.0f);
             throttle = Mathf.Min(move.magnitude, 1.0f);
             if (throttle <= 0.01f)

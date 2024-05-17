@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class DialogBox : MonoBehaviour
 {
@@ -32,5 +33,10 @@ public class DialogBox : MonoBehaviour
         if (null != m_no)
             m_no();
         gameObject.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        EventSystem.current.SetSelectedGameObject(transform.Find("Yes").gameObject);
     }
 }

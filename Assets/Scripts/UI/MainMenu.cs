@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class MainMenu : MonoBehaviour
 {
@@ -48,6 +49,11 @@ public class MainMenu : MonoBehaviour
         if (SaveData.Get().GetCurrentLevel() == 0)
         {   // disable the continue game option
             GrayOutButton(m_continueGame);
+            EventSystem.current.SetSelectedGameObject(transform.Find("NewGame").gameObject);
+        }
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(m_continueGame);
         }
     }
 
@@ -77,8 +83,13 @@ public class MainMenu : MonoBehaviour
 
     public void OnOptionsMenu()
     {
-        m_optionsMenu.SetActive(!m_optionsMenu.activeSelf);
+        bool openOptions = !m_optionsMenu.activeSelf;
+        m_optionsMenu.SetActive(openOptions);
         m_menuSelect.Play();
+        if (openOptions)
+            EventSystem.current.SetSelectedGameObject(m_optionsMenu.transform.GetChild(0).Find("Close").gameObject);
+        else
+            EventSystem.current.SetSelectedGameObject(transform.Find("Options").gameObject);
     }
 
     public void OnQuitGame()
