@@ -17,6 +17,7 @@ public class GameUI : MonoBehaviour
     public GameObject m_fireButtonSplit;
     public TutorialUI m_tutorial;
     public GameObject m_timeBar;
+    public Button m_pauseButton;
 
     Joystick m_joystick;
 
@@ -58,6 +59,12 @@ public class GameUI : MonoBehaviour
     public static GameUI Get()
     {
         return s_theUI;
+    }
+
+    public void PauseGame()
+    {
+        if (m_pauseButton.onClick != null)
+            m_pauseButton.onClick.Invoke();
     }
 
     public void UpdateOptions()

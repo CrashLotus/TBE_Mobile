@@ -2325,6 +2325,7 @@ MonoBehaviour:
   m_fireButtonSplit: {fileID: 8227089614368988505}
   m_tutorial: {fileID: 761245958791781229}
   m_timeBar: {fileID: 6810505542909804783}
+  m_pauseButton: {fileID: 4899773588630436461}
 --- !u!1 &8227089614368988505
 GameObject:
   m_ObjectHideFlags: 0

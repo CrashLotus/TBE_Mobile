@@ -121,6 +121,11 @@ public class Player : Bird, IHitPoints
             timeWarp |= timeButton.IsButtonPress();
         timeWarp |= m_input.actions.FindAction("TimeWarp").triggered;
 
+        bool pause = false;
+        pause |= m_input.actions.FindAction("Pause").triggered;
+        if (pause)
+            GameUI.Get().PauseGame();
+        
         // update velocity
         int speedLevel = SaveData.Get().HasUpgrade("FASTFLY") ? 1 : 0;
         m_vertSpeed = s_vertSpeed[speedLevel];

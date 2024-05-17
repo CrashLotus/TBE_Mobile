@@ -44,7 +44,7 @@
                 {
                     "name": "Pause",
                     "type": "Button",
-                    "id": "cf3d8d77-f6bb-4f58-9435-66c761e2cc0e",
+                    "id": "c3857413-3fdb-401d-b82a-59179495c957",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -252,6 +252,17 @@
                 },
                 {
                     "name": "",
+                    "id": "ff83a7a5-e0d2-4351-ae2d-f513ae996208",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "7b7db6e1-4afe-4067-9aba-3fb500773c9e",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
@@ -329,7 +340,18 @@
                 },
                 {
                     "name": "",
-                    "id": "5b15797b-7c5c-4379-bb61-6f2ce66aef86",
+                    "id": "7c63497e-2593-4785-96c9-d861420d62ae",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Missile",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "65d7c573-8acc-4f0a-a03a-963dadd56811",
                     "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
@@ -340,7 +362,7 @@
                 },
                 {
                     "name": "",
-                    "id": "52d1abd2-36a9-4be8-81e5-469b4ba399bd",
+                    "id": "07a0c81e-f944-43c5-8fe7-b70c63962080",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
@@ -351,12 +373,12 @@
                 },
                 {
                     "name": "",
-                    "id": "7c63497e-2593-4785-96c9-d861420d62ae",
-                    "path": "<Gamepad>/leftShoulder",
+                    "id": "e9753100-e5ff-4d13-9232-d37e92708a1f",
+                    "path": "<Gamepad>/dpad/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Missile",
+                    "groups": "Gamepad",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
