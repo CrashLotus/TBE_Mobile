@@ -25,6 +25,7 @@ public class EnemyBird : Bird, IHitPoints
     const float s_riseHeight = 1.0f;
     const float s_fallHeight = -3.0f;
     const float s_invTime = 1.0f;
+    public float s_offScreenBoost = 3.0f;
     protected const float s_jukeAmp = 1.0f;
     static List<EnemyBird> s_theList = new List<EnemyBird>();
     static ObjectPool[] s_enemyPool = new ObjectPool[3];
@@ -197,6 +198,11 @@ public class EnemyBird : Bird, IHitPoints
                         move = delta / length;
                         move.x *= m_horizSpeed * dt;
                         move.y *= m_vertSpeed * dt;
+                        // if you're off screen, speed up
+                        Vector3 screenPos = Camera.main.WorldToViewportPoint(pos);
+                        float dx = Mathf.Abs(screenPos.x) - 1.0f;
+                        if (dx > 0.1f)
+                            move.x += Mathf.Sign(move.x) * s_offScreenBoost * dt;
                     }
                     else
                     {
