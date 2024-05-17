@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class StoreMenu : MonoBehaviour
@@ -75,6 +76,7 @@ public class StoreMenu : MonoBehaviour
         }
 
         OnSelectItem(-1);
+        UI_Utility.SelectUI(transform.Find("Continue").gameObject);
     }
 
     void Update()

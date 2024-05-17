@@ -49,11 +49,11 @@ public class MainMenu : MonoBehaviour
         if (SaveData.Get().GetCurrentLevel() == 0)
         {   // disable the continue game option
             GrayOutButton(m_continueGame);
-            EventSystem.current.SetSelectedGameObject(transform.Find("NewGame").gameObject);
+            UI_Utility.SelectUI(transform.Find("NewGame").gameObject);
         }
         else
         {
-            EventSystem.current.SetSelectedGameObject(m_continueGame);
+            UI_Utility.SelectUI(m_continueGame);
         }
     }
 
@@ -87,9 +87,9 @@ public class MainMenu : MonoBehaviour
         m_optionsMenu.SetActive(openOptions);
         m_menuSelect.Play();
         if (openOptions)
-            EventSystem.current.SetSelectedGameObject(m_optionsMenu.transform.GetChild(0).Find("Close").gameObject);
+            UI_Utility.SelectUI(m_optionsMenu.transform.GetChild(0).Find("Close").gameObject);
         else
-            EventSystem.current.SetSelectedGameObject(transform.Find("Options").gameObject);
+            UI_Utility.SelectUI(transform.Find("Options").gameObject);
     }
 
     public void OnQuitGame()
