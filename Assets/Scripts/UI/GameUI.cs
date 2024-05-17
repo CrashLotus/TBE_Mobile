@@ -69,6 +69,11 @@ public class GameUI : MonoBehaviour
 
     public void UpdateOptions()
     {
+#if !UNITY_IOS && !UNITY_ANDROID
+        m_fixedJoystick.gameObject.SetActive(false);
+        m_floatJoystick.gameObject.SetActive(false);
+        m_joystick = m_fixedJoystick;
+#else
         switch (PlayerPrefs.GetInt("joystick", 0))
         {
             case 0: // fixed
@@ -83,6 +88,7 @@ public class GameUI : MonoBehaviour
                 m_joystick = m_floatJoystick;
                 break;
         }
+#endif
 
         SaveData data = SaveData.Get();
         if (data.HasUpgrade("AIM"))
