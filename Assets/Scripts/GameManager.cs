@@ -178,6 +178,7 @@ public class GameManager : MonoBehaviour
                 yield return null;
             if (s_adResult == GameOverAdResult.FAIL)
             {
+                LeaderBoard.Get().AddScore(save.GetScore());
                 save.ResetGame();
                 ChangeState(State.MAIN_MENU);
                 yield break;
@@ -194,6 +195,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(2.0f);
 
         // return to main menu
+        LeaderBoard.Get().AddScore(save.GetScore());
         save.ResetGame();
         ChangeState(State.MAIN_MENU);
     }
@@ -248,6 +250,7 @@ public class GameManager : MonoBehaviour
         }
         // Boot Strap
         PurchaseManager.Get();
+        LeaderBoard.Get();
         BulletTime.Get();
         UpdateScreenBounds();
         SoundInstance.WarmUp();

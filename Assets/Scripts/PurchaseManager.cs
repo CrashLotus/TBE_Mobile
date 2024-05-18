@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.Purchasing;
+using Unity.Services.Authentication;
 using Unity.Services.Core;
 
 public class PurchaseManager : MonoBehaviour, IStoreListener, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
@@ -33,6 +34,10 @@ public class PurchaseManager : MonoBehaviour, IStoreListener, IUnityAdsInitializ
 #else
     bool m_isDebugMode = false;
 #endif
+
+    // Authentication
+    string m_playerId = "";
+    bool m_isAuthenticationReady = false;
 
     public static PurchaseManager Get()
     {
@@ -74,6 +79,7 @@ public class PurchaseManager : MonoBehaviour, IStoreListener, IUnityAdsInitializ
         try
         {
             await UnityServices.InitializeAsync();
+            await SignInAnonymously();
             Debug.Log("InitializePurchasing()");
             InitializePurchasing();
             InitializeAds();
@@ -83,6 +89,24 @@ public class PurchaseManager : MonoBehaviour, IStoreListener, IUnityAdsInitializ
             Debug.LogException(e);
         }
         Debug.Log("Finish Initialize()");
+        m_isAuthenticationReady = true;
+    }
+
+    async Task SignInAnonymously()
+    {
+        AuthenticationService.Instance.SignedIn += () =>
+        {
+            m_playerId = AuthenticationService.Instance.PlayerId;
+            Debug.Log("Signed in as: " + m_playerId);
+        };
+        AuthenticationService.Instance.SignInFailed += s =>
+        {
+            // Take some action here...
+            Debug.LogError(s);
+            m_playerId = "";    // not signed in
+        };
+
+        await AuthenticationService.Instance.SignInAnonymouslyAsync();
     }
 
     void InitializePurchasing()
@@ -282,5 +306,21 @@ public class PurchaseManager : MonoBehaviour, IStoreListener, IUnityAdsInitializ
     public void OnInitializeFailed(InitializationFailureReason error, string message)
     {
         throw new NotImplementedException();
+    }
+
+    // Authentication
+    public bool IsAuthenticationReady()
+    {
+        return m_isAuthenticationReady;
+    }
+
+    public bool IsSignedIn()
+    {
+        return m_playerId != null && m_playerId.Length > 0;
+    }
+
+    public string PlayerId()
+    {
+        return m_playerId;
     }
 }

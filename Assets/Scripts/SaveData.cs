@@ -64,8 +64,10 @@ public class SaveData
 
     public void ResetGame()
     {
+        m_data.m_score = 0;
         m_data.m_currentLevel = 0;
         m_data.m_playerHP = Player.s_startingHP;
+        m_data.m_tutorial.Clear();
         Save();
     }
 
