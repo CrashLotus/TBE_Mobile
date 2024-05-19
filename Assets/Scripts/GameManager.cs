@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
         STORE,
         STAGE_CLEAR,
         CREDITS,
+        LEADERBOARD,
     }
     public enum GameOverAdResult
     { 
@@ -116,6 +117,11 @@ public class GameManager : MonoBehaviour
         ChangeState(State.STORE);
     }
 
+    public void GoToLeaderboard()
+    {
+        ChangeState(State.LEADERBOARD);
+    }
+
     public void GameOver()
     {
         ChangeState(State.GAME_OVER);
@@ -180,7 +186,7 @@ public class GameManager : MonoBehaviour
             {
                 LeaderBoard.Get().AddScore(save.GetScore());
                 save.ResetGame();
-                ChangeState(State.MAIN_MENU);
+                ChangeState(State.LEADERBOARD);
                 yield break;
             }
             ChangeState(State.GAME_ON);
@@ -197,7 +203,7 @@ public class GameManager : MonoBehaviour
         // return to main menu
         LeaderBoard.Get().AddScore(save.GetScore());
         save.ResetGame();
-        ChangeState(State.MAIN_MENU);
+        ChangeState(State.LEADERBOARD);
     }
 
     static void OnGameOverAdCompleted(bool success)
@@ -312,6 +318,10 @@ public class GameManager : MonoBehaviour
                 ClearGame();
                 SceneManager.LoadScene("Credits");
                 break;
+            case State.LEADERBOARD:
+                ClearGame();
+                SceneManager.LoadScene("LeaderBoard");
+                break;
             default:
                 break;
         }
@@ -353,6 +363,7 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(StageClearCountDown());
                 break;
             case State.CREDITS:
+            case State.LEADERBOARD:
                 MusicManager.Get().Play(MusicManager.SongType.CREDITS);
                 break;
         }

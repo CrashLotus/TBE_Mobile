@@ -81,6 +81,12 @@ public class MainMenu : MonoBehaviour
         m_menuSelect.Play();
     }
 
+    public void OnLeaderboard()
+    {
+        GameManager.Get().GoToLeaderboard();
+        m_menuSelect.Play();
+    }
+
     public void OnOptionsMenu()
     {
         bool openOptions = !m_optionsMenu.activeSelf;
