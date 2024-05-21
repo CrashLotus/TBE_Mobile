@@ -2,14 +2,14 @@ Shader "TBE/Background"
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
+        [PerRendererData] _MainTex ("Texture", 2D) = "white" {}
     }
     SubShader
     {
         Tags { "RenderType"="Transparent" "Queue"="Transparent" }
         Blend SrcAlpha OneMinusSrcAlpha
+        ZWrite Off
         Cull off
-        LOD 100
 
         Pass
         {

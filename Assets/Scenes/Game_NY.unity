@@ -405,63 +405,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1001 &1122316602
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3961898668197125641, guid: 7edfa5faa808ada4ebb4dbf2928029bd, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3961898668197125641, guid: 7edfa5faa808ada4ebb4dbf2928029bd, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3961898668197125641, guid: 7edfa5faa808ada4ebb4dbf2928029bd, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3961898668197125641, guid: 7edfa5faa808ada4ebb4dbf2928029bd, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3961898668197125641, guid: 7edfa5faa808ada4ebb4dbf2928029bd, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3961898668197125641, guid: 7edfa5faa808ada4ebb4dbf2928029bd, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3961898668197125641, guid: 7edfa5faa808ada4ebb4dbf2928029bd, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3961898668197125641, guid: 7edfa5faa808ada4ebb4dbf2928029bd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3961898668197125641, guid: 7edfa5faa808ada4ebb4dbf2928029bd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3961898668197125641, guid: 7edfa5faa808ada4ebb4dbf2928029bd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4234046206340094728, guid: 7edfa5faa808ada4ebb4dbf2928029bd, type: 3}
-      propertyPath: m_Name
-      value: Explosion
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7edfa5faa808ada4ebb4dbf2928029bd, type: 3}
 --- !u!1001 &1278346455
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -639,9 +582,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2510424741102639955, guid: a640ddbce4377164298fed74f4137c48, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2992253428012367764, guid: a640ddbce4377164298fed74f4137c48, type: 3}
       propertyPath: m_Name
       value: NYBackground
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992253428012367764, guid: a640ddbce4377164298fed74f4137c48, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2992253428012367767, guid: a640ddbce4377164298fed74f4137c48, type: 3}
       propertyPath: m_RootOrder
@@ -686,6 +637,18 @@ PrefabInstance:
     - target: {fileID: 2992253428012367767, guid: a640ddbce4377164298fed74f4137c48, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3901172339368484430, guid: a640ddbce4377164298fed74f4137c48, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5843599602057739785, guid: a640ddbce4377164298fed74f4137c48, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5843599602204935058, guid: a640ddbce4377164298fed74f4137c48, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1096,4 +1059,3 @@ SceneRoots:
   - {fileID: 1742798436}
   - {fileID: 476247852}
   - {fileID: 1443512831}
-  - {fileID: 1122316602}

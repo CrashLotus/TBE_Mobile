@@ -1,6 +1,6 @@
-#define TEST_LEADERS
+//#define TEST_LEADERS
 
-using Newtonsoft.Json;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -84,8 +84,16 @@ public class LeaderBoard : MonoBehaviour
         m_state = State.INIT;
         for (int boardIndex = 0; boardIndex < (int)Board.TOTAL; ++boardIndex)
         {
-            var scoreResponse = await LeaderboardsService.Instance.AddPlayerScoreAsync(s_boardID[boardIndex], score);
-            m_scores[boardIndex] = await LeaderboardsService.Instance.GetScoresAsync(s_boardID[boardIndex]);
+            m_scores[boardIndex] = null;
+            try
+            {
+                var scoreResponse = await LeaderboardsService.Instance.AddPlayerScoreAsync(s_boardID[boardIndex], score);
+                m_scores[boardIndex] = await LeaderboardsService.Instance.GetScoresAsync(s_boardID[boardIndex]);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e.Message);
+            }
         }
 
         m_state = State.READY;

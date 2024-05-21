@@ -16,9 +16,12 @@ public class HighScores : MonoBehaviour
     public GameObject m_linePrefab;
     public GameObject m_allTimePanel;
     public GameObject m_weeklyPanel;
+    public GameObject m_rightArrow;
+    public GameObject m_leftArrow;
     public float m_startY = -278.0f;
     public float m_lineSpacing = 132.0f;
     public int m_maxDisplay = 10;
+    public float m_timePerLine = 0.25f;
     public Sound m_menuSelect;
     public Sound m_typeSound;
     public Sound m_openKeyboardSound;
@@ -43,6 +46,7 @@ public class HighScores : MonoBehaviour
     void Start()
     {
         m_rect = GetComponent<RectTransform>();
+        EnableArrows(false);
         StartCoroutine(LoadScores());
         Transform parent = transform.parent;
         while (parent)
@@ -76,50 +80,60 @@ public class HighScores : MonoBehaviour
                 done = true;
             pos.x += diff;
             m_rect.anchoredPosition = pos;
-            foreach (GameObject obj in m_allLines)
-                Destroy(obj);
-            m_allLines.Clear();
-            StartCoroutine(LoadScores());
+            if (done)
+            {
+                foreach (GameObject obj in m_allLines)
+                    Destroy(obj);
+                m_allLines.Clear();
+                StartCoroutine(LoadScores());
+            }
         }
     }
 
     IEnumerator LoadScores()
     {
+        EnableArrows(false);
         LeaderBoard lb = LeaderBoard.Get();
         while (false == lb.IsReady())
             yield return null;
         string yourId = PurchaseManager.Get().PlayerId();
-        yourId = "playerId14";  // testing
+//        yourId = "playerId14";  // testing
         LeaderboardScoresPage scores = lb.GetScores(m_board);
-        int yourIndex = -1;
-        for (int i = 0; i < scores.Results.Count; ++i)
+        if (scores != null)
         {
-            if (scores.Results[i].PlayerId == yourId)
+            int yourIndex = -1;
+            for (int i = 0; i < scores.Results.Count; ++i)
             {
-                yourIndex = i;
-                break;
+                if (scores.Results[i].PlayerId == yourId)
+                {
+                    yourIndex = i;
+                    break;
+                }
+            }
+            Vector3 pos = Vector3.zero;
+            pos.y = m_startY;
+            int to = Mathf.Min(scores.Results.Count, m_maxDisplay);
+            if (yourIndex >= 10)
+                to = 8;
+            Transform panel = m_allTimePanel.transform;
+            if (m_board == LeaderBoard.Board.WEEKLY)
+                panel = m_weeklyPanel.transform;
+            for (int i = 0; i < to; ++i)
+            {
+                var score = scores.Results[i];
+                DrawLine(score, pos, yourId, panel);
+                pos.y -= m_lineSpacing;
+                yield return new WaitForSecondsRealtime(m_timePerLine);
+            }
+            if (yourIndex >= 0 && yourIndex >= 10)
+            {
+                yield return new WaitForSecondsRealtime(m_timePerLine); // a double-delay before the player's line
+                pos.y -= 0.5f * m_lineSpacing;
+                var score = scores.Results[yourIndex];
+                DrawLine(score, pos, yourId, panel);
             }
         }
-        Vector3 pos = Vector3.zero;
-        pos.y = m_startY;
-        int to = m_maxDisplay - 1;
-        if (yourIndex > 10)
-            to = 8;
-        Transform panel = m_allTimePanel.transform;
-        if (m_board == LeaderBoard.Board.WEEKLY)
-            panel = m_weeklyPanel.transform;
-        for (int i = 0; i < to; ++i)
-        {
-            var score = scores.Results[i];
-            DrawLine(score, pos, yourId, panel);
-            pos.y -= m_lineSpacing;
-        }
-        if (yourIndex >= 0)
-        {
-            pos.y -= 0.5f * m_lineSpacing;
-            var score = scores.Results[yourIndex];
-            DrawLine(score, pos, yourId, panel);
-        }
+        EnableArrows(true);
     }
 
     bool DrawLine(LeaderboardEntry score, Vector3 pos, string yourId, Transform panel)
@@ -167,6 +181,12 @@ public class HighScores : MonoBehaviour
             m_playerName = score.PlayerName;
         }
         return foundYours;
+    }
+
+    void EnableArrows(bool enable)
+    {
+        m_leftArrow.SetActive(enable);
+        m_rightArrow.SetActive(enable);
     }
 
     public void OnExit()

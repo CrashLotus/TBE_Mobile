@@ -9,6 +9,7 @@ Shader "Unlit/Credits"
     SubShader
     {
         Tags { "RenderType"="Opaque" }
+        Cull off
         LOD 100
 
         Pass

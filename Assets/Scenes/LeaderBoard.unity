@@ -1735,9 +1735,12 @@ MonoBehaviour:
   m_linePrefab: {fileID: 2262542271993164029, guid: e88d503352af66548bcb2ac101de0d1a, type: 3}
   m_allTimePanel: {fileID: 357733651}
   m_weeklyPanel: {fileID: 408504986}
+  m_rightArrow: {fileID: 885197206}
+  m_leftArrow: {fileID: 294155322}
   m_startY: -278
   m_lineSpacing: 80
   m_maxDisplay: 10
+  m_timePerLine: 0.08
   m_menuSelect: {fileID: 11400000, guid: 6500afb990c27bf4cb407707a6f801d7, type: 2}
   m_typeSound: {fileID: 11400000, guid: e153792257986414c87573c2b961674c, type: 2}
   m_openKeyboardSound: {fileID: 11400000, guid: 304bacbd6d2799240bd2ab2f32a754d5, type: 2}
