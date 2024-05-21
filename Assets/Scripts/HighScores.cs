@@ -14,6 +14,8 @@ using Process = System.Diagnostics.Process;
 public class HighScores : MonoBehaviour
 {
     public GameObject m_linePrefab;
+    public GameObject m_allTimePanel;
+    public GameObject m_weeklyPanel;
     public float m_startY = -278.0f;
     public float m_lineSpacing = 132.0f;
     public int m_maxDisplay = 10;
@@ -21,8 +23,15 @@ public class HighScores : MonoBehaviour
     public Sound m_typeSound;
     public Sound m_openKeyboardSound;
     public Sound m_closeKeyboardSound;
+    public Sound m_swipeSound;
+    public float m_slideSpeed = 1.0f;
+
+    LeaderBoard.Board m_board = LeaderBoard.Board.ALL_TIME;
     string m_playerName;
     TextMeshProUGUI m_playerText;
+    RectTransform m_rect;
+    RectTransform m_canvas;
+    List<GameObject> m_allLines = new List<GameObject>();
 
 #if USE_OSK
     Process m_keyboard;
@@ -33,7 +42,45 @@ public class HighScores : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        m_rect = GetComponent<RectTransform>();
         StartCoroutine(LoadScores());
+        Transform parent = transform.parent;
+        while (parent)
+        {
+            Canvas canvas = parent.GetComponent<Canvas>();
+            if (null != canvas)
+            {
+                m_canvas = canvas.GetComponent<RectTransform>();
+                break;
+            }
+            parent = parent.parent;
+        }
+    }
+
+    void Update()
+    {
+        float targetOffset = 0.0f;
+        if (m_board == LeaderBoard.Board.WEEKLY)
+            targetOffset = -m_canvas.rect.width;
+        Vector2 pos = m_rect.anchoredPosition;
+        float diff = targetOffset - pos.x;
+        if (diff != 0.0f)
+        {
+            float maxSpeed = m_canvas.rect.width * m_slideSpeed * Time.deltaTime;
+            bool done = false;
+            if (diff < -maxSpeed)
+                diff = -maxSpeed;
+            else if (diff > maxSpeed)
+                diff = maxSpeed;
+            else
+                done = true;
+            pos.x += diff;
+            m_rect.anchoredPosition = pos;
+            foreach (GameObject obj in m_allLines)
+                Destroy(obj);
+            m_allLines.Clear();
+            StartCoroutine(LoadScores());
+        }
     }
 
     IEnumerator LoadScores()
@@ -42,25 +89,44 @@ public class HighScores : MonoBehaviour
         while (false == lb.IsReady())
             yield return null;
         string yourId = PurchaseManager.Get().PlayerId();
-        var scores = lb.GetAllTimeScores();
-        int rank = 1;
+        yourId = "playerId14";  // testing
+        LeaderboardScoresPage scores = lb.GetScores(m_board);
+        int yourIndex = -1;
+        for (int i = 0; i < scores.Results.Count; ++i)
+        {
+            if (scores.Results[i].PlayerId == yourId)
+            {
+                yourIndex = i;
+                break;
+            }
+        }
         Vector3 pos = Vector3.zero;
         pos.y = m_startY;
-        bool foundYours = false;
-        foreach (var score in scores.Results)
+        int to = m_maxDisplay - 1;
+        if (yourIndex > 10)
+            to = 8;
+        Transform panel = m_allTimePanel.transform;
+        if (m_board == LeaderBoard.Board.WEEKLY)
+            panel = m_weeklyPanel.transform;
+        for (int i = 0; i < to; ++i)
         {
-            foundYours |= DrawLine(score, pos, yourId);
-            rank++;
+            var score = scores.Results[i];
+            DrawLine(score, pos, yourId, panel);
             pos.y -= m_lineSpacing;
-            if (rank > m_maxDisplay)
-                break;
+        }
+        if (yourIndex >= 0)
+        {
+            pos.y -= 0.5f * m_lineSpacing;
+            var score = scores.Results[yourIndex];
+            DrawLine(score, pos, yourId, panel);
         }
     }
 
-    bool DrawLine(LeaderboardEntry score, Vector3 pos, string yourId)
+    bool DrawLine(LeaderboardEntry score, Vector3 pos, string yourId, Transform panel)
     {
         bool foundYours = false;
-        GameObject line = Instantiate(m_linePrefab, transform);
+        GameObject line = Instantiate(m_linePrefab, panel);
+        m_allLines.Add(line);
         RectTransform rect = line.transform as RectTransform;
         rect.anchoredPosition = pos;
         {
@@ -107,6 +173,20 @@ public class HighScores : MonoBehaviour
     {
         GameManager.Get().ReturnToMainMenu();
         m_menuSelect.Play();
+    }
+
+    public void OnRight()
+    {
+        if (null != m_swipeSound)
+            m_swipeSound.Play();
+        m_board = LeaderBoard.Board.WEEKLY;
+    }
+
+    public void OnLeft()
+    {
+        if (null != m_swipeSound)
+            m_swipeSound.Play();
+        m_board = LeaderBoard.Board.ALL_TIME;
     }
 
     public void OnClickName()

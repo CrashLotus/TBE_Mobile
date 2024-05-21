@@ -1,4 +1,4 @@
-//#define TEST_LEADERS
+#define TEST_LEADERS
 
 using Newtonsoft.Json;
 using System.Collections;
@@ -11,6 +11,14 @@ using Unity.Services.Leaderboards.Models;
 
 public class LeaderBoard : MonoBehaviour
 {
+    public enum Board
+    {
+        ALL_TIME,
+        WEEKLY,
+
+        TOTAL   // this goes last
+    }
+
     static LeaderBoard s_theLeaderBoard;
 
     enum State
@@ -20,8 +28,11 @@ public class LeaderBoard : MonoBehaviour
     }
     State m_state = State.INIT;
 
-    const string s_allTime = "ALL_TIME";
-    LeaderboardScoresPage m_allTimeScores;
+    static readonly string[] s_boardID = {
+        "ALL_TIME",
+        "WEEKLY"
+    };
+    LeaderboardScoresPage[] m_scores;
 
     public static LeaderBoard Get()
     {
@@ -46,6 +57,7 @@ public class LeaderBoard : MonoBehaviour
     IEnumerator UpdateCo()
     {
         m_state = State.INIT;
+        m_scores = new LeaderboardScoresPage[(int)Board.TOTAL];
 
         // wait for sign-in
         PurchaseManager pm = PurchaseManager.Get();
@@ -53,9 +65,15 @@ public class LeaderBoard : MonoBehaviour
             yield return null;
 
         // wait for scores
-        var task = LeaderboardsService.Instance.GetScoresAsync(s_allTime);
-        yield return new WaitUntil(() => task.IsCompleted);
-        m_allTimeScores = task.Result;
+        for (int boardIndex = 0; boardIndex < (int)Board.TOTAL; ++boardIndex)
+        {
+            var task = LeaderboardsService.Instance.GetScoresAsync(s_boardID[boardIndex]);
+            yield return new WaitUntil(() => task.IsCompleted);
+            Debug.Log("hi");
+            m_scores[boardIndex] = null;
+            if (task.Status == TaskStatus.RanToCompletion)
+                m_scores[boardIndex] = task.Result;
+        }
 
         Debug.Log("Leaderboard Ready");
         m_state = State.READY;
@@ -64,12 +82,16 @@ public class LeaderBoard : MonoBehaviour
     public async void AddScore(int score)
     {
         m_state = State.INIT;
-        var scoreResponse = await LeaderboardsService.Instance.AddPlayerScoreAsync(s_allTime, score);
-        m_allTimeScores = await LeaderboardsService.Instance.GetScoresAsync(s_allTime);
+        for (int boardIndex = 0; boardIndex < (int)Board.TOTAL; ++boardIndex)
+        {
+            var scoreResponse = await LeaderboardsService.Instance.AddPlayerScoreAsync(s_boardID[boardIndex], score);
+            m_scores[boardIndex] = await LeaderboardsService.Instance.GetScoresAsync(s_boardID[boardIndex]);
+        }
+
         m_state = State.READY;
     }
 
-    public LeaderboardScoresPage GetAllTimeScores()
+    public LeaderboardScoresPage GetScores(Board board)
     {
         if (m_state != State.READY)
             return null;
@@ -86,15 +108,15 @@ public class LeaderBoard : MonoBehaviour
         list.Add(new LeaderboardEntry("playerId8",  "Player8",   8,  300000.0));
         list.Add(new LeaderboardEntry("playerId9",  "Player9",   9,  200000.0));
         list.Add(new LeaderboardEntry("playerId10", "Player10",  10, 100000.0));
-        list.Add(new LeaderboardEntry("playerId11", "Player11",  11, 10000.0));
-        list.Add(new LeaderboardEntry("playerId12", "Player12",  12, 1000.0));
-        list.Add(new LeaderboardEntry("playerId13", "Player13",  13, 900.0));
-        list.Add(new LeaderboardEntry("playerId14", "Player14",  14, 800.0));
-        list.Add(new LeaderboardEntry("playerId15", "Player15",  15, 600.0));
+        list.Add(new LeaderboardEntry("playerId11", "Player11",  11,  10000.0));
+        list.Add(new LeaderboardEntry("playerId12", "Player12",  12,   1000.0));
+        list.Add(new LeaderboardEntry("playerId13", "Player13",  13,    900.0));
+        list.Add(new LeaderboardEntry("playerId14", "Player14",  14,    800.0));
+        list.Add(new LeaderboardEntry("playerId15", "Player15",  15,    600.0));
         LeaderboardScoresPage testPage = new LeaderboardScoresPage(0, 0, 1, list);
         return testPage;
 #endif
-        return m_allTimeScores;
+        return m_scores[(int)board];
     }
 
     public void SetPlayerName(string name)
