@@ -112,13 +112,14 @@ public class MainMenu : MonoBehaviour
 
     public void OnResetSave()
     {
-        m_dialogBox.ShowDialog("This will erase your current save.\n\nAll upgrades and Time Crystals will be removed.", DoResetSave, null);
+        m_dialogBox.ShowDialog("This will erase your current save and online account information.\n\nAll upgrades and Time Crystals will be removed.", DoResetSave, null);
     }
 
     void DoResetSave()
     {
         Debug.Log("DoResetSave()");
         SaveData.Get().Reset();
+        PurchaseManager.Get().DeleteAccount();
     }
 
     public void OnNewGameYes()

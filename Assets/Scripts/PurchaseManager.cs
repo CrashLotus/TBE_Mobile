@@ -68,6 +68,18 @@ public class PurchaseManager : MonoBehaviour, IStoreListener, IUnityAdsInitializ
         return false;
     }
 
+    public async void DeleteAccount()
+    {
+        try
+        {
+            await AuthenticationService.Instance.DeleteAccountAsync();
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e.Message);
+        }
+    }
+
     private bool IsInitialized()
     {
         return m_StoreController != null && m_StoreExtensionProvider != null;
