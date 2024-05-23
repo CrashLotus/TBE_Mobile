@@ -284,9 +284,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Classified Top-Secret
-
-    Pre-Release Beta'
+  m_text: Early-Access Beta
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e71c5eb5ae6449b459ec8e3b9a1bbc1e, type: 2}
   m_sharedMaterial: {fileID: -1347874316741633517, guid: e71c5eb5ae6449b459ec8e3b9a1bbc1e, type: 2}
