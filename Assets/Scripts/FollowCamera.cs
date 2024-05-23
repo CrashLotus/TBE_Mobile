@@ -35,12 +35,16 @@ public class FollowCamera : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        const float s_baseAR = 16.0f / 9.0f;
+        float ar = Screen.width / Screen.height / s_baseAR;
+        float right = m_noMoveZoneRight * ar;
+        float left = m_noMoveZoneLeft * ar;
         Vector3 pos = transform.position;
         float deltaX = m_player.transform.position.x - pos.x;
-        if (deltaX > m_noMoveZoneRight)
-            deltaX -= m_noMoveZoneRight;
-        else if (deltaX < -m_noMoveZoneLeft)
-            deltaX += m_noMoveZoneLeft;
+        if (deltaX > right)
+            deltaX -= right;
+        else if (deltaX < -left)
+            deltaX += left;
         else
             deltaX = 0;
         pos.x += deltaX;
