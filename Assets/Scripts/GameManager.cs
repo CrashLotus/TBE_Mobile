@@ -230,6 +230,9 @@ public class GameManager : MonoBehaviour
 
         // return to main menu
         OnContinueGame();
+        SaveData save = SaveData.Get();
+        int score = save.GetScore();
+        LeaderBoard.Get().AddScore(score);
         ChangeState(State.STORE);
     }
 
