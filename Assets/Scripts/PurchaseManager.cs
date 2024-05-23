@@ -73,6 +73,7 @@ public class PurchaseManager : MonoBehaviour, IStoreListener, IUnityAdsInitializ
         try
         {
             await AuthenticationService.Instance.DeleteAccountAsync();
+            await AuthenticationService.Instance.SignInAnonymouslyAsync();
         }
         catch (Exception e)
         {
