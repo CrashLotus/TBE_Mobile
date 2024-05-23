@@ -232,7 +232,7 @@ public class Ninja : EnemyBird
             {
                 Vector3 eggDir = s_eggExplodeSpeed[eggPower] * new Vector3(Mathf.Sin(eggAng), Mathf.Cos(eggAng), 0.0f);
                 eggDir.y += s_eggExplodeUp[eggPower];
-                Egg.Spawn(pos, eggPower + 1, eggDir);
+                Egg.Spawn(pos, eggPower + 1, eggDir, 0);
                 eggAng += angPerEgg;
             }
         }
@@ -279,7 +279,7 @@ public class Ninja : EnemyBird
                         if (null != poopSprite)
                             poopSprite.flipX = m_sprite.flipX;
                     }
-                    Egg.Spawn(pos, m_eggPower, -m_eggSpeed * dir);
+                    Egg.Spawn(pos, m_eggPower, -m_eggSpeed * dir, 0);   //mrwTODO increase generation over time
                 }
             }
         }

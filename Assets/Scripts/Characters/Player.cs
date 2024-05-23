@@ -42,6 +42,7 @@ public class Player : Bird, IHitPoints
     Animator m_eggShieldAnim;
     float m_comboTimer = 0.0f;
     int m_comboPoints = 0;
+    List<int> m_eggGeneration = new List<int>();
 
     const int s_maxEggStart = 10;
     public const int s_startingHP = 3;
@@ -82,6 +83,7 @@ public class Player : Bird, IHitPoints
         m_isEggShieldOn = false;
         m_eggShieldAnim = m_eggShield.GetComponent<Animator>();
         m_eggShield.SetActive(false);
+        m_eggGeneration = new List<int>();
         
         // check the egg shield
         if (data.HasUpgrade("EGGSHIELD"))
@@ -264,17 +266,17 @@ public class Player : Bird, IHitPoints
         TutorialManager.Get().PlayerDamaged(transform.position);
         while (numEgg >= 3)
         {
-            Egg.Spawn(pos, 3);
+            Egg.Spawn(pos, 3, NextEggGeneration());
             numEgg -= 3;
         }
         while (numEgg >= 2)
         {
-            Egg.Spawn(pos, 2);
+            Egg.Spawn(pos, 2, NextEggGeneration());
             numEgg -= 2;
         }
         while (numEgg >= 1)
         {
-            Egg.Spawn(pos, 1);
+            Egg.Spawn(pos, 1, NextEggGeneration());
             numEgg -= 1;
         }
 
@@ -304,6 +306,17 @@ public class Player : Bird, IHitPoints
         }
 
         return ret;
+    }
+
+    int NextEggGeneration()
+    {
+        if (m_eggGeneration.Count > 0)
+        {
+            int ret = m_eggGeneration[m_eggGeneration.Count - 1];
+            m_eggGeneration.RemoveAt(m_eggGeneration.Count - 1);
+            return ret + 1;
+        }
+        return 1;
     }
 
     public static EggBonus GetBonusMode()
@@ -361,7 +374,7 @@ public class Player : Bird, IHitPoints
         }
     }
 
-    public void AddEgg()
+    public void AddEgg(int generation)
     {
         SaveData data = SaveData.Get();
         EggBonus startBonus = GetBonusMode();
@@ -374,6 +387,7 @@ public class Player : Bird, IHitPoints
         m_hitPoints += 1;
         if (m_hitPoints > maxEgg)
             m_hitPoints = maxEgg;
+        m_eggGeneration.Add(generation);
 
         EggBonus endBonus = GetBonusMode();
         if (endBonus != startBonus)

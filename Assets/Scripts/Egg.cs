@@ -10,12 +10,20 @@ public class Egg : PickUp
     static ObjectPool s_eggPool;
     static List<Egg> s_theList = new List<Egg>();
     static int s_numHitLava = 0;
+    public static readonly float[] s_scoreMod =
+    {
+        1.0f,
+        0.8f,
+        0.4f,
+        0.1f,
+    };
     const int s_score = 50;
     const float s_hudFlyTime = 0.3f;
     static readonly Vector2 s_magnetOffset = new Vector2(85.0f, 87.5f);
 
     int m_power;
     float m_magnetPower = 0.0f;
+    int m_generation = 0;
 
     public static void MakeEggPool()
     {
@@ -26,7 +34,7 @@ public class Egg : PickUp
         }
     }
 
-    static Egg MakeEgg(Vector3 pos, int power)
+    static Egg MakeEgg(Vector3 pos, int power, int generation)
     {
         if (power < 0)
             return null;
@@ -41,6 +49,7 @@ public class Egg : PickUp
             {
                 Egg egg = eggObj.GetComponent<Egg>();
                 egg.m_power = power;
+                egg.m_generation = generation;
                 SpriteRenderer sprite = egg.GetComponent<SpriteRenderer>();
                 sprite.sprite = egg.m_sprites[power - 1];
                 if (null != egg.m_spawnSound)
@@ -51,29 +60,29 @@ public class Egg : PickUp
         return null;
     }
 
-    public static void Spawn(Vector3 pos, int power, float upSpeed)
+    public static void Spawn(Vector3 pos, int power, float upSpeed, int generation)
     {
         while (power > 3)
         {
-            Egg egg = MakeEgg(pos, 3);
+            Egg egg = MakeEgg(pos, 3, generation);
             egg.PopUp(upSpeed);
             power -= 3;
         }
         if (power > 0)
         {
-            Egg egg = MakeEgg(pos, power);
+            Egg egg = MakeEgg(pos, power, generation);
             egg.PopUp(upSpeed);
         }
     }
 
-    public static void Spawn(Vector3 pos, int power)
+    public static void Spawn(Vector3 pos, int power, int generation)
     {
-        Spawn(pos, power, s_spawnSpeed);
+        Spawn(pos, power, s_spawnSpeed, generation);
     }
 
-    public static void Spawn(Vector3 pos, int power, Vector3 vel)
+    public static void Spawn(Vector3 pos, int power, Vector3 vel, int generation)
     {
-        Egg egg = MakeEgg(pos, power);
+        Egg egg = MakeEgg(pos, power, generation);
         if (null != egg)
             egg.m_vel = vel;
     }
@@ -169,7 +178,7 @@ public class Egg : PickUp
     {
         base.HitLava();
         TutorialManager.Get().EggHitLava(transform.position);
-        EnemyBird enemy = EnemyBird.Spawn(transform.position, m_power);
+        EnemyBird enemy = EnemyBird.Spawn(transform.position, m_power, m_generation);
         if (null != enemy)
         {
             ++s_numHitLava;
@@ -205,13 +214,21 @@ public class Egg : PickUp
             m_magnet.gameObject.SetActive(false);
         }
         m_magnetPower = 0.0f;
+        m_generation = 0;
     }
 
     protected override void PickedUp(Player player)
     {
         base.PickedUp(player);
-        Player.AddScore(s_score);
+        Player.AddScore(GetScoreMod(s_score, m_generation));
         m_hudPos = HitPoint_UI.Get().GetEggPos();
-        player.AddEgg();
+        player.AddEgg(m_generation);
+    }
+
+    public static int GetScoreMod(int score, int generation)
+    {
+        if (generation < s_scoreMod.Length)
+            return (int)(score * s_scoreMod[generation] + 0.5f);
+        return 0;
     }
 }

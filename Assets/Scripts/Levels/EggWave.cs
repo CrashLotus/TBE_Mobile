@@ -112,7 +112,7 @@ public class EggWave : Wave
             spawnPos.x += Random.Range(-s_eggSpacing, s_eggSpacing);
             --m_eggsLeft;
             if (m_eggList[m_eggsLeft] > 0)
-                Egg.Spawn(spawnPos, m_eggList[m_eggsLeft], s_eggSpeedY);
+                Egg.Spawn(spawnPos, m_eggList[m_eggsLeft], s_eggSpeedY, 0);
             else
                 TimeCrystal.Spawn(spawnPos, s_eggSpeedY);
             m_eggTimer += m_timePerEgg;

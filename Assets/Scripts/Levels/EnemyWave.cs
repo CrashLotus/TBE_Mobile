@@ -94,11 +94,11 @@ public class EnemyWave : Wave
 #else
             string spawnType = m_spawnList[m_spawnIndex].m_spawnType;
             if ("Enemy_01" == spawnType)
-                EnemyBird.Spawn(spawnPos, 1);
+                EnemyBird.Spawn(spawnPos, 1, 0);
             else if ("Enemy_02" == spawnType)
-                EnemyBird.Spawn(spawnPos, 2);
+                EnemyBird.Spawn(spawnPos, 2, 0);
             else if ("Enemy_03" == spawnType)
-                EnemyBird.Spawn(spawnPos, 3);
+                EnemyBird.Spawn(spawnPos, 3, 0);
             else
                 Debug.LogWarning("Unknown Spawn Type: " + spawnType);
 #endif

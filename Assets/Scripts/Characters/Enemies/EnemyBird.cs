@@ -11,6 +11,8 @@ public class EnemyBird : Bird, IHitPoints
     public int m_score;
     public GameObject m_spawnEffect;
 
+    protected int m_generation = 0;
+
     const float s_chaseDist = 100.0f;
     const float s_minPlayerDist = 2.0f;
     const float s_repulseForce = 0.75f;
@@ -82,7 +84,7 @@ public class EnemyBird : Bird, IHitPoints
         }
     }
 
-    public static EnemyBird Spawn(Vector3 pos, int power)
+    public static EnemyBird Spawn(Vector3 pos, int power, int generation)
     {
         int index = power - 1;
         if (null == s_enemyPool[index])
@@ -102,6 +104,7 @@ public class EnemyBird : Bird, IHitPoints
                     if (null != pool)
                         pool.Allocate(pos);
                 }
+                enemy.m_generation = generation;
                 return enemy;
             }
         }
@@ -127,6 +130,7 @@ public class EnemyBird : Bird, IHitPoints
         m_fireDelay = Random.Range(s_fireDelayMin, s_fireDelayMax);
         m_repulse = Vector3.zero;
         m_invTimer = s_invTime;
+        m_generation = 0;
         GetComponent<Collider2D>().enabled = false;
         Vector3 pos = transform.position;
         pos = Camera.main.WorldToViewportPoint(pos);
@@ -381,8 +385,8 @@ public class EnemyBird : Bird, IHitPoints
         ObjectPool.Allocate(m_deathEffect, 64, transform.position);
         if (null != m_deathSound)
             m_deathSound.Play();
-        Player.AddScore(m_score);
-        Egg.Spawn(transform.position, m_eggPower);
+        Player.AddScore(Egg.GetScoreMod(m_score, m_generation));
+        Egg.Spawn(transform.position, m_eggPower, m_generation + 1);
         TutorialManager.Get().EnemyKilled(transform.position);
         Free();
     }
