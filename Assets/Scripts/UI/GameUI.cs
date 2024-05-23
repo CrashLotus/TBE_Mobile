@@ -183,9 +183,15 @@ public class GameUI : MonoBehaviour
             RectTransform rect = m_tutorial.GetComponent<RectTransform>();
             Vector2 pivot = rect.pivot;
             if (viewPos.x > 0.5f)
+            {
                 pivot.x = 1.0f;
+                viewPos.x = 1.0f;
+            }
             else
+            {
                 pivot.x = 0.0f;
+                viewPos.x = 0.0f;
+            }
             if (viewPos.y > 0.5f)
                 pivot.y = 1.0f;
             else
