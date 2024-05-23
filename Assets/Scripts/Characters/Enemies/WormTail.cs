@@ -9,6 +9,8 @@ public class WormTail : WormSection
     public float m_eggSpeed = 1.0f;
     public int m_eggPower = 1;
 
+    int m_generation = 0;
+
     public void _WarmUp()
     {
         if (null != m_poopEffect)
@@ -27,9 +29,14 @@ public class WormTail : WormSection
                     GameObject poop = ObjectPool.Allocate(m_poopEffect, 16, pos);
                     if (null != poop)
                         poop.transform.rotation = m_poopSpot.rotation;
-                    Egg.Spawn(pos, m_eggPower, -m_eggSpeed * m_poopSpot.right, 0);  //mrwTODO increase generation over time?
+                    Egg.Spawn(pos, m_eggPower, -m_eggSpeed * m_poopSpot.right, m_generation);
                 }
             }
         }
+    }
+
+    public void SetGeneration(int generation)
+    {
+        m_generation = generation;
     }
 }

@@ -130,7 +130,7 @@ public class EnemyBird : Bird, IHitPoints
         m_fireDelay = Random.Range(s_fireDelayMin, s_fireDelayMax);
         m_repulse = Vector3.zero;
         m_invTimer = s_invTime;
-        m_generation = 0;
+        m_generation = -1;
         GetComponent<Collider2D>().enabled = false;
         Vector3 pos = transform.position;
         pos = Camera.main.WorldToViewportPoint(pos);

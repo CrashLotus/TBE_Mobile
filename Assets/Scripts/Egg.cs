@@ -227,6 +227,8 @@ public class Egg : PickUp
 
     public static int GetScoreMod(int score, int generation)
     {
+        if (generation < 0)
+            return score;
         if (generation < s_scoreMod.Length)
             return (int)(score * s_scoreMod[generation] + 0.5f);
         return 0;

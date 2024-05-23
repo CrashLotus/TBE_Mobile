@@ -46,6 +46,7 @@ public class Worm : WormSection
     public int m_score = 500;
 
     protected List<WormSection> m_sections;
+    WormTail m_tail;
     Pattern m_pattern;
     float m_tailYMin = 0.0f;
     float m_tailYMax = 0.0f;
@@ -53,6 +54,7 @@ public class Worm : WormSection
     Vector3 m_arcCenter;
     bool m_useOldPos = false;
     Vector3 m_oldPos;
+    int m_generation = 0;
 
     enum SubState
     {
@@ -121,6 +123,7 @@ public class Worm : WormSection
                         break;
                 }
                 worm.m_useOldPos = false;
+                worm.m_generation = 0;
                 worm.BeginPattern(pattern);
                 return worm;
             }
@@ -198,6 +201,7 @@ public class Worm : WormSection
             section.Free();
         }
         m_sections.Clear();
+        m_tail = null;
         Free();
     }
 
@@ -229,6 +233,12 @@ public class Worm : WormSection
                 m_sections.Add(worm);
                 parent = worm;
                 animTime += 0.2f;
+                if (i >= m_numSection - 1)
+                {
+                    m_tail = worm as WormTail;
+                    if (m_tail)
+                        m_tail.SetGeneration(0);
+                }
             }
         }
 
@@ -729,6 +739,9 @@ public class Worm : WormSection
         {
             m_useOldPos = true;
             m_oldPos = pos;
+            m_generation++;
+            if (m_tail)
+                m_tail.SetGeneration(m_generation);
             switch (m_pattern)
             {
                 case Pattern.ARC_RIGHT:
@@ -768,23 +781,25 @@ public class Worm : WormSection
         }
 
         // is the tail on screen?
-        WormSection tail = m_sections[m_sections.Count - 1];
-        SpriteRenderer tailSprite = tail.GetSprite();
-        Vector3 tailMin = Camera.main.WorldToViewportPoint(tailSprite.bounds.min);
-        m_tailYMin = tailMin.y;
-        Vector3 tailMax = Camera.main.WorldToViewportPoint(tailSprite.bounds.max);
-        m_tailYMax = tailMax.y;
-        if (m_tailYMax < 0.0f)
+        if (m_tail)
         {
-            m_tailOnScreen = false;
-        }
-        else if (m_tailYMin > 1.0f)
-        {
-            m_tailOnScreen = false;
-        }
-        else
-        {
-            m_tailOnScreen = true;
+            SpriteRenderer tailSprite = m_tail.GetSprite();
+            Vector3 tailMin = Camera.main.WorldToViewportPoint(tailSprite.bounds.min);
+            m_tailYMin = tailMin.y;
+            Vector3 tailMax = Camera.main.WorldToViewportPoint(tailSprite.bounds.max);
+            m_tailYMax = tailMax.y;
+            if (m_tailYMax < 0.0f)
+            {
+                m_tailOnScreen = false;
+            }
+            else if (m_tailYMin > 1.0f)
+            {
+                m_tailOnScreen = false;
+            }
+            else
+            {
+                m_tailOnScreen = true;
+            }
         }
     }
 

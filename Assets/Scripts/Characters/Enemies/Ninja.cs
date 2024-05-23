@@ -151,6 +151,7 @@ public class Ninja : EnemyBird
                 {
                     if (Missile.GetNumMissiles() > 0)
                     {
+                        m_generation++;
                         m_state = (State)State_Ninja.SHELL;
                         PopUp(s_popUpSpeed);
                         m_shellTimer = s_shellTime;
@@ -279,7 +280,7 @@ public class Ninja : EnemyBird
                         if (null != poopSprite)
                             poopSprite.flipX = m_sprite.flipX;
                     }
-                    Egg.Spawn(pos, m_eggPower, -m_eggSpeed * dir, 0);   //mrwTODO increase generation over time
+                    Egg.Spawn(pos, m_eggPower, -m_eggSpeed * dir, m_generation);
                 }
             }
         }
