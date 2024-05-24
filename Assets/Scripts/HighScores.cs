@@ -154,7 +154,11 @@ public class HighScores : MonoBehaviour
         }
         {
             TextMeshProUGUI textMesh = line.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
-            textMesh.text = score.PlayerName;
+            string name = score.PlayerName;
+            int hashIndex = name.LastIndexOf('#');
+            if (hashIndex > 0)
+                name = name.Substring(0, hashIndex);
+            textMesh.text = name;
             Button button = line.transform.GetChild(2).GetComponent<Button>();
             if (button)
             {
