@@ -95,7 +95,7 @@ public class PurchaseManager : MonoBehaviour, IStoreListener, IUnityAdsInitializ
         {
 #if TEST_ENVIRONMENT
             var options = new InitializationOptions();
-            options.SetEnvironmentName("dev");
+            options.SetEnvironmentName("test");
             await UnityServices.InitializeAsync(options);
 #else
             await UnityServices.InitializeAsync();
