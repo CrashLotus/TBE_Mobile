@@ -355,7 +355,7 @@ public class Player : Bird, IHitPoints
 
     public static void AddScore(int score)
     {
-        Debug.Log(score);
+//        Debug.Log(score);
         s_score += score;
     }
 
