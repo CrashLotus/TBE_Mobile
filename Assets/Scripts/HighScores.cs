@@ -144,8 +144,9 @@ public class HighScores : MonoBehaviour
         RectTransform rect = line.transform as RectTransform;
         rect.anchoredPosition = pos;
         {
+            int rank = score.Rank + 1;
             TextMeshProUGUI textMesh = line.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-            textMesh.text = score.Rank.ToString();
+            textMesh.text = rank.ToString();
         }
         {
             TextMeshProUGUI textMesh = line.transform.GetChild(1).GetComponent<TextMeshProUGUI>();

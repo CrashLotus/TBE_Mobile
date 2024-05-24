@@ -1,4 +1,5 @@
 //#define DEBUG_ADS
+#define TEST_ENVIRONMENT
 
 using System;
 using System.Collections;
@@ -9,6 +10,7 @@ using UnityEngine.Advertisements;
 using UnityEngine.Purchasing;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
+using Unity.Services.Core.Environments;
 
 public class PurchaseManager : MonoBehaviour, IStoreListener, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
 {
@@ -91,7 +93,13 @@ public class PurchaseManager : MonoBehaviour, IStoreListener, IUnityAdsInitializ
         Debug.Log("Start Initialize()");
         try
         {
+#if TEST_ENVIRONMENT
+            var options = new InitializationOptions();
+            options.SetEnvironmentName("dev");
+            await UnityServices.InitializeAsync(options);
+#else
             await UnityServices.InitializeAsync();
+#endif
             await SignInAnonymously();
             Debug.Log("InitializePurchasing()");
             InitializePurchasing();

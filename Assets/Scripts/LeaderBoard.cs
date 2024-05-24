@@ -69,7 +69,6 @@ public class LeaderBoard : MonoBehaviour
         {
             var task = LeaderboardsService.Instance.GetScoresAsync(s_boardID[boardIndex]);
             yield return new WaitUntil(() => task.IsCompleted);
-            Debug.Log("hi");
             m_scores[boardIndex] = null;
             if (task.Status == TaskStatus.RanToCompletion)
                 m_scores[boardIndex] = task.Result;
@@ -81,7 +80,11 @@ public class LeaderBoard : MonoBehaviour
 
     public async void AddScore(int score)
     {
+        if (m_state != State.READY)
+            return;     // the system isn't ready to accept new scores right now
+
         m_state = State.INIT;
+
         for (int boardIndex = 0; boardIndex < (int)Board.TOTAL; ++boardIndex)
         {
             m_scores[boardIndex] = null;
