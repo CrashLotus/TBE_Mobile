@@ -221,8 +221,9 @@ public class Player : Bird, IHitPoints
                 m_comboTimer += s_comboCountDown;
         }
 
-        if (Input.GetKeyDown(KeyCode.P))
-            ComboKill(transform.position);
+// debug code to test combo
+//        if (Input.GetKeyDown(KeyCode.P))
+//            ComboKill(transform.position);
 
         base.Update();
     }
