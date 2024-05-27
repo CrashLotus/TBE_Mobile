@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using TMPro;
 
 public class Debug_StageSelect : MonoBehaviour
@@ -20,9 +21,9 @@ public class Debug_StageSelect : MonoBehaviour
         SaveData save = SaveData.Get();
         int level = save.GetCurrentLevel();
         int oldLevel = level;
-        if (Input.GetKeyDown(KeyCode.Minus))
+        if (Keyboard.current.minusKey.wasPressedThisFrame)
             --level;
-        if (Input.GetKeyDown(KeyCode.Equals))
+        if (Keyboard.current.equalsKey.wasPressedThisFrame)
             ++level;
         level = Mathf.Clamp(level, 0, GameManager.GetNumLevels() - 1);
         if (oldLevel != level)
