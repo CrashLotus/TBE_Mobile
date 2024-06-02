@@ -34,6 +34,11 @@ public class LeaderBoard : MonoBehaviour
     };
     LeaderboardScoresPage[] m_scores;
 
+    public class Metadata
+    {
+        public int m_levelNum;
+    }
+
     public static LeaderBoard Get()
     {
         if (null == s_theLeaderBoard)
@@ -90,7 +95,11 @@ public class LeaderBoard : MonoBehaviour
             m_scores[boardIndex] = null;
             try
             {
-                var scoreResponse = await LeaderboardsService.Instance.AddPlayerScoreAsync(s_boardID[boardIndex], score);
+                AddPlayerScoreOptions options = new AddPlayerScoreOptions();
+                Metadata meta = new Metadata();
+                meta.m_levelNum = SaveData.Get().GetCurrentLevel();
+                options.Metadata = meta;
+                var scoreResponse = await LeaderboardsService.Instance.AddPlayerScoreAsync(s_boardID[boardIndex], score, options);
                 m_scores[boardIndex] = await LeaderboardsService.Instance.GetScoresAsync(s_boardID[boardIndex]);
             }
             catch (Exception e)
