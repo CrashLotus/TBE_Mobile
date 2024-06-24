@@ -353,6 +353,7 @@ public class GameManager : MonoBehaviour
             case State.GAME_ON:
                 AnalyticsManager.Get().LevelStart(SaveData.Get().GetCurrentLevel());
                 MusicManager.Get().Play(MusicManager.SongType.GAME);
+                TutorialManager.Get().StartScene();
                 break;
             case State.GAME_OVER:
                 AnalyticsManager.Get().GameOver(SaveData.Get().GetCurrentLevel());

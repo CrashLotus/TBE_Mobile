@@ -10,6 +10,7 @@ public class Options : MonoBehaviour
     public Slider m_musicSlider;
     public Sound m_sfxAdjust;
     public TMP_Dropdown m_joystickDropdown;
+    public Toggle m_tutorialToggle;
 
     float m_sfxLastPlay = 0.0f;
     const float s_sfxPlayRate = 0.2f;
@@ -19,6 +20,7 @@ public class Options : MonoBehaviour
         m_sfxSlider.value = GetSFXVolume();
         m_musicSlider.value = GetMusicVolume();
         m_joystickDropdown.SetValueWithoutNotify(PlayerPrefs.GetInt("joystick", 0));
+        m_tutorialToggle.SetIsOnWithoutNotify(PlayerPrefs.GetInt("tutorial", 1) == 0 ? false : true);
     }
 
     public void OnSFXVolume()
@@ -44,6 +46,15 @@ public class Options : MonoBehaviour
     public void OnJoystickSelect(int select)
     {
         PlayerPrefs.SetInt("joystick", select);
+        PlayerPrefs.Save();
+        GameUI ui = GameUI.Get();
+        if (null != ui)
+            ui.UpdateOptions();
+    }
+
+    public void OnTutorialSelect(Toggle toggle)
+    {
+        PlayerPrefs.SetInt("tutorial", toggle.isOn ? 1 : 0);
         PlayerPrefs.Save();
         GameUI ui = GameUI.Get();
         if (null != ui)

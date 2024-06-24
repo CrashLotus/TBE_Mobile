@@ -11,8 +11,9 @@ using UnityEngine.Purchasing;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Core.Environments;
+using UnityEngine.Purchasing.Extension;
 
-public class PurchaseManager : MonoBehaviour, IStoreListener, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
+public class PurchaseManager : MonoBehaviour, IDetailedStoreListener, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
 {
     static PurchaseManager s_theManager;
     static IStoreController m_StoreController;          // The Unity Purchasing system.
@@ -225,6 +226,11 @@ public class PurchaseManager : MonoBehaviour, IStoreListener, IUnityAdsInitializ
     public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
     {
         Debug.LogError(string.Format("OnPurchaseFailed: FAIL. Product: '{0}', PurchaseFailureReason: {1}", product.definition.storeSpecificId, failureReason));
+    }
+
+    public void OnPurchaseFailed(Product product, PurchaseFailureDescription failureDescription)
+    {
+        OnPurchaseFailed(product, failureDescription.reason);
     }
 
     // Ads

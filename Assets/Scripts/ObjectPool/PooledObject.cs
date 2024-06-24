@@ -19,13 +19,11 @@ public class PooledObject : MonoBehaviour
 
     public void Free()
     {
+        if (null == this)
+            return;
         if (null == m_pool)
-        {
             Destroy(gameObject);
-        }
         else
-        {
             m_pool.Free(gameObject);
-        }
     }
 }

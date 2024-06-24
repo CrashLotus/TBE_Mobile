@@ -60,6 +60,7 @@ public class Player : Bird, IHitPoints
     static readonly float[] s_vertSpeed = { 7.0f, 10.0f };
     static readonly float[] s_horizSpeed = { 7.0f, 10.0f };
     static readonly float[] s_accel = { 100.0f, 150.0f };
+    const float s_tiltThreshold = 0.3f;
 
     public static Player Get()
     {
@@ -102,6 +103,9 @@ public class Player : Bird, IHitPoints
         }
 
         m_input = GetComponent<PlayerInput>();
+        Accelerometer acc = Accelerometer.current;
+        if (null != acc)
+            InputSystem.EnableDevice(acc);
         s_thePlayer = this;
     }
 
@@ -112,17 +116,24 @@ public class Player : Bird, IHitPoints
         Vector3 pos = transform.position;
 
         // Input
+        Vector3 tilt = Vector3.zero;
+        Accelerometer acc = Accelerometer.current;
+        if (null != acc)
+            acc.acceleration.ReadValue();
+
         m_fireLaser = m_fireButton.IsButtonHold() | m_fireLeft.IsButtonHold() | m_fireRight.IsButtonHold();
         m_fireLaser |= m_input.actions.FindAction("Fire").IsPressed();
         bool fireLaser = m_fireLaser && (!m_fireLaserOld);
 
         bool fireMissile = m_missileButton.IsButtonPress();
         fireMissile |= m_input.actions.FindAction("Missile").triggered;
+        fireMissile |= tilt.x > s_tiltThreshold;
 
         bool timeWarp = false;
         foreach (SimpleButton timeButton in m_timeButton)
             timeWarp |= timeButton.IsButtonPress();
         timeWarp |= m_input.actions.FindAction("TimeWarp").triggered;
+        timeWarp |= tilt.x < -s_tiltThreshold;
 
         bool pause = false;
         pause |= m_input.actions.FindAction("Pause").triggered;

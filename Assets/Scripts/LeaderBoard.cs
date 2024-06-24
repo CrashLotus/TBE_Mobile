@@ -72,11 +72,43 @@ public class LeaderBoard : MonoBehaviour
         // wait for scores
         for (int boardIndex = 0; boardIndex < (int)Board.TOTAL; ++boardIndex)
         {
-            var task = LeaderboardsService.Instance.GetScoresAsync(s_boardID[boardIndex]);
-            yield return new WaitUntil(() => task.IsCompleted);
-            m_scores[boardIndex] = null;
-            if (task.Status == TaskStatus.RanToCompletion)
-                m_scores[boardIndex] = task.Result;
+            {
+                var task = LeaderboardsService.Instance.GetScoresAsync(s_boardID[boardIndex]);
+                yield return new WaitUntil(() => task.IsCompleted);
+                m_scores[boardIndex] = null;
+                if (task.Status == TaskStatus.RanToCompletion)
+                    m_scores[boardIndex] = task.Result;
+            }
+            if (null != m_scores[boardIndex])
+            {   // get the player's score (in case it's not in the top 10)
+                Debug.Log("Leaderboard: looking for player in list");
+                string yourId = PurchaseManager.Get().PlayerId();
+                bool foundYou = false;
+                foreach (var entry in m_scores[boardIndex].Results)
+                {
+                    if (entry.PlayerId == yourId)
+                    {   // the player was already found
+                        Debug.Log("Leaderboard: found player in list");
+                        foundYou = true;
+                        break;
+                    }
+                }
+                if (false == foundYou)
+                {   // go get the player's score and add it
+                    Debug.Log("Leaderboard: getting player's score");
+                    var task = LeaderboardsService.Instance.GetPlayerScoreAsync(s_boardID[boardIndex]);
+                    yield return new WaitUntil(() => task.IsCompleted);
+                    if (task.Status == TaskStatus.RanToCompletion)
+                    {
+                        Debug.Log("Leaderboard: adding player's score");
+                        m_scores[boardIndex].Results.Add(task.Result);
+                    }
+                    else
+                    {
+                        Debug.Log("Leaderboard: failed");
+                    }
+                }
+            }
         }
 
         Debug.Log("Leaderboard Ready");
@@ -100,7 +132,8 @@ public class LeaderBoard : MonoBehaviour
                 meta.m_levelNum = SaveData.Get().GetCurrentLevel();
                 options.Metadata = meta;
                 var scoreResponse = await LeaderboardsService.Instance.AddPlayerScoreAsync(s_boardID[boardIndex], score, options);
-                m_scores[boardIndex] = await LeaderboardsService.Instance.GetScoresAsync(s_boardID[boardIndex]);
+                StartCoroutine(UpdateCo());
+//                m_scores[boardIndex] = await LeaderboardsService.Instance.GetScoresAsync(s_boardID[boardIndex]);
             }
             catch (Exception e)
             {
@@ -139,8 +172,9 @@ public class LeaderBoard : MonoBehaviour
         return m_scores[(int)board];
     }
 
-    public void SetPlayerName(string name)
+    public async void SetPlayerName(string name)
     {
-        AuthenticationService.Instance.UpdatePlayerNameAsync(name);
+        await AuthenticationService.Instance.UpdatePlayerNameAsync(name);
+        StartCoroutine(UpdateCo());
     }
 }

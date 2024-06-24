@@ -172,14 +172,16 @@ public class GameUI : MonoBehaviour
         }
     }
 
-    public void SetTutorial(string tutorial, Vector3 pos)
+    public void SetTutorial(string tutorial, Vector3 pos, string saveKey)
     {
+        if (PlayerPrefs.GetInt("tutorial", 1) == 0)
+            return;
         if (null != m_tutorial)
         {
             m_tutorial.gameObject.SetActive(true);
             Vector2 viewPos = Camera.main.WorldToViewportPoint(pos);
-            Debug.Log("pos = " + pos);
-            Debug.Log("viewPos = " + viewPos);
+            //Debug.Log("pos = " + pos);
+            //Debug.Log("viewPos = " + viewPos);
             RectTransform rect = m_tutorial.GetComponent<RectTransform>();
             Vector2 pivot = rect.pivot;
             if (viewPos.x > 0.5f)
@@ -199,6 +201,8 @@ public class GameUI : MonoBehaviour
             rect.pivot = pivot;
             rect.anchorMin = rect.anchorMax = viewPos;
             m_tutorial.SetText(tutorial);
+            GameManager.Get().SetPause(true);
+            SaveData.Get().SeeTutorial(saveKey);
         }
     }
 

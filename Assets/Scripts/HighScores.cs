@@ -276,9 +276,9 @@ public class HighScores : MonoBehaviour
         }
         m_keyboard = null;
         Debug.Log("Closed with name = " + m_playerName);
-        LeaderBoard.Get().SetPlayerName(m_playerName);
         if (null != m_closeKeyboardSound)
             m_closeKeyboardSound.Play();
+        LeaderBoard.Get().SetPlayerName(m_playerName);
     }
 #endif
 }

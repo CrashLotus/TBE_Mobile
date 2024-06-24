@@ -32,9 +32,7 @@ public class TutorialManager : MonoBehaviour
         {
             if (GameManager.Get().GetScreenBounds().Contains(pos))
             {
-                save.SeeTutorial("EGG_FROM_ENEMY");
-                GameUI.Get().SetTutorial("Eggs represent your health. Catch eggs to regain lost health.", pos);
-                GameManager.Get().SetPause(true);
+                GameUI.Get().SetTutorial("Eggs represent your health. Catch eggs to regain lost health.", pos, "EGG_FROM_ENEMY");
             }
         }
     }
@@ -46,9 +44,7 @@ public class TutorialManager : MonoBehaviour
         {
             if (GameManager.Get().GetScreenBounds().Contains(pos))
             {
-                save.SeeTutorial("EGG_HEALTH");
-                GameUI.Get().SetTutorial("Enemies release eggs when defeated.", pos);
-                GameManager.Get().SetPause(true);
+                GameUI.Get().SetTutorial("Enemies release eggs when defeated.", pos, "EGG_HEALTH");
             }
         }
     }
@@ -60,9 +56,41 @@ public class TutorialManager : MonoBehaviour
         {
             if (GameManager.Get().GetScreenBounds().Contains(pos))
             {
-                save.SeeTutorial("EGG_SPAWN_ENEMY");
-                GameUI.Get().SetTutorial("If you let it hit the lava, an egg will spawn an enemy.", pos);
-                GameManager.Get().SetPause(true);
+                GameUI.Get().SetTutorial("If you let it hit the lava, an egg will spawn an enemy.", pos, "EGG_SPAWN_ENEMY");
+            }
+        }
+    }
+
+    public void StartScene()
+    {
+        StartCoroutine(StartSceneCo());
+    }
+
+    IEnumerator StartSceneCo()
+    {
+        SaveData save = SaveData.Get();
+        GameUI ui = GameUI.Get();
+        while (null == ui)
+        {
+            ui = GameUI.Get();
+            yield return null;
+        }
+        if (false == save.HasSeenTutorial("MISSILE_TILT"))
+        {
+            if (save.HasUpgrade("MISSILE1"))
+            {
+                ui.SetTutorial("You can fire a missile by tilting your device to the right.", Vector3.zero, "MISSILE_TILT");
+                while (GameManager.Get().GetPause())
+                    yield return null;
+            }
+        }
+        if (false == save.HasSeenTutorial("TIMEWARP_TILT"))
+        {
+            if (save.HasUpgrade("BULLETTIME"))
+            {
+                ui.SetTutorial("You can activate Time Freeze by tilting your device to the left.", Vector3.zero, "TIMEWARP_TILT");
+                while (GameManager.Get().GetPause())
+                    yield return null;
             }
         }
     }

@@ -2236,12 +2236,20 @@ PrefabInstance:
       value: 0.688
       objectReference: {fileID: 0}
     - target: {fileID: 4460494213919008034, guid: 39f0e68f219d48646a6562089612542e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4460494213919008034, guid: 39f0e68f219d48646a6562089612542e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4460494213919008034, guid: 39f0e68f219d48646a6562089612542e, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4460494213919008034, guid: 39f0e68f219d48646a6562089612542e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 4460494213919008034, guid: 39f0e68f219d48646a6562089612542e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
