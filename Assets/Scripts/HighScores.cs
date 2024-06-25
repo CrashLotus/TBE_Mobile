@@ -97,8 +97,13 @@ public class HighScores : MonoBehaviour
         while (false == lb.IsReady())
             yield return null;
         string yourId = PurchaseManager.Get().PlayerId();
-//        yourId = "playerId14";  // testing
-        LeaderboardScoresPage scores = lb.GetScores(m_board);
+        //        yourId = "playerId14";  // testing
+        LeaderboardScoresPage scores = null;
+        while (null == scores)
+        {
+            scores = lb.GetScores(m_board);
+            yield return null;
+        }
         if (scores != null)
         {
             int yourIndex = -1;
@@ -275,7 +280,10 @@ public class HighScores : MonoBehaviour
             yield return null;
         }
         m_keyboard = null;
+        m_playerName = m_playerName.Replace(" ", "_");
         Debug.Log("Closed with name = " + m_playerName);
+        if (m_playerText != null)
+            m_playerText.text = m_playerName;
         if (null != m_closeKeyboardSound)
             m_closeKeyboardSound.Play();
         LeaderBoard.Get().SetPlayerName(m_playerName);

@@ -159,7 +159,7 @@ PlayerSettings:
   resolutionScalingMode: 0
   resetResolutionOnWindowResize: 0
   androidSupportedAspectRatio: 1
-  androidMaxAspectRatio: 2.1
+  androidMaxAspectRatio: 1.9
   applicationIdentifier:
     Android: com.WholesaleAlgorithms.TBE
     Standalone: com.WholesaleAlgorithms.TBE

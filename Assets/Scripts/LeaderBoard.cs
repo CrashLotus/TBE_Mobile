@@ -81,31 +81,23 @@ public class LeaderBoard : MonoBehaviour
             }
             if (null != m_scores[boardIndex])
             {   // get the player's score (in case it's not in the top 10)
-                Debug.Log("Leaderboard: looking for player in list");
                 string yourId = PurchaseManager.Get().PlayerId();
                 bool foundYou = false;
                 foreach (var entry in m_scores[boardIndex].Results)
                 {
                     if (entry.PlayerId == yourId)
                     {   // the player was already found
-                        Debug.Log("Leaderboard: found player in list");
                         foundYou = true;
                         break;
                     }
                 }
                 if (false == foundYou)
                 {   // go get the player's score and add it
-                    Debug.Log("Leaderboard: getting player's score");
                     var task = LeaderboardsService.Instance.GetPlayerScoreAsync(s_boardID[boardIndex]);
                     yield return new WaitUntil(() => task.IsCompleted);
                     if (task.Status == TaskStatus.RanToCompletion)
                     {
-                        Debug.Log("Leaderboard: adding player's score");
                         m_scores[boardIndex].Results.Add(task.Result);
-                    }
-                    else
-                    {
-                        Debug.Log("Leaderboard: failed");
                     }
                 }
             }
@@ -133,7 +125,6 @@ public class LeaderBoard : MonoBehaviour
                 options.Metadata = meta;
                 var scoreResponse = await LeaderboardsService.Instance.AddPlayerScoreAsync(s_boardID[boardIndex], score, options);
                 StartCoroutine(UpdateCo());
-//                m_scores[boardIndex] = await LeaderboardsService.Instance.GetScoresAsync(s_boardID[boardIndex]);
             }
             catch (Exception e)
             {
@@ -174,7 +165,14 @@ public class LeaderBoard : MonoBehaviour
 
     public async void SetPlayerName(string name)
     {
-        await AuthenticationService.Instance.UpdatePlayerNameAsync(name);
-        StartCoroutine(UpdateCo());
+        try
+        {
+            await AuthenticationService.Instance.UpdatePlayerNameAsync(name);
+            StartCoroutine(UpdateCo());
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e.Message);
+        }
     }
 }
