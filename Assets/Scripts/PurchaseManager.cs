@@ -1,5 +1,5 @@
 //#define DEBUG_ADS
-#define TEST_ENVIRONMENT
+//#define TEST_ENVIRONMENT
 
 using System;
 using System.Collections;
