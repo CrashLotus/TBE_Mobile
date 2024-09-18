@@ -1,3 +1,10 @@
+//----------------------------------------------------------------------------------------
+//	Copyright © 2024 Matt Whiting, All Rights Reserved.
+//  For educational purposes only.
+//  Please do not distribute or republish in electronic or print form without permission.
+//  Thanks - whitingm@usc.edu
+//----------------------------------------------------------------------------------------
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -119,7 +126,7 @@ public class Player : Bird, IHitPoints
         Vector3 tilt = Vector3.zero;
         Accelerometer acc = Accelerometer.current;
         if (null != acc)
-            acc.acceleration.ReadValue();
+            tilt = acc.acceleration.ReadValue();
 
         m_fireLaser = m_fireButton.IsButtonHold() | m_fireLeft.IsButtonHold() | m_fireRight.IsButtonHold();
         m_fireLaser |= m_input.actions.FindAction("Fire").IsPressed();
