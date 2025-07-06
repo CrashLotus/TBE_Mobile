@@ -15,7 +15,7 @@ public class Missile : Bullet
 
     const float s_timeOut = 1.0f;
     const float s_launchSpeed = 5.6f;
-    const float s_finalSpeed = 2.2f;
+    const float s_finalSpeed = 6.2f;
 
     GameObject m_target;
     Bezier m_bezier;
